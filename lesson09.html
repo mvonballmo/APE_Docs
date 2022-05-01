@@ -1,0 +1,915 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Lektion 09: JavaScript: MLZ Präsentationen; React, Builders &amp; TypeScript</title>
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/white.css">
+  <link rel="stylesheet" href="slides.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/github.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="assets/MonteRosa.jpg">
+        <h1>JavaScript</h1>
+        <h2>Lektion 9</h2>
+        <p>
+          <b>MLZ Präsentationen</b>; React, Builders &amp; TypeScript
+        </p>
+      </section>
+
+      <section data-background="assets/looking-back-dimmed.jpg">
+        <h1>Rückblick</h1>
+        <ul>
+          <li>Web Components</li>
+          <li>JSX</li>
+          <li>React</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Übersicht Lektionen</h1>
+        <ol class="compact">
+          <li class="completed">Einführung &amp; IDE Aufsetzen</li>
+          <li class="completed">Grundlagen: Typen, Operatoren, Statements, Funktionen I</li>
+          <li class="completed">Grundlagen: Funktionen II, Klassen, Modulen; Linting</li>
+          <li class="completed">Externe Abfrage: JSON &amp; Fetch; Refactoring</li>
+          <li class="completed">DOM &amp; Ereignisse</li>
+          <li class="completed">Formulare, Eingaben &amp; Validierung</li>
+          <li class="completed">Browser-Objekte, Persistenz, Animationen, Media</li>
+          <li class="completed"><b>LK1</b>; Web Komponenten, JSX &amp; React</li>
+          <li class="selected"><b>MLZ Präsentationen</b>; React, Builders &amp; TypeScript</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>Fragen zur LZ1?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <h1>MLZ Präsentationen</h1>
+        <ul>
+          <li>Nico Weidmann</li>
+          <li>Nicolas Stutz</li>
+          <li>Alexander Lowe</li>
+          <li>Cyrill Näf</li>
+          <li>Dane Singer</li>
+          <li>Oliver Huber</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>React &amp; TypeScript</h1>
+        <ul>
+          <li>React Tipps</li>
+          <li>React Advanced Hooks</li>
+          <li>Performantes React</li>
+          <li>Reducers (State &amp; Dispatch)</li>
+          <li>Builders</li>
+          <li>TypeScript</li>
+          <li>TypeScript &amp; React</li>
+          <li>TypeScript, React &amp; Jest</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1 class="insertion">React Tipps</h1>
+        <ul>
+          <li><a href="https://github.com/facebook/react/tree/main/packages/react-devtools">React Developer Tools</a></li>
+          <li><a href="https://reactjs.org/docs/strict-mode.html"><code>StrictMode</code></a></li>
+          <li>Debugging: Stack Traces</li>
+          <li><code><a href="https://eslint.org/">eslint</a></code> ergänzen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://github.com/facebook/react/tree/main/packages/react-devtools">React Developer Tools</a></h1>
+        <div class="seventy-thirty-grid">
+          <ul>
+            <li>Im Browser als Extension installieren</li>
+            <li>Oder als Desktop-App (mit <code>npm i -g react-devtools</code>) installieren</li>
+          </ul>
+          <img src="assets/Lesson 09/ReactToolsComponentList.png">
+        </div>
+      </section>
+
+      <section class="compact">
+        <h1><a href="https://reactjs.org/docs/strict-mode.html"><code>StrictMode</code></a></h1>
+        <ul>
+          <li>Schaltet erweiterte semantische Prüfung ein</li>
+          <li>In <em>debug</em> Versionen automatisch dabei</li>
+          <li>Kann mit der <a href="https://reactjs.org/docs/strict-mode.html"><code>React.StrictMode</code></a> Komponenten eingeschaltet werden</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            import React from "react";
+            import ReactDOM from "react-dom";
+            import App from "./Components/App";
+
+            ReactDOM.render(
+              &lt;React.StrictMode>
+                &lt;App />
+              &lt;/React.StrictMode>,
+              document.getElementById("root"),
+            );
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Debugging: Stack Traces</h1>
+        <div class="seventy-thirty-grid">
+          <div>
+            <ol>
+              <li>Vollständiges Stack-Trace anzeigen mit dem Pfeil links von der Fehlermeldung</li>
+              <li>Stack-Trace nach eigenem Code durchsuchen</li>
+            </ol>
+            <p class="notes">Siehe <a href="https://github.com/facebook/react/issues/18178#issuecomment-595846312">Javascript/React Stack analysieren</a> für weitere Information</p>
+          </div>
+          <img src="assets/Lesson 09/ReactStackTrace.png">
+        </div>
+      </section>
+
+      <section class="compact">
+        <h1><code><a href="https://eslint.org/">eslint</a></code> ergänzen</h1>
+        <p>Die folgende Plugins mit <code>npm i -D</code> installieren und einbinden</p>
+        <ul>
+          <li><a href="https://www.npmjs.com/package/eslint-plugin-react-hooks#installation">eslint-plugin-react-hooks</a></li>
+          <li><a href="https://babeljs.io/docs/en/babel-preset-react/">@babel/preset-react</a></li>
+          <li><a href="https://github.com/babel/babel/tree/main/eslint/babel-eslint-parser">@babel/eslint-parser</a></li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            "extends": ["eslint:recommended", "prettier", "plugin:react-hooks/recommended"],
+            "parser": "@babel/eslint-parser",
+            "parserOptions": {
+              "ecmaVersion": 13,
+              "sourceType": "module",
+              "babelOptions": {
+                "presets": ["@babel/preset-react"]
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Advanced React und TS?</h1>
+        <div class="fragment fifty-fifty-grid">
+          <p>Legen wir los...</p>
+          <img src="assets/fyeah.png">
+        </div>
+      </section>
+
+      <section>
+        <h1><em>Controlled</em> Inputs</h1>
+        <ul>
+          <li>Der <code>value</code> einer <a href="https://reactjs.org/docs/uncontrolled-components.html">Uncontrolled</a> Komponenten wird <em>vom DOM</em> verwaltet.</li>
+          <li>Der <code>value</code> einer <a href="https://reactjs.org/docs/forms.html#controlled-components">Controlled</a> Komponenten wird <em>von React</em> als <em>state</em> verwaltet.</li>
+          <li>Controlled Komponenten sind präferiert</li>
+          <li>Siehe <a href="https://scriptverse.academy/tutorials/reactjs-defaultvalue-value.html">React/ReactJS: Difference between defaultValue and value</a> für weitere Information</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1><a href="https://reactjs.org/docs/hooks-overview.html">React Advanced Hooks</a></h1>
+        <ul>
+          <li><a href="https://reactjs.org/docs/hooks-reference.html#usereducer"><code>useReducer()</code></a></li>
+          <li><a href="https://reactjs.org/docs/hooks-reference.html#useref"><code>useRef()</code></a></li>
+          <li><a href="https://reactjs.org/docs/hooks-reference.html#usememo"><code>useMemo()</code></a></li>
+          <li><a href="https://reactjs.org/docs/hooks-reference.html#usecallback"><code>useCallback()</code></a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://reactjs.org/docs/hooks-reference.html#usereducer"><code>useReducer()</code></a></h1>
+        <ul>
+          <li>Erzeugt einen <code>state</code> und eine <code>dispatch</code> Funktion womit ein neues <code>state</code> erstellt werden kann</li>
+          <li>Bewahrt die Daten einer Applikation oder einem Teil davon auf</li>
+          <li>Siehe <a href="https://www.robinwieruch.de/react-update-item-in-list/">Update an Item in a List in React</a> (May 2020) für weitere Information</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1><a href="https://reactjs.org/docs/hooks-reference.html#usereducer"><code>useReducer()</code></a> &amp; Service</h1>
+        <ul>
+          <li><a href="https://reactjs.org/docs/hooks-reference.html#usereducer"><code>useReducer()</code></a> klappt nicht mit <code>async</code></li>
+          <li>Ein <em>Service</em> umhüllt <code>dispatch</code> und <code>async</code> Methoden in einem einfacheren API</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            export class AppService {
+              async deleteEntity(state: AppState) {
+                const entity = state.entity;
+
+                await state.crud.delete(entity);
+
+                this.dispatch(CreateDeleteEntityAction(entity));
+              }
+            }
+          </code>
+        </pre>
+        <p class="notes">Siehe <a href="https://gist.github.com/astoilkov/013c513e33fe95fa8846348038d8fe42">Async Operations with useReducer Hook</a> für weitere Information</p>
+      </section>
+
+      <section>
+        <h1><a href="https://reactjs.org/docs/hooks-reference.html#useref"><code>useRef()</code></a></h1>
+        <ul>
+          <li>Erstellt eine Referenz, die mit <code>current</code> zugegriffen werden kann</li>
+          <li>Wird üblicherweise mit DOM-Elementen benutzt</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const saveButton = React.useRef(null);
+
+            const inputChange = e => {
+              saveButton.current.disabled = !e.target.form.checkValidity();
+            };
+
+            return &lt;button ref={saveButton} onClick={() => saveEntity(entity)}>
+              Save
+            &lt;/button>;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1 class="insertion">Performance</h1>
+        <ul>
+          <li><em>Reconciliation</em> Algorithmus
+            <ol>
+              <li>baut die aktuellen Komponenten auf</li>
+              <li>vergleicht mit den bestehenden Komponenten</li>
+              <li>gleicht mit möglichst wenig DOM-Änderungen ab</li>
+            </ol>
+          </li>
+          <li>Es ist <em>günstig</em> Komponenten zu erstellen
+            <ul class="fragment pro fade-in">
+              <li>👍 Meistens kein bis wenig Impact</li>
+            </ul>
+          </li>
+          <li>Es ist <em>teuer</em> das DOM anzupassen
+            <ul class="fragment contra fade-in">
+              <li>👎 Möglichst zu vermeiden</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1><a href="https://reactjs.org/docs/hooks-reference.html#usememo"><code>useMemo()</code></a></h1>
+        <ul>
+          <li><a href="https://reactjs.org/docs/hooks-reference.html#usememo"><code>useMemo()</code></a>
+            erstellt einen Datenbehälter, die nur bedingt neu berechnet wird</a></li>
+          <li>Bedingungen sind im zweiten Parameter aufgelistet</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const isSelected = entity.id === selectedEntity?.id;
+
+            return React.useMemo(
+              () => (
+                &lt;>
+                  &lt;a className={isSelected ? "selected" : ""} href="#" onClick={() => service.setEntity(entity)}>
+                    {classMetadata.getTitle(entity)}
+                  &lt;/a>
+                &lt;/>
+              ),
+              [isSelected, entity, classMetadata],
+            );
+          </code>
+        </pre>
+        <p class="notes"><a href="https://dev.to/adevnadia/how-to-write-performant-react-code-rules-patterns-dos-and-donts-40gk">How to write performant React code: rules, patterns, do's and don'ts</a></p>
+      </section>
+
+      <section>
+        <h1><a href="https://reactjs.org/docs/hooks-reference.html#usecallback"><code>useCallback()</code></a></h1>
+        <ul>
+          <li>Ähnlich zu <code>useMemo()</code> aber für Funktionen</li>
+          <li>Mit leeren Abhängigkeiten <code>[]</code> wird nie mutiert</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            function List() {
+              const { state } = React.useContext(AppContext);
+              const { entities } = state;
+
+              const logClick = React.useCallback(() => console.log("selection changed"), []);
+
+              return entities.map(e => &lt;Item key={e.id ?? 0} entity={e} log={logClick} />);
+            }
+          </code>
+        </pre>
+        <p class="notes">Siehe <a href="https://dmitripavlutin.com/dont-overuse-react-usecallback/">Your Guide to React.useCallback()</a> für weitere Information</p>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1><a href="https://reactjs.org/docs/hooks-overview.html">Advanced Hooks</a></h1>
+            <ul>
+              <li><a href="https://reactjs.org/docs/hooks-reference.html#usereducer"><code>useReducer()</code></a></li>
+              <li><a href="https://reactjs.org/docs/hooks-reference.html#useref"><code>useRef()</code></a></li>
+              <li><a href="https://reactjs.org/docs/hooks-reference.html#usememo"><code>useMemo()</code></a></li>
+              <li><a href="https://reactjs.org/docs/hooks-reference.html#usecallback"><code>useCallback()</code></a></li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li><code>useCallback()</code> und <code>useMemo()</code>in einer Komponente Benutzen</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Builders</h1>
+        <ul>
+          <li>Übersicht</li>
+          <li>Sortiment</li>
+          <li>Vergleich</li>
+          <li><a href="https://vitejs.dev/guide/">Vite</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Builder: Hauptaufgaben</h1>
+        <ul>
+          <li>Umwandlung von Quelltext
+            <ul>
+              <li>TypeScript nach JS Umwandeln</li>
+              <li>JSX/TSX nach JS Umwandeln</li>
+              <li>Less/Sass nach CSS Umwandeln</li>
+              <li>Typisiertes Einbinden von Bilder, CSS, jSON, usw.</li>
+              <li>Mit <em>SourceMaps</em> zu den originalen Dateien</li>
+            </ul>
+          </li>
+          <li><em>Bundling</em> von Ressourcen zu einer Datei (war vor HTTP2 wichtiger)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Builder: Zusatzaufgaben</h1>
+        <ul>
+          <li>HMR (Hot Module Reload/Replacement): automatisches und präzises Neuladen ohne F5</li>
+          <li>SSR (Server-side Rendering)</li>
+          <li>CSS Modules / PostCSS</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Einflüsse Performance</h1>
+        <ul>
+          <li>Entwicklungssprache des Tools (JS &lt; Go/Rust)</li>
+          <li>Bundling ist aufwendiger als Modul-Referenzen</li>
+          <li>TypeScript <em>konvertieren</em> geht schnell</li>
+          <li>TypeScript <em>prüfen</em> ist langsam</li>
+          <li>Vorkompiliert vs. Kompilieren auf Anfrage</li>
+          <li>Grösse des Projekts (wir gut skaliert der Ansatz eines Builders?)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Builder Auswahl</h1>
+        <ul>
+          <li>Die <a href="https://reactjs.org/docs/create-a-new-react-app.html">React Anleitung</a> listet diverse Optionen auf</li>
+          <li><a href="https://webpack.js.org/">Webpack</a> (von <a href="https://create-react-app.dev/docs/adding-typescript/"><code>create-react-app</code></a> eingesetzt)</li>
+          <li><a href="https://parceljs.org/">Parcel</a></li>
+          <li><a href="https://www.rollupjs.org/guide">Rollup</a></li>
+          <li><a href="https://github.com/evanw/esbuild">esbuild</a></li>
+          <li><a href="https://www.snowpack.dev/tutorials/react">Snowpack</a></li>
+          <li><a href="https://github.com/preactjs/wmr">wmr</a></li>
+          <li><a href="https://vitejs.dev/guide/">Vite</a></li>
+        </ul>
+        <p class="notes">Siehe <a href="https://css-tricks.com/comparing-the-new-generation-of-build-tools/">Comparing the New Generation of Build Tools</a> für eine vertiefte Analyse von esbuild, Vite, Snowpack und wmr</p>
+      </section>
+
+      <section>
+        <h1>Builder: Bemerkungen</h1>
+        <ul>
+          <li><a href="https://github.com/evanw/esbuild">esbuild</a>, <a href="https://www.rollupjs.org/guide">Rollup</a>, <a href="https://webpack.js.org/">Webpack</a> und <a href="https://parceljs.org/">Parcel</a> sind <em>Bundlers</em></li>
+          <li><a href="https://www.snowpack.dev/tutorials/react">Snowpack</a>, <a href="https://github.com/preactjs/wmr">wmr</a> und <a href="https://vitejs.dev/guide/">Vite</a> benutzen <em>ES Modulen</em></li>
+          <li><a href="https://github.com/evanw/esbuild">esbuild</a> ist mit <a href="https://go.dev/">Go</a> geschrieben, <a href="https://parceljs.org/">Parcel</a> mit <a href="https://www.rust-lang.org/">Rust</a></li>
+          <li><a href="https://www.snowpack.dev/tutorials/react">Snowpack</a> benutzt <a href="https://www.rollupjs.org/guide">Rollup</a> und <a href="https://vitejs.dev/guide/">Vite</a> <a href="https://github.com/evanw/esbuild">esbuild</a> für Produktion/Bundling</li>
+          <li><a href="https://www.snowpack.dev/tutorials/react">Snowpack</a> und <a href="https://vitejs.dev/guide/">Vite</a> unterstützen zero-config React/TypeScript und Kompilieren auf Anfrage</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Warum nicht Webpack?</h1>
+        <ul>
+          <li>Unterstützt <em>nur</em> Bundling</li>
+          <li>Unterstützt nur <em>Vorkompilieren</em></li>
+          <li>Skaliert weniger gut als neuere Lösungen</li>
+          <li>Wird schon mit mittelgrossen Projekten langsam </li>
+          <li>Hatte immer wieder Problemen mit Caching</li>
+          <li>War für ein anderes Ära geschrieben</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Entwicklerkomfort</h1>
+        <ul>
+          <li>Muss <em>korrekt</em> sein</li>
+          <li>Muss <em>schnell</em> sein</li>
+          <li>HMR ist wichtig</li>
+          <li>Bundling unerwünscht</li>
+          <li>Caching darf nichts kaputt machen</li>
+          <li>Sollte TypeScript nur kompilieren (IDE prüft schon)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Die Qual der Wahl</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/look_of_disapproval.jpg">
+          <div>
+            <p><a href="https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f">How it feels to learn JavaScript in <span class="fragment strike semi-fade-out" data-fragment-index="0">2016</span><span class="fragment fade-in" data-fragment-index="0">2022</span></a></p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h1><a href="https://vitejs.dev/guide/">Vite</a></h1>
+        <p><code>npm init vite@latest</code> ausführen</p>
+        <div class="fifty-fifty-grid">
+          <div>
+            <h2>React w/JS</h2>
+            <img src="assets/Lesson 09/ViteReactJS.png">
+          </div>
+          <div>
+            <h2>React w/TS</h2>
+            <img src="assets/Lesson 09/ViteReactTS.png">
+          </div>
+
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Builders</h1>
+            <ul>
+              <li>Vite mit React JavaScript</li>
+              <li>Vite mit React TypeScript</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>Vite Projekt mit React und TypeScript aufsetzen</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>TypeScript</h1>
+        <ul>
+          <li>Übersicht</li>
+          <li>Typsystem</li>
+          <li>JS "typisieren"</li>
+          <li>JS ersetzen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Übersicht</h1>
+        <ul>
+          <li>Die folgende Folien umfassen nur einen kurzen Überflug von TypeScript</li>
+          <li>Wie schauen hauptsächlich Konzepte an, die für das Konvertieren des Beispielprojekts wichtig waren</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Typen deklarieren</h1>
+        <ul>
+          <li><a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#type-aliases">Type Aliases</a> mit <code>type</code></li>
+          <li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces">Interfaces</a> mit <code>interface</code></li>
+          <li><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">Classes</a> mit <code>class</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Strukturelle Typen</h1>
+        <p>Typen sind auf <a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#structural-typing">Strukturen</a> statt Namen basiert</p>
+        <pre>
+          <code data-trim class="language-typescript hljs">
+            type One = { p: string };
+            interface Two {
+              p: string;
+            }
+            class Three {
+              p = "Hello";
+            }
+
+            let x: One = { p: "hi" };
+            let two: Two = x;
+            two = new Three();
+            two = { p: "World" };
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Strukturen definieren</h1>
+        <ul>
+          <li>Eine <a href="https://www.typescriptlang.org/docs/handbook/2/objects.html#index-signatures">Index Signature</a> erlaubt beliebig Properties</li>
+          <li><code>?</code> erlaubt <code>undefined</code> oder <code>null</code></li>
+          <li><code>unknown</code> ist mit unbekanntem Typ zugewiesen</li>
+          <li><code>readonly</code> und <code>private</code> für "immutability"</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-typescript hljs">
+            type Entity = {
+              private id: number;
+              readonly extra?: string;
+              [otherOptions: string]: unknown;
+            };
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Ergänzungen zu JS</h1>
+        <ul>
+          <li>Generics: <code>MouseEvent&lt;HTMLButtonElement></code></li>
+          <li><a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#unions">Union Types</a>: <code>A | B | C</code></li>
+          <li><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types">Intersection Types</a>: <code>A & B & C</code></li>
+          <li>Enums: <code>enum { a, b }</code></li>
+          <li>Werte dürfen per Default nicht <code>null</code> sein</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions">Type Assertions</a></h1>
+        <ul>
+          <li>Mit <code>as</code> kann den von TypeScript angenommenen Typ übersteuert werden</li>
+          <li>Mit <code>!</code> kann den von TypeScript angenommenen "nullability" übersteuert werden</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-typescript hljs">
+            const a = "2";              // typeof a == string
+            const b = a as number;      // typeof b == number
+            const c = "text";           // typeof c == string
+            const d = "text" as const;  // typeof d == "text"
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">Narrowing</a></h1>
+        <ul>
+          <li>Schränkt ein Typ anhand einer Bedingung weiter ein (mit z.B. ein "guard")</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-typescript hljs">
+            export const AppContext = createContext&lt;TAppContext>(null as unknown as TAppContext);
+
+            let entity = state.entity;  // typeof entity == Entity | null
+            if (!entity) {
+              throw new Error("The entity must be assigned in order to be saved.");
+            }
+            // typeof entity == Entity
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>JS in TS umwandeln</h1>
+        <ul>
+          <li>Ansatz</li>
+          <li>Properties typisieren</li>
+          <li><code>useEffect()</code> mit <code>async</code> korrigieren</li>
+          <li><code>reducer</code> typisieren</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>JS => TS: Ansatz</h1>
+        <ul>
+          <li><code>*.d.ts</code> Dateien können <code>*.js</code> Dateien "typisieren"</li>
+          <li>Code kann auch direkt in TypeScript geschrieben werden (ersetzt das JS)</li>
+          <li>Umwandlungsschritte:
+            <ul>
+              <li>JS direkt benutzen (Typfehlern vorhanden)</li>
+              <li><code>*.d.ts</code> erstellen (keine Typfehlern bleiben übrig)</li>
+              <li>JS-Dateien kopieren und nach TS umwandeln</li>
+              <li>Typfehlern korrigieren</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Problems Ansicht</h1>
+        <p>Für das Korrigieren hat WebStorm ein "Project Errors" Ansicht</p>
+        <img src="assets/Lesson 09/WebStormProblemsView.png" class="screenshot">
+      </section>
+
+      <section>
+        <h1>JS => TS: React Props</h1>
+        <ul>
+          <li>Eigenschaften müssen nun typisiert werden</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-typescript hljs">
+            import { PropertyMetadata } from "../../common/Metadata";
+
+            type InputRowProps = {
+              p: PropertyMetadata;
+              validate: (e: HTMLElement) => void;
+            };
+
+            export function InputRow({ p, validate }: InputRowProps) {
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1><a href="https://reactjs.org/docs/hooks-reference.html#useeffect"><code>useEffect()</code></a> mit <code>async</code></h1>
+        <p>Obwohl es scheint zu funktionieren, unterstützt <code>useEffect()</code> <code>async</code>-Funktionen nicht. So geht's besser:</p>
+        <pre>
+          <code data-trim class="language-typescript hljs">
+            useEffect(() => {
+              async function setEntities() {
+                setLoading(true);
+                const data = await state.crud.getAll();
+                service.setEntities(data);
+                setLoading(false);
+              }
+
+              setEntities().catch(e => {
+                throw e;
+              });
+            }, [classMetadata]);
+          </code>
+        </pre>
+        <p class="notes">Siehe <a href="https://devtrium.com/posts/async-functions-useeffect">How to use async functions in <code>useEffect</code></a>
+          und <a href="https://www.benmvp.com/blog/successfully-using-async-functions-useeffect-react/">Successfully using async functions in React <code>useEffect</code></a> für weitere Information.</p>
+      </section>
+
+      <section class="compact">
+        <h1>Reducer Typisieren</h1>
+        <p>Actions müssen typisiert werden. Z.B. mit <code>interfaces</code></p>
+        <pre>
+          <code data-trim class="language-typescript hljs">
+            interface SetMetadataAction {
+              type: "setMetadata";
+              classMetadata: ClassMetadata;
+            }
+
+            interface SetEntityAction {
+              type: "setEntity";
+              entity: Entity;
+            }
+
+            type AppAction = SetMetadataAction | SetEntityAction;
+          </code>
+        </pre>
+        <p class="notes">Siehe <a href="https://codewithstyle.info/Typing-a-useReducer-React-hook-in-TypeScript/">Typing a <code>useReducer</code> React hook in TypeScript</a> für weitere Information</p>
+      </section>
+
+      <section class="compact">
+        <h1>Reducer Typisieren II</h1>
+        <p><code>interfaces</code> mit Methoden ersetzen und <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#returntypetype"><code>ReturnType</code></a> einsetzen</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            export const CreateSetMetadataAction = (classMetadata: ClassMetadata) => ({
+              type: "setMetadata" as const,
+              classMetadata,
+            });
+
+            export const CreateSetEntityAction = (entity: Entity) => ({
+              type: "setEntity" as const,
+              entity
+            });
+
+            export type AppAction =
+            | ReturnType&lt;typeof CreateSetMetadataAction>
+            | ReturnType&lt;typeof CreateSetEntityAction>
+          </code>
+        </pre>
+        <p class="notes">Siehe auch andere nützliche <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">Utility Types</a></p>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>TS/React mit Jest</h1>
+        <ul>
+          <li>Einleitung</li>
+          <li>Packages installieren</li>
+          <li><a href="https://testing-library.com/">Testing Library</a> (<a href="https://testing-library.com/docs/react-testing-library/">React</a>)</li>
+          <li>Test mit Komponente erstellen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Einleitung</h1>
+        <ul>
+          <li>Vite unterstützt TS und React bereits. Was ist das Problem?</li>
+          <li>Vite benutzt ESBuild und hat kein Testing per Default</li>
+          <li>Jest arbeitet mit Babel</li>
+          <li>Babel und Jest müssen für TypeScript und React konfiguriert werden</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Packages installieren</h1>
+        <p>Ausführen: <code>npm i -D jest babel-jest react-test-renderer @babel/preset-env @babel/preset-react @babel/preset-typescript identity-obj-proxy</code></p>
+        <p class="notes">Eine Erklärung für die Notwendigkeit diesen Packages gibt es in
+          <a href="https://egghead.io/lessons/jest-adding-jest-with-typescript-support-to-a-vite-application">Adding Jest with TypeScript Support to a Vite Application</a>. Diese ist ein Teil eines Kurses mit vielen anderen interessanten Lektionen.
+        </p>
+      </section>
+
+      <section>
+        <h1>Babel konfigurieren</h1>
+        <p><code>babel.config.js</code> mit folgenden Inhalt Erstellen:</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            module.exports = {
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {
+                    targets: {
+                      node: "current",
+                    },
+                  },
+                ],
+                "@babel/preset-react",
+                "@babel/preset-typescript",
+              ],
+            };
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Jest konfigurieren</h1>
+        <p>In <code>packages.config</code>:</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            "jest": {
+              "testEnvironment": "jsdom",
+              "setupFilesAfterEnv": [
+                "&lt;rootDir>/jest-setup.ts"
+              ],
+              "collectCoverage": true,
+              "collectCoverageFrom": [
+                "src/**/*.{ts,tsx,js,jsx}",
+                "!src/**/*.d.ts"
+              ],
+              "moduleNameMapper": {
+                "\\.(css|less|scss)$": "identity-obj-proxy"
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://testing-library.com/docs/react-testing-library/intro/">React Testing Library</a></h1>
+        <ul>
+          <li>Ergänzt Jest um das Aufsetzen und Testen von React Komponenten zu vereinfachen</li>
+          <li><code>render(&lt;Component>)</code> gibt eine gerenderte Komponente zurück</li>
+          <li>Funktioniert mit normalen Snapshots</li>
+          <li>Bietet aber viel, viel mehr (sieht <a href="https://testing-library.com/docs/react-testing-library/example-intro">React Testing Library Example</a>)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>React Testing Installieren</h1>
+        <p>Ausführen: <code>npm i -D <a href="https://testing-library.com/docs/react-testing-library/intro/">@testing-library/react</a>
+          <a href="https://testing-library.com/docs/ecosystem-jest-dom/">@testing-library/jest-dom</a>
+          <a href="https://testing-library.com/docs/ecosystem-user-event/">@testing-library/user-event</a></code></p>
+        <p class="notes">Installiert die Basis plus verbesserte DOM und Ereignis Testing APIs</p>
+      </section>
+
+      <section>
+        <h1>Testing Library einbinden</h1>
+        <p><code>jest-setup.ts</code> mit folgenden Inhalt Erstellen:</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            import "@testing-library/jest-dom";
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Komponente Snapshot</h1>
+        <p><code>App.test.tsx</code> mit folgenden Inhalt Erstellen:</p>
+        <pre>
+          <code data-trim class="language-typescript hljs">
+            import { describe, expect, test } from "@jest/globals";
+            import React from "react";
+            import { render } from "@testing-library/react";
+            import App from "./Components/App";
+
+            describe("App Component", () => {
+              test("App initial contents", () => {
+                const { container } = render(&lt;App />);
+
+                expect(container.innerHTML).toMatchSnapshot();
+              });
+            });
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>TS/React mit Jest</h1>
+            <ul>
+              <li>Installieren und aufsetzen</li>
+              <li>Test mit Komponente erstellen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>

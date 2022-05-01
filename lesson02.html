@@ -1,0 +1,1259 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>JavaScript, Lektion 02, Grundlagen: Typen, Operatoren, Statements, Funktionen I</title>
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/white.css">
+  <link rel="stylesheet" href="slides.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/github.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="assets/MonteRosa.jpg">
+        <h1>JavaScript</h1>
+        <h2>Lektion 2</h2>
+        <p class="notes">
+          Grundlagen: Typen, Operatoren, Statements, Funktionen I
+        </p>
+      </section>
+
+      <section data-background="assets/looking-back-dimmed.jpg">
+        <h1>Rückblick</h1>
+        <ul>
+          <li>Jeder hat alle Werkzeuge eingerichtet</li>
+          <li>Jeder kann JavaScript mit Jest testen</li>
+          <li>Jeder hat ein Projekt auf GitHub eingerichtet</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Übersicht Lektionen</h1>
+        <ol class="compact">
+          <li class="completed">Einführung &amp; IDE Aufsetzen</li>
+          <li class="selected">Grundlagen: Typen, Operatoren, Statements, Funktionen I</li>
+          <li>Grundlagen: Funktionen II, Klassen, Modulen</li>
+          <li>Externe Abfrage: JSON &amp; Fetch; Refactoring</li>
+          <li>DOM &amp; Ereignisse</li>
+          <li>Formulare, Eingaben &amp; Validierung</li>
+          <li>Browser-Objekte, Persistenz, Animationen, Media</li>
+          <li><b>LK1</b>; Web Komponenten, JSX &amp; React</li>
+          <li><b>MLZ Präsentationen</b>; React, Builders &amp; TypeScript</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>Grundlagen</h1>
+        <ul>
+          <li><a href="https://wesbos.com/javascript/01-the-basics/variables-and-statements">Variablen</a>:
+            <code>var</code>, <code>let</code> und <code>const</code>
+          </li>
+          <li><a href="https://wesbos.com/javascript/01-the-basics/types-introduction">Typen</a>, <a href="https://wesbos.com/javascript/01-the-basics/types-strings">Zeichenketten</a></li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Operatoren</a></li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements">Statements</a>: Verzweigungen, Schleifen</li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions">Funktionen I</a>: Grundlagen, Methoden, Math, Daten</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Deklarieren: <code>var</code></h1>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+function varTest() {
+  var x = 1;
+  if (true) {
+    var x = 2;  // gleiche Variable!
+    console.log(x);  // 2
+  }
+  console.log(x);  // 2
+}
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Deklarieren: <code>let</code></h1>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+function letTest() {
+  let x = 1;
+  if (true) {
+    let x = 2;  // andere Variable
+    console.log(x);  // 2
+  }
+  console.log(x);  // 1
+}
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Deklarieren: <code>const</code></h1>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+function constTest() {
+  const x = 1;
+  if (true) {
+    const x = 2;  // andere Variable
+    console.log(x);  // 2
+  }
+  x = 2;  // Nicht erlaubt!
+  console.log(x);  // 1
+}
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Typen</h1>
+        <ul class="compact">
+          <li>JavaScript is eine <em>dynamische</em> Sprache</li>
+          <li>Der Entwickler kann Typen nicht zuweisen</li>
+          <li>Jede Variable hat eine der folgenden <a href="https://wesbos.com/javascript/01-the-basics/types-introduction">Typen</a>:
+            <ul>
+              <li><a href="https://wesbos.com/javascript/01-the-basics/types-null-and-undefined">Null</a></li>
+              <li><a href="https://wesbos.com/javascript/01-the-basics/types-null-and-undefined">Undefined</a></li>
+              <li><a href="https://wesbos.com/javascript/01-the-basics/types-numbers">Number</a></li>
+              <li><a href="https://wesbos.com/javascript/01-the-basics/types-booleans-and-equality">Boolean</a></li>
+              <li><a href="https://wesbos.com/javascript/01-the-basics/types-strings">String</a></li>
+              <li><a href="https://wesbos.com/javascript/01-the-basics/types-objects">Object</a></li>
+              <li><a href="https://wesbos.com/javascript/08-data-types/arrays">Array</a></li>
+              <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Symbol</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>"use strict";</h1>
+        <ul>
+          <li>Einfach oben im Script reinschreiben</li>
+          <li>Hilft unerwünschte Ausdrücke zu finden</li>
+          <li>Siehe <a href="https://www.w3schools.com/js/js_strict.asp">Doku und Beispiele</a> (W3Schools)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Null und Undefined</h1>
+        <ul>
+          <li>Ein Variable mit Typ <code>Null</code> wurde <em>explizit</em> zugewiesen</li>
+          <li>Ein Variable mit Typ <code>Undefined</code> wurde <em>noch nicht</em> zugewiesen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Zahlen (Number)</h1>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const a = 4;
+            const b = 4.2;
+            const c = 4.2e6;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Boolean</h1>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const yes = true;
+            const no = false;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Zeichenketten (Strings)</h1>
+        <ul>
+          <li>Kann mit normale oder einfache Anführungszeichen oder <em>Backticks</em> geschrieben werden</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const a = 'he\'s not here';
+            const b = "he\"s not here";
+            const c = `he\`s not here`;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Multi-line Strings</h1>
+        <p>Für <em>Multi-line Strings</em> mit " und ' muss jede Zeile mit \ beenden. Für die mit <em>Backticks</em>
+          nicht.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+const a = "Das \
+  ist \
+  multi-line.";
+
+const a = `Das
+  ist
+  multi-line.`;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Template-Strings</h1>
+        <p><em><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals">Backticks</a></em>
+          unterstützen das Auflösen von eingebauten Variablen.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+const name = "Bob";
+const a = "Das \
+  ist " + name + " \
+  multi-line.";
+
+const a = `Das
+  ist ${name}
+  multi-line.`
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Tagged Template-Strings</h1>
+        <p><em><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals">Tagged
+              Template-Strings</a></em> können die Ausgabe von Template-Strings mit einer Funktion ändern.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            function Bio(t, name, age) {
+              const years = (age == 1) ? " year" : " years";
+
+              return `${t[0]}${name}${t[1]}${age}${years}${t[2]}`;
+            }
+
+            let age = 0;
+            let person = "bob";
+
+            const output = Bio`The user ${person} is ${age} old.`;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://wesbos.com/javascript/01-the-basics/types-objects">Objekte</a></h1>
+        <p>Gruppierungen von Variablen</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const empty = {};
+            const person = {
+              first: "Bob",
+              last: "Hoffman",
+              age: 34,
+              company: {
+                name: "Apple"
+              }
+            };
+            const bobsAge = person.age;                   // 34
+            const bobsCompanyName = person.company.name;  // "Apple"
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Arrays</a>
+        </h1>
+        <ul>
+          <li>Eine Liste von Werten mit irgendwelchen Typen (Zahlen, Strings, Objekte, andere Arrays, usw.).</li>
+          <li>Kann <a href="https://dmitripavlutin.com/javascript-sparse-dense-arrays/">"Sparse" oder "Dense"</a> sein.
+          </li>
+          <li>Kann mit initialen Werten gefüllt werden.</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const empty1 = [];
+            const empty2 = new Array();
+            const filled = [1, 2, 3];
+            const sparse1 = [,,];         // sparse1.length == 3
+            const sparse2 = new Array(3); // sparse2.length == 3
+            const a = filled[1];          // a == 2
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map">Maps</a>
+        </h1>
+        <ul>
+          <li>Eine Liste von Schlüsseln/Werten</li>
+          <li>Erhaltet Einfügungsreihenfolge bei Iteration</li>
+          <li>Schlüssel kann irgendwelcher Typ sein.</li>
+          <li>Wird mit <code>set</code> geschrieben und <code>get</code> gelesen.</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const m = new Map();
+
+            m.set('a', 1);
+            m.set('b', 2);
+            m.set('c', 3);
+
+            // m.get('a') == 1, etc.
+          </code>
+        </pre>
+        <p class="notes">Siehe <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map#objects_vs._maps">Vergleich
+            mit Objekt</a>.</p>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map#iterating_map_with_for..of">Maps:
+            Iteration</a>
+        </h1>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const m = new Map();
+
+            m.set('a', 1);
+            m.set('b', 2);
+            m.set('c', 3);
+
+            // kann mit for..of iteriert werden
+            for (const [key, value] of m) {
+              console.log(key + ' = ' + value)
+            }
+            // [key, value] benutzt "destructuring" (kommt später)
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set">Sets</a>
+        </h1>
+        <p>Speichert eindeutige Werte jedes beliebigen Typs.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const s = new Set([1, 2, 3]);
+
+            s.add(5);
+
+            const one = s.has(1); // one == true
+            const four = s.has(4); // four == false
+            const five = s.has(5); // five == true
+
+            // kann mit for..of iteriert werden
+            for (const item of s) {
+              console.log(item)
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Symbolen</a>
+        </h1>
+        <p>Erstellt eine eindeutige Referenz statt ein Objekt.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const symbol1 = Symbol('foo');
+            const symbol2 = Symbol('foo');
+            const areEqual = symbol1 == symbol2; // false
+          </code>
+        </pre>
+        <p>Wird relativ selten benutzt, ist aber für gewisse <em>Use Cases</em> wichtig.</p>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Typen</h1>
+            <ul>
+              <li>Arrays Testen</li>
+              <li>Symbolen Testen</li>
+              <li>Objekte Testen</li>
+              <li>Strings Testen</li>
+              <li>Map-Iteration Testen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>Test mit Objekten schreiben</li>
+              <li>Test mit Arrays schreiben</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Operatoren</a></h1>
+        <ul>
+          <li>Typ-operatoren</li>
+          <li>Rechenoperatoren</li>
+          <li>Vergleichsoperatoren</li>
+          <li>Boolesche Operatoren</li>
+          <li>Nullesche Operatoren</li>
+          <li>Zuweisungsoperatoren</li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread
+              (...)</a> Operator</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Typ-operatoren</h1>
+        <ul>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/typeof">typeof</a></li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/instanceof">instanceof</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/typeof">typeof</a></h1>
+        <p>Liefert den Typ einer Variable</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const age = 42;
+            const text = `I am ${age}`;
+            let temp;
+          </code>
+        </pre>
+
+        <ul>
+          <li><code>typeof age</code> ergibt <code>number</code></li>
+          <li><code>typeof text</code> ergibt <code>string</code></li>
+          <li><code>typeof temp</code> ergibt <code>undefined</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/instanceof">instanceof</a></h1>
+        <p>Prüft, ob ein Objekt durch eine bestimmte <em>Constructor-Funktion</em> erstellt wurde.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            function person(firstName, lastName) {
+              this.firstName = firstName;
+              this.lastName = lastName;
+            }
+            const bob = new person('John', 'Doe');
+            const isPerson = bob instanceof person; // true
+            const isObject = bob instanceof Object; // true
+            const isNumber = bob instanceof Number; // false
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/instanceof">instanceof</a> (Klassen)</h1>
+        <p>Prüft, ob ein Objekt von einer bestimmten <em>Klasse</em> abgeleitet ist.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            class person {
+              constructor(name) {
+                this.name = name;
+              }
+            }
+            class employee extends person {
+              constructor(name) { super(name); }
+            }
+
+            const bob = new employee('John', 'Doe');
+            const isPerson = bob instanceof employee; // true
+            const isPerson = bob instanceof person;   // true
+            const isObject = bob instanceof Object;   // true
+            const isNumber = bob instanceof Number;   // false
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Rechenoperatoren</a>
+        </h1>
+        <ul class="compact">
+          <li><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>**</code></li>
+          <li><code>%</code> berechnet den Restwert einer ganzzahligen Division (Modulo): <code>5 % 2 == 1</code>.</li>
+          <li><code>5 ** 2</code> ist 5 hoch 2 = 25</li>
+          <li><code>++</code> ist wie <code>+1</code>; <code>--</code> ist wie <code>-1</code></li>
+          <li><code>++zahl</code> erhöht zahl vor der Auswertung um 1.</li>
+          <li><code>zahl++</code> erhöht zahl nach der Auswertung um 1.</li>
+          <li>Negative Zahlen werden mit <code>-</code> geschrieben -zahl.</li>
+          <li>Es gilt Punkt vor Strich und dann links vor rechts.</li>
+          <li>Um die Reihenfolge zu ändern können Klammern <code>()</code> gesetzt werden.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Vergleichsoperatoren</a>
+        </h1>
+        <ul>
+          <li><code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>===</code>, <code>!==</code></li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const x = 1 == '1';   // x ist 'true'
+            const y = 1 === '1';  // y ist 'false'
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Boolesche <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Operatoren</a>
+        </h1>
+        <ul>
+          <li><code>&&</code>, <code>||</code>, <code>!</code></li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const x = false;
+            const y = true;
+            const a = x && y; // a ist 'false'
+            const o = x || y; // o ist 'true'
+            const n = !x;     // n ist 'true'
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Nullesche <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Operatoren</a>
+        </h1>
+        <ul>
+          <li><code>?.</code>, <code>??</code></li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const person = {
+              first: "bob",
+              last: "Hoffman",
+              age: 34,
+              company: {
+                name: "Apple"
+              }
+            };
+            const x = person?.middle; // x == undefined ohne Fehlermeldung
+            const y = x ?? "nothing"; // y == "nothing"
+            const z = person.company.name ?? "none"; // z == "Apple"
+            const z2 = person?.company?.name ?? "none"; // z2 == "Apple"
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators"></a>Zuweisungsoperatoren</a>
+        </h1>
+        <ul>
+          <li><code>x = 1</code></li>
+          <li><code>x++</code>, <code>++x</code></li>
+          <li><code>x--</code>, <code>--x</code></li>
+          <li><code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>&&=</code>, <code>||=</code>, <code>??=</code>, <code>**=</code></li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            let x = 1;
+            const y = x++;  // y == 1
+            const z = ++x;  // z == 3
+            x = x + 1;      // x == 4
+            x += 1;         // x == 5; Kurzschreibweise für x = x + 1;
+          </code>
+        </pre>
+        <p class="notes">Siehe <a href="https://www.codeproject.com/Articles/1208666/Why-Does-x-equals-plusplusx-plus-xplusplus-Give-Me">Why
+            Does x = ++x + x++ Give Me the Wrong Answer?</a> für weitere Infos.</p>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread
+            (...)</a> Operator</h1>
+        <p>Kopiert alle Eigenschaften eines Objekts.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const person = {
+              a: 1,
+              b: "n",
+              c: false,
+              d: {
+                e: 2,
+                f: "m"
+              }
+            };
+            const person2 = person;                         // Referenz
+            const personCopy1 = Object.assign({}, person);  // Kopie
+            const personCopy2 = { ...person };              // Kopie
+            person.a = 2;  // Ändert nur person und person2
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread</a>
+          mit Anpassungen </h1>
+        <p>Kann mit explizitem Setzen von Eigenschaften kombiniert werden.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const person = { a: 1, b: "n", c: false, d: { e: 2, f: "m" } };
+            const person2 = {
+              ...person,
+              a: 2,
+              d: {
+                ...person.d,
+                e: 1
+              }
+            } // { a: 2, b: "n", c: false, d:  { e: 1, f: "m" } }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread</a>
+          mit Arrays</h1>
+        <p>Kopiert nicht nur Objekte sondern auch <em>Arrays</em>.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const a = [0, 1, 2];
+            const b = [3, 4, 5];
+
+            const b2 = [...b];            // Kopie von b
+
+            const c = [...a, ...b];       // [0, 1, 2, 3, 4, 5, 6]
+            const d = [0, 1, 2, ...b, 7]; // [0, 1, 2, 3, 4, 5, 6, 7]
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread</a>
+          mit Parametern</h1>
+        <p>Kann auch als Funktionsparametern benutzt werden.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            function sum(x, y, z) {
+              return x + y + z;
+            }
+            const numbers = [1, 2, 3];
+            const total = sum(...numbers);  // Ergibt 6
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring</a>
+        </h1>
+        <p>Mit <code>[]</code> können Daten aus Arrays extrahiert werden.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const items = [10, 20, 30, 40, 50];
+            const [a, b, ...rest] = items;
+            // a == 10, b == 20, rest == [30, 40, 50]
+
+            // Mit Standardwerte
+            const [c, d, e = -1, f = -1] = rest;
+            // c == 30, d == 40, e = 50, f = -1
+          </code>
+        </pre>
+        <p class="notes">Siehe <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#array-destrukturierung">weitere
+            Beispiele</a>.</p>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring</a>
+        </h1>
+        <p>Mit <code>{}</code> können Daten aus Objekten extrahiert werden.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const obj = { name: "bob", age: 10, country: "CH" };
+            const { name, age } = obj;
+            // name == "bob", age == 10
+
+            let name2, age2;          // Semicolon nötig
+            ({ name2, age2 } = obj);  // Klammern nötig
+            // name2  = "bob", age2 = 10
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring</a>
+        </h1>
+        <p>Daten aus Objekten zu anderen Eigenschaften zuweisen.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const obj = { name: "bob", age: 10, country: "CH" };
+            const { name: firstName, age: years } = obj;
+            // firstName == "bob", years == 10
+
+            // Mit Standardwerte
+            const {name: firstName = "John", lastName = "Doe"} = obj;
+            // firstName  = "bob", lastName = "Doe"
+
+            // Mit "rest"
+            const {name, ...obj2} = obj;
+            // name = "bob", obj2 = { age: 10, country: "CH" }
+          </code>
+        </pre>
+        <p class="notes">Siehe <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#objektdestrukturierung">weitere
+            Beispiele</a>.</p>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Operatoren</h1>
+            <ul>
+              <li>Nullesche Operatoren Testen</li>
+              <li>Vergleichsoperatoren Testen</li>
+              <li>Spread Operatoren Testen</li>
+              <li>Destructuring Operatoren Testen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>Test mit Nulleschen Operatoren</li>
+              <li>Test mit Spread Operatoren</li>
+              <li>Test mit Destructuring Operatoren</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Statements</a></h1>
+        <ul>
+          <li>Verzweigungen:
+            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/if...else">if</a></code>/<code>else</code>
+          </li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Conditional_Operator">Ternäre</a>
+            Operator (<code>?:</code>)</li>
+          <li>Verzweigungen:
+            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/switch">switch</a></code>
+          </li>
+          <li>Schleifen:
+            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for">for</a></code>
+          </li>
+          <li>Schleifen:
+            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for...in">for..in</a></code>
+          </li>
+          <li>Schleifen:
+            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for...of">for..of</a></code></code>
+          </li>
+          <li>Schleifen:
+            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/while">while</a></code>
+          </li>
+          <li>Schleifen:
+            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/do...while">do..while</a></code>
+          </li>
+          <li>Exception-Handling:
+            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/try...catch">try..catch..finally</a></code>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Verzweigungen:
+          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/if...else">if</a></code>/<code>else</code>
+        </h1>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const x = 42;
+            let y;
+            if (x > 42) {
+              y = 1;
+            } else {
+              y = 2;
+            }
+            // y == 2
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>
+          <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Conditional_Operator">Ternäre</a>
+          Operator (<code>?:</code>)
+        </h1>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const x = 42;
+            const y = x > 42 ? 1 : 2;
+            // y == 2
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Verzweigungen:
+          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/switch">switch</a></code>
+        </h1>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const x = 42;
+            let y;
+            switch (x) {
+              case 41:
+                y = 1;
+                break;
+              case 42:
+                y = 2;
+                break;
+              default:
+                y = 3;
+            }
+            // y == 2
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Schleifen:
+          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for">for</a></code>
+        </h1>
+        <p>Für sich wiederholende Programmteile werden Schleifen verwendet.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            for (let i = 0; i < 5; i++) {
+              // Wird für i = 0,1,2,3,4 ausgeführt
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Schleifen:
+          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for...in">for..in</a></code>
+        </h1>
+        <p>Um allen Eigenschaften eines Objekts durchzugehen.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const o = { a: 1, b: 2, c: 3 };
+
+            for (const property in o) {
+              // Ergibt "a", "b", "c"
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Schleifen:
+          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for...of">for..of</a></code>
+        </h1>
+        <p>Um allen Elementen eines Arrays durchzugehen.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const a = ['a', 'b', 'c'];
+
+            for (const element of array1) {
+              // Ergibt 'a', 'b', 'c'
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Schleifen:
+          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/while">while</a></code>
+        </h1>
+        <p>Um Code auszuführen bis eine Bedingung erfüllt wird.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            let n = 0;
+
+            while (n < 3) {
+              n++;
+            }
+            // n ist 3
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Schleifen:
+          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/do...while">do..while</a></code>
+        </h1>
+        <p>Um Code mindestens ein mal auszuführen und dann bis eine Bedingung erfüllt wird.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            let result = '';
+            let i = 0;
+
+            do {
+              i = i + 1;
+              result = result + i;
+            } while (i < 5);
+            // result ist "12345"
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Exception-Handling</h1>
+        <table>
+          <tr>
+            <th><code>try</code></th>
+            <td>wird bis einen <span class="fragment highlight-red">Fehler</span> vorkommt ausgeführt</td>
+          </tr>
+          <tr>
+            <th><code>catch(error)</code></th>
+            <td>wird nur bei einem <span class="fragment highlight-red">Fehler im <code>try {}</code></span> ausgeführt
+            </td>
+          </tr>
+          <tr>
+            <th><code>finally</code></th>
+            <td>wird <span class="fragment highlight-blue">immer</span> ausgeführt</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h1>Exception-Handling</h1>
+        <ul>
+          <li><code>throw</code> erzeugt ein <em>Exception</em></li>
+          <li>Aufrufe werden bis zu einem <code>catch</code> "aufgerollt"</li>
+          <li>Mangels ein <code>catch</code> wird die Applikation beendet</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const divide = (a, b) => {
+              if (b === 0) { throw "Divide by zero"; }
+
+              return a / b;
+            };
+
+            try {
+              divide(1, 0);
+            }
+            catch (error) {
+              console.log(error);
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Statements</h1>
+            <ul>
+              <li><code>for..in</code> Testen</li>
+              <li><code>for..of</code> Testen</li>
+              <li><code>switch</code> Testen</li>
+              <li><code>try..catch..finally</code> Testen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>Test mit <code>for..of</code></li>
+              <li>Test mit <code>switch</code></li>
+              <li>Test mit <code>try..catch..finally</code></li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg" class="compact">
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions">Funktionen</a></h1>
+        <ul>
+          <li>Gewöhnliche <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions">Funktionen</a></li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Method_definitions">Methoden</a></li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/get">Getters</a>/<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/set">Setters</a></li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions">Arrow Funktionen</a></li>
+          <li>Umwandlungsfunktionen</li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math">Mathematische</a> Funktionen</li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Datumsmethoden</a></li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Gewöhnliche <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions">Funktionen</a></h1>
+        <ul>
+          <li>Kann mehrere Parameter haben</li>
+          <li>"rest" Parameter wird mit "..." geschrieben</li>
+          <li>Parametern können default-Werte haben</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            function add(a, b, c = 0) {
+              return a + b + c;
+            }
+            function addAll(...args) {
+              let result = 0;
+              for (const a of args) {
+                result += a;
+              }
+              return result;
+            }
+            const sum1 = add(1, 2);           // 3
+            const sum2 = add(1, 2, 3);        // 6
+            const sum3 = add(1, 2, 3, 4);     // 6 weil "4" ignoriert wird
+            const sum4 = addAll(1, 2, 3, 4);  // 10
+            const sum5 = addAll(...[1,2,3]);  // 6
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Method_definitions">Methoden</a>
+        </h1>
+        <p>Funktionen, die an einem Objekt gebunden sind.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const person = {
+              age: 34,
+
+              setAge(a) {
+                this.age = a;
+              }
+
+              getYearsLeft() {
+                return 65 - this.age;
+              }
+            };
+
+            person.setAge(42);
+            const y = person.getYearsLeft();  // 23
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/get">Getters</a>/<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/set">Setters</a></h1>
+        <p>Ermöglicht berechnete Eigenschaften.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const person = {
+              _age: 34;
+
+              get age() {
+                return _age;
+              }
+
+              set age(a) {
+                this._age = a - 10; // Don't lie about your age 😉...
+              }
+            };
+
+            person.age = 42;
+            const y = person.age;  // 32
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions">Arrow
+            Funktionen</a></h1>
+        <ul>
+          <li>Eine kompaktere Definitionsform für Funktionen.</li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions#arrow_functions_used_as_methods">Für
+              Methoden nicht gut geeignet</a> (weil <code>this</code> eine andere Bedeutung hat).</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const add = (a, b, c = 0) => a + b + c;
+            const addAll = (...args) => {
+              let result = 0;
+              for (const a of args) {
+                result += a;
+              }
+              return result;
+            }
+            const singleArgument = a => a + 2;  // Benötigt keine Klammern
+            const noParameters = () => false;   // Benötigt leere Klammern
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Umwandlungsfunktionen</h1>
+        <ul>
+          <li>
+            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/parseInt">parseInt</a>()</code>
+          </li>
+          <li>
+            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/parseFloat">parseFloat</a>()</code>
+          </li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const x = "42.3";
+            const xType = typeof x;   // "string"
+            const y = parseFloat(x);  // y == 42.3
+            const yType = typeof y;   // "number"
+            const z = parseInt(x);    // z == 42
+            const zType = typeof z;   // "number"
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math">Mathematische</a>
+          Funktionen</h1>
+        <ul>
+          <li><code>isNaN()</code> prüft ob eine Variable keine Zahl ist (gibt true zurück, wenn es keine Zahl ist).
+          </li>
+          <li><code>Math.random()</code> erzeugt eine Zufallszahl >= 0 und <1.< /li>
+          <li><code>Math.abs()</code> gibt den absoluten Wert einer Zahl zurück.</li>
+          <li><code>Math.floor()</code> rundet eine Zahl ab</li>
+          <li><code>Math.ceil()</code> rundet eine Zahl auf</li>
+          <li><code>Math.max()</code> gibt die grösste Zahl zurück</li>
+          <li><code>Math.sqrt()</code> berechnet die Quadratwurzel</li>
+        </ul>
+        <p>NaN = <em>Not a Number</em></p>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Datumsmethoden</a>
+        </h1>
+        <ul>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a>
+            hat verschiedene Konstruktoren</li>
+          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date/parse"><code>Date.parse()</code></a>
+            unterstützt verschiedene Formate</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const dateText = "04 Dec 2021 00:10:00 GMT";
+            const date = new Date(dateText);
+            const month = date.getUTCMonth();     // 11
+            const hour = date.getUTCHours();      // 0
+            const minutes = date.getUTCMinutes(); // 10
+
+            const milliseconds = Date.parse(dateText);
+            const unixDate = new Date(milliseconds);
+            // unixDate = date
+            const date2 = new Date(2021, 11, 4, 0, 10, 0);
+            // date2 ist Lokal, nicht GMT
+
+            const now = Date.now();  // jetzt (in Millisekunden)
+            const now2 = new Date(); // jetzt
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a></h1>
+        <ul class="compact">
+          <li>Unterstützt das Formatieren in <em>locales</em> (z.B. "de-CH")</li>
+          <li>
+            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat">DateTimeFormat</a></code>
+            formatiert absoluten Daten
+          </li>
+          <li>
+            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat/RelativeTimeFormat">RelativeTimeFormat</a></code>
+            formatiert relativen Zeiten
+          </li>
+        </ul>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            const date = new Date('04 Dec 2021 00:10:00 GMT');
+            const dateTimeFormat = new Intl.DateTimeFormat("de-CH");
+            const formattedDate = dateTimeFormat.format(date);
+            // formattedDate == "4.12.2021"
+            const timeFormat = new Intl.RelativeTimeFormat("de-CH");
+            const formatted = timeFormat.format(1, "day");
+            // formatted == "in 1 Tag"
+            const timeFormat2 = new Intl.RelativeTimeFormat("de-CH", {
+              numeric: "auto",
+            });
+            const formatted2 = timeFormat.format(1, "day");
+            // formatted2 == "morgen"
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Funktionen</h1>
+            <ul>
+              <li>Methoden Testen</li>
+              <li>Eigenschaften (<code>get</code>/<code>set</code>) Testen</li>
+              <li>Arrow-Funktionen Testen</li>
+              <li><code>Math</code> Funktionen Testen</li>
+              <li>Datumsfunktionen Testen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>Test mit Methoden und Eigenschaften (<code>get</code>/<code>set</code>)</li>
+              <li>Test mit <code>Intl</code></li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>
