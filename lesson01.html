@@ -339,58 +339,146 @@
         <h2>Vorstellung, Einführung und Aufsetzen von Werkzeugen</h2>
       </section>
 
-      <section>
+      <section class="compressed">
         <h1>Übersicht Landschaft</h1>
+        <li>Xamarin ermöglicht Android/iOS Entwicklung mit .NET/C#</li>
         <div>
-          <img src="assets/Lesson01/MobileAppDevelopmentOverview.jpg" class="screenshot">
+          <table>
+            <tr>
+              <th></th>
+              <th>IDE</th>
+              <th>Languages</th>
+              <th>Frameworks</th>
+              <th>Build/Deploy</th>
+            </tr>
+            <tr>
+              <th style="writing-mode: vertical-lr;">Android</th>
+              <td>
+                Android Studio<br>
+                Eclipse<br>
+                NetBeans
+              </td>
+              <td>
+                Java<br>
+                Kotlin<br>
+                C++
+              </td>
+              <td>
+                Google Play Service<br>
+                Dagger<br>
+                data-bind<br>
+                gson<br>
+                jdeferred
+              </td>
+              <td>
+                PlayStore<br>
+                Gradle<br>
+                Maven
+              </td>
+            </tr>
+            <tr>
+              <th style="writing-mode: vertical-lr">iOS</th>
+              <td>
+                xCode<br>
+                AppCode
+              </td>
+              <td>
+                Swift<br>
+                Objective-C
+              </td>
+              <td>
+                AlamoFire<br>
+                CryptoSwift<br>
+                SwiftyJSON<br>
+                SwiftyRSA<br>
+                PromiseKit
+              </td>
+              <td>
+                TestFlight<br>
+                AppStore<br>
+                CocoaPods
+              </td>
+            </tr>
+            <tr>
+              <th style="writing-mode: vertical-lr">Cross-Platform</th>
+              <td>
+                <span class="fragment highlight-blue">Visual Studio</span><br>
+                Rider<br>
+                WebStorm<br>
+                Visual Studio Code<br>
+              </td>
+              <td>
+                <span class="fragment highlight-blue">C#</span><br>
+                F#<br>
+                TypeScript
+              </td>
+              <td>
+                <span class="fragment highlight-blue">Xamarin</span><br>
+                MAUI<br>
+                React Native<br>
+                Ionic<br>
+                Cordova (ehem. PhoneGap)<br>
+                NativeScript
+              </td>
+              <td>
+                fastlane<br>
+                HockeyApp<br>
+                Artifactory<br>
+                Jenkins<br>
+                TeamCity<br>
+                Azure<br>
+              </td>
+            </tr>
+          </table>
         </div>
       </section>
 
       <section>
         <h1>Geschichte Xamarins</h1>
         <ul>
-          <li>Xamarin wurde ursprünglich von der Firma Mono entwickelt</li>
-          <li>Ermöglicht Android und iOS Entwicklung mit .NET/C#</li>
-          <li>In 2016 von Microsoft gekauft</li>
-          <li>Immer weiter in .NET integriert</li>
+          <li>Die Linux .NET Laufzeitumgebung <em>Mono</em> wurde von der Firma <em>Ximian</em> entwickelt</li>
+          <li>Aus <em>Ximian</em> wurde die Firma <em>Xamarin</em></li>
+          <li>Das Produkt <em>Xamarin</em> ermöglicht iOS/Android Apps mit <em>C#</em> mit <em>Mono</em></li>
+          <li>In 2016 wurde <em>Mono</em> von <em>Microsoft</em> gekauft</li>
+          <li>Wird immer weiter in .NET integriert</li>
           <li>Wird in 2022 durch <a href="https://docs.microsoft.com/en-us/dotnet/maui/">MAUI</a> ersetzt/erweitert</li>
         </ul>
+        <p class="notes">Siehe den <a href="https://en.wikipedia.org/wiki/Xamarin">Wikipedia Eintrag dazu</a>.</p>
       </section>
 
       <section>
-        <h1>Xamarin "Classic"</h1>
+        <h1>Xamarin mit Native UIs</h1>
         <ul>
-          <li>Xamarin.iOS & Xamarin.Android (Classic)</li>
-          <li>They basically map the platform 1:1</li>
-          <li>Support new APIs in 24 hours</li>
-          <li>Share the “Core” libraries</li>
-          <li>No shared UI - unless you use a Hybrid approach</li>
+          <li>Xamarin.iOS &amp; Xamarin.Android Projekte</li>
+          <li>Ein 1:1 Mapping zu den jeweiligen Plattform-APIs</li>
+          <li>Neue APIs werden innerhalb 24 Stunden angeboten</li>
+          <li><em>Core Elemente</em> werden geteilt</li>
+          <li><em>UIs</em> sind Plattform-spezifisch und werden <em>nicht</em> geteilt (ausser mit Hybrid-UIs)</li>
         </ul>
       </section>
 
       <section>
         <h1>Xamarin Forms</h1>
         <ul>
-          <li>Share UI code and write it in XAML</li>
-          <li>Use DependencyService (IoC) to access platform features</li>
-          <li>Abstraction of features (Dialogs, Notifications, etc.)</li>
-          <li>Built-in support for navigation</li>
+          <li><em>UIs</em> werden geteilt und mit <em>XAML</em> geschrieben</li>
+          <li>Bietet <code>DependencyService</code> (IoC) für plattformabhängige Features an</li>
+          <li>Bietet Schnittstellen für gemeinsame Features (wie z.B. Dialogs, Notifications, usw.) an</li>
+          <li>Bietet Unterstützung für Navigation an</li>
         </ul>
       </section>
 
-      <section>
+      <section class="compact">
         <h1>.NET Standard</h1>
         <ul>
-          <li>Common API (independent of target runtime)</li>
-          <li>Version 2.1 is the latest</li>
-          <li>The higher the version the more APIs are available</li>
-          <li>Think of it as an “interface” it does not contain actual code</li>
-          <li>Mono implements .NET Standard for iOS/Android</li>
-          <li>.NET Framework implements it for Windows</li>
-          <li>You can find the definitions on GitHub</li>
-          <li>.NET 5 is the current LTS target</li>
-          <li>.NET 6 is the most recent target</li>
+          <li>Definiert ein gemeinsames <em>API</em> oder <em>Schnittstelle</em></li>
+          <li>Je höher die Version desto breiter die API Oberfläche</li>
+          <li>Version 2.1 ist die neuste Version</li>
+          <li><em>Mono</em> implementiert <em>.NET Standard</em> for iOS/Android</li>
+          <li><em>.NET Framework</em> und <em>.NET</em> implementieren sie for Windows</li>
+          <li><em>.NET 5</em> is die aktuelle <em>LTS*</em> Version (Nov. 2020)</li>
+          <li><em>.NET 6</em> is die allerneuste Version (Nov. 2021)</li>
         </ul>
+        <p class="notes">LTS = Long Term Service</p>
       </section>
 
       <section>
@@ -444,7 +532,7 @@
         <h1>GitHub Einrichten</h1>
         <ul>
           <li>Konto auf <a href="https://github.com/">GitHub</a> erstellen</li>
-          <li>Github Repository erstellen (z.B. "HFU_21H__JAS_20I_app")
+          <li>Github Repository erstellen (z.B. "HFU_APE_app")
             <ul>
               <li><em>Entweder</em> veröffentlichen</li>
               <li><em>Oder</em> mich (<b>mvonballmo</b>) einladen</li>
@@ -475,6 +563,7 @@
             <h1>Wo steht ihr?</h1>
             <ul>
               <li><em>GitHub</em> ist eingerichtet</li>
+              <li><em>GitHub</em> Projekt ist aufgesetzt</li>
             </ul>
           </div>
           <img src="assets/checklist.png">
@@ -545,7 +634,8 @@
           <div>
             <h1>Wo steht ihr?</h1>
             <ul>
-              <li><em>GitHub</em> ist eingerichtet</li>
+              <li class="done"><em>GitHub</em> ist eingerichtet</li>
+              <li class="done"><em>GitHub</em> Projekt ist aufgesetzt</li>
               <li><em>SmartGit</em> ist eingerichtet</li>
               <li>"app" und "doc" Repositories sind bei euch lokal verfügbar</li>
             </ul>
@@ -560,7 +650,7 @@
           <li>OS und Zielgerät feststellen</li>
           <li>Visual Studio 2022 installieren</li>
           <li>Emulator (Android) oder Simulator (iOS) einrichten</li>
-          <li>Optional: <a href="https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/set-up-device-for-development">Set up your device to allow debugging</a></li>
+          <li>Optional: <a href="https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/set-up-device-for-development">Einrichten eines Geräts für die Entwicklung und Debugging</a></li>
         </ul>
       </section>
 
@@ -570,6 +660,7 @@
           <div>
             <ul>
               <li class="done"><em>GitHub</em> ist eingerichtet</li>
+              <li class="done"><em>GitHub</em> Projekt ist aufgesetzt</li>
               <li class="done"><em>SmartGit</em> ist eingerichtet</li>
               <li class="done">"app" und "doc" Repositories sind lokal verfügbar</li>
               <li><em>Visual Studio</em> ist installiert</li>
@@ -596,7 +687,7 @@
             <ul>
               <li class="fragment highlight-current-blue">Xamarin.Forms wählen</li>
               <li class="fragment highlight-current-blue">Drei Projekte werden erstellt</li>
-              <li class="fragment highlight-current-blue">"Shared" Projekt zielt auf .NET Standard</li>
+              <li class="fragment highlight-current-blue">"Shared" Projekt zielt auf <em>.NET Standard</em></li>
               <li class="fragment highlight-current-blue">Im Emulator Ausführen</li>
             </ul>
           </div>
@@ -631,6 +722,10 @@
         </div>
       </section>
 
+      <section data-background="assets/A river near Forestport.jpeg" class="white-text">
+        <h1>Navigation und Tabs</h1>
+      </section>
+
       <section>
         <h1>Navigation</h1>
         <p>Seiten auf dem "View Stack" setzen</p>
@@ -645,9 +740,10 @@
             await Navigation.PopModalAsync();
           </code>
         </pre>
+        <p class="notes"><code>async</code> und <code>await</code> werden wir jetzt einfach benutzen und in einer späteren Lektion genauer erklären</p>
       </section>
 
-      <section>
+      <section class="compact">
         <h1>Xamarin Forms: Tabs</h1>
         <p>Populate pages as tabs in <code>MainPage.xaml.cs</code> in the <code>TabbedPage.Children</code></p>
         <pre>

@@ -74,6 +74,11 @@
   font-size: var(--r-main-font-size);
 }
 
+.reveal .compressed {
+  --r-main-font-size: 20px;
+  font-size: var(--r-main-font-size);
+}
+
 .reveal li.selected {
   color: coral;
 }
