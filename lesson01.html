@@ -172,7 +172,7 @@
         <ul>
           <li>Allgemeine Software-Entwicklung: Prozesse und Werkzeuge kennenlernen</li>
           <li>Übersicht und Einarbeitung Mobile-App Entwicklung</li>
-          <li>Schwerpunkt Cross-Platform mit <a href="https://docs.microsoft.com/xamarin/xamarin-forms/">Xamarin</a> (evtl. auch <a href="https://docs.microsoft.com/en-us/dotnet/maui/">MAUI</a>)</li>
+          <li>Schwerpunkt Cross-Platform mit <a href="https://docs.microsoft.com/xamarin/">Xamarin</a> (evtl. auch <a href="https://docs.microsoft.com/en-us/dotnet/maui/">MAUI</a>)</li>
           <li>Übliche Einsatzgebiete anschauen</li>
           <li>Testen, Debuggen, Ausführen</li>
           <li>Lernen wo Native Code besser geeignet ist</li>
@@ -340,51 +340,67 @@
       </section>
 
       <section>
-        <h1>JavaScript 1.0</h1>
-        <div class="seventy-thirty-grid">
-          <ul>
-            <li>Als <a href="https://en.wikipedia.org/wiki/JavaScript#Creation_at_Netscape">"LiveScript" in 1995 von
-                Brendan Eich</a> in 10 Tagen für Netscape entwickelt</li>
-            <li>Ursprünglich benutzt, um Java Applets in den Netscape Navigator einzubinden</li>
-            <li>Deshalb in JavaScript umbenannt</li>
-          </ul>
-          <img src="assets/Lesson01/NetscapeNavigator2.0.jpeg">
+        <h1>Übersicht Landschaft</h1>
+        <div>
+          <img src="assets/Lesson01/MobileAppDevelopmentOverview.jpg" class="screenshot">
         </div>
       </section>
 
       <section>
-        <h1>JavaScript 2.0</h1>
+        <h1>Geschichte Xamarins</h1>
         <ul>
-          <li>1996 integrierte Internet Explorer 3.0 eine eigene Version namens <a href="https://en.wikipedia.org/wiki/JScript">JScript</a></li>
-          <li>Zeit des ersten Browserkriegs</li>
-          <li>Vernachlässigung von Standards, viele Inkompatibilitäten</li>
+          <li>Xamarin wurde ursprünglich von der Firma Mono entwickelt</li>
+          <li>Ermöglicht Android und iOS Entwicklung mit .NET/C#</li>
+          <li>In 2016 von Microsoft gekauft</li>
+          <li>Immer weiter in .NET integriert</li>
+          <li>Wird in 2022 durch <a href="https://docs.microsoft.com/en-us/dotnet/maui/">MAUI</a> ersetzt/erweitert</li>
         </ul>
       </section>
 
       <section>
-        <h1>Standardisierung</h1>
+        <h1>Xamarin "Classic"</h1>
         <ul>
-          <li>1997 als <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-262/">ECMA-262</a> standardisiert</li>
-          <li>Browserseitige Schnittstellen vom W3C (World Wide Web Consortium) standardisiert.</li>
-          <li>Seit 2015 gab es pro Jahr eine neue Version</li>
-          <li>"Evergreen" Browsers werden automatisch aktualisiert (z.B. Chrome, Edge, Opera, Firefox aber nicht Safari)</li>
+          <li>Xamarin.iOS & Xamarin.Android (Classic)</li>
+          <li>They basically map the platform 1:1</li>
+          <li>Support new APIs in 24 hours</li>
+          <li>Share the “Core” libraries</li>
+          <li>No shared UI - unless you use a Hybrid approach</li>
         </ul>
       </section>
 
       <section>
-        <h1>Vorteile</h1>
+        <h1>Xamarin Forms</h1>
         <ul>
-          <li>Logik im Client spart Roundtrips und Rechenzeit auf dem Server</li>
-          <li>Schnellere Antwortzeiten für den Client</li>
+          <li>Share UI code and write it in XAML</li>
+          <li>Use DependencyService (IoC) to access platform features</li>
+          <li>Abstraction of features (Dialogs, Notifications, etc.)</li>
+          <li>Built-in support for navigation</li>
         </ul>
       </section>
 
       <section>
-        <h1>Nachteile</h1>
+        <h1>.NET Standard</h1>
         <ul>
-          <li>Browserinkompatibilitäten (immer weniger)</li>
-          <li>JavaScript kann deaktiviert werden (und nicht alle Browser unterstützen JavaScript)</li>
-          <li>Sicherheitsprobleme (fremder Code wird auf dem eigenen Computer ausgeführt, Ausbruch aus der Sandbox)</li>
+          <li>Common API (independent of target runtime)</li>
+          <li>Version 2.1 is the latest</li>
+          <li>The higher the version the more APIs are available</li>
+          <li>Think of it as an “interface” it does not contain actual code</li>
+          <li>Mono implements .NET Standard for iOS/Android</li>
+          <li>.NET Framework implements it for Windows</li>
+          <li>You can find the definitions on GitHub</li>
+          <li>.NET 5 is the current LTS target</li>
+          <li>.NET 6 is the most recent target</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>.NET Standard APIs</h1>
+        <ul>
+          <li>File (System.IO)</li>
+          <li>Collections &amp; LINQ</li>
+          <li>Task &amp; <code>async</code>/<code>await</code></li>
+          <li>Http (Client) (System.NET)</li>
+          <li>Und viel mehr...</li>
         </ul>
       </section>
 
@@ -393,11 +409,8 @@
           <div>
             <h1>Erster Blick</h1>
             <ul>
-              <li>Im Browser Console</li>
-              <li>Aus einer HTML-Datei</li>
-              <li>Aus einer JS-Datei</li>
-              <li>Im System Console (Node)</li>
-              <li>Testing (Jest)</li>
+              <li>Einfaches Applikation ausführen und debuggen</li>
+              <li>Tests ausführen und debuggen</li>
             </ul>
           </div>
           <img src="assets/demo.png">
@@ -417,30 +430,42 @@
 
       <section data-background="assets/Rusty_tools_dimmed.jpg">
         <h1>Was benötigen wir?</h1>
-        <h2>Werkzeuge</h2>
         <ul>
-          <li>Einfaches Tracking von Aufgaben: <a href="https://www.trello.com/">Trello</a></li>
-          <li>Source-Kontrolle: <a href="https://www.syntevo.com/smartgit/">SmartGit</a> und <a href="https://git-scm.com/">Git</a></li>
+          <li>Source-Kontrolle: <a href="https://git-scm.com/">Git</a> (mit <a href="https://www.syntevo.com/smartgit/">SmartGit</a> GUI)</li>
           <li>Online Code Repo: <a href="https://github.com/">GitHub</a></li>
-          <li>IDE: <a href="https://code.visualstudio.com/">Visual Studio Code</a> (VSC) und <a href="https://www.jetbrains.com/webstorm/">WebStorm</a></li>
-          <li>Laufzeitumgebung & Package Manager: <a href="https://nodejs.org/">Node</a> und <a href="https://www.npmjs.com/">NPM</a></li>
-          <li>Testing Framework: <a href="https://jestjs.io/">Jest</a></li>
+          <li>IDE: <a href="https://visualstudio.microsoft.com/vs/community/">Visual Studio</a></li>
+          <li>Laufzeitumgebung: <a href="https://dotnet.microsoft.com/">.NET</a>/<a href="https://docs.microsoft.com/xamarin/">Xamarin</a></li>
+          <li>Package Manager: <a href="https://www.nuget.org/">NuGet</a></li>
+          <li>Testing Framework: <a href="https://nunit.org/">nUnit</a></li>
         </ul>
       </section>
 
       <section>
-        <h1>Einführung <a href="https://www.trello.com/">Trello</a></h1>
+        <h1>GitHub Einrichten</h1>
         <ul>
-          <li>Gratis für nicht kommerzielle Zwecke</li>
+          <li>Konto auf <a href="https://github.com/">GitHub</a> erstellen</li>
+          <li>Github Repository erstellen (z.B. "HFU_21H__JAS_20I_app")
+            <ul>
+              <li><em>Entweder</em> veröffentlichen</li>
+              <li><em>Oder</em> mich (<b>mvonballmo</b>) einladen</li>
+            </ul>
+          </li>
+          <li><a href="https://github.com/mvonballmo/APE_Docs">Docs</a> und <a href="https://github.com/mvonballmo/APE_Apps">Apps</a> merken (entweder mit "Watch" oder "⭐️")</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Einführung <a href="https://www.trello.com/">GitHub Issues</a></h1>
+        <ul>
           <li>Unterstützt die Projektführung
             <ul>
-              <li>Workspaces</li>
+              <li>Projekte</li>
               <li>Boards</li>
-              <li>Karten</li>
+              <li>Issues</li>
               <li>Spalten/Status</li>
             </ul>
           </li>
-          <li><b>Aufgaben:</b> Konto, Workspace, Board, und eine Karte erstellen</li>
+          <li><b>Aufgaben:</b> Konto, Repository, Projekt, und ein Issue erstellen</li>
         </ul>
       </section>
 
@@ -449,7 +474,7 @@
           <div>
             <h1>Wo steht ihr?</h1>
             <ul>
-              <li><em>Trello</em> ist eingerichtet</li>
+              <li><em>GitHub</em> ist eingerichtet</li>
             </ul>
           </div>
           <img src="assets/checklist.png">
@@ -480,19 +505,6 @@
       </section>
 
       <section>
-        <h1>GitHub Einrichten</h1>
-        <ul>
-          <li>Konto auf <a href="https://github.com/">GitHub</a> erstellen</li>
-          <li>Github Repository erstellen (z.B. "HFU_21H__JAS_20I_app")
-            <ul>
-              <li><em>Entweder</em> veröffentlichen</li>
-              <li><em>Oder</em> mich (<b>mvonballmo</b>) einladen</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section>
         <h1>SmartGit</h1>
         <ul>
           <li>Gratis für nicht kommerzielle Zwecke</li>
@@ -518,8 +530,8 @@
         <ul class="compact">
           <li>Repos:
             <ul>
-              <li><a href="https://github.com/mvonballmo/HFU_21H__JAS_20I_app.git">https://github.com/mvonballmo/HFU_21H__JAS_20I_app.git</a></li>
-              <li><a href="https://github.com/mvonballmo/HFU_21H__JAS_20I_doc.git">https://github.com/mvonballmo/HFU_21H__JAS_20I_doc.git</a></li>
+              <li><a href="https://github.com/mvonballmo/APE_Docs">https://github.com/mvonballmo/APE_Docs</a></a></li>
+              <li><a href="https://github.com/mvonballmo/APE_Apps">https://github.com/mvonballmo/APE_Apps</a></a></li>
               <li>Eigenes Projekt-Repo</li>
             </ul>
           </li>
@@ -533,7 +545,6 @@
           <div>
             <h1>Wo steht ihr?</h1>
             <ul>
-              <li class="done"><em>Trello</em> ist eingerichtet</li>
               <li><em>GitHub</em> ist eingerichtet</li>
               <li><em>SmartGit</em> ist eingerichtet</li>
               <li>"app" und "doc" Repositories sind bei euch lokal verfügbar</li>
@@ -544,37 +555,12 @@
       </section>
 
       <section>
-        <h1>Node &amp; NPM</h1>
+        <h1>IDE Aufsetzen</h1>
         <ul>
-          <li>Gratis/Open-source</li>
-          <li>Laufzeitumgebung und Package Manager für JavaScript</li>
-          <li><a href="https://nodejs.org/">Herunterladen</a> und installieren</li>
-          <li>Im Terminal, <code>node -v</code> ausführen</li>
-          <li>Im Terminal, <code>npm -v</code> ausführen</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Visual Studio Code</h1>
-        <ul>
-          <li>Gratis/Open-source</li>
-          <li>Unterstützt Webentwicklung aller Art</li>
-          <li><a href="https://code.visualstudio.com/">Herunterladen</a> und installieren</li>
-          <li>Ausführen</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>JetBrains WebStorm</h1>
-        <p class="notes">Dieser Schritt ist <em>optional</em>, jedoch eine gute Idee sich mit verschiedenen Werkzeugen
-          vertraut zu machen.</p>
-        <ul>
-          <li>Gratis für nicht kommerzielle Zwecke</li>
-          <li>Unterstützt Webentwicklung aller Art</li>
-          <li><a href="https://code.visualstudio.com/">Herunterladen</a> und installieren</li>
-          <li><a href="https://www.jetbrains.com/community/education/#students">Lizenz beantragen</a> (evtl. Konto
-            erstellen)</li>
-          <li>Ausführen</li>
+          <li>OS und Zielgerät feststellen</li>
+          <li>Visual Studio 2022 installieren</li>
+          <li>Emulator (Android) oder Simulator (iOS) einrichten</li>
+          <li>Optional: <a href="https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/set-up-device-for-development">Set up your device to allow debugging</a></li>
         </ul>
       </section>
 
@@ -583,13 +569,11 @@
         <div class="seventy-thirty-grid">
           <div>
             <ul>
-              <li class="done"><em>Trello</em> ist eingerichtet</li>
               <li class="done"><em>GitHub</em> ist eingerichtet</li>
               <li class="done"><em>SmartGit</em> ist eingerichtet</li>
               <li class="done">"app" und "doc" Repositories sind lokal verfügbar</li>
-              <li><em>node</em> und <em>npm</em> können ausgeführt werden</li>
-              <li><em>VSC</em> ist installiert</li>
-              <li><em>WebStorm</em> ist installiert</li>
+              <li><em>Visual Studio</em> ist installiert</li>
+              <li>Ein Emulator ist eingerichtet</li>
             </ul>
           </div>
           <img src="assets/checklist.png">
@@ -608,12 +592,12 @@
       <section>
         <div class="seventy-thirty-grid">
           <div>
-            <h1>JS im Browser</h1>
+            <h1>Projekt erstellen</h1>
             <ul>
-              <li class="fragment highlight-current-blue">Projekt Ordner in WebStorm oder VSC öffnen</li>
-              <li class="fragment highlight-current-blue">HTML Datei erstellen</li>
-              <li class="fragment highlight-current-blue">JS im HTML schreiben</li>
-              <li class="fragment highlight-current-blue">Im Browser ein Breakpoint setzen und ausführen</li>
+              <li class="fragment highlight-current-blue">Xamarin.Forms wählen</li>
+              <li class="fragment highlight-current-blue">Drei Projekte werden erstellt</li>
+              <li class="fragment highlight-current-blue">"Shared" Projekt zielt auf .NET Standard</li>
+              <li class="fragment highlight-current-blue">Im Emulator Ausführen</li>
             </ul>
           </div>
           <img src="assets/cog-wheels.png">
@@ -626,13 +610,12 @@
             <h1>Commit und Push</h1>
             <ul>
               <li class="fragment highlight-current-blue">Änderungen in Git "committen"</li>
-              <li class="fragment highlight-current-blue">Commit nach GitHub "pushen"</li>
+              <li class="fragment highlight-current-blue">Commit(s) nach GitHub "pushen"</li>
             </ul>
           </div>
           <img src="assets/up_down.png">
         </div>
-        <p class="notes">Um ein lokal erstelltes Projekt mit GitHub zu verbinden, siehe <a href="https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github">How to
-            Push an Existing Project to GitHub</a>.</p>
+        <p class="notes">Um ein lokal erstelltes Projekt mit GitHub zu verbinden, siehe <a href="https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github">How to Push an Existing Project to GitHub</a>.</p>
       </section>
 
       <section>
@@ -647,49 +630,62 @@
           <img src="assets/checklist.png">
         </div>
       </section>
+
       <section>
-        <div class="seventy-thirty-grid">
-          <div class="compact">
-            <h1>JS mit Jest testing</h1>
-            <ul>
-              <li>Im Terminal ausführen:
-                <ul>
-                  <li class="fragment highlight-current-blue"><code>npm init</code></li>
-                  <li class="fragment highlight-current-blue"><code>npm install --save-dev jest</code></li>
-                </ul>
-              </li>
-              <li class="fragment highlight-current-blue">In <code>package.json</code>, den "test" Script nach "jest"
-                umstellen.</li>
-              <li class="fragment highlight-current-blue"><code>module.exports</code> definieren</li>
-              <li class="fragment highlight-current-blue">Test-Datei erstellen mit einem Test</li>
-              <li>Siehe <a href="https://jestjs.io/docs/getting-started">Jest "getting started" Doku</a></li>
-            </ul>
-          </div>
-          <img src="assets/cog-wheels.png">
-        </div>
+        <h1>Navigation</h1>
+        <p>Seiten auf dem "View Stack" setzen</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            // App.xaml.cs
+            MainPage = new MainPage();
+
+            // ItemsPage.xaml.cs
+            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            // NewItemPage.xaml.cs
+            await Navigation.PopModalAsync();
+          </code>
+        </pre>
       </section>
 
       <section>
-        <h1>Tests ausführen</h1>
+        <h1>Xamarin Forms: Tabs</h1>
+        <p>Populate pages as tabs in <code>MainPage.xaml.cs</code> in the <code>TabbedPage.Children</code></p>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;TabbedPage.Children&gt;
+              &lt;NavigationPage Title="Browse"&gt;
+                  &lt;x:Arguments&gt;
+                      &lt;views:ItemsPage /&gt;
+                  &lt;/x:Arguments&gt;
+                  &lt;NavigationPage.Icon&gt;
+                      &lt;OnPlatform x:TypeArguments="FileImageSource"&gt;
+                          &lt;On Platform="iOS" Value="tab_feed.png"/&gt;
+                      &lt;/OnPlatform&gt;
+                  &lt;/NavigationPage.Icon&gt;
+              &lt;/NavigationPage&gt;
+
+              &lt;NavigationPage Title="About"&gt;
+                  &lt;x:Arguments&gt;
+                      &lt;views:AboutPage /&gt;
+                  &lt;/x:Arguments&gt;
+                  &lt;NavigationPage.Icon&gt;
+                      &lt;OnPlatform x:TypeArguments="FileImageSource"&gt;
+                          &lt;On Platform="iOS" Value="tab_about.png"/&gt;
+                      &lt;/OnPlatform&gt;
+                  &lt;/NavigationPage.Icon&gt;
+              &lt;/NavigationPage&gt;
+            &lt;/TabbedPage.Children&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Xamarin Forms UI</h1>
+        <p>Weitere UI-Elemente sind:</p>
         <ul>
-          <li>Im VSC Terminal, <code>npm run test</code> ausführen</li>
-          <li>In WebStorm, <code>npm run test</code> ausführen</li>
-          <li>In WebStorm, rechtsklick auf der Testing-Datei und "Ausführen/Run" selektieren</li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/navigation/master-detail-page">Master-Detail</a></li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/navigation/carousel-page">Carousel</a></li>
         </ul>
-      </section>
-
-      <section>
-        <h1>Tests debuggen</h1>
-        <div class="seventy-thirty-grid">
-          <ul class="compact">
-            <li>In VSC oder WebStorm, Breakpoint setzen (links am Rand klicken)</li>
-            <li>In VSC, <code>package.json</code>, "Debug" klicken</li>
-            <li><b>Oder</b> in WebStorm, rechtsklick auf der Testing-Datei und "Debuggen" selektieren</li>
-            <li><b>Oder</b> In VSC, <a href="https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_javascript-debug-terminal">JavaScript
-                Debug Terminal</a> öffnen und danach <code>npm run test</code> ausführen</li>
-          </ul>
-          <img src="assets/Lesson01/package.json-debug-code-lens.png" class="full-size">
-        </div>
       </section>
 
       <section>
@@ -699,9 +695,8 @@
             <ul>
               <li class="done">Alle Werkzeuge sind installiert und eingerichtet</li>
               <li class="done">Eure Code ist auf GitHub gesichert</li>
-              <li>Ihr könnt JavaScript tests
+              <li>Ihr könnt eure App im Emulator und auf dem Gerät
                 <ul>
-                  <li>schreiben</li>
                   <li>ausführen</li>
                   <li>debuggen</li>
                 </ul>
@@ -716,7 +711,7 @@
         <div class="fifty-fifty-grid">
           <img src="assets/look_of_disapproval.jpg">
           <div>
-            <p class="fragment" style="margin-top: 5em">Können wir jetzt endlich<br> mehr JavaScript lernen?</p>
+            <p class="fragment" style="margin-top: 5em">Können wir jetzt endlich<br> mehr Mobile-Entwicklung lernen?</p>
             <p class="fragment" style="text-align: right">Ja! Nächstes mal...</p>
           </div>
         </div>
