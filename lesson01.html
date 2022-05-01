@@ -81,95 +81,36 @@
       </section>
 
       <section>
-        <h1>Planung (DL)</h1>
-        <table class="compact">
-          <tr>
-            <th>Zeit</th>
-            <th>Dauer</th>
-            <th>Beschreibung</th>
-          </tr>
-          <tr>
-            <td>17:50</td>
-            <td>01:10</td>
-            <td>Unterricht</td>
-          </tr>
-          <tr>
-            <td>19:00</td>
-            <td>00:20</td>
-            <td>Pause / Essen</td>
-          </tr>
-          <tr>
-            <td>19:20</td>
-            <td>01:00</td>
-            <td>Unterricht</td>
-          </tr>
-          <tr>
-            <td>20:20</td>
-            <td>00:05</td>
-            <td>Pause</td>
-          </tr>
-          <tr>
-            <td>20:25</td>
-            <td>00:35</td>
-            <td>Unterricht</td>
-          </tr>
-          <tr>
-            <td>21:00</td>
-            <td>00:10</td>
-            <td>Pause</td>
-          </tr>
-          <tr>
-            <td>21:10</td>
-            <td>00:30</td>
-            <td>Projekt-Arbeit & Fragen</td>
-          </tr>
-        </table>
-      </section>
+        <h1>Planung</h1>
+        <style>
+          .pause {
+            background-color: cornsilk
+          }
 
-      <section class="compact">
-        <h1>Planung (PU)</h1>
-        <table>
-          <tr>
-            <th>Zeit</th>
-            <th>Dauer</th>
-            <th>Beschreibung</th>
-          </tr>
-          <tr>
-            <td>17:50</td>
-            <td>01:00</td>
-            <td>Unterricht</td>
-          </tr>
-          <tr>
-            <td>18:50</td>
-            <td>00:10</td>
-            <td>Pause</td>
-          </tr>
-          <tr>
-            <td>19:00</td>
-            <td>00:55</td>
-            <td>Unterricht</td>
-          </tr>
-          <tr>
-            <td>19:55</td>
-            <td>00:10</td>
-            <td>Pause</td>
-          </tr>
-          <tr>
-            <td>20:05</td>
-            <td>00:55</td>
-            <td>Unterricht</td>
-          </tr>
-          <tr>
-            <td>21:00</td>
-            <td>00:10</td>
-            <td>Pause</td>
-          </tr>
-          <tr>
-            <td>21:10</td>
-            <td>00:30</td>
-            <td>Projekt-Arbeit & Fragen</td>
-          </tr>
-        </table>
+          .school {
+            background-color: lightblue
+          }
+
+          .project {
+            background-color: orange
+          }
+        </style>
+        <div style="display: grid; grid-template-columns: repeat(24, 1fr);">
+          <div style="grid-row: 1; grid-column: 1 / span 7;">17:50</div>
+          <div class="pause" style="grid-row: 1 / span 8; grid-column: 8 / span 2;">19h</div>
+          <div style="grid-row: 1; grid-column: 10 / span 6;">19:20</div>
+          <div class="pause" style="grid-row: 1 / span 8; grid-column: 16 / span 1;">20:20</div>
+          <div style="grid-row: 1; grid-column: 17 / span 3;">20:30</div>
+          <div class="pause" style="grid-row: 1 / span 8; grid-column: 20 / span 1;">21h</div>
+          <div style="grid-row: 1; grid-column: 21 / span 3;">21:10</div>
+          <div class="school" style="grid-row: 2; grid-column: 1 / span 7;">1:10</div>
+          <div class="pause" style="grid-row: 3; grid-column: 8 / span 2;">0:20</div>
+          <div class="school" style="grid-row: 4; grid-column: 10 / span 6;">1:00</div>
+          <div class="pause" style="grid-row: 5; grid-column: 16 / span 1;">0:10</div>
+          <div class="school" style="grid-row: 6; grid-column: 17 / span 3;">0:30</div>
+          <div class="pause" style="grid-row: 7; grid-column: 20 / span 1;">0:10</div>
+          <div class="project" style="grid-row: 8; grid-column: 21 / span 3;">0:30</div>
+        </div>
       </section>
 
       <section>
