@@ -62,9 +62,20 @@
     <h2 id="übersicht">Übersicht</h2>
     <p>Es soll ein App geben womit man:</p>
     <ul>
-      <li>Daten von einem Server abfragen und anzeigen kann. <a href="lesson04.html">4️⃣</a></li>
-      <li>Die Daten können vom Benutzer geändert und gespeichert werden. <a href="lesson05.html">5️⃣</a>, <a href="lesson06.html">6️⃣</a></li>
+      <li>Daten von einem Server abfragen und anzeigen kann. <a href="lesson07.html">7️⃣</a></li>
+      <li>Die Daten können vom Benutzer geändert und lokal oder remote gespeichert werden. <a href="lesson05.html">5️⃣</a>, <a href="lesson07.html">7️⃣</a></li>
       <li>Die Daten können auch gelöscht werden. <a href="lesson04.html">4️⃣</a></li>
+      <li>Die App unterstützt mindestens zwei den folgenden Features:
+        <ul>
+          <li>Login <a href="lesson06.html">6️⃣</a></li>
+          <li>Dialoge <a href="lesson03.html">3️⃣</a></li>
+          <li>Notifications <a href="lesson04.html">4️⃣</a></li>
+          <li>Lokale DB <a href="lesson07.html">7️⃣</a></li>
+          <li>HTTPClient <a href="lesson07.html">7️⃣</a></li>
+          <li>Biometrie <a href="lesson06.html">6️⃣</a></li>
+          <li>IoC <a href="lesson03.html">3️⃣</a></li>
+        </ul>
+      </li>
     </ul>
     <h2 id="bewertung-aspekte">Bewertung Aspekte</h2>
     <h3 id="erfolderlich">Erforderlich</h3>
@@ -76,10 +87,11 @@
       <li>Einen Datensatz kann in einem Formular editiert werden, mit Validierung von den verschiedenen Typen. Zumindest
         ein Feld muss ein Zwangsfeld sein. <a href="lesson06.html">6️⃣</a></li>
       <li>Die Validierung muss mindestens so ausgeprägt sein, dass Fehler auf der Seite beim Drücken des Speichern-Buttons
-        angezeigt werden. Dies darf nicht über einen <code>alert</code> geschehen, sondern die Infos müssen per JavaScript
-        dem DOM hinzugefügt werden. <a href="lesson06.html">6️⃣</a></li>
-      <li>Ist das Formular fehlerfrei und der Benutzer klickt auf den Speichern-Button soll ein JSON Objekt mit allen
-        eingegebenen Informationen anzeigt an dem lokalen Server gesendet werden. <a href="lesson04.html">4️⃣</a>, <a href="lesson06.html">6️⃣</a></li>
+        angezeigt werden. Dies kann entweder mit Dialogen geschehen, oder die Infos können in-line angezeigt werden. <a href="lesson06.html">6️⃣</a></li>
+      <li>Ist das Formular fehlerfrei und der Benutzer klickt auf den Speichern-Button soll <strong>entweder</strong> ein JSON Objekt mit allen
+        eingegebenen Informationen anzeigt an dem lokalen Server gesendet werden <strong>oder</strong> in einem lokalen DB gespeichert werden (oder beides).
+        <a href="lesson04.html">4️⃣</a>, <a href="lesson06.html">6️⃣</a>
+      </li>
       <li>Ein neues Objekt kann erstellt werden. <a href="lesson04.html">4️⃣</a></li>
     </ul>
     <h3 id="optional">Optional</h3>
@@ -102,7 +114,7 @@
     </ul>
     <h4>Benutzerkomfort</h4>
     <ul>
-      <li>Gewisse Felder mit localStorage im Browser des Users speichern. Wenn der User die Seite wieder aufruft,
+      <li>Gewisse Felder und Einstellungen in einer lokalen DB speichern. Wenn der User eine Seite wieder aufruft,
         sollen die Felder mit den gespeicherten Werten ausgefüllt werden. <a href="lesson07.html">7️⃣</a></li>
       <li>Der Benutzer kann Test-Daten erstellen lassen.</li>
       <li>Der Benutzer kann allen Daten löschen.</li>
