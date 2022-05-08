@@ -33,7 +33,13 @@
           <li>Jeder hat ein Projekt auf GitHub eingerichtet</li>
           <li>Jeder hat alle benötigte Werkzeuge eingerichtet</li>
           <li>Jeder kann mit dem Simulator oder Gerät ausführen</li>
-          <li class="insertion">Habt ihr ein <code>.gitignore</code> erstellt?</li>
+          <li class="insertion">
+            Habt ihr eine <code>.gitignore</code> Datei erstellt?
+            <ul>
+              <li><code>bin/</code> und <code>obj/</code> ausschliessen</li>
+              <li>Unerwünschte Dateien aus dem Repo löschen</li>
+            </ul>
+          </li>
         </ul>
       </section>
 
@@ -53,331 +59,98 @@
       </section>
 
       <section>
-        <h1>Grundlagen</h1>
+        <h1>Einführung UI</h1>
         <ul>
-          <li><a href="https://wesbos.com/javascript/01-the-basics/variables-and-statements">Variablen</a>:
-            <code>var</code>, <code>let</code> und <code>const</code>
-          </li>
-          <li><a href="https://wesbos.com/javascript/01-the-basics/types-introduction">Typen</a>, <a href="https://wesbos.com/javascript/01-the-basics/types-strings">Zeichenketten</a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Operatoren</a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements">Statements</a>: Verzweigungen, Schleifen</li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions">Funktionen I</a>: Grundlagen, Methoden, Math, Daten</li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/xaml/xaml-basics/data-bindings-to-mvvm">MVVM</a></li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/xaml/xaml-basics/essential-xaml-syntax">XAML for Forms</a></li>
+          <li>Verfügbare views/layouts/controls</li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/basic-bindings">Bindings</a></li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/commanding">Commands</a></li>
         </ul>
       </section>
 
       <section>
-        <h1>Deklarieren: <code>var</code></h1>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-function varTest() {
-  var x = 1;
-  if (true) {
-    var x = 2;  // gleiche Variable!
-    console.log(x);  // 2
-  }
-  console.log(x);  // 2
-}
-          </code>
-        </pre>
+        <h1>MVVM Pattern</h1>
+        <ul>
+          <li>MVVM = [M]odel [V]iew [V]iew[M]odel</li>
+          <li>Entkoppelt Logik von Ansichten</li>
+          <li>Setzt <em>Bindings</em> ein, um View mit Logik zu verbinden</li>
+          <li>Das automatisiertes Testen von <em>Views</em> oder mit denen assoziierten "code-behind" Code ist schwer.</li>
+          <li>Deshalb soll das "ViewModel" vom Ansicht entkoppelt sein.</li>
+        </ul>
       </section>
 
       <section>
-        <h1>Deklarieren: <code>let</code></h1>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-function letTest() {
-  let x = 1;
-  if (true) {
-    let x = 2;  // andere Variable
-    console.log(x);  // 2
-  }
-  console.log(x);  // 1
-}
-          </code>
-        </pre>
+        <h1>MVVM Pattern</h1>
+        <img src="assets/Lesson02/MVVM.jpg" class="full-width">
       </section>
 
       <section>
-        <h1>Deklarieren: <code>const</code></h1>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-function constTest() {
-  const x = 1;
-  if (true) {
-    const x = 2;  // andere Variable
-    console.log(x);  // 2
-  }
-  x = 2;  // Nicht erlaubt!
-  console.log(x);  // 1
-}
-          </code>
-        </pre>
+        <h1>ViewModels</h1>
+        <p>Beinhalt die Logik für das Anzeigen vom UI (<em>nicht</em> Business-Logik)</p>
+        <ul>
+          <li>Welche Controls sind aktiviert (enabled)?</li>
+          <li>Welche Items beinhalten Listen?</li>
+          <li>Was passiert beim interagieren mit dem UI? (Z.B. beim anklicken eines Elements?)</li>
+          <li>Ansicht-spezifische Konvertierungen von Daten (z.B. <code>Age</code> von <code>Birthdate</code> berechnen)</li>
+        </ul>
       </section>
 
-      <section>
-        <h1>Typen</h1>
+      <section class="compact">
+        <h1>ViewModel Benachrichtigungen</h1>
         <ul class="compact">
-          <li>JavaScript is eine <em>dynamische</em> Sprache</li>
-          <li>Der Entwickler kann Typen nicht zuweisen</li>
-          <li>Jede Variable hat eine der folgenden <a href="https://wesbos.com/javascript/01-the-basics/types-introduction">Typen</a>:
-            <ul>
-              <li><a href="https://wesbos.com/javascript/01-the-basics/types-null-and-undefined">Null</a></li>
-              <li><a href="https://wesbos.com/javascript/01-the-basics/types-null-and-undefined">Undefined</a></li>
-              <li><a href="https://wesbos.com/javascript/01-the-basics/types-numbers">Number</a></li>
-              <li><a href="https://wesbos.com/javascript/01-the-basics/types-booleans-and-equality">Boolean</a></li>
-              <li><a href="https://wesbos.com/javascript/01-the-basics/types-strings">String</a></li>
-              <li><a href="https://wesbos.com/javascript/01-the-basics/types-objects">Object</a></li>
-              <li><a href="https://wesbos.com/javascript/08-data-types/arrays">Array</a></li>
-              <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Symbol</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>"use strict";</h1>
-        <ul>
-          <li>Einfach oben im Script reinschreiben</li>
-          <li>Hilft unerwünschte Ausdrücke zu finden</li>
-          <li>Siehe <a href="https://www.w3schools.com/js/js_strict.asp">Doku und Beispiele</a> (W3Schools)</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Null und Undefined</h1>
-        <ul>
-          <li>Ein Variable mit Typ <code>Null</code> wurde <em>explizit</em> zugewiesen</li>
-          <li>Ein Variable mit Typ <code>Undefined</code> wurde <em>noch nicht</em> zugewiesen</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Zahlen (Number)</h1>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const a = 4;
-            const b = 4.2;
-            const c = 4.2e6;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Boolean</h1>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const yes = true;
-            const no = false;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Zeichenketten (Strings)</h1>
-        <ul>
-          <li>Kann mit normale oder einfache Anführungszeichen oder <em>Backticks</em> geschrieben werden</li>
+          <li>Findet meistens über <a href="https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a> statt</li>
+          <li>Kann generisch abgefangen werden (wir werden eine Basis-Klasse dafür definieren)</li>
         </ul>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            const a = 'he\'s not here';
-            const b = "he\"s not here";
-            const c = `he\`s not here`;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Multi-line Strings</h1>
-        <p>Für <em>Multi-line Strings</em> mit " und ' muss jede Zeile mit \ beenden. Für die mit <em>Backticks</em>
-          nicht.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-const a = "Das \
-  ist \
-  multi-line.";
-
-const a = `Das
-  ist
-  multi-line.`;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Template-Strings</h1>
-        <p><em><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals">Backticks</a></em>
-          unterstützen das Auflösen von eingebauten Variablen.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-const name = "Bob";
-const a = "Das \
-  ist " + name + " \
-  multi-line.";
-
-const a = `Das
-  ist ${name}
-  multi-line.`
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Tagged Template-Strings</h1>
-        <p><em><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals">Tagged
-              Template-Strings</a></em> können die Ausgabe von Template-Strings mit einer Funktion ändern.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            function Bio(t, name, age) {
-              const years = (age == 1) ? " year" : " years";
-
-              return `${t[0]}${name}${t[1]}${age}${years}${t[2]}`;
-            }
-
-            let age = 0;
-            let person = "bob";
-
-            const output = Bio`The user ${person} is ${age} old.`;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://wesbos.com/javascript/01-the-basics/types-objects">Objekte</a></h1>
-        <p>Gruppierungen von Variablen</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const empty = {};
-            const person = {
-              first: "Bob",
-              last: "Hoffman",
-              age: 34,
-              company: {
-                name: "Apple"
+          <code data-trim class="language-csharp hljs">
+            public bool IsSelected
+            {
+              get => _isSelected;
+              set
+              {
+                _isSelected = value;
+                RaisePropertyChanged();
               }
-            };
-            const bobsAge = person.age;                   // 34
-            const bobsCompanyName = person.company.name;  // "Apple"
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Arrays</a>
-        </h1>
-        <ul>
-          <li>Eine Liste von Werten mit irgendwelchen Typen (Zahlen, Strings, Objekte, andere Arrays, usw.).</li>
-          <li>Kann <a href="https://dmitripavlutin.com/javascript-sparse-dense-arrays/">"Sparse" oder "Dense"</a> sein.
-          </li>
-          <li>Kann mit initialen Werten gefüllt werden.</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const empty1 = [];
-            const empty2 = new Array();
-            const filled = [1, 2, 3];
-            const sparse1 = [,,];         // sparse1.length == 3
-            const sparse2 = new Array(3); // sparse2.length == 3
-            const a = filled[1];          // a == 2
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map">Maps</a>
-        </h1>
-        <ul>
-          <li>Eine Liste von Schlüsseln/Werten</li>
-          <li>Erhaltet Einfügungsreihenfolge bei Iteration</li>
-          <li>Schlüssel kann irgendwelcher Typ sein.</li>
-          <li>Wird mit <code>set</code> geschrieben und <code>get</code> gelesen.</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const m = new Map();
-
-            m.set('a', 1);
-            m.set('b', 2);
-            m.set('c', 3);
-
-            // m.get('a') == 1, etc.
-          </code>
-        </pre>
-        <p class="notes">Siehe <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map#objects_vs._maps">Vergleich
-            mit Objekt</a>.</p>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map#iterating_map_with_for..of">Maps:
-            Iteration</a>
-        </h1>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const m = new Map();
-
-            m.set('a', 1);
-            m.set('b', 2);
-            m.set('c', 3);
-
-            // kann mit for..of iteriert werden
-            for (const [key, value] of m) {
-              console.log(key + ' = ' + value)
             }
-            // [key, value] benutzt "destructuring" (kommt später)
-          </code>
-        </pre>
-      </section>
 
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set">Sets</a>
-        </h1>
-        <p>Speichert eindeutige Werte jedes beliebigen Typs.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const s = new Set([1, 2, 3]);
-
-            s.add(5);
-
-            const one = s.has(1); // one == true
-            const four = s.has(4); // four == false
-            const five = s.has(5); // five == true
-
-            // kann mit for..of iteriert werden
-            for (const item of s) {
-              console.log(item)
+            protected void RaisePropertyChanged([CallerMemberName] string property = "")
+            {
+              PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
             }
           </code>
         </pre>
       </section>
 
       <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Symbolen</a>
-        </h1>
-        <p>Erstellt eine eindeutige Referenz statt ein Objekt.</p>
+        <h1>Listen von Elementen</h1>
+        <ul>
+          <li>Findet über <a href="https://docs.microsoft.com/dotnet/api/system.collections.specialized.inotifycollectionchanged=">INotifyCollectionChanged</a> statt</li>
+          <li><a href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1">ObservableCollection</a> implementiert diese und benachrichtigt von Änderungen</li>
+        </ul>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            const symbol1 = Symbol('foo');
-            const symbol2 = Symbol('foo');
-            const areEqual = symbol1 == symbol2; // false
+          <code data-trim class="language-csharp hljs">
+            public ObservableCollection&lt;TodoItemViewModel&gt; Items
+            {
+              get => _items;
+              set
+              {
+                _items = value;
+                RaisePropertyChanged();
+              }
+            }
           </code>
         </pre>
-        <p>Wird relativ selten benutzt, ist aber für gewisse <em>Use Cases</em> wichtig.</p>
       </section>
 
       <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Typen</h1>
-            <ul>
-              <li>Arrays Testen</li>
-              <li>Symbolen Testen</li>
-              <li>Objekte Testen</li>
-              <li>Strings Testen</li>
-              <li>Map-Iteration Testen</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
+        <h2>Unterschied <em>Modell</em> vom <em>ViewModell</em></h2>
+        <p>Ein <em>Modell</em></p>
+        <ul>
+          <li>Repräsentiert die unverzierte Daten (z.B. das, was in die Datenbank gespeichert ist)</li>
+          <li>Beinhaltet keine Logik</li>
+          <li>Benachrichtigt Änderungen nur sehr selten</li>
+        </ul>
       </section>
 
       <section>
@@ -390,10 +163,25 @@ const a = `Das
       <section>
         <div class="seventy-thirty-grid">
           <div>
-            <h1>Übungen</h1>
+            <h1>MVVM</h1>
             <ul>
-              <li>Test mit Objekten schreiben</li>
-              <li>Test mit Arrays schreiben</li>
+              <li>Modell definieren</li>
+              <li>ViewModell definieren</li>
+              <li>View definieren</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <p>Mindestens ein Modell und ein ViewModell in die eigene App erstellen</p>
+            <ul>
+              <li>Benötigte Properties hinzufügen</li>
+              <li><code>PropertyChanged</code> wo nötig aufrufen</li>
             </ul>
           </div>
           <img src="assets/cog-wheels.png">
@@ -401,320 +189,228 @@ const a = `Das
       </section>
 
       <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Operatoren</a></h1>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/pages">Pages</a>
+          und
+          <a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/layouts">Layouts</a>
+        </h1>
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/pages">Pages</a></h1>
+        <p>Repräsentiert ein <em>Screen</em> (ganzer Bildschirm)</p>
         <ul>
-          <li>Typ-operatoren</li>
-          <li>Rechenoperatoren</li>
-          <li>Vergleichsoperatoren</li>
-          <li>Boolesche Operatoren</li>
-          <li>Nullesche Operatoren</li>
-          <li>Zuweisungsoperatoren</li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread
-              (...)</a> Operator</li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/api/Xamarin.Forms.ContentPage?view=xamarin-forms">ContentPage</a></li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.navigationpage?view=xamarin-forms">NavigationPage</a></li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.tabbedpage?view=xamarin-forms">TabbedPage</a></li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.carouselpage?view=xamarin-forms">CarouselPage</a></li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.flyoutpage?view=xamarin-forms">FlyoutPage</a>*</li>
         </ul>
+        <p class="notes">* Dokumentiert mit dem obsoleten <a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.masterdetailpage?view=xamarin-forms">MasterDetailPage</a></p>
       </section>
 
       <section>
-        <h1>Typ-operatoren</h1>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/layouts">Layouts</a></h1>
+        <p>Ableitungen von <em>Views</em></p>
         <ul>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/typeof">typeof</a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/instanceof">instanceof</a></li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.contentview?view=xamarin-forms">ContentPage</a> beinhaltet ein einziges Element</li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.frame?view=xamarin-forms">Frame</a> ist ein <code>ContentView</code> mit Position und Rand</li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.scrollview?view=xamarin-forms">ScrollView</a> verwaltet einen scrollbaren Bereich</li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.stacklayout?view=xamarin-forms">StackLayout</a> arrangiert Elemente vertikal oder horizontal</li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.grid?view=xamarin-forms">Grid</a> arrangiert Elemente in Spalten und Zeilen</li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.flexlayout?view=xamarin-forms">FlexLayout</a> arrangiert Elemente mit <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox">CSS Flexbox</a></li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.tableview?view=xamarin-forms">TableView</a> arrangiert Elemente in einer Tabelle</li>
         </ul>
       </section>
 
       <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/typeof">typeof</a></h1>
-        <p>Liefert den Typ einer Variable</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const age = 42;
-            const text = `I am ${age}`;
-            let temp;
-          </code>
-        </pre>
-
+        <h1>Grid Layout</h1>
         <ul>
-          <li><code>typeof age</code> ergibt <code>number</code></li>
-          <li><code>typeof text</code> ergibt <code>string</code></li>
-          <li><code>typeof temp</code> ergibt <code>undefined</code></li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/layouts/grid">Grid</a> ist eine der mächtigsten Kontrollen</li>
+          <li>Definiert Reihen und Spalten mit <code>RowDefinitions</code> und <code>ColumnDefinitions</code></li>
+          <li>Elementen hinzufügen und einen <code>RowIndex</code> und/oder <code>ColumnIndex</code> zuweisen</li>
         </ul>
       </section>
 
       <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/instanceof">instanceof</a></h1>
-        <p>Prüft, ob ein Objekt durch eine bestimmte <em>Constructor-Funktion</em> erstellt wurde.</p>
+        <h1>Grid: Zellen einteilen</h1>
+        <p>Die Grösse einer Zelle kann:</p>
+        <ul>
+          <li>Automatisch von Elementen berechnet werden ("content sizing")</li>
+          <li><strong>Default</strong>: Proportional berechnet werden ("*-sizing")</li>
+          <li>Auf einem absoluten Wert "fixiert" werden ("fixed sizing")</li>
+        </ul>
+        <p class="notes">Siehe Beispiel in <a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.grid?view=xamarin-forms">die Dokumentation</a></p>
+      </section>
+
+      <section>
+        <h1>Grid XAML Beispiel</h1>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            function person(firstName, lastName) {
-              this.firstName = firstName;
-              this.lastName = lastName;
-            }
-            const bob = new person('John', 'Doe');
-            const isPerson = bob instanceof person; // true
-            const isObject = bob instanceof Object; // true
-            const isNumber = bob instanceof Number; // false
+          <code data-trim class="language-xml hljs">
+            &lt;Grid&gt;
+              &lt;Grid.RowDefinitions&gt;
+                &lt;RowDefinition Height="*" /&gt;
+                &lt;RowDefinition Height="*" /&gt;
+              &lt;/Grid.RowDefinitions&gt;
+              &lt;Grid.ColumnDefinitions&gt;
+                &lt;ColumnDefinition Width="*" /&gt;
+                &lt;ColumnDefinition Width="*" /&gt;
+              &lt;/Grid.ColumnDefinitions&gt;
+
+              &lt;Label Text="Top Left" Grid.Row="0" Grid.Column="0" /&gt;
+              &lt;Label Text="Top Right" Grid.Row="0" Grid.Column="1" /&gt;
+              &lt;Label Text="Bottom Left" Grid.Row="1" Grid.Column="0" /&gt;
+              &lt;Label Text="Bottom Right" Grid.Row="1" Grid.Column="1" /&gt;
+            &lt;/Grid&gt;
           </code>
         </pre>
       </section>
 
       <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/instanceof">instanceof</a> (Klassen)</h1>
-        <p>Prüft, ob ein Objekt von einer bestimmten <em>Klasse</em> abgeleitet ist.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            class person {
-              constructor(name) {
-                this.name = name;
-              }
-            }
-            class employee extends person {
-              constructor(name) { super(name); }
-            }
+        <h1>Grid Beispiel Visualisierung</h1>
+        <img src="assets/Lesson02/GridExample.jpg" class="tall-screenshot">
+      </section>
 
-            const bob = new employee('John', 'Doe');
-            const isPerson = bob instanceof employee; // true
-            const isPerson = bob instanceof person;   // true
-            const isObject = bob instanceof Object;   // true
-            const isNumber = bob instanceof Number;   // false
-          </code>
-        </pre>
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/">Controls</a></h1>
       </section>
 
       <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Rechenoperatoren</a>
-        </h1>
-        <ul class="compact">
-          <li><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>**</code></li>
-          <li><code>%</code> berechnet den Restwert einer ganzzahligen Division (Modulo): <code>5 % 2 == 1</code>.</li>
-          <li><code>5 ** 2</code> ist 5 hoch 2 = 25</li>
-          <li><code>++</code> ist wie <code>+1</code>; <code>--</code> ist wie <code>-1</code></li>
-          <li><code>++zahl</code> erhöht zahl vor der Auswertung um 1.</li>
-          <li><code>zahl++</code> erhöht zahl nach der Auswertung um 1.</li>
-          <li>Negative Zahlen werden mit <code>-</code> geschrieben -zahl.</li>
-          <li>Es gilt Punkt vor Strich und dann links vor rechts.</li>
-          <li>Um die Reihenfolge zu ändern können Klammern <code>()</code> gesetzt werden.</li>
+        <h1>Common <a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/">Controls</a></h1>
+        <ul>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/text/label"><code>Label</code></a>: nicht editierbare Text</li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/button"><code>Button</code></a>: klickbares/tippbares Element</li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/text/entry"><code>Entry</code></a>: Ein Editor für eine Textzeile</li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/text/editor"><code>Editor</code></a>: Ein Editor für mehrere Textzeilen</li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/"><code>ListView</code></a>: eine vertikale Liste von Daten</li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/picker/"><code>Picker</code></a>: ermöglicht der Auswahl eines Elements aus einer Liste (auch "dropdown" oder "combobox")</li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/datepicker"><code>DatePicker</code></a>: vereinfacht der Auswahl eines Datums</li>
         </ul>
       </section>
 
       <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Vergleichsoperatoren</a>
+        <h1>Common <a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/">Controls II</a></h1>
+        <ul>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/timepicker"><code>TimePicker</code></a>: vereinfacht der Auswahl einer Zeit</li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/imagebutton"><code>ImageButton</code></a>: ein <code>Button</code> mit Text und Bild</li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/stepper"><code>Stepper</code></a>: vereinfacht der Auswahl einer Zahl</li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/slider"><code>Slider</code></a>: vereinfacht der Auswahl einer Wert aus einer Bandbreite</li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/checkbox"><code>Checkbox</code></a> stellt einen booleschen Wert dar</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Controls XAML Beispiel</h1>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;Grid Margin="10"&gt;
+              &lt;Grid.RowDefinitions&gt;
+                &lt;RowDefinition Height="*" /&gt;
+                &lt;RowDefinition Height="3*" /&gt;
+                &lt;RowDefinition Height="*" /&gt;
+              &lt;/Grid.RowDefinitions&gt;
+
+              &lt;Entry Grid.Row=“0" VerticalOptions=“Center" Placeholder="Your title here” /&gt;
+
+              &lt;Frame Grid.Row="1"&gt;
+                &lt;Editor VerticalOptions=“FillAndExpand" Placeholder="Your description here” /&gt;
+              &lt;/Frame&gt;
+
+              &lt;Button Grid.Row=“2" HorizontalOptions=“End" VerticalOptions=“End&gt;
+                      WidthRequest=“100" HeightRequest=“50" Text="Save" />
+            &lt;/Grid&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Controls Visualisierung</h1>
+        <img src="assets/Lesson02/ControlsExample.jpg">
+      </section>
+
+      <section>
+        <h1>Anordnung von Controls</h1>
+        <ul>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/layouts/layout-options">Layout Options</a>: <code>VerticalOptions</code> and <code>HorizontalOptions</code>
+            <ul>
+              <li><code>Start</code>, <code>End</code>, <code>Center</code> und <code>Fill</code></li>
+              <li>Suffix <code>AndExpand</code> kontrolliert die Zuteilung von zusätzlichem Platz
+                (siehe Beispiele auf <a href="https://stackoverflow.com/questions/25338533/what-is-the-difference-between-xamarin-forms-layoutoptions-especially-fill-and">StackOverflow</a>)</li>
+            </ul>
+          </li>
+          <li>Expansion wird in <code>StackLayouts</code> benutzt</li>
+      </section>
+
+      <section class="compact">
+        <h1>Anordnung Visualisierung</h1>
+        <img src="assets/Lesson02/AlignmentExample.jpg" class="tall-screenshot">
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/text/label"><code>Label</code></a>: Eigenschaften</h1>
+        <ul>
+          <li><code>Text</code> wird im Layout angezeigt</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/button"><code>Button</code></a>: Eigenschaften</h1>
+        <ul>
+          <li><code>Text</code> wird im Layout angezeigt</li>
+          <li><code>Command</code> wird beim Klicken oder Tippen ausgeführt</li>
+          <li><code>CommandParameter</code> wird dem <code>Command</code> weitergegeben</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/text/entry"><code>Entry</code></a>: Eigenschaften</h1>
+        <ul>
+          <li><code>Text</code> ist die angezeigte und/oder eingegebene Text</li>
+          <li><code>Placeholder</code> wird im leeren Entry angezeigt</li>
+          <li><code>MaxLength</code> schränkt die maximale Länge der Text ein</li>
+          <li><code>IsPassword</code> gibt an, ob <code>*</code> soll für eingegebene Text benutzt werden</li>
+          <li><code>ClearButtonVisibility</code> gibt an, ob ein Button angezeigt werden soll womit den Inhalt gelöscht werden kann</li>
+          <li><code>Keyboard</code> kontrolliert welche Tastatur angezeigt werden soll</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/editor/"><code>Editor</code></a>: Eigenschaften</h1>
+        <ul>
+          <li>Eigenschaften von <code>Entry</code></li>
+          <li><code>IsPassword</code> wird <em>nicht</em> unterstützt</li>
+          <li><code>Autosize</code> gibt an, ob die Grösse der Kontrolle an den Inhalt angepasst werden soll</li>
+          <li><code>IsSpellCheckEnabled</code> gibt an, ob Rechtschreibung eingeschaltet ist</li>
+          <li><code>IsTextPredictionEnabled</code> gibt an, ob Selbstkorrektur eingeschaltet ist</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1 class="insertion"><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/xaml/hot-reload">"Hot Reload"</a></a>
         </h1>
         <ul>
-          <li><code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>===</code>, <code>!==</code></li>
+          <li>Ermöglicht das Wahrnehmen von Änderungen ohne, dass die App neu ausgeführt werden muss</li>
+          <li>
+            Siehe <a href="https://docs.microsoft.com/de-de/xamarin/xamarin-forms/xaml/hot-reload#known-limitations">Bekannte Einschränkungen</a>
+            <ul>
+              <li>Geht nur für XAML-Änderungen (leider noch keine C#-Änderungen)</li>
+              <li>Benötigt "Link None" oder "Don't Link" in die Build-Optionen</li>
+            </ul>
+          </li>
+          <li>
+            Siehe Troubleshooting
+            <ul>
+              <li>"XAML Hot Reload" Output-Fenster anzeigen</li>
+            </ul>
+          </li>
         </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const x = 1 == '1';   // x ist 'true'
-            const y = 1 === '1';  // y ist 'false'
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Boolesche <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Operatoren</a>
-        </h1>
-        <ul>
-          <li><code>&&</code>, <code>||</code>, <code>!</code></li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const x = false;
-            const y = true;
-            const a = x && y; // a ist 'false'
-            const o = x || y; // o ist 'true'
-            const n = !x;     // n ist 'true'
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Nullesche <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Operatoren</a>
-        </h1>
-        <ul>
-          <li><code>?.</code>, <code>??</code></li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const person = {
-              first: "bob",
-              last: "Hoffman",
-              age: 34,
-              company: {
-                name: "Apple"
-              }
-            };
-            const x = person?.middle; // x == undefined ohne Fehlermeldung
-            const y = x ?? "nothing"; // y == "nothing"
-            const z = person.company.name ?? "none"; // z == "Apple"
-            const z2 = person?.company?.name ?? "none"; // z2 == "Apple"
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators"></a>Zuweisungsoperatoren</a>
-        </h1>
-        <ul>
-          <li><code>x = 1</code></li>
-          <li><code>x++</code>, <code>++x</code></li>
-          <li><code>x--</code>, <code>--x</code></li>
-          <li><code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>&&=</code>, <code>||=</code>, <code>??=</code>, <code>**=</code></li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            let x = 1;
-            const y = x++;  // y == 1
-            const z = ++x;  // z == 3
-            x = x + 1;      // x == 4
-            x += 1;         // x == 5; Kurzschreibweise für x = x + 1;
-          </code>
-        </pre>
-        <p class="notes">Siehe <a href="https://www.codeproject.com/Articles/1208666/Why-Does-x-equals-plusplusx-plus-xplusplus-Give-Me">Why
-            Does x = ++x + x++ Give Me the Wrong Answer?</a> für weitere Infos.</p>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread
-            (...)</a> Operator</h1>
-        <p>Kopiert alle Eigenschaften eines Objekts.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const person = {
-              a: 1,
-              b: "n",
-              c: false,
-              d: {
-                e: 2,
-                f: "m"
-              }
-            };
-            const person2 = person;                         // Referenz
-            const personCopy1 = Object.assign({}, person);  // Kopie
-            const personCopy2 = { ...person };              // Kopie
-            person.a = 2;  // Ändert nur person und person2
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread</a>
-          mit Anpassungen </h1>
-        <p>Kann mit explizitem Setzen von Eigenschaften kombiniert werden.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const person = { a: 1, b: "n", c: false, d: { e: 2, f: "m" } };
-            const person2 = {
-              ...person,
-              a: 2,
-              d: {
-                ...person.d,
-                e: 1
-              }
-            } // { a: 2, b: "n", c: false, d:  { e: 1, f: "m" } }
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread</a>
-          mit Arrays</h1>
-        <p>Kopiert nicht nur Objekte sondern auch <em>Arrays</em>.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const a = [0, 1, 2];
-            const b = [3, 4, 5];
-
-            const b2 = [...b];            // Kopie von b
-
-            const c = [...a, ...b];       // [0, 1, 2, 3, 4, 5, 6]
-            const d = [0, 1, 2, ...b, 7]; // [0, 1, 2, 3, 4, 5, 6, 7]
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread</a>
-          mit Parametern</h1>
-        <p>Kann auch als Funktionsparametern benutzt werden.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            function sum(x, y, z) {
-              return x + y + z;
-            }
-            const numbers = [1, 2, 3];
-            const total = sum(...numbers);  // Ergibt 6
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring</a>
-        </h1>
-        <p>Mit <code>[]</code> können Daten aus Arrays extrahiert werden.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const items = [10, 20, 30, 40, 50];
-            const [a, b, ...rest] = items;
-            // a == 10, b == 20, rest == [30, 40, 50]
-
-            // Mit Standardwerte
-            const [c, d, e = -1, f = -1] = rest;
-            // c == 30, d == 40, e = 50, f = -1
-          </code>
-        </pre>
-        <p class="notes">Siehe <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#array-destrukturierung">weitere
-            Beispiele</a>.</p>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring</a>
-        </h1>
-        <p>Mit <code>{}</code> können Daten aus Objekten extrahiert werden.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const obj = { name: "bob", age: 10, country: "CH" };
-            const { name, age } = obj;
-            // name == "bob", age == 10
-
-            let name2, age2;          // Semicolon nötig
-            ({ name2, age2 } = obj);  // Klammern nötig
-            // name2  = "bob", age2 = 10
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring</a>
-        </h1>
-        <p>Daten aus Objekten zu anderen Eigenschaften zuweisen.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const obj = { name: "bob", age: 10, country: "CH" };
-            const { name: firstName, age: years } = obj;
-            // firstName == "bob", years == 10
-
-            // Mit Standardwerte
-            const {name: firstName = "John", lastName = "Doe"} = obj;
-            // firstName  = "bob", lastName = "Doe"
-
-            // Mit "rest"
-            const {name, ...obj2} = obj;
-            // name = "bob", obj2 = { age: 10, country: "CH" }
-          </code>
-        </pre>
-        <p class="notes">Siehe <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#objektdestrukturierung">weitere
-            Beispiele</a>.</p>
       </section>
 
       <section>
         <div class="seventy-thirty-grid">
           <div>
-            <h1>Operatoren</h1>
+            <h1>Controls und Layouts</h1>
             <ul>
-              <li>Nullesche Operatoren Testen</li>
-              <li>Vergleichsoperatoren Testen</li>
-              <li>Spread Operatoren Testen</li>
-              <li>Destructuring Operatoren Testen</li>
+              <li>Beispiele von oben einbauen und anschauen</li>
             </ul>
           </div>
           <img src="assets/demo.png">
@@ -733,9 +429,8 @@ const a = `Das
           <div>
             <h1>Übungen</h1>
             <ul>
-              <li>Test mit Nulleschen Operatoren</li>
-              <li>Test mit Spread Operatoren</li>
-              <li>Test mit Destructuring Operatoren</li>
+              <li>Layout erstellen und damit spielen</li>
+              <li>Verschieden Controls einbauen, um ein Gefühl dafür zu bekommen</li>
             </ul>
           </div>
           <img src="assets/cog-wheels.png">
@@ -743,231 +438,135 @@ const a = `Das
       </section>
 
       <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">Statements</a></h1>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/xaml/xaml-basics/data-binding-basics">Data-Binding</a></h1>
+      </section>
+
+      <section>
+        <h1>Beispiel mit <a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/">ListView</a></h1>
         <ul>
-          <li>Verzweigungen:
-            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/if...else">if</a></code>/<code>else</code>
-          </li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Conditional_Operator">Ternäre</a>
-            Operator (<code>?:</code>)</li>
-          <li>Verzweigungen:
-            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/switch">switch</a></code>
-          </li>
-          <li>Schleifen:
-            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for">for</a></code>
-          </li>
-          <li>Schleifen:
-            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for...in">for..in</a></code>
-          </li>
-          <li>Schleifen:
-            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for...of">for..of</a></code></code>
-          </li>
-          <li>Schleifen:
-            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/while">while</a></code>
-          </li>
-          <li>Schleifen:
-            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/do...while">do..while</a></code>
-          </li>
-          <li>Exception-Handling:
-            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/try...catch">try..catch..finally</a></code>
-          </li>
+          <li>Als <code>ItemsSource</code> ein <code>ObservableCollection&lt;T&gt;</code> einsetzen</li>
+          <li><code>ItemTemplate</code> beeinflusst die visuelle Repräsentation</li>
+          <li>Mit <code>SelectedItem</code> können Änderungen abgefangen werden</li>
         </ul>
       </section>
 
       <section>
-        <h1>Verzweigungen:
-          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/if...else">if</a></code>/<code>else</code>
-        </h1>
+        <h2>Code von <a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/">ListView</a> Beispiel</h2>
+        <p>Das ViewModell:</p>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            const x = 42;
-            let y;
-            if (x > 42) {
-              y = 1;
-            } else {
-              y = 2;
+          <code data-trim class="language-csharp hljs">
+            public ObservableCollection&lt;TodoItemViewModel&gt; Items
+            {
+              get => _items;
+              set
+              {
+                _items = value;
+                RaisePropertyChanged();
+              }
             }
-            // y == 2
+
+            private ObservableCollection&lt;TodoItemViewModel&gt; _items;
           </code>
         </pre>
       </section>
 
       <section>
-        <h1>
-          <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Conditional_Operator">Ternäre</a>
-          Operator (<code>?:</code>)
-        </h1>
+        <h2>Code von <a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/">ListView</a> Beispiel</h2>
+        <p>Das View:</p>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            const x = 42;
-            const y = x > 42 ? 1 : 2;
-            // y == 2
+          <code data-trim class="language-xml hljs">
+            &lt;ListView
+              ItemsSource="{Binding Path=MyList}"
+              SelectedItem="{Binding SelectedItem, Mode=TwoWay}"&gt;
+              &lt;ListView.ItemTemplate&gt;
+                &lt;DataTemplate&gt;
+                  &lt;ViewCell&gt;
+                    &lt;StackLayout&gt;
+                      &lt;Label Text="{Binding Firstname}" /&gt;
+                      &lt;Label Text="{Binding Lastname}" /&gt;
+                    &lt;/StackLayout&gt;
+                  &lt;/ViewCell&gt;
+                &lt;/DataTemplate&gt;
+              &lt;/ListView.ItemTemplate&gt;
+            &lt;/ListView&gt;
           </code>
         </pre>
       </section>
 
       <section>
-        <h1>Verzweigungen:
-          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/switch">switch</a></code>
-        </h1>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const x = 42;
-            let y;
-            switch (x) {
-              case 41:
-                y = 1;
-                break;
-              case 42:
-                y = 2;
-                break;
-              default:
-                y = 3;
-            }
-            // y == 2
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Schleifen:
-          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for">for</a></code>
-        </h1>
-        <p>Für sich wiederholende Programmteile werden Schleifen verwendet.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            for (let i = 0; i < 5; i++) {
-              // Wird für i = 0,1,2,3,4 ausgeführt
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Schleifen:
-          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for...in">for..in</a></code>
-        </h1>
-        <p>Um allen Eigenschaften eines Objekts durchzugehen.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const o = { a: 1, b: 2, c: 3 };
-
-            for (const property in o) {
-              // Ergibt "a", "b", "c"
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Schleifen:
-          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for...of">for..of</a></code>
-        </h1>
-        <p>Um allen Elementen eines Arrays durchzugehen.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const a = ['a', 'b', 'c'];
-
-            for (const element of array1) {
-              // Ergibt 'a', 'b', 'c'
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Schleifen:
-          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/while">while</a></code>
-        </h1>
-        <p>Um Code auszuführen bis eine Bedingung erfüllt wird.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            let n = 0;
-
-            while (n < 3) {
-              n++;
-            }
-            // n ist 3
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Schleifen:
-          <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/do...while">do..while</a></code>
-        </h1>
-        <p>Um Code mindestens ein mal auszuführen und dann bis eine Bedingung erfüllt wird.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            let result = '';
-            let i = 0;
-
-            do {
-              i = i + 1;
-              result = result + i;
-            } while (i < 5);
-            // result ist "12345"
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Exception-Handling</h1>
-        <table>
-          <tr>
-            <th><code>try</code></th>
-            <td>wird bis einen <span class="fragment highlight-red">Fehler</span> vorkommt ausgeführt</td>
-          </tr>
-          <tr>
-            <th><code>catch(error)</code></th>
-            <td>wird nur bei einem <span class="fragment highlight-red">Fehler im <code>try {}</code></span> ausgeführt
-            </td>
-          </tr>
-          <tr>
-            <th><code>finally</code></th>
-            <td>wird <span class="fragment highlight-blue">immer</span> ausgeführt</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>Exception-Handling</h1>
+        <h1>Binding erstellen</h1>
         <ul>
-          <li><code>throw</code> erzeugt ein <em>Exception</em></li>
-          <li>Aufrufe werden bis zu einem <code>catch</code> "aufgerollt"</li>
-          <li>Mangels ein <code>catch</code> wird die Applikation beendet</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const divide = (a, b) => {
-              if (b === 0) { throw "Divide by zero"; }
-
-              return a / b;
-            };
-
-            try {
-              divide(1, 0);
-            }
-            catch (error) {
-              console.log(error);
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Statements</h1>
+          <li>
+            <code><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/basic-bindings">BindingContext</a></code> zum ViewModell definieren
             <ul>
-              <li><code>for..in</code> Testen</li>
-              <li><code>for..of</code> Testen</li>
-              <li><code>switch</code> Testen</li>
-              <li><code>try..catch..finally</code> Testen</li>
+              <li>Syntax: <code>{Binding Path=Value}</code></li>
+              <li><code><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/binding-mode">BindingMode</a></code> kann <code>Default</code>, <code>OneWay</code>, <code>TwoWay</code> oder <code>OneTime</code> sein</li>
             </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
+          </li>
+          <li><code><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/binding-mode#viewmodels-and-property-change-notifications">INotifyPropertyChanged</a></code> implementieren</li>
+          <li><code><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/converters">IValueConverter</a></code> einsetzen, um Werten "on the fly" zu konvertieren</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>BindingContext</h1>
+        <ul>
+          <li><code>BindingContext</code> ist die “Source”</li>
+          <li><code>BindingContext</code> wird geerbt</li>
+          <li><code><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/relative-bindings">x:Reference</a></code> einsetzen um ein Control mit Namen zu referenzieren</li>
+          <li><code>RelativeSource</code> ermöglicht eine bessere Kapslung für Komponenten</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Kompilierte Bindings Beispiel</h1>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            &lt;ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:viewModels="clr-namespace:ToDo.ViewModels"
+              x:Class="Todo.Views.TodoDetailPage"
+              x:DataType="viewModels:TodoItemViewModel"
+              Title="Details"&gt;
+              &lt;ContentPage.Content&gt;
+                &lt;Grid Margin="10"&gt;
+                  &lt;Grid.RowDefinitions&gt;
+                    &lt;RowDefinition Height="1*" /&gt;
+                    &lt;RowDefinition Height="1*" /&gt;
+                    &lt;RowDefinition Height="3*" /&gt;
+                    &lt;RowDefinition Height="1*" /&gt;
+                  &lt;/Grid.RowDefinitions&gt;
+                  &lt;Entry Grid.Row="0" VerticalOptions="Center" Text="{Binding Title}" /&gt;
+                  &lt;Picker Grid.Row="1" ItemsSource="{Binding Priorities}" SelectedItem="{Binding Priority, Mode=TwoWay}" /&gt;
+                  &lt;Frame Grid.Row="2"&gt;
+                    &lt;Editor VerticalOptions="FillAndExpand" Text="{Binding Description}" /&gt;
+                  &lt;/Frame&gt;
+                  &lt;Button Grid.Row="3" Command="{Binding SaveCommand}" Text="Save" /&gt;
+                &lt;/Grid&gt;
+              &lt;/ContentPage.Content&gt;
+            &lt;/ContentPage&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><code><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/converters">IValueConverter</a></code></h1>
+        <ul>
+          <li>Einsetzen um den Wert eines Bindings anzupassen</li>
+          <li><code>IValueConverter</code> Schnittstelle implementieren</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;ContentPage.Resources&gt;
+              &lt;ResourceDictionary&gt;
+                &lt;local:IntToBoolConverter x:Key="Converter" /&gt;
+              &lt;/ResourceDictionary&gt;
+            &lt;/ContentPage.Resources&gt;
+            &lt;Button
+                IsEnabled="{Binding Path=SomeValue, Converter={StaticResource Converter}}”
+                Text="Click me" /&gt;
+          </code>
+        </pre>
       </section>
 
       <section>
@@ -980,241 +579,89 @@ const a = `Das
       <section>
         <div class="seventy-thirty-grid">
           <div>
+            <h1>Bindings</h1>
+            <ul>
+              <li>Binding definieren</li>
+              <li><code>IValueConverter</code> definieren</li>
+              <li>Kompilierte Bindings benutzen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
             <h1>Übungen</h1>
             <ul>
-              <li>Test mit <code>for..of</code></li>
-              <li>Test mit <code>switch</code></li>
-              <li>Test mit <code>try..catch..finally</code></li>
+              <li>Ein kompilierte Binding mit einem <code>IValueConverter</code> erstellen</li>
             </ul>
           </div>
           <img src="assets/cog-wheels.png">
         </div>
       </section>
 
-      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg" class="compact">
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions">Funktionen</a></h1>
-        <ul>
-          <li>Gewöhnliche <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions">Funktionen</a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Method_definitions">Methoden</a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/get">Getters</a>/<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/set">Setters</a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions">Arrow Funktionen</a></li>
-          <li>Umwandlungsfunktionen</li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math">Mathematische</a> Funktionen</li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Datumsmethoden</a></li>
-        </ul>
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/commanding">Commands</a></h1>
       </section>
 
-      <section class="compact">
-        <h1>Gewöhnliche <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions">Funktionen</a></h1>
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/commanding">Commands</a></h1>
         <ul>
-          <li>Kann mehrere Parameter haben</li>
-          <li>"rest" Parameter wird mit "..." geschrieben</li>
-          <li>Parametern können default-Werte haben</li>
+          <li>Einsetzen um Code auszuführen</li>
+          <li><code>Command</code> Klasse mit einem <em>delegate</em> einsetzen</li>
+          <li><code>CanExecute</code> <em>noch</em> nicht benutzen</li>
+          <li>Bestehende Implementation aus Xamarin einsetzen (eine eigene Version muss man <em>nicht</em> schreiben)</li>
         </ul>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            function add(a, b, c = 0) {
-              return a + b + c;
-            }
-            function addAll(...args) {
-              let result = 0;
-              for (const a of args) {
-                result += a;
-              }
-              return result;
-            }
-            const sum1 = add(1, 2);           // 3
-            const sum2 = add(1, 2, 3);        // 6
-            const sum3 = add(1, 2, 3, 4);     // 6 weil "4" ignoriert wird
-            const sum4 = addAll(1, 2, 3, 4);  // 10
-            const sum5 = addAll(...[1,2,3]);  // 6
+          <code data-trim class="language-xml hljs">
+            &lt;Button Command="{Binding Path=AddTodoCommand}" Text="Click me" /&gt;
+          </code>
+        </pre>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            AddTodoCommand = new Command(() => { /* ... */ });
           </code>
         </pre>
       </section>
 
       <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Method_definitions">Methoden</a>
-        </h1>
-        <p>Funktionen, die an einem Objekt gebunden sind.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const person = {
-              age: 34,
-
-              setAge(a) {
-                this.age = a;
-              }
-
-              getYearsLeft() {
-                return 65 - this.age;
-              }
-            };
-
-            person.setAge(42);
-            const y = person.getYearsLeft();  // 23
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/get">Getters</a>/<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/set">Setters</a></h1>
-        <p>Ermöglicht berechnete Eigenschaften.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const person = {
-              _age: 34;
-
-              get age() {
-                return _age;
-              }
-
-              set age(a) {
-                this._age = a - 10; // Don't lie about your age 😉...
-              }
-            };
-
-            person.age = 42;
-            const y = person.age;  // 32
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions">Arrow
-            Funktionen</a></h1>
+        <h1>Kommandos mit Parametern</h1>
         <ul>
-          <li>Eine kompaktere Definitionsform für Funktionen.</li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions#arrow_functions_used_as_methods">Für
-              Methoden nicht gut geeignet</a> (weil <code>this</code> eine andere Bedeutung hat).</li>
+          <li>Generische <code>Command</code> Klasse einsetzen</li>
+          <li><code>CommandParameter</code> in XAML setzen</li>
         </ul>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            const add = (a, b, c = 0) => a + b + c;
-            const addAll = (...args) => {
-              let result = 0;
-              for (const a of args) {
-                result += a;
-              }
-              return result;
-            }
-            const singleArgument = a => a + 2;  // Benötigt keine Klammern
-            const noParameters = () => false;   // Benötigt leere Klammern
+          <code data-trim class="language-xml hljs">
+            &lt;Button Command="{Binding Path=AddTodoCommand}" CommandParameter="1" Text="Click" /&gt;
+          </code>
+        </pre>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            AddTodoCommand = new Command&lt;int&gt;(parameter => { /* ... */ });
           </code>
         </pre>
       </section>
 
       <section>
-        <h1>Umwandlungsfunktionen</h1>
-        <ul>
-          <li>
-            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/parseInt">parseInt</a>()</code>
-          </li>
-          <li>
-            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/parseFloat">parseFloat</a>()</code>
-          </li>
-        </ul>
+        <h1>Konkretes Beispiel</h1>
+        <p>XAML Datei</p>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            const x = "42.3";
-            const xType = typeof x;   // "string"
-            const y = parseFloat(x);  // y == 42.3
-            const yType = typeof y;   // "number"
-            const z = parseInt(x);    // z == 42
-            const zType = typeof z;   // "number"
+          <code data-trim class="language-xml hljs">
+            &lt;Button Command="{Binding SaveCommand}" Text="Save" /&gt;
           </code>
         </pre>
-      </section>
-
-      <section class="compact">
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math">Mathematische</a>
-          Funktionen</h1>
-        <ul>
-          <li><code>isNaN()</code> prüft ob eine Variable keine Zahl ist (gibt true zurück, wenn es keine Zahl ist).
-          </li>
-          <li><code>Math.random()</code> erzeugt eine Zufallszahl >= 0 und <1.< /li>
-          <li><code>Math.abs()</code> gibt den absoluten Wert einer Zahl zurück.</li>
-          <li><code>Math.floor()</code> rundet eine Zahl ab</li>
-          <li><code>Math.ceil()</code> rundet eine Zahl auf</li>
-          <li><code>Math.max()</code> gibt die grösste Zahl zurück</li>
-          <li><code>Math.sqrt()</code> berechnet die Quadratwurzel</li>
-        </ul>
-        <p>NaN = <em>Not a Number</em></p>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Datumsmethoden</a>
-        </h1>
-        <ul>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a>
-            hat verschiedene Konstruktoren</li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date/parse"><code>Date.parse()</code></a>
-            unterstützt verschiedene Formate</li>
-        </ul>
+        <p>ViewModell</p>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            const dateText = "04 Dec 2021 00:10:00 GMT";
-            const date = new Date(dateText);
-            const month = date.getUTCMonth();     // 11
-            const hour = date.getUTCHours();      // 0
-            const minutes = date.getUTCMinutes(); // 10
-
-            const milliseconds = Date.parse(dateText);
-            const unixDate = new Date(milliseconds);
-            // unixDate = date
-            const date2 = new Date(2021, 11, 4, 0, 10, 0);
-            // date2 ist Lokal, nicht GMT
-
-            const now = Date.now();  // jetzt (in Millisekunden)
-            const now2 = new Date(); // jetzt
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a></h1>
-        <ul class="compact">
-          <li>Unterstützt das Formatieren in <em>locales</em> (z.B. "de-CH")</li>
-          <li>
-            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat">DateTimeFormat</a></code>
-            formatiert absoluten Daten
-          </li>
-          <li>
-            <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat/RelativeTimeFormat">RelativeTimeFormat</a></code>
-            formatiert relativen Zeiten
-          </li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const date = new Date('04 Dec 2021 00:10:00 GMT');
-            const dateTimeFormat = new Intl.DateTimeFormat("de-CH");
-            const formattedDate = dateTimeFormat.format(date);
-            // formattedDate == "4.12.2021"
-            const timeFormat = new Intl.RelativeTimeFormat("de-CH");
-            const formatted = timeFormat.format(1, "day");
-            // formatted == "in 1 Tag"
-            const timeFormat2 = new Intl.RelativeTimeFormat("de-CH", {
-              numeric: "auto",
+          <code data-trim class="language-csharp hljs">
+            public ICommand SaveCommand => new Command(() =>
+            {
+              _listViewModel.Items.Add(this);
+              _navigation.PopAsync();
             });
-            const formatted2 = timeFormat.format(1, "day");
-            // formatted2 == "morgen"
           </code>
         </pre>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Funktionen</h1>
-            <ul>
-              <li>Methoden Testen</li>
-              <li>Eigenschaften (<code>get</code>/<code>set</code>) Testen</li>
-              <li>Arrow-Funktionen Testen</li>
-              <li><code>Math</code> Funktionen Testen</li>
-              <li>Datumsfunktionen Testen</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
       </section>
 
       <section>
@@ -1227,10 +674,23 @@ const a = `Das
       <section>
         <div class="seventy-thirty-grid">
           <div>
+            <h1>Bindings</h1>
+            <ul>
+              <li>Kommando zeigen</li>
+              <li>Kommando mit Parameter zeigen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
             <h1>Übungen</h1>
             <ul>
-              <li>Test mit Methoden und Eigenschaften (<code>get</code>/<code>set</code>)</li>
-              <li>Test mit <code>Intl</code></li>
+              <li>Eigenes Kommando mit Parameter definieren</li>
+              <li><code>ListView</code> DataTemplate mit einem Konverter für eine Farbe oder Icon ergänzen (siehe <a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/images">images</a>)</li>
             </ul>
           </div>
           <img src="assets/cog-wheels.png">

@@ -31,6 +31,10 @@
   max-width: 300px;
 }
 
+.reveal img.tall-screenshot {
+  max-width: 50%;
+}
+
 .reveal img.screenshot {
   max-width: 70%;
 }
