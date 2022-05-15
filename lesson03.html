@@ -14,6 +14,89 @@
 
   <!-- Theme used for syntax highlighted code -->
   <link rel="stylesheet" href="plugin/highlight/github.css">
+
+  <style>
+    section.whiteText h1 {
+      color: white;
+      text-shadow: 5px 5px 5px black;
+    }
+
+    section.whiteText h2 {
+      color: white;
+      text-shadow: 5px 5px 5px black;
+    }
+
+    section.whiteText h3 {
+      color: white;
+      text-shadow: 5px 5px 5px black;
+    }
+
+    section.shadowText h1 {
+      text-shadow: 3px 3px 5px black;
+    }
+
+    section.shadowText h2 {
+      text-shadow: 3px 3px 5px black;
+    }
+
+    section.shadowText h3 {
+      text-shadow: 3px 3px 5px black;
+    }
+
+    .chat li {
+      border-radius: 15px;
+      background: #CCFFCC;
+      padding: 10px;
+      padding-top: 5px;
+      margin-bottom: 10px;
+    }
+
+    .chat li.other {
+      background: pink;
+    }
+
+    .side-by-side {
+      display: flex;
+      align-items: center;
+    }
+
+    .side-by-side>div {
+      flex: 1;
+    }
+
+    .side-by-side>div:nth-child(2)>h3 {
+      text-align: center;
+    }
+
+    .side-by-side.end {
+      align-items: flex-end;
+    }
+
+    .side-by-side.end>div:nth-child(2) {
+      margin-left: 20px;
+    }
+
+    .box-legend {
+      display: inline-block;
+      border-radius: 5px;
+      padding: 10px;
+      background: #49D;
+      text-align: center;
+      width: 150px;
+      color: white;
+    }
+
+    .box-legend.green {
+      background: #6A6;
+    }
+
+    .reveal .slides li code {
+      border: 1px solid silver;
+      padding: 1px;
+      background-color: #F0F0F6;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -331,7 +414,7 @@
           </tr>
           <tr>
             <td><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/effects/">Effects</a></td>
-            <td>Platformspezifische Anpassungen ohne Renderer</td>
+            <td>Plattformspezifische Anpassungen ohne Renderer</td>
           </tr>
         </table>
       </section>
@@ -368,334 +451,412 @@
       </section>
 
       <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/dependency-injection">IoC</a> (Inversion of Control)</h1>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/dependency-injection">IoC</a></h1>
       </section>
 
       <section>
-        <h1></h1>
-        We would like to work with abstractions
-        IOC: [I]nversion [O]f [C]ontrol is such a pattern A container has registrations from
-        An abstraction...
-        ...to an implementation
-        A container resolves requests for abstractions by providing
-        implementations
-        See Dependency Injection
-        See How do I DI? presentation (2018)
+        <h2>Was ist IOC?</h2>
+        <ul>
+          <li>IoC bedeutet [I]nversion [o]f [C]ontrol
+            <ul>
+              <li>Ist das generelle Konzept implementiert von <em>DI</em></li>
+              <li>Equivalent zu [D]ependency [I]nversion [P]rinciple</li>
+              <li>Transferiert Kontrolle vom <i>Aufgerufenen</i> zum <i>Aufrufer</i></li>
+            </ul>
+          </li>
+          <li>Das Muster erstellt einen <em>Graph</em> von <em>Komponenten</em> von <i>oben nach unten</i></li>
+          <li>Ein <em>Container</em> <i>unterstützt</i> oder <em>implementiert</em> IOC*</li>
+        </ul>
+        <p class="notes">*Ein Container ist optional aber man wird fast sicher eins einsetzen wollen...</p>
       </section>
 
-      <section class="compact">
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array-Methoden</a>
-          (immutable)</h1>
-        <p>Die folgende Methoden ändern das Array <em>nicht</em>.</p>
+      <section>
+        <h1>IoC: Anforderungen</h1>
+        Wir würden gerne mit Abstraktionen arbeiten
+        ein IoC Container enthält Registrierungen von
         <ul>
-          <li><code>slice()</code> Erzeugt ein neues Array aus bestimmten Elementen des ersten</li>
-          <li><code>concat()</code> Arrays verbinden</li>
-          <li><code>join()</code> Erzeugt einen String aus allen Elementen</li>
-          <li><code>flat()</code> Erstellt rekursiv ein neues Array mit allen Elementen von Unterarrays</li>
-          <li><code>includes()</code> Prüft, ob ein Array ein bestimmtes Element enthält</li>
-          <li><code>indexOf()</code> Gibt den Index zurück, an dem ein bestimmtes Element im Array</li>
+          <li>Abstraktionen...</li>
+          <li>...zu Implementierungen</li>
         </ul>
-      </section>
-
-      <section class="compact">
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array-Methoden</a>
-          (immutable)</h1>
-        <p>Die folgende Methoden ändern das Array <em>nicht</em>.</p>
-        <ul>
-          <li><code>find()</code> Gibt den Wert, welches als erstes die Bedingung einer Funktion erfüllt</li>
-          <li><code>map()</code> Wendet auf jedes Element des Arrays eine Funktion an und gibt das Ergebnis in einem
-            neuen Array zurück.</li>
-          <li><code>reduce()</code> Ähnlich zu <code>map()</code>, aber mit Akkumulator</li>
-          <li><code>filter()</code> Erstellt ein neues Array mit allen Elementen, die den von einer Funktion
-            implementierten Bedingung bestehen.</li>
-        </ul>
-      </section>
-
-      <section class="compact">
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array-Methoden</a>
-          (immutable)</h1>
-        <p>Die folgende Methoden ändern das Array <em>nicht</em>.</p>
-        <ul>
-          <li><code>find()</code> Gibt den Wert, welches als erstes die Bedingung einer Funktion erfüllt</li>
-          <li><code>map()</code> Wendet auf jedes Element des Arrays eine Funktion an und gibt das Ergebnis in einem
-            neuen Array zurück.</li>
-          <li><code>reduce()</code> Ähnlich zu <code>map()</code>, aber mit Akkumulator</li>
-          <li><code>filter()</code> Erstellt ein neues Array mit allen Elementen, die den von einer Funktion
-            implementierten Bedingung bestehen.</li>
-        </ul>
+        <li>Ein Container liefert Implementierungen für angeforderte Abstraktionen</li>
       </section>
 
       <section>
         <div class="seventy-thirty-grid">
           <div>
-            <h1>Funktionen</h1>
+            <h2>Was ist DI?</h2>
             <ul>
-              <li>Array-Funktionen Testen</li>
+              <li>DI steht für [D]ependency [I]njection</li>
+              <li>Abhängigkeiten <i>mitgeben</i> statt <i>erstellen</i></li>
+              <li>Implementiert <em>IoC</em></li>
             </ul>
           </div>
-          <img src="assets/demo.png">
-        </div>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
           <div>
-            <h1>Übungen</h1>
-            <ul>
-              <li>Test mit Array Methoden schreiben</li>
-            </ul>
+            <img src="assets/look_of_disapproval.jpg" class="fragment" data-fragment-index="1">
+            <p class="fragment" data-fragment-index="1">Genug Theorie!</p>
           </div>
-          <img src="assets/cog-wheels.png">
         </div>
       </section>
 
       <section>
-        <h1>String: Suchen</h1>
-        <table class="compact">
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/substr">substr()</a></code></td>
-            <td>Extrahiert von Position bis Länge</td>
-          </tr>
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/substring">substring()</a></code>,
-              <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/slice">slice()</a></code>
-            </td>
-            <td>Extrahiert zwischen zwei Positionen</td>
-          </tr>
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/includes">includes()</a></code></td>
-            <td><code>true</code> falls ein Sub-String vorkommt</td>
-          </tr>
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/indexof">indexOf()</a></code>, <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/lastindexof">lastIndexOf()</a></code></td>
-            <td>Position des ersten oder letzten Vorkommens eines Sub-Strings</td>
-          </tr>
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/startswith">startsWith()</a></code>,
-              <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith">endsWith()</a></code>
-            </td>
-            <td><code>true</code> falls ein String mit einem anderen beginnt oder endet</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>Strings: Transformieren</h1>
-        <table class="compact">
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase">toLowerCase()</a></code>,
-              <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleLowerCase">toLocaleLowerCase()</a></code>
-            </td>
-            <td>Wandeln ein String in Kleinbuchstaben um</td>
-          </tr>
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase">toUpperCase()</a></code>,
-              <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleUpperCase">toLocaleUpperCase()</a></code>
-            </td>
-            <td>Wandeln ein String in Grossbuchstaben um</td>
-          </tr>
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/trim">trim()</a></code>,
-              <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/trimStart">trimStart()</a></code>,
-              <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/trimStart">trimEnd()</a></code>
-            </td>
-            <td>Entfernt Whitespace von einem String</td>
-          </tr>
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/split">split()</a></code>
-            </td>
-            <td>Liefert ein Array von Sub-Strings</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>Strings: Matching</h1>
-        <p>Suchen und ersetzen mit Regulären Ausdrücken.</p>
-        <table class="compact">
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/match">match()</a></code>,
-              <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll">matchAll()</a></code>
-            </td>
-            <td>Findet Sub-Strings, die zu einem regulären Ausdruck passen</td>
-          </tr>
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/replace">replace()</a></code>,
-              <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll">replaceAll()</a></code>
-            </td>
-            <td>Ersetzt ein SubString oder Regulären Ausdruck mit einem anderen String</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="compact">
-        <h1 class="insertion">"Zeichen"</h1>
-        <ul>
-          <li>JavaScript unterstützt Unicode, aber...Funktionen wie <code>substr()</code> eher nicht</li>
-          <li>Bei Emojis besteht ein <em>Grapheme</em> aus mehreren <em>Code Points</em></li>
-          <li><code><a href="https://github.com/orling/grapheme-splitter">grapheme-splitter</a></code> npm package kann helfen</li>
-        </ul>
-        <p>Für weitere Infos, siehe:</p>
-        <ul class="notes">
-          <li><a href="https://dmitripavlutin.com/what-every-javascript-developer-should-know-about-unicode/">What every
-              JavaScript developer should know about Unicode</a> (2021)</li>
-          <li><a href="https://flaviocopes.com/javascript-unicode/">Unicode in JavaScript</a> (2018)</li>
-          <li><a href="https://stackoverflow.com/questions/27331819/whats-the-difference-between-a-character-a-code-point-a-glyph-and-a-grapheme">What's
-              the difference between a character, a code point, a glyph and a grapheme?</a> (2017)</li>
-          <li><a href="https://mathiasbynens.be/notes/javascript-unicode">JavaScript has a Unicode problem</a> (2013)</li>
-          <li><a href="https://stackoverflow.com/questions/4547609/how-to-get-character-array-from-a-string/34717402#34717402">How to get character array from a string?</a> (2010)</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Strings: Unicode</h1>
+        <hi>Bottom-up vs. Top-down</hi>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            function* getLetters() {
-              yield "a";
-              yield "b";
-            }
+          <code data-trim class="language-csharp hljs">
+            // Bottom-up (callee makes decisions)
+            var pilot = new LukeSkywalker();
+            // weapon and helmet initialized in constructor
 
-            const letters = getLetters();
-            const a = letters.next(); // { done: false, value: "a" }
-            const b = letters.next(); // { done: false, value: "b" }
-            const c = letters.next(); // { done: true, value: undefined }
-          </code>
-        </pre>
-
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>String-Funktionen</h1>
-            <ul>
-              <li><code>match()</code>/<code>matchAll()</code> Testen</li>
-              <li><code>replace()</code>/<code>replaceAll()</code> Testen</li>
-              <li>UPPER/lower-case Testen</li>
-              <li><code>trim()</code>/<code>split()</code> Testen</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Übungen</h1>
-            <ul>
-              <li>Test mit <code>split()</code> und <code>trim()</code> schreiben</li>
-              <li>Test mit <code>replace()</code> oder <code>replaceAll()</code> schreiben</li>
-            </ul>
-          </div>
-          <img src="assets/cog-wheels.png">
-        </div>
-      </section>
-
-      <section class="compact">
-        <h1>Fortgeschrittene Funktionen</h1>
-        <ul>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function*">Generator Funktionen</a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Guide/Functions#recursion">Rekursive Funktionen</a></li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Generator Funktionen</h1>
-        <ul>
-          <li>Beschreibt ein Algorithmus, welches eine <em>Sequenz</em> definiert</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            function* getLetters() {
-              yield "a";
-              yield "b";
-            }
-
-            const letters = getLetters();
-            const a = letters.next(); // { done: false, value: "a" }
-            const b = letters.next(); // { done: false, value: "b" }
-            const c = letters.next(); // { done: true, value: undefined }
+            // Top-down (caller makes decisions)
+            var pilot = new LukeSkywalker(
+              new LaserBlaster(),
+              new BrainBucket()
+            );
           </code>
         </pre>
       </section>
 
       <section>
-        <h1>Generatoren: Iterieren</h1>
+        <h1>IoC: Vorteile</h1>
         <ul>
-          <li>Können iteriert werden</li>
-          <li>Können zu Arrays konvertiert werden</li>
+          <li>Plattformspezifischen Implementationen für Testing ersetzen</li>
+          <li>Implementation basierend auf eine Bedingung selektieren
+            <ul>
+              <li>iOS vs. Android</li>
+              <li>Production vs. Testing</li>
+            </ul>
+          </li>
+          <li>"Constructor injection"
+            <ul>
+              <li>ist einfach zu verstehen</li>
+              <li>vereinfacht das identifizieren von Abhängigkeiten</li>
+            </ul>
+          </li>
         </ul>
+      </section>
+
+      <section>
+        <h1>IoC: Workflow</h1>
+        <ul>
+          <li>Schnittstellen/"Services" registrieren
+            <ul>
+              <li><code>Container.Register&lt;Interface, Implementation&gt;()</code></li>
+            </ul>
+          </li>
+          <li>IoC versiegeln (keine weitere Registrierungen erlaubt)</li>
+          <li>Schnittstellen/"Services" aus dem Container holen
+            <ul>
+              <li><code>Container.Resolve&lt;Interface&gt;()</code></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Warum versiegeln?</h1>
+        <ul>
+          <li>Ein container wird versiegelt sobald eine Instanz gefordert wird</li>
+          <li>Wie sonst könnte man ein Singleton garantieren?</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Singleton Verletzung</h1>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            function* getLetters() {
-              yield "a";
-              yield "b";
-            }
+          <code data-trim class="language-csharp hljs">
+            // Register
+            var container = CreateContainer()
+            .RegisterSingle&lt;IToy, StarWarsLegos&gt;();
 
-            for (const letter of getLetters()) {
-              // Work with each letter
-            }
+            // Seal
+            var services = container.GetServices();
 
-            const letterArray = [...getLetters()];
+            // Request
+            var toy = services.GetInstance&lt;IToy&gt;();
+
+            // Error!
+            container.RegisterSingle&lt;IToy, BoardGame&gt;();
+        </code></pre>
+      </section>
+
+      <section>
+        <h1>Wann registrieren?</h1>
+        <ul>
+          <li>Für Schnittstellen <em>immer</em></li>
+          <li>Nicht registrierte Objekte sind immer <em>transient</em></li>
+          <li>Benutzt das Container, um Objekte leicht zu erstellen</li>
+          <li>Weicht eine Abhängigkeit auf Constructor-Parametern aus</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Beispiel Registrierung</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            class A { }
+            class B { B(A a) { } }
+            class C : A { }
+
+            var s1 = CreateContainer().GetServices();
+
+            var b = s1.GetInstance&lt;B&gt;(); // uses A
+
+            var s2 = CreateContainer()
+            .Register&lt;A, C&gt;()
+            .GetServices();
+
+            var b = s2.GetInstance&lt;B&gt;(); // uses C
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>Container übermässig einsetzen</h2>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            // Get all objects...
+            var toy = services.GetInstance&lt;IToy&gt;();
+            var player = services.GetInstance&lt;IPerson&gt;();
+            var game = services.GetInstance&lt;IGame&gt;();
+
+            // Use them
+            game.Start(player, toy);
           </code>
         </pre>
       </section>
 
       <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Guide/Functions#rekursion">Rekursion</a></h1>
+        <h2>Was könnte man sonst tun?</h2>
+        <p>Ein übergeordnetes Konzept einsetzen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            var services = CreateContainer()
+              .RegisterSingle&lt;IGame, Game&gt;()
+              .RegisterSingle&lt;IToy, StarWarsLegos&gt;()
+              .RegisterSingle&lt;IPerson, Child&gt;()
+              .GetServices();
+
+            class PlayDate
+            {
+              PlayDate(IGame game, IPerson person, IToy toy) { }
+            }
+
+            // Get new play date (transient)
+            services.GetInstance&lt;PlayDate&gt;().Start();
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>Transients und Singletons</h2>
         <ul>
-          <li>Ein <em>rekursive</em> Algorithmus besteht aus einer Funktion, die sich sich selbst aufruft (oder mehrere Funktionen, die sich gegenseitig aufrufen).</li>
-          <li>Diese Funktionen ermöglichen das effiziente Abbilden offenen Algorithmen (z.B. Fibonacci).</li>
-          <li>⚠️ Ein rekursives Programm ohne Abbruchbedingung läuft theoretisch unendlich.</li>
+          <li><b>Singleton</b>: eine Instanz instance pro Container</li>
+          <li><b>Transient</b>: neue Instanz pro Aufruf</li>
+          <li><em>"lifestyle mismatch"</em> =&gt; Transient injiziert zu einem Singleton</li>
         </ul>
       </section>
 
       <section>
-        <h1>Rekursion: Fibonacci</h1>
-        <p>Die Sequenz fängt so an:</p>
-        <p><code>0, 1, 1, 2, 3, 5, 8, 13, 21, ...</code></p>
-        <p>Der Algorithmus kann rekursiv geschrieben werden:</p>
+        <h2>Lifestyle mismatch</h2>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            const getFibonacci = n => {
-              if (n === 0 || n === 1) {
-                return n;
+          <code data-trim class="language-csharp hljs">
+            class StarWarsLegos
+            {
+              StarWarsLegos(IPerson owner) { }
+            }
+
+            var services = CreateContainer()
+              .RegisterSingle&lt;IToy, StarWarsLegos&gt;()
+              .Register&lt;IPerson, Child&gt;()
+              .GetServices();
+
+            var toy = services.GetInstance&lt;IToy&gt;(); // CRASH
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>Anti-pattern: Container injizieren</h2>
+        <p>Abhängigkeiten werden vom Aufrufer verborgen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            bool CanFly(Container container)
+            {
+              var droid = container.GetInstance&lt;IDroid&gt;();
+              var pilot = container.GetInstance&lt;IPilot&gt;();
+
+              return droid.Online &amp;&amp; pilot.Awake;
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>Anti-pattern: Global Container benutzen</h2>
+        <p>Abhängigkeiten werden vom Aufrufer verborgen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            bool CanFly()
+            {
+              var droid = ServiceLocator.GetInstance&lt;IDroid&gt;();
+              var pilot = ServiceLocator.GetInstance&lt;IPilot&gt;();
+
+              return droid.Online &amp;&amp; pilot.Awake;
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>Code smell: <code>new</code></h2>
+        <ul>
+          <li>Nicht anpassbar</li>
+          <li>Kann nicht "gemockt" werden</li>
+          <li><em>Nie</em> <code>new</code> für ein Singleton einsetzen</li>
+          <li><em>Factories</em> sind flexibler</li>
+          <li><code>new</code> ist für kleine, "mutable" Objekte i.O.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>IoC in Xamarin</h1>
+        <img src="assets/Lesson03/IOCXamarin.jpg" class="full-width">
+      </section>
+
+      <section class="compact">
+        <h1>Ioc in Android</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            // Shared interface
+            public interface ISomeService {
+              void Foo();
+            }
+
+            // Android specific implementation. Registration via attribute.
+            using System;
+            using FormsTesting.Droid;
+            using Xamarin.Forms;
+
+            [assembly: Dependency(typeof(SomeService))]
+            namespace FormsTesting.Droid {
+              public class SomeService : ISomeService {
+                public void Foo() {
+                  throw new NotImplementedException();
+                }
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>IoC von Xamarin</h1>
+        <ul>
+          <li>Ist ein <strong>muss</strong> für "Custom Controls"</li>
+          <li>Ist wiederum ein ziemlich <em>einfaches</em> Container mit vielen Einschränkungen</li>
+          <li>Wir können es überall einsetzen <em>müssen das aber nicht</em></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>IoC: Eine Alternative</h1>
+        <p><a href="https://simpleinjector.readthedocs.io/en/latest/quickstart.html">SimpleInjector</a> ist:</p>
+        <ul>
+          <li>Viel mächtiger</li>
+          <li>Plattformunabhängig</li>
+          <li>Exzellent Dokumentiert</li>
+          <li>Wird in unseren Projekten eingesetzt</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>SimpleInjector: Beispiel</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            // REGISTER services we need to set up our application.
+            Services.RegisterInstance&lt;Page&gt;(navigationPage);
+            Services.RegisterSingleton&lt;IViewMapper, ViewMapper&gt;();
+            Services.RegisterSingleton&lt;ITodoViewModelFactory, TodoViewModelFactory&gt;();
+            Services.RegisterSingleton&lt;ITodoItemProvider, TodoItemProvider&gt;();
+            Services.RegisterSingleton&lt;MainViewModel&gt;();
+            Services.RegisterSingleton&lt;TodoListViewModel&gt;();
+            Services.Register&lt;TodoItemViewModel&gt;();
+
+            public TodoListViewModel(INavigation navigation, IViewMapper viewMapper,
+              ITodoViewModelFactory viewModelFactory, ITodoItemProvider provider)
+            {
+              // Constructor
+            }
+
+            Services.GetInstance&lt;TodoListViewModel&gt;();  // RESOLVE
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>IOC: Schnittstelle definieren</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public interface IDialogService {
+              Task Show(string title, string message);
+              Task&lt;bool&gt; Show(string title, string message, string positive, string negative);
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>IOC: Schnittstelle einsetzen</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            DeleteItemCommand = new Command(async () => {
+              var confirmed = await dialogService.Show("Confirm", "Are you sure you want to delete the item?", "Yes", "No");
+              if (confirmed)
+              {
+                Items.Remove(Items.First(x => x.IsSelected));
+              }
+            });
+          </code>
+        </pre>
+      </section>
+      <section>
+        <h1>IOC: <code>DialogService</code></h1>
+        <p>Implementation der Schnittstelle:</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class DialogService : IDialogService {
+              public DialogService(Page page) {
+                _page = page;
               }
 
-              return getFibonacci(n - 1) + getFibonacci(n - 2);
-            };
+              public async Task Show(string title, string message) {
+                await _page.DisplayAlert(title, message, "Cancel");
+              }
+
+              public async Task&lt;bool&gt; Show(string title, string message, string positive, string negative) {
+                return await _page.DisplayAlert(title, message, positive, negative);
+              }
+
+              private readonly Page _page;
+            }
           </code>
         </pre>
-
       </section>
 
       <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Fortgeschrittene Funktionen</h1>
-            <ul>
-              <li>Generators Testen</li>
-              <li>Rekursive Funktionen Testen</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
+        <h1>IOC: <code>MockDialogService</code></h1>
+        <p>Implementation eines "Mocks":</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class MockDialogService : IDialogService {
+              public Task Show(string title, string message) {
+                return Task.CompletedTask;
+              }
+
+              public Task&lt;bool&gt; Show(string title, string message, string positive, string negative) {
+                return Task.FromResult(true);
+              }
+            }
+          </code>
+        </pre>
       </section>
 
       <section>
@@ -708,10 +869,26 @@
       <section>
         <div class="seventy-thirty-grid">
           <div>
-            <h1>Übungen</h1>
+            <h1>IoC</h1>
             <ul>
-              <li>Test mit einem Generator schreiben</li>
-              <li>Eine rekursive Funktion schreiben</li>
+              <li>Registrierung</li>
+              <li>Constructor definieren</li>
+              <li>Objekt durch IoC erstellen lassen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <p>IoC mit mindestens einen Dienst integrieren; Beispiele:</p>
+            <ul>
+              <li>On/Offline service</li>
+              <li>UI-spezifischer Dienst (z.B. DialogService)</li>
+              <li>Data-Provider (z.B. mit Verbindung über API oder DB; kann vorerst in Speicher implementiert werden)</li>
             </ul>
           </div>
           <img src="assets/cog-wheels.png">
@@ -719,281 +896,80 @@
       </section>
 
       <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1>Struktur</h1>
-        <ul>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Classes">Klassen</a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules">Modulen</a></li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Classes">Klassen</a></h1>
-        <ul>
-          <li>Definieren eine Vorlage für Objekt-Definitionen</li>
-          <li>Können, wie Objekte, Methoden und Variablen beinhalten</li>
-          <li>Können auch Konstruktoren definieren, um die Initialisierung eines Objekts zu übersteuern</li>
-          <li>Können, wie Funktionen, deklariert oder als <i>Ausdrücke</i> definiert werden</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Classes">Klassen</a>: Deklarieren
-        </h1>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            class Person {
-              firstName = "John";
-              lastName = "Doe";
-
-              constructor(firstName, lastName) {
-                this.firstName = firstName;
-                this.lastName = lastName;
-              }
-
-              fullName() {
-                return `${this.firstName} ${this.lastName}`
-              }
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Classes">Klassen</a>: Erstellen</h1>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const p1 = new Person("Bob");
-            // p1.fullName() == "Bob Doe"
-            const p2 = new Person("Bob", "Smith");
-            // p2.fullName() == "Bob Smith"
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Classes">Klassen</a>: Vererbung</h1>
-        <p>Klassen können von einander vererben.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            class Teacher extends Person {
-              schoolName = "unknown";
-
-              constructor(firstName, lastName, schoolName) {
-                super(firstName, lastName);
-                this.schoolName = schoolName;
-              }
-
-              fullName() {
-                return `${super.fullName()} @ ${this.schoolName}`
-              }
-            }
-
-            const p3 = new Teacher("Bob", "Smith", "HFU");
-            // p3.fullName() == "Bob Smith @ HFU"
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Classes">Klassen</a>: Private</h1>
-        <p>Eigenschaften/Methoden mit <code>#</code>-Präfix sind <em>privat</em>.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            class Teacher2 extends Teacher {
-              #homeAddress = "unknown";
-
-              #getFullNameWithHomeAddress() {
-                return `${this.fullName()} (${this.homeAddress})`;
-              }
-            }
-
-            const p4 = new Teacher2("Bob", "Smith", "HFU");
-            const x = p4.homeAddress;                   // Error
-            const y = p4.getFullNameWithHomeAddress();  // Error
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Klassen</h1>
-            <ul>
-              <li>Klasse Testen</li>
-              <li>Vererbung Testen</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Übungen</h1>
-            <ul>
-              <li>Test mit Konstruktoren mit default Parametern</li>
-              <li>Test mit Vererbungen</li>
-            </ul>
-          </div>
-          <img src="assets/cog-wheels.png">
-        </div>
-      </section>
-
-      <section>
-        <h1>Modulen: CommonJS</h1>
-        <ul>
-          <li>Default System für <a href="https://nodejs.org">Node</a></li>
-          <li>Browsers verstehen es nicht</li>
-          <li>Exportieren mit <code>exports</code> oder <code>module.exports</code></li>
-          <li>Importieren mit <code>require()  </code></li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Modulen: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules">ES6/JavaScript</a>
-        </h1>
-        <ul>
-          <li>Ist <em>standardisiert</em></li>
-          <li>Das einzige System für Browsers</li>
-          <li>Geht mit <code>file://</code> nicht (wegen <a href="https://developer.mozilla.org/docs/Web/HTTP/CORS">CORS</a>)</li>
-          <li><a href="https://nodejs.org">Node</a> versteht es nur mit Hilfe von <em><a href="https://babeljs.io/">Babel</a></em></li>
-          <li>Exportieren mit <code>export</code></li>
-          <li>Importieren mit <code>import</code></li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Konvertieren nach ES6</h1>
-        <ul>
-          <li><code>library.js</code> soll <code>export</code> benutzen</li>
-          <li><code>library.test.js</code> soll <code>import</code> benutzen</li>
-          <li><em>Jest</em> muss mit <em><a href="https://babeljs.io/">Babel</a></em> ausgeführt werden</li>
-          <li><code>index.html</code> muss von <code>http://localhost</code> gelesen werden</li>
-          <li>Click-handlers umschreiben (imports sind nicht global verfügbar)</li>
-        </ul>
+        <h1><a href="https://docs.microsoft.com/en-us/dotnet/core/testing/">Testing</a></h1>
       </section>
 
       <section class="compact">
-        <h1>Babel Installieren</h1>
+        <h1><a href="https://docs.microsoft.com/en-us/dotnet/core/testing/">Testing</a></h1>
+        <p>Wir wollen möglichst viel Code mit Tests abdecken.</p>
         <ul>
-          <li>Im Terminal <code>npm install --save-dev babel-jest @babel/core @babel/node @babel/preset-env</code>
-            ausführen</li>
-          <li>Datei <code>babel.config.js</code> mit folgendem Inhalt erstellen</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            module.exports = {
-              presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
-            };
-          </code>
-        </pre>
-        <ul class="notes">
-          <li><a href="https://jestjs.io/docs/getting-started#using-babel">Using Babel (with Jest)</a></li>
-          <li><a href="https://linkstraffic.net/using-jest-with-es6-modules/">Using Jest with ES6 Modules</a></li>
-          <li><a href="https://masteringjs.io/tutorials/node/import">Using <code>import</code> Statements in Node.js</a>
+          <li>Es gibt verschiedene Testing Frameworks:
+            <ul>
+              <li>NUnit</li>
+              <li>MSUnit</li>
+              <li>XUnit</li>
+            </ul>
           </li>
+          <li>Wir bevorzugen "NUnit" weil das API besser und Test-Runner besser ist</li>
         </ul>
       </section>
 
       <section>
-        <h1>Syntax anpassen</h1>
+        <h1>Testing Projekt erstellen</h1>
         <ul>
-          <li><kbd>Ctrl</kbd> + <kbd>.</kbd> auf <code>require</code> in <code>library.test.js</code> betätigen, um nach
-            <code>import</code> zu konvertieren
-          </li>
-          <li><kbd>Ctrl</kbd> + <kbd>.</kbd> auf <code>module.exports</code> in <code>library.js</code> betätigen, um
-            nach <code>export</code> zu konvertieren</li>
-          <li>Tests ausführen</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Localhost benutzen</h1>
-        <ul>
-          <li><a href="https://www.npmjs.com/package/http-server">http-server</a> NPM package installieren</li>
-          <li><code>npx http-server</code> ausführen</li>
-          <li><a href="http://localhost:8080">http://localhost:8080</a> im Browser öffnen</li>
-        </ul>
-        <p class="notes">Siehe <a href="https://medium.com/ghostcoder/using-es6-modules-in-the-browser-5dce9ca9e911">Using ES6 modules in the
-            browser</a> (2018) für weitere Infos.</p>
-      </section>
-
-      <section>
-        <h1>Modulen: Click-Handlers</h1>
-        <ul>
-          <li>Click-Handlers werden im Kontext vom <code>window</code>-Objekt ausgeführt</li>
-          <li>Importierte Methoden sind nur lokal verfügbar und können nicht mehr direkt aufgerufen werden</li>
-          <li><code>window</code> Objekt muss angepasst werden</li>
-          <li>Wir sehen später, wie das Problem mit Event-Handlers gelöst werden kann</li>
+          <li>Ein "NUnit Test Project" im eigenen Solution erstellen</li>
+          <li>"Shared Code" Projekt vom Test-Projekt referenzieren</li>
+          <li>Ein Test-Klasse per "Service" erstellen</li>
+          <li>Basis-Klassen und Hilfsmethoden können nützlich sein, um dupliziertes Code zu vermeiden</li>
         </ul>
       </section>
 
       <section class="compact">
-        <h1>Click-Handlers anpassen</h1>
-        <p>In <code>index.html</code></p>
+        <h1>Testing: IoC aufsetzen</h1>
         <pre>
-          <code data-trim class="language-html hljs">
-            <button onclick="add()">+</button>
-            <button onclick="subtract()">-</button>
+          <code data-trim class="language-csharp hljs">
+            [TestFixture]
+            public class Tests {
+              [OneTimeSetUp]
+              public void Setup() {
+                // Potentially register different services to set up a "predictable" test environment.
+                App.Services.RegisterInstance(new NavigationPage().Navigation);
+                App.Services.Register&lt;IViewMapper, ViewMapper&gt;(Lifestyle.Singleton);
+                App.Services.Register&lt;ITodoViewModelFactory, TodoViewModelFactory&gt;(Lifestyle.Singleton);
+                App.Services.Register&lt;ITodoItemProvider, TodoItemProvider&gt;(Lifestyle.Singleton);
+                App.Services.Register&lt;MainViewModel&gt;(Lifestyle.Singleton);
+                App.Services.Register&lt;TodoListViewModel&gt;(Lifestyle.Singleton);
+                App.Services.Register&lt;TodoItemViewModel&gt;(Lifestyle.Transient);
+                App.Services.Register&lt;IDialogService, MockDialogService&gt;(Lifestyle.Singleton);
+              }
+           }
           </code>
         </pre>
-        <p>In <code>main.js</code></p>
+      </section>
+
+      <section class="compact">
+        <h1>Testing: Test schreiben</h1>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            import * as library from './library.js';
+          <code data-trim class="language-csharp hljs">
+            [TestFixture]
+            public class Tests {
+              // Setup excluded
 
-            window.add = () => {
-              library.show(library.increment())
-            };
+              [Test]
+              public void TestEmptyTodoCantBeSaved() {
+                var listViewModel = App.Services.GetInstance&lt;TodoListViewModel&gt;();
+                var todoItemViewModel = App.Services.GetInstance&lt;ITodoViewModelFactory&gt;()
+                  .Create(new TodoItem(), listViewModel);
 
-            window.subtract = () => {
-              library.show(library.decrement())
-            };
+                Assert.That(todoItemViewModel.SaveCommand.CanExecute(null), Is.False);
+                todoItemViewModel.Title = "Title";
+                Assert.That(todoItemViewModel.SaveCommand.CanExecute(null));
+              }
+            }
           </code>
         </pre>
       </section>
 
-      <section>
-        <h1>Browser Cache</h1>
-        <ul>
-          <li>"Developer Tools" öffnen</li>
-          <li>"Disable cache" ankreuzen, um sicherzustellen, dass Änderungen sofort geladen werden.</li>
-        </ul>
-        <table class="labeled-images">
-          <tr>
-            <th>Chrome</th>
-            <td><img src="assets/Lesson03/Chrome_disable_cache.png"></td>
-          </tr>
-          <tr>
-            <th>Firefox</th>
-            <td><img src="assets/Lesson03/Firefox_disable_cache.png"></td>
-          </tr>
-          <tr>
-            <th>Safari</th>
-            <td><img src="assets/Lesson03/Safari_disable_cache.png"></td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Modulen</h1>
-            <ul>
-              <li>Nach ES6-Modulen konvertieren</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
-      </section>
 
       <section>
         <h1>Fragen?</h1>
@@ -1005,188 +981,11 @@
       <section>
         <div class="seventy-thirty-grid">
           <div>
-            <h1>Übungen</h1>
+            <h1>Testing</h1>
             <ul>
-              <li>Eigenes Projekt nach ES6-Modulen konvertieren</li>
-            </ul>
-          </div>
-          <img src="assets/cog-wheels.png">
-        </div>
-      </section>
-
-      <section data-background="assets/Rusty_tools_dimmed.jpg">
-        <h1>Tools ergänzen</h1>
-        <p>Code Linting und Formatierung</p>
-      </section>
-
-      <section>
-        <h1>Code Style &amp; "Linting"</h1>
-        <p><em>Linting Werkzeuge</em> suchen nach und beheben semantischen Fehlern.</p>
-        <ul>
-          <li>Zugriff auf nicht initialisierte Variablen verhindern</li>
-          <li>Nicht erreichbare Code hervorheben (z.B. nach einem <code>return</code>)</li>
-          <li>Siehe <a href="https://eslint.org/docs/rules/">ESLint Rules</a></li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Formatierung</h1>
-        <p><em>Formatierungswerkzeuge</em> helfen, eine einheitliche Code Style und Formatierung einzuhalten.</p>
-        <ul>
-          <li>Namenskonventionen einhalten</li>
-          <li>Positionen von Klammern standardisieren</li>
-          <li>Einrückung mit tabs/spaces</li>
-          <li>Siehe <a href="https://prettier.io/docs/en/options.html">Prettier Optionen</a></li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><a href="https://prettier.io/docs/en/install.html">Prettier installieren</a></h1>
-        <ul>
-          <li><code>npm install --save-dev prettier</code> ausführen</li>
-          <li>Datei <code>/.prettierignore</code> mit folgendem Inhalt erstellen</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-properties hljs">
-            node_modules
-            package-lock.json
-            *.html
-            *.md
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://prettier.io/docs/en/configuration.html">Prettier konfigurieren</a></h1>
-        <ul>
-          <li>Datei <code>/.prettierrc</code> mit folgendem Inhalt erstellen</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            {
-              "printWidth": 120,
-              "singleQuote": false,
-              "useTabs": false,
-              "tabWidth": 2,
-              "semi": true,
-              "bracketSpacing": true,
-              "trailingComma": "all"
-            }
-          </code>
-        </pre>
-        <p class="notes">Siehe <a href="https://prettier.io/docs/en/options.html">Prettier Optionen</a> für weitere
-          Infos.</p>
-      </section>
-
-      <section>
-        <h1>Prettier ausführen</h1>
-        <ul>
-          <li><code>npx prettier --write .</code></li>
-          <li>Die Änderungen in SmartGit anschauen.</li>
-          <li>Einfacher geht's mit <em>IDE-Integration</em></li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Prettier &amp; <a href="https://prettier.io/docs/en/configuration.html">WebStorm</a></h1>
-        <div class="seventy-thirty-grid">
-          <div>
-            <ul>
-              <li>Einstellungen öffnen</li>
-              <li>Nach <em>Languages &amp; Frameworks | JavaScript | Prettier</em> navigieren</li>
-              <li>Ankreuzen: On 'Reformat Code' action</li>
-              <li>Ankreuzen: On save</li>
-            </ul>
-          </div>
-          <img src="assets/Lesson03/WebStormPrettierSettings.png" style="max-width: 400px">
-        </div>
-      </section>
-
-      <section>
-        <h1>Prettier &amp; <a href="https://prettier.io/docs/en/editors.html">VSC</a></h1>
-        <div class="seventy-thirty-grid">
-          <div>
-            <ul>
-              <li>Extension
-                <code><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">prettier-vscode</a></code>
-                installieren
-              </li>
-              <li>Format auslösen; "Prettier Format" auswählen</li>
-              <li>Einstellungen öffnen</li>
-              <li>Nach "format on save" suchen</li>
-              <li>Option ankreuzen</li>
-            </ul>
-          </div>
-          <img src="assets/Lesson03/PrettierCodeFormatterVSCode.png" style="max-width: 400px">
-        </div>
-      </section>
-
-      <section class="compact">
-        <h1><a href="https://eslint.org/docs/user-guide/getting-started">ESLint installieren</a></h1>
-        <ul>
-          <li><code>npm install --save-dev eslint eslint-config-prettier</code> ausführen</li>
-        </ul>
-      </section>
-
-      <section class="compact">
-        <h1><a href="https://eslint.org/docs/user-guide/getting-started">ESLint konfigurieren</a></h1>
-        <ul>
-          <li>Konfigurationsdatei mittels <code>npx eslint --init</code> erstellen</li>
-          <li><em>Oder</em> Datei <code>/.eslintrc.json</code> mit folgendem Inhalt erstellen</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            {
-              "env": {
-                "browser": true,
-                "commonjs": true,
-                "es2021": true
-              },
-              "extends": ["eslint:recommended", "prettier"],
-              "parserOptions": {
-                "ecmaVersion": 2021
-              },
-              "rules": {}
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>ESLint &amp; VSC</h1>
-        <div class="seventy-thirty-grid">
-          <div>
-            <ul>
-              <li><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint
-                  Extension</a> installieren.</li>
-              <li>Fehler sollten in <code>.js</code> Dateien sofort ersichtlich sein.</li>
-              <li>Siehe <a href="https://eslint.org/docs/rules/">ESLint Rules</a> für weitere Einstellungen.</li>
-            </ul>
-          </div>
-          <img src="assets/Lesson03/ESLintExtension.png" style="max-width: 400px">
-        </div>
-      </section>
-
-      <section>
-        <h1>ESLint &amp; <a href="https://www.jetbrains.com/help/webstorm/eslint.html">WebStorm</a></h1>
-        <div class="seventy-thirty-grid">
-          <div>
-            <ul>
-              <li>Einstellungen öffnen</li>
-              <li>Zu <em>Languages &amp; Frameworks | JavaScript | Code Quality Tools | ESLint</em> navigieren</li>
-              <li><em>Automatic ESLint configuration</em> auswählen</li>
-            </ul>
-          </div>
-          <img src="assets/Lesson03/ESLintWebStorm.png" style="max-width: 400px">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Tools</h1>
-            <ul>
-              <li>Prettier &amp; ESLint einrichten</li>
+              <li>Setup</li>
+              <li>Ausführen</li>
+              <li>Debuggen</li>
             </ul>
           </div>
           <img src="assets/demo.png">
@@ -1194,20 +993,10 @@
       </section>
 
       <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
         <div class="seventy-thirty-grid">
           <div>
             <h1>Übungen</h1>
-            <ul>
-              <li>Prettier einrichten</li>
-              <li>ESLint einrichten</li>
-            </ul>
+            <p>Mindestens einen Test im eigenen Projekt erstellen und ausführen</p>
           </div>
           <img src="assets/cog-wheels.png">
         </div>
