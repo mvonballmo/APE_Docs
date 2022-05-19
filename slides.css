@@ -47,6 +47,13 @@
   max-width: none;
 }
 
+.reveal img.platform-logo {
+  width: 80px;
+  position: absolute;
+  right: 0;
+  top: -20px;
+}
+
 .reveal code {
   background-color: aliceblue;
   outline: 1px dotted lightskyblue;

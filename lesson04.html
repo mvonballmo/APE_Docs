@@ -20,7 +20,7 @@
   <div class="reveal">
     <div class="slides">
       <section data-background="assets/MonteRosa.jpg" class="white-text">
-        <h1>JavaScript</h1>
+        <h1>Mobile App Entwicklung</h1>
         <h2>Lektion 4</h2>
         <p>
           Benachrichtigungen (Local/Push/Remote)
@@ -30,14 +30,10 @@
       <section data-background="assets/looking-back-dimmed.jpg">
         <h1>Rückblick</h1>
         <ul>
-          <li>Grundlagen:
-            <ul>
-              <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions">Funktionen</a></li>
-              <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Classes">Klassen</a></li>
-              <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules">Modulen</a></li>
-            </ul>
-          </li>
-          <li><a href="https://prettier.io/">Prettier</a> &amp; <a href="https://eslint.org/">ESLint</a></li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/pop-ups">Dialogs</a> (Pop-Ups)</li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/styles/xaml/">Styles</a></li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/dependency-injection">IoC</a></li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/core/testing/">Testing</a></li>
         </ul>
       </section>
 
@@ -57,156 +53,160 @@
       </section>
 
       <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1>JSON &amp; Fetch</h1>
-        <p>Hier geht es um Daten mit anderen Systemen auszutauschen.</p>
+        <h1>Benachrichtigungen</h1>
         <ul>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON">JSON</a>:
-            standardisiertes Austauschformat</li>
-          <li><a href="https://developer.mozilla.org/docs/Web/API/Fetch_API">Fetch</a>: Kommunikations-API</li>
+          <li>Unterscheiden sich auf iOS und Android</li>
+          <li>Beide unterstützen <em>Remote</em> (oder <em>Push</em>) <em>Notifications</em></li>
+          <li>Dies ist ein perfektes Einsatzgebiet für <em>IoC</em></li>
         </ul>
       </section>
 
       <section>
-        <h1>JSON: Einführung</h1>
+        <h1>Lokale Benachrichtigungen</h1>
         <ul>
-          <li>Akronym für "JavaScript Object Notation"</li>
-          <li>Unterstützt mittlerweile überall</li>
-          <li>Repräsentiert JavaScript Strukturen, inklusive:
+          <li>Berechtigungen zuerst abfragen (nur für iOS)</li>
+          <li><em>Notification channel</em> aussetzen (nur für Android)</li>
+          <li>Nachricht mit Details abfüllen (Text, Priority, usw.)</li>
+          <li>Nachricht für die Auslieferung freigeben (<em>schedule</em>)</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Android</h1>
+        <div class="fifty-fifty-grid">
+          <p>Vor dem wir beginnen, müssen wir ein bisschen mehr über Android lernen.</p>
+          <img src="assets/Android_Logo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Android: Basics</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li><em>Activities</em> sind die Controllers im <em>MVC</em></li>
+          <li><code>Xamarin.Forms</code> Apps haben normalerweise nur das <code>MainActivity</code></li>
+          <li>Xamarin generiert ein gross Teil dieses Code (<em>scaffolding</em>)</li>
+          <li>Inclusive das Code womit <code>Xamarin.Forms</code> selbst gestartet wird (<em>bootstrapping</em>)</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1><a href="https://developer.android.com/guide/components/activities/activity-lifecycle">Android Lifecycle</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <img src="assets/Lesson04/AndroidLifeCycle.png">
+      </section>
+
+      <section>
+        <h1><a href="https://developer.android.com/guide/topics/manifest/manifest-intro">Android Manifest</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>In die Datei <code>AndroidManifest.xml</code> definiert</li>
+          <li>Beinhaltet die <em>Metadaten</em> für die Applikation
             <ul>
-              <li>Objekte <code>{}</code></li>
-              <li>Arrays <code>[]</code></li>
-              <li>Felder (Null, Undefined, Strings, Numbers, Booleans)</li>
+              <li>Package Name</li>
+              <li>Minimum SDK Level</li>
+              <li>Geforderte Berechtigungen</li>
+              <li><em>Intent filters</em></li>
             </ul>
           </li>
         </ul>
       </section>
 
       <section>
-        <h1>JSON: Einschränkungen</h1>
+        <h1><a href="https://developer.android.com/guide/components/intents-filters">Android Intents</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
         <ul>
-          <li><code>NaN</code> wird zu <code>null</code></li>
-          <li><code>Date</code> wird zu <code>String</code></li>
-          <li><code>Function</code>, <code>RegExp</code> und <code>Error</code> Objekte werden nicht nach JSON
-            übertragen.</li>
+          <li>Sind Objekten womit eine Aktion oder Benachrichtigung gestartet werden kann</li>
+          <li>Benutzt um zwischen <em>Activities</em> zu wechseln</li>
+          <li>Wir werden eine Benachrichtigung mit einem <em>Intent</em> bestücken, um das Bearbeiten der Nachricht durch die App zu beeinflussen</li>
+          <li>Ein <em>Intent</em> kann zusätzlichen Daten beinhalten</li>
         </ul>
       </section>
 
       <section>
-        <h1>JSON: Beispiel</h1>
-        <p>Sieht aus wie JavaScript ausserdem Eigenschafts&shy;namen werden mit Strings geschrieben.</p>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/android/app-fundamentals/notifications/local-notifications">Notification Channels</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Eine App muss zumindest ein <em>Notification Channel</em> definieren, um Nachrichten zu bekommen</li>
+          <li>Ein <em>Notification Channel</em> beinhaltet
+            <ul>
+              <li>Eine Priorität</li>
+              <li>Eine Beschreibung</li>
+            </ul>
+          </li>
+          <li>Die können vom Benutzer im Betriebssystem verwaltet werden</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Android Settings</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <div class="fifty-fifty-grid">
+          <img src="assets/Lesson04/NotificationSettings.png">
+          <img src="assets/Lesson04/ChannelSettings.png">
+        </div>
+      </section>
+
+      <section class="compact">
+        <h1>Channel Erstellen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Ein <em>Channel</em> kann in einem Service definiert werden.</p>
         <pre>
           <code data-trim class="language-javascript hljs">
-            {
-              "firstName": "John",
-              "lastName": "Doe",
-              "age": 42,
-              "active": true
-              "cars": [
-                { "make": "VW", "model": "Golf" },
-                { "make": "BMW", "model": "M3" }
-              ]
+            public class NotificationService : INotificationService {
+              private const string ChannelId = "Channel ID";
+              private const string ChannelName = "TODO Channel";
+              private const string ChannelDescription = "Messages for the TODO App";
+
+              public void CreateNotificationChannel() {
+                var channel = new NotificationChannel(ChannelId, ChannelName, NotificationImportance.Default) {
+                  Description = ChannelDescription
+                };
+
+                var notificationManager = (NotificationManager)MainActivity.Activity.GetSystemService(Context.NotificationService);
+                notificationManager.CreateNotificationChannel(channel);
+              }
             }
           </code>
         </pre>
       </section>
 
       <section>
-        <h1>JSON: Lesen/Schreiben</h1>
-        <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse"><code>JSON.parse()</code></a>
-          wandelt JSON in JS um</li>
-        <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify()</code></a>
-          wandelt JS in JSON um</li>
+        <h1>Notification Erstellen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
         <pre>
           <code data-trim class="language-javascript hljs">
-            const obj = { color: "red", speed: 50.2 };
+            var builder = new NotificationCompat.Builder(MainActivity.Activity, ChannelId)
+              .SetContentTitle(title)
+              .SetContentText(description)
+              .SetSmallIcon(Resource.Drawable.notify_panel_notification_icon_bg);
 
-            const json = JSON.stringify(obj);
-            // json == '{"color":"red","speed":50.2}'
-
-            const obj2 = JSON.parse(json);
-            // obj === obj2
+            var notification = builder.Build();
           </code>
         </pre>
       </section>
 
       <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify()</code></a>
-        </h1>
-        <p>Das Ausgabeformat kann mit optionalen Parametern angepasst werden.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const isString = v => typeof v === "string"
-            const replacer = (k, v) => isString(v) ? undefined : v;
-            const obj = { color: "red", speed: 50.2 };
-            const json = JSON.stringify(obj, replacer);
-            // json == '{"speed":50.2}'
-            const json2 = JSON.stringify(obj, replacer, /* space: */ 2);
-            /* json2 == `{
-              "speed": 50.2
-            }`*/
-          </code>
-        </pre>
+        <h1>Notification Layout</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <img src="assets/Lesson04/NotificationExample.png" class="full-width">
       </section>
 
       <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>toJSON()</code></a>
-        </h1>
-        <p>Zu exportierenden Objekten können das Ausgabe&shy;format mit einer <code>toJSON()</code> Methode selbst
-          steuern.</p>
+        <h1>Notification Anzeigen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Benachrichtigungen werden mit demselben <code>NotificationService</code> gesendet als für die Registrierung benutzt wurde.</p>
         <pre>
           <code data-trim class="language-javascript hljs">
-            const obj = {
-              password: "password123",
-              speed: 50.2,
-              toJSON(key) {
-                const { password, ...rest } = this;
-                return rest;  // without "password"
-              }
-            };
-            const json = JSON.stringify(obj);
-            // json == '{"speed":50.2}'
+            var a = MainActivity.Activity;
+            var svc = a.GetSystemService(Context.NotificationService);
+            var notificationManager = (NotificationManager)svc;
+
+            const int notificationId = 0;
+
+            notificationManager.Notify(notificationId, notification);
           </code>
         </pre>
-      </section>
-
-      <section class="compact">
-        <h1 class="insertion"><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/toString"><code>toString()</code></a></h1>
-        <ul>
-          <li><code>toString()</code> gibt ein Objekt als Text aus.</li>
-          <li>Default <code>toString()</code> gibt der Typ des Objekts aus (oft <code>[object Object]</code>).</li>
-          <li><code>toString()</code> kann in Klassen und Objekten überschrieben werden</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const obj = {
-              password: "password123",
-              speed: 50.2,
-              toString() {
-                return speed;
-              }
-            };
-            const s = obj.toString();
-            // s == "50.2"
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>JSON</h1>
-            <ul>
-              <li><code>JSON.stringify()</code>
-                <ul>
-                  <li>Mit Formatierung</li>
-                  <li>Mit <code>toJSON()</code></li>
-                </ul>
-              </li>
-              <li><code>JSON.parse()</code></li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
       </section>
 
       <section>
@@ -219,10 +219,23 @@
       <section>
         <div class="seventy-thirty-grid">
           <div>
+            <h2>Lokale Benachrichtigungen</h2>
+            <ul>
+              <li><em>Notification Channel</em> registrieren</li>
+              <li>Lokale Nachricht senden und empfangen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
             <h1>Übungen</h1>
             <ul>
-              <li>Test mit JSON.stringify() schreiben</li>
-              <li>Test mit JSON.parse() schreiben</li>
+              <li><em>Notification Channel</em> registrieren</li>
+              <li>Lokale Nachricht senden und empfangen</li>
             </ul>
           </div>
           <img src="assets/cog-wheels.png">
@@ -230,138 +243,114 @@
       </section>
 
       <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/Document_Object_Model"><code>fetch()</code></a>
-        </h1>
-        <p>Hier geht es um Daten mit einem Server auszutauschen.</p>
+        <h1>Push Notifications</h1>
+      </section>
+
+      <section>
+        <h1>Push Notifications</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
         <ul>
-          <li>Promises</li>
-          <li><code>json-server</code> aufsetzen</li>
-          <li><code>async</code>/<code>await</code></li>
-          <li><code>GET</code></li>
-          <li><code>POST</code></li>
-          <li><code>PUT</code></li>
-          <li><code>DELETE</code></li>
+          <li>Wir schauen das generelle Setup an</li>
+          <li>Wir schauen das Backend für den Push-Dienst <em>nicht</em> in Detail an</li>
+          <li>Wir setzen <em>Firebase</em> direkt ein</li>
+          <li><em>Firebase</em> ist das offizielle Android/Google Push-Notification Provider</li>
         </ul>
       </section>
 
       <section>
-        <h1>Promises</h1>
-        <p>Platzhalter für einen asynchronen Funktionsaufruf</p>
-        <table>
-          <tr>
-            <th><code>then()</code></th>
-            <td>wird beim <span class="fragment highlight-green">erfolgreichen</span> Ausführen der Funktion ausgeführt
-            </td>
-          </tr>
-          <tr>
-            <th><code>catch()</code></th>
-            <td>wird beim <span class="fragment highlight-red">fehlgeschlagenen</span> Ausführen der Funktion ausgeführt
-            </td>
-          </tr>
-          <tr>
-            <th><code>finally()</code></th>
-            <td>wird <span class="fragment highlight-blue">immer</span> ausgeführt</td>
-          </tr>
-        </table>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/android/data-cloud/google-messaging/firebase-cloud-messaging">Firebase Architektur</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <img src="assets/Lesson04/FireBaseArchitecture.png" class="screenshot">
       </section>
 
       <section>
-        <h1><code>fetch()</code>: Daten lesen</h1>
+        <h1>Packages einziehen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Folgende <em>NuGet</em> Packages im Android Projekt installieren</p>
         <ul>
-          <li>Gibt zwei verschachtelten <code>Promises</code> zurück</li>
-          <li>URL an <code>fetch()</code> mitgeben</li>
-          <li>Wenn erfolgreich, denn von JSON nach <em>Adressen</em> mit <code>json()</code> umwandeln lassen</li>
-          <li>Wenn erfolgreich, denn mit den <em>Adressen</em> arbeiten</li>
+          <li><code>Xamarin.GooglePlayServices.Base</code></li>
+          <li><code>Xamarin.Firebase.Messaging</code></li>
+          <li><code>Xamarin.Google.Dagger</code></li>
         </ul>
+      </section>
+
+      <section>
+        <h1>Firebase aufsetzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ol>
+          <li><a href="https://console.firebase.google.com">https://console.firebase.google.com</a> öffnen</li>
+          <li>Einloggen oder Konto erstellen</li>
+          <li>Projekt erstellen</li>
+          <li><em>Google Analytics</em> müsst ihr nicht einschalten</li>
+          <li>Android App mit dem Package-Namen aus der <code>AndroidManifest.xml</code> einfügen</li>
+          <li><code>google-services.json</code> herunterladen</li>
+          <li>Diese Datei im Android-Projekt einfügen</li>
+          <li><em>Build Action</em> für diese Datei auf <code>GoogleServicesJson</code> setzen</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>App aufsetzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Im <code>AndroidManifest.xml</code> innerhalb des <code>&lt;application&gt;</code> Tags die folgenden Zeilen einfügen</p>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            fetch("http://localhost:3000/addresses")
-              .then(data => data.json())
-              .then(addresses => {
-                // mit "addresses" arbeiten
-              });
+          <code data-trim class="language-xml hljs">
+            &lt;receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="false" /&gt;
+            &lt;receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND"&gt;
+              &lt;intent-filter&gt;
+                &lt;action android:name="com.google.android.c2dm.intent.RECEIVE" /&gt;
+                &lt;action android:name="com.google.android.c2dm.intent.REGISTRATION" /&gt;
+                &lt;category android:name="${applicationId}" /&gt;
+              &lt;/intent-filter&gt;
+            &lt;/receiver&gt;
+          </code>
+        </pre>
+        <p class="notes">Sicherstellen, dass ein <em>Notification Channel</em> definiert ist, sonst kommen keine Nachrichten an.</p>
+      </section>
+
+      <section class="compact">
+        <h1><code>FirebaseService</code></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Im Android Projekt <code>FirebaseService</code> definieren, um das <code>Token</code> für das Gerät abzuhandeln</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            [Service]
+            [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
+            [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
+            public class FirebaseService : FirebaseMessagingService {
+              public override void OnNewToken(string token) {
+                Log.Debug(nameof(FirebaseService), "FCM token: " + token);
+
+                SendRegistrationToServer(token);
+
+                DependencyService.Get&lt;INotificationService&gt;().CreateNotificationChannel();
+              }
+
+              public void SendRegistrationToServer(string token) {
+                // Send the token to the server, if desired
+                // Using this, you can send notifications to specific recipients
+              }
+            }
           </code>
         </pre>
       </section>
 
       <section>
-        <h1>Externe Abhängigkeiten</h1>
-        <ul>
-          <li>Durch <code>fetch()</code> wird die Applikation von einem Externen Server abhängig</li>
-          <li>Den könnte man in Tests mit einem "Fake" oder "Mock" ersetzen</li>
-          <li>Mit einem "Mock" bleiben wir bei <em>unit tests</em></li>
-          <li>Ansonsten bauen wir <em>integration tests</em>, die einen externen Server benötigen</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Mocking: pro/contra</h1>
-        <table>
-          <tr>
-            <th><span class="pro">pro</span></th>
-            <td>Keine externe Abhängigkeiten</td>
-          </tr>
-          <tr>
-            <th><span class="pro">pro</span></th>
-            <td>Generell schneller (weil lokal)</td>
-          </tr>
-          <tr>
-            <th><span class="pro">pro</span></th>
-            <td>Einfach einzubinden</td>
-          </tr>
-          <tr>
-            <th><span class="contra">contra</span></th>
-            <td>Kann aufwendig sein zu schreiben</td>
-          </tr>
-          <tr>
-            <th><span class="contra">contra</span></th>
-            <td>Kann <em>falsch</em> sein</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>Integration: pro/contra</h1>
-        <table>
-          <tr>
-            <th><span class="pro">pro</span></th>
-            <td>Muss nicht geschrieben werden</td>
-          </tr>
-          <tr>
-            <th><span class="pro">pro</span></th>
-            <td>Kann <em>nicht</em> falsch sein</td>
-          </tr>
-          <tr>
-            <th><span class="contra">contra</span></th>
-            <td>Kann aufwendiger sein einzubinden</td>
-          </tr>
-          <tr>
-            <th><span class="contra">contra</span></th>
-            <td>Externe Abhängigkeit muss vorhanden sein</td>
-          </tr>
-          <tr>
-            <th><span class="contra">contra</span></th>
-            <td>Kann langsamer sein</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1><code>fetch()</code> "mocken"</h1>
-        <ul>
-          <li>Das API mit einer eigenen JS-Funktion definieren</li>
-          <li>Ist nicht ganz ohne...</li>
-        </ul>
+        <h1><code>OnMessageReceived()</code></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>FirebaseService</code> erweitern, um Nachrichten abzuhandeln, wenn die App im Vordergrund ist</p>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            function fetch(url) {
-              return {
-                then(f) {
-                  return {
-                    json() {}
-                  }
-                }
-                catch(f) {}
+          <code data-trim class="language-csharp hljs">
+            [Service]
+            [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
+            [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
+            public class FirebaseService : FirebaseMessagingService {
+
+              // Neu
+              public override void OnMessageReceived(RemoteMessage message) {
+                Log.Debug(nameof(FirebaseService), $"Received message. {message}");
+
+                DependencyService.Get&lt;INotificationService&gt;().ShowNotification(message.From, message.GetNotification().Body);
               }
             }
           </code>
@@ -369,465 +358,199 @@
       </section>
 
       <section class="compact">
-        <h1><code>json-server</code>: pro/contra</h1>
-        <table>
-          <tr>
-            <th><span class="pro">pro</span></th>
-            <td>Muss nicht geschrieben werden</td>
-          </tr>
-          <tr>
-            <th><span class="pro">pro</span></th>
-            <td>Ist der gleiche Server wie Produktion</td>
-          </tr>
-          <tr>
-            <th><span class="pro">pro</span></th>
-            <td>Muss nicht in die Tests eingebunden werden</td>
-          </tr>
-          <tr>
-            <th><span class="pro">pro</span></th>
-            <td>Leicht aufzusetzen (auch für CI/CD)</td>
-          </tr>
-          <tr>
-            <th><span class="pro">pro</span></th>
-            <td>Macht die Tests nicht langsam</td>
-          </tr>
-        </table>
+        <h1>Nachricht Testen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>App starten und Token aus dem Output lesen (oder Breakpoint in <code>FirebaseService</code> setzen)</li>
+          <li>App schliessen oder im Hintergrund setzen</li>
+          <li><em>Firebase Console</em> öffnen
+            <ul>
+              <li>Links auf dem Menü "Engage" klicken</li>
+              <li>Sub-Menü “Cloud Messaging” wählen</li>
+              <li>Neue Nachricht mit einem Titel und einer Beschreibung kreieren</li>
+              <li>“Testnachricht senden” klicken</li>
+              <li>Token eingeben und “Test” klicken</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h2>Push Notifications</h2>
+            <ul>
+              <li>App für Push Notifications einrichten</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>App für Push Notifications einrichten</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>"Taps" und App-spezifische Daten</h1>
       </section>
 
       <section class="compact">
-        <h1><code>json-server</code> aufsetzen</h1>
-        <ul>
-          <li><code>npm install --save-dev json-server</code> ausführen</li>
-          <li>JSON-Datei (z.B. <code>./data.json</code>) mit Daten füllen</li>
-        </ul>
+        <h1>App öffnen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Mit einem <code>Intent</code> kann die App im Vordergrund gebracht oder gestartet werden</p>
         <pre>
-          <code data-trim class="language-javascript hljs">
+          <code data-trim class="language-csharp hljs">
+            var notificationIntent = MainActivity.Activity.PackageManager.GetLaunchIntentForPackage(MainActivity.Activity.PackageName);
+            notificationIntent.SetFlags(ActivityFlags.SingleTop);
+            notificationIntent.PutExtra("FromNotification", true);
+
+            var pendingIntent = PendingIntent.GetActivity(MainActivity.Activity,
+              0, notificationIntent, PendingIntentFlags.UpdateCurrent);
+
+            var builder = new NotificationCompat.Builder(MainActivity.Activity, channelId)
+              .SetContentTitle(title)
+              .SetContentText(description)
+              .SetContentIntent(pendingIntent) // &lt;== neue Zeile
+              .SetSmallIcon(Resource.Drawable.ic_app);
+
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1><code>MainActivity</code> anpassen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>Intent</code> im <code>MainActivity</code> abfangen und abhandeln</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            protected override void OnNewIntent(Intent intent) {
+              // Do something with the data you pass from the notification.
+              var extra = intent.GetBooleanExtra("FromNotification", false);
+              if (extra) {
+                // Do something with it
+              }
+              base.OnNewIntent(intent);
+            }
+
+            protected override void OnCreate(Bundle savedInstanceState) {
+              // Forms startup here...
+
+              // Check if our notification was clicked while the app was closed.
+              var extra = Intent.GetBooleanExtra("FromNotification", false);
+              if (extra) {
+                // Do something with it
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Werten auslesen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Key/Value Paare können mitgeschickt werden, die an die App weitergeleitet werden</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            protected override void OnCreate(Bundle savedInstanceState) {
+              if (!Forms.IsInitialized) {
+                   // Forms init code
+              }
+              else {
+                // We need to make sure we call the base method in any case
+                base.OnCreate(savedInstanceState);
+              }
+
+              // Check if we've some extras because we've been started by a notification tap.
+              if (Intent.Extras?.Get("RemoteKey") != null) {
+                // Let's do something with that information.
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>App im Vordergrund</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Klicks auf Nachrichten für eine laufende App können mit folgendem Code abgehandelt werden</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            protected override void OnNewIntent(Intent intent)
             {
-              "addresses": [
-                { "name": "Maria" },
-                { "name": "Johann" }
-              ]
-            }
-          </code>
-        </pre>
-        <ul>
-          <li><code>npx json-server ./data.json</code> ausführen</li>
-          <li>Nach <a href="http://localhost:3000">http://localhost:3000</a> im Browser navigieren</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><code>fetch()</code> testen</h1>
-        <ul>
-          <li>Bei <em>node</em> gibt es kein <code>fetch()</code></li>
-          <li><code>npm install --save-dev isomorphic-fetch</code> ausführen, um <code>fetch</code> für <em>node</em> zu
-            installieren</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><code>fetch()</code> testen II</h1>
-        <ul>
-          <li>Das <code>Promise</code> muss man mit <code>return</code> zurückgeben</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            import "isomorphic-fetch";  // Oben in die Datei
-
-            test("call fetch gets addresses", () => {
-              return fetch("http://localhost:3000/addresses")
-                .then(data => data.json())
-                .then(addresses => {
-                  expect(addresses.length).toBe(12);
-                });
-            });
-          </code>
-        </pre>
-        <p class="notes">Siehe <a href="https://jestjs.io/docs/asynchronous">Testing Asynchronous Code</a> für weitere
-          Information.</p>
-      </section>
-
-      <section>
-        <h1><code>async</code>/<code>await</code></h1>
-        <ul>
-          <li>Verschachtelte Aufrufe sind nicht besonders lesbar oder nachvollziehbar</li>
-          <li>Stattdessen kann man ein <code>Promise</code> mit <code>await</code> "abwarten"</li>
-          <li>Funktionen, die zumindest ein <code>await</code> beinhalten müssen mit <code>async</code> bezeichnet
-            werden</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Test mit <code>async</code>/<code>await</code></h1>
-        <ul>
-          <li>Die zwei <code>Promises</code> sind klarer zu sehen</li>
-          <li><code>expect()</code> funktioniert wie erwartet (ohne ein <code>Promise</code> aus dem inneren Kontext
-            zurückgeben zu müssen)</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            test("call fetch with async/await", async () => {
-              const response = await fetch("http://localhost:3000/addresses");
-              const addresses = await response.json();
-
-              expect(addresses.length).toBe(12);
-            });
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><code>Promises</code> mit Fehlern</h1>
-        <p>Die <code>catch()</code> und <code>finally()</code> Methoden eines <code>Promises</code> werden mit
-          <em>Exception-Handling</em> ersetzt
-        </p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            async function getAddresses() {
-              try {
-                const promise = await fetch("http://localhost:3000/addresses");
-                return await promise.json();
-              } catch(error) {
-                // Wird im Fehlerfall ausgeführt
-              } finally {
-                // Wird immer ausgeführt (cleanup, logging, usw.)
+              // Check for key/values from notifications.
+              var extra = intent.GetStringExtra("FromNotification");
+              if (!string.IsNullOrEmpty(extra))
+              {
+                // Do something with the value.
               }
-            }
-        </code>
-        </pre>
-      </section>
 
-      <section>
-        <h1>Mehrere <code>Promises</code></h1>
-        <p>Mit <code>Promise.All()</code> kann auf mehrere asynchrone Aufrufe gewartet werden.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            test("wait for multiple fetch calls", async () => {
-              const p1 = getAddresses();
-              const p2 = getCars();
-
-              const [addresses, cars] = await Promise.all([p1, p2]);
-
-              expect(addresses.length).toBe(12);
-              expect(cars.length).toBe(2);
-            });
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><code>json-server</code>: ID</h1>
-        <ul>
-          <li>Um Entitäten aktualisieren oder löschen zu können muss man einen <code>ID</code> zuweisen</li>
-          <li>Beim erstellen einer Entität wird ein <code>ID</code> automatisch zugewiesen</li>
-          <li>Eine Adresse mit <code>ID == 1</code> lesen: <code>http://localhost:3000/addresses/1</code></li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><code>fetch()</code> mit <code>POST</code></h1>
-        <ul>
-          <li>Einen neuen Eintrag kann mit der Methode <code>POST</code> erstellt werden</li>
-          <li>Der <code>Content-Type</code> Header muss gesetzt werden</li>
-          <li>Das <code>body</code> muss als JSON gesetzt werden</li>
-          <li>Auf dem Resultat wird ein ID gesetzt</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            await fetch("http://localhost:3000/addresses/", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(address),
-            });
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><code>fetch()</code> mit <code>PUT</code></h1>
-        <ul>
-          <li>Einen bestehenden Eintrag kann mit der Methode <code>PUT</code> angepasst werden</li>
-          <li>Der <code>Content-Type</code> Header muss gesetzt werden</li>
-          <li>Das <code>body</code> muss als JSON gesetzt werden</li>
-          <li>Mit dieser Methode muss man ein <code>ID</code> mitgeben</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            await fetch("http://localhost:3000/addresses/1", {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(address),
-            });
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><code>fetch()</code> mit <code>DELETE</code></h1>
-        <ul>
-          <li>Einen Eintrag kann mit der Methode <code>DELETE</code> gelöscht werden</li>
-          <li>Mit dieser Methode muss man ein <code>ID</code> mitgeben</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            await fetch("http://localhost:3000/addresses/1", {
-              method: "DELETE" }
-            );
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><code>json-server</code> mit "watch"</h1>
-        <ul>
-          <li>Änderungen an die lokale Datei (z.B. bei einem "Revert" in Git) werden von <code>json-server</code> nicht
-            wahrgenommen</li>
-          <li>Mit der <code>--watch</code> Option lädt sich <code>json-server</code> bei Änderungen neu</li>
-          <li><code>json-server ./data.json --watch</code> ausführen</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><code>fetch()</code>: Response</h1>
-        <ul>
-          <li>Bei gravierendem Fehler kommt ein <code>Error</code></li>
-          <li>Einen <code>404</code> Fehler ist nicht gravierend</li>
-          <li>Response testen, ob der Resultat vorhanden ist</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const response = await fetch(`http://localhost:3000/addresses/1`);
-
-            if (response.ok) {
-              const address = await response.json();
-            } else {
-              // "response.statusCode"
-              // "response.statusText"
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section class="compact">
-        <h1><code>fetch()</code>: Timeout</h1>
-        <ul>
-          <li>Kann mit einem
-            <code><a href="https://developer.mozilla.org/docs/Web/API/AbortController">AbortController</a></code> und
-            <code><a href="https://developer.mozilla.org/docs/Web/API/setTimeout">SetTimeout</a></code> implementiert
-            werden
-          </li>
-          <li><code>AbortError</code> im <code>catch</code>-Statement abfangen</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 500);
-
-            try {
-              await fetch("http://localhost:3020/addresses", {
-                signal: controller.signal,
-              });
-            } catch(error) {
-              if (error.name === "AbortError") {
-                // timeout
-              }
+              base.OnNewIntent(intent);
             }
           </code>
         </pre>
       </section>
 
       <section>
-        <h1><a href="https://axios-http.com/docs/api_intro">Axios</a></h1>
-        <p>Ist ein bekanntes NPM Kommunikationsmodul</p>
-        <ul>
-          <li>Gleiches Code in Node und im Browser</li>
-          <li>Ist mit älteren Browsers rückwärtskompatibel</li>
-          <li>Unterstützt "request pipeline" Erweiterungen</li>
-          <li>Fortschritt-Events für Download <em>und</em> Upload</li>
-          <li>Direkte Unterstützung für Timeouts</li>
-          <li>Alle HTTP-Fehler sind Exceptions</li>
-          <li>JSON ist natives Format</li>
-        </ul>
-        <p class="notes">Siehe <a href="https://betterprogramming.pub/why-javascript-developers-should-prefer-axios-over-fetch-294b28a96e2c">Why
-            JavaScript Developers Should Prefer Axios Over Fetch</a> für weitere Infos.</p>
+        <h1>Icon setzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Im <code>AndroidManifest.xml</code> innerhalb des <code>&lt;application&gt;</code> Tags die folgenden Zeilen einfügen</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            &lt;meta-data
+              android:name="com.google.firebase.messaging.default_notification_icon"
+              android:resource="@drawable/ic_mtrl_chip_checked_circle"
+            /&gt;
+          </code>
+        </pre>
       </section>
 
       <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1><code>fetch()</code></h1>
+        <h1>Und iOS?</h1>
+        <img src="assets/iOS_logo.png" class="platform-logo">
+        <ul>
+          <li>Man muss ein kostenpflichtiges <em>Apple Developer</em> Konto haben</li>
+          <li>APN geht im Simulator nicht; muss auf einem echten Gerät getestet werden</li>
+          <li>Man kann FireBase und/oder Azure auch für iOS einsetzen</li>
+        </ul>
+        <p>Wir fokussieren auf Android.</p>
+      </section>
+
+      <section>
+        <h1>Und Senden?</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Das automatisierte Senden von Nachrichten läuft auch über das <em>Firebase</em> API</li>
+          <li>Man muss ein weiteres API-Schlüssel anlegen und diverse Registrierungen machen</li>
+          <li>So etwas ist "out of scope" für das Modul</li>
+          <li>Siehe
             <ul>
-              <li>Test mit <code>async</code>/<code>await</code></li>
-              <li>Test für <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code></li>
+              <li><a href="https://firebase.google.com/docs/cloud-messaging/send-message">Build app server send requests</a></li>
+              <li><a href="https://firebase.google.com/docs/cloud-messaging/server">Your server environment and FCM</a></li>
             </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
+          </li>
+        </ul>
       </section>
 
       <section>
         <h1>Fragen?</h1>
         <div class="fifty-fifty-grid">
           <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Übungen</h1>
-            <ul>
-              <li>Test für <code>GET</code> für alle Entitäten</li>
-              <li>Test für <code>GET</code> für eine einzige Entität</li>
-            </ul>
-          </div>
-          <img src="assets/cog-wheels.png">
-        </div>
-      </section>
-
-      <section>
-        <h1 class="insertion">Refactoring</h1>
-        <p>Code lesbarer und weniger komplex machen</p>
-        <ul>
-          <li>Mit genügender Test-Abdeckung und grünen Tests</li>
-          <li>Schritt für Schritt machen</li>
-          <li>Nicht mit anderen Fixes mischen</li>
-          <li>In klaren Git-Commits aufteilen, vor allem
-            <ul>
-              <li>Das Umbenennen von Dateien</li>
-              <li>Das verschieben von grösseren Code-Mengen</li>
-              <li>Grössere Umformatierungen</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h1 class="insertion"><a href="https://jsdoc.app/">JSDoc</a></h1>
-        <p>Bekannter Dokumentationswerkzeug für JS</p>
-        <ul>
-          <li>Wird in Kommentaren an JS "angehängt"</li>
-          <li>Typen, Parametern, Rückgabewerten, usw.</li>
-          <li>Typen werden mit <code>{}</code> angegeben</li>
-          <li>Wird in VSC und WebStorm erkennt und angezeigt
-            <ul>
-              <li>WebStorm prüft Code damit</li>
-              <li>WebStorm schlägt Typen für JSDoc vor</li>
-              <li>Wird bei WebStorm-Refactoring berücksichtigt</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>JSDoc: Arrays/Generics</h1>
-        <ul>
-          <li>Arrays: <code>string[]</code> oder <code>[string]</code></li>
-          <li>Promises/Generics: Mit spitzigen Klammern</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            /**
-             * Gets an array of all entities from the database.
-             *
-             * @return {Promise&lt;[{ id: number }]&gt;} Array of all entities
-             */
-            getAll() {/* ... */}
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>JSDoc: Klassen/Objekte</h1>
-        <ul>
-          <li>Name der Klasse womöglich benutzen </li>
-          <li>Objekteigenschaften mit Namen und Typen innerhalb geschweiften Klammern schreiben</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            /**
-             * Updates the given `entity` in the database.
-             *
-             * @param {{ id: number }} entity The object to update.
-             * @return {Promise&lt;{ id: number }&gt;} The updated entity
-             */
-            update(entity) {/* ... */}
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>JSDoc: Callbacks</h1>
-        <ul>
-          <li>Ein Funktionsparameter beschreibt man mit <code>function</code>, klammern, Parametertypen und einem Doppelpunkt vor dem Resultat</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            /**
-             * @param {string[]} items Array of strings to modify
-             * @param {string} seed The object to update
-             * @param {function(string, string):boolean} f The function to apply
-             * @return string[]
-             */
-            apply(items, seed, f) {/* ... */}
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>JSDoc: Restparameter</h1>
-        <ul>
-          <li>Ein Restparameter beschreibt man mit <code>...</code> und einem Typ</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            /**
-              * Finds text in the given object.
-              *
-              * @param {any} obj
-              * @param {...string} searchTexts
-              * @return {boolean}
-              */
-            export function* findText(obj, ...searchTexts) {
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1><code>Refactoring</code></h1>
-            <ul>
-              <li>Hilfsmethoden in <code>fetch.test.js</code> auslagern</li>
-              <li>Duplizierungen vermeiden/zusammenführen</li>
-              <li>Hilfsmethoden in einer Hilfsklasse einbauen</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Übungen</h1>
-            <ul>
-              <li>Eine Komponente für <code>fetch()</code> erstellen und testen</li>
-              <li>Dokumentation nicht vergessen. 🙃</li>
-            </ul>
-          </div>
-          <img src="assets/cog-wheels.png">
         </div>
       </section>
 
