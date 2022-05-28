@@ -20,7 +20,7 @@
   <div class="reveal">
     <div class="slides">
       <section data-background="assets/MonteRosa.jpg" class="white-text">
-        <h1>JavaScript</h1>
+        <h1>Mobile App Entwicklung</h1>
         <h2>Lektion 5</h2>
         <p>
           Hybrid-Apps
@@ -30,11 +30,13 @@
       <section data-background="assets/looking-back-dimmed.jpg">
         <h1>Rückblick</h1>
         <ul>
-          <li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON">JSON</a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/API/Fetch_API"><code>fetch()</code></a>,
-            <code>async</code>/<code>await</code>
+          <li>Einführung Android</li>
+          <li>Benachrichtigungen
+            <ul>
+              <li><a href="https://docs.microsoft.com/en-us/xamarin/android/app-fundamentals/notifications/local-notifications">Lokal</a></li>
+              <li><a href="https://docs.microsoft.com/en-us/xamarin/android/data-cloud/google-messaging/firebase-cloud-messaging">Push/Remote</a></li>
+            </ul>
           </li>
-          <li>Refactoring</li>
         </ul>
       </section>
 
@@ -54,549 +56,164 @@
       </section>
 
       <section>
-        <div class="fifty-fifty-grid">
-          <img class="fragment" data-fragment-index="2" src="assets/troll_whyyou.jpg">
-          <div>
-            <p class="fragment semi-fade-out" data-fragment-index="2">Vor dem wir mit DOM beginnen...</p>
-            <p class="fragment" data-fragment-index="1"><span class="fragment semi-fade-out" data-fragment-index="2">Können wir die <strong>Typenerkennung</strong> verbessern?</span></p>
-            <p class="fragment" data-fragment-index="2">Warum geht das nicht richtig?</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="compact">
-        <h1>JSDoc &amp; Generics</h1>
-        <p>Die JSDoc-Definition ist nicht wirklich generisch und führt zu Problemen in die Typ-Erkennung.</p>
-        <div class="fifty-fifty-grid">
-          <img src="assets/Lesson05/GetDefinition.png" class="full-width">
-          <img src="assets/Lesson05/ResultNotAnAddress.png" class="full-width">
-        </div>
+        <h1>Ablauf der Lektion</h1>
         <ul>
-          <li>Das kann man mit <em>TypeScript</em> verbessern!</li>
-          <li>Wir bleiben bei JavaScript für <em>Code</em>, ergänzen die <em>Typen</em> in JSDoc mit TypeScript</li>
-        </ul>
-      </section>
-
-      <section class="compact">
-        <h1><code>*.d.ts</code> Definitionen</h1>
-        <ul>
-          <li>VSC und WebStorm erkennen und setzen <code>*.d.ts</code> Dateien für Modulen ein</li>
-          <li>In <code>crud.d.ts</code> schreibt man TypeScript Definitionen für die Typen in <code>crud.js</code></li>
-        </ul>
-        <p>Für weitere Infos, siehe:</p>
-        <ul class="notes">
-          <li><a href="https://typescript-eslint.io/docs/linting/linting">Linting your TypeScript Codebase</a></li>
-          <li><a href="https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#import-types">TypeScript: JSDoc Reference</a></li>
-          <li><a href="https://medium.com/jspoint/typescript-type-declaration-files-4b29077c43">A quick introduction to “Type Declaration” files and adding type support to your JavaScript packages</a> (2020)</li>
-          <li><a href="https://medium.com/@antonkrinitsyn/jsdoc-generic-types-typescript-db213cf48640">JSDoc & Generic types. Typescript</a> (2019)</li>
-          <li><a href="https://stackoverflow.com/questions/57597142/how-to-run-typescript-eslint-on-ts-files-and-eslint-on-js-files-in-the-same-pr">How to run typescript-eslint on .ts files and eslint on .js files in the same project in VSCode</a> (2019)</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>ESLint &amp; TypeScript</h1>
-        <ul>
-          <li>ESLint erkennt <code>*.ts</code> Dateien noch nicht richtig</li>
-          <li>Wir installieren TypeScript, um ESLint auch in den Definitionsdateien benutzen zu können</li>
-          <li>In einem Terminal <code>npm i --save-dev
-            <a href="https://www.npmjs.com/package/@tsconfig/typescript">typescript</a>
-            <a href="https://www.npmjs.com/package/@tsconfig/@typescript-eslint/parser">@typescript-eslint/parser</a>
-            <a href="https://www.npmjs.com/package/@tsconfig/@typescript-eslint/eslint-plugin">@typescript-eslint/eslint-plugin</a>
-            <a href="https://www.npmjs.com/package/@tsconfig/recommended">@tsconfig/recommended</a></code> ausführen</li>
-        </ul>
-      </section>
-
-      <section class="compact">
-        <h1>ESLint Konfiguration</h1>
-        <ul>
-          <li><code>.eslintrc.json</code> Datei mit folgenden <em>overrides</em> ergänzen</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            {
-              "overrides": [
-                {
-                  "files": [ "**/*.ts", "**/*.tsx" ],
-                  "plugins": [ "@typescript-eslint" ],
-                  "extends": [
-                    "eslint:recommended", "prettier", "plugin:@typescript-eslint/recommended"
-                  ],
-                  "parser": "@typescript-eslint/parser",
-                  "parserOptions": {
-                    "project": [ "./tsconfig.json" ]
-                  }
-                }
-              ]
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section class="compact">
-        <h1>TypeScript Konfiguration</h1>
-        <ul>
-          <li><code>tsconfig.json</code> Datei mit folgendem Inhalt erstellen</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            {
-              "extends": "@tsconfig/recommended/tsconfig.json",
-              "compilerOptions": {
-                "sourceMap": true
-              },
-              "exclude": [
-                "node_modules"
-              ]
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section class="compact">
-        <h1>Definition einsetzen</h1>
-        <ul>
-          <li>Typ des Variables mit JSDoc beschreiben</li>
-          <li>Wird von VSC und WebStorm richtig erkannt und angewendet</li>
-        </ul>
-        <img src="assets/Lesson05/JSDocGenericTypeWorks.png" class="full-width">
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>JSDoc, ESLint &amp; TypeScript</h1>
-            <ul class="compact">
-              <li>Definitionsdatei für <code>crud.js</code> erstellen</li>
-              <li>ESLint mit TypeScript einrichten</li>
-              <li><code>main.js</code> verbessern</li>
-              <li><code>address</code> definieren und einsetzen</li>
+          <li>Übersicht: Hybrid Applikationen</li>
+          <li>Interoperabilität mit dem nativen Teil
+            <ul>
+              <li>Schnittstelle zwischen Web und nativem Code entwerfen</li>
+              <li>Kleines Beispiel implementieren</li>
+              <li>Ansatz präsentieren</li>
             </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/Document_Object_Model">DOM</a></h1>
-        <p>Hier geht es um Elemente aus dem Dokument selektieren, manipulieren und darauf zu reagieren.</p>
-        <ul>
-          <li>Einführung</li>
-          <li>Lesen</li>
-          <li>Modifizieren</li>
+          </li>
         </ul>
-      </section>
-
-      <section>
-        <h1>DOM: Einführung</h1>
-        <div class="fifty-fifty-grid">
-          <ul>
-            <li>DOM ist ein generelles, vom W3C standard&shy;isiertes Zugriffsmodell</li>
-            <li>DOM ist eine Hierarchie</li>
-            <li>Das <code>document</code> Objekt ist die Wurzel des Baums</li>
-          </ul>
-          <img class="screenshot" src="assets/Lesson05/Interactive_design_in_relation_to_other_fields_of_study_dimmed.png">
-        </div>
-        <p class="notes">Quelle für das Diagramm: <a href="https://mrvirk.com/html-dom-diagram-and-explanation.html">HTML DOM Diagram, Coded Example and
-            Explanation</a></p>
-      </section>
-
-      <section>
-        <h1>DOM: Der Kern</h1>
-        <ul>
-          <li>Das DOM-API formt die Basis für <em>Rendering</em> in vielen bekannten Bibliotheken wie React, Angular, Vue, Next.js, Elm, Svelte, usw.</li>
-          <li>Andere Rendering-Möglichkeiten sind <a href="https://developer.mozilla.org/docs/Web/API/Canvas_API"><code>canvas</code></a>
-            oder <a href=""><code>WebGL</code></a></li>
-          <li>Z.B. <em>Flutter</em> benutzt <code>canvas</code> und weicht das DOM komplett aus</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>DOM: ein riesiges API</h1>
-        <ul>
-          <li>Das DOM-API ist vielfältig; wir schauen die <strong>Basics</strong> an</li>
-          <li>Aufgaben können auf unterschiedliche Art und Weise erledigt werden (z.B. CSS-Klasse setzen)</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            button.setAttribute("class", "primary");  // oder...
-            button.className = "primary";             // oder...
-            button.classList.add("primary");          // oder...
-
-            const attr = document.createAttribute("class");
-            attr.value = "primary";
-            button.attributes.setNamedItem(attr);
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1 class="insertion">Jest mit DOM</h1>
-        <ul>
-          <li>Jest unterstützt DOM nur in die <code>jsdom</code> Umgebung</li>
-          <li>Die Umgebung kann pro Datei eingeschaltet werden</li>
-          <li>Oben in der Datei kann die <code>@jest-environment</code> mit einem Kommentar gesetzt werden</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            /**
-             * @jest-environment jsdom
-             */
-
-             import { describe, expect, test } from "@jest/globals";
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Element-Typen</h1>
-        <table>
-          <tr>
-            <th>Element</th>
-            <td>Entspricht ein Tag im Dokument</td>
-          </tr>
-          <tr>
-            <th>Attribut</th>
-            <td>Entspricht ein Attribut eines Tags</td>
-          </tr>
-          <tr>
-            <th>Text</th>
-            <td>Entspricht Text zwischen Elementen (inkl. Whitespace)</td>
-          </tr>
-          <tr>
-            <th>Kommentar</th>
-            <td>Entspricht ein HTML Kommentar</td>
-          </tr>
-        </table>
-        <p class="notes">Siehe <a href="https://developer.mozilla.org/docs/Web/API/Node">Node</a> für weitere Information und anderen Typen.</p>
       </section>
 
       <section class="compact">
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/Element">Element</a> Eigenschaften</h1>
-        <p>Können gelesen und geschrieben werden</p>
-        <table>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Global_attributes/id">id</a></code></th>
-            <td>Eindeutiger Name</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/API/Element/tagName">tagName</a></code></th>
-            <td>Name des Tags im Dokument</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/API/Element/className">className</a></code></th>
-            <td>Text-Repräsentation von allen CSS-Klassen</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/API/Element/classList">classList</a></code></th>
-            <td>Liste von allen CSS-Klassen</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/API/HTMLElement/style">style</a></code></th>
-            <td>Alle auf dem Objekt definierten CSS-Styles</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/API/Element/innerhtml">innerHTML</a></code></th>
-            <td>Text-Repräsentation allen Unterelementen</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/API/Element/outerhtml">outerHTML</a></code></th>
-            <td>Text-Repräsentation vom Tag mit Unterelementen</td>
-          </tr>
-        </table>
+        <h1>Vorteile</h1>
+        <ul>
+          <li>Hybrid-Ansatz ist etwa 50% des Markts (obwohl dies schwer zu beweisen ist)</li>
+          <li>Auch Mobile Web Browsers unterstützen die modernste HTML/CSS/JS APIs</li>
+          <li>Erlaubt Plattformunabhängiges Entwickeln für iOS, Android, und Desktop-Web gleichzeitig</li>
+          <li>Es ist leichter Web- als iOS/Android Entwickler zu finden</li>
+          <li>Aktualisieren der App kann ohne Store-Update statt finden</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Nachteile</h1>
+        <ul>
+          <li>Wirkt nicht immer so fliesend wie natives Code (obwohl das wird mit neueren Releases immer besser)</li>
+          <li>Man muss trotzdem beide API-Welten verstehen (Native &amp; Web)
+            <ul>
+              <li>Bei natives Code nicht so tiefgehend</li>
+              <li>Hingegen bei Web-Entwicklung schon</li>
+            </ul>
+          </li>
+        </ul>
       </section>
 
       <section class="compact">
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/Element">Element</a> Eigenschaften</h1>
-        <p>Können gelesen und geschrieben werden</p>
-        <table>
-          <tr>
-            <th><code>children</code></th>
-            <td>Alle Unterelementen (nur Tags)</td>
-          </tr>
-          <tr>
-            <th><code>firstElementChild</code></th>
-            <td>Erstes Unterelement (nur Tags)</td>
-          </tr>
-          <tr>
-            <th><code>lastElementChild</code></th>
-            <td>Letztes Unterelement (nur Tags)</td>
-          </tr>
-          <tr>
-            <th><code>childNodes</code></th>
-            <td>Alle Unterelementen (Alle)</td>
-          </tr>
-          <tr>
-            <th><code>firstChild</code></th>
-            <td>Erstes Unterelement (Alle)</td>
-          </tr>
-          <tr>
-            <th><code>lastChild</code></th>
-            <td>Letztes Unterelement (Alle)</td>
-          </tr>
-        </table>
-        <p class="notes">"Alle" entspricht ein Tag, Text oder Kommentar Element</p>
+        <h1>Umsetzung</h1>
+        <ul>
+          <li>Natives Teil deklariert ein JavaScript-API</li>
+          <li>Web Browser kann den nativen Teil "antworten"</li>
+          <li>Web kann mit Nativen Komponenten kombiniert werden (z.B. für Sicherheitsrelevanten Eingaben wie PINs)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>WebView Komponenten</h1>
+        <ul>
+          <li><em>Xamarin</em> bietet ein eigenes WebView an. Siehe:
+            <ul>
+              <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/webview?tabs=windows">Xamarin.Forms WebView</a></li>
+              <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/custom-renderer/hybridwebview">Customizing a WebView</a></li>
+            </ul>
+          </li>
+          <li>Auf natives <em>iOS</em>, <code><a href="https://developer.apple.com/documentation/webkit/wkwebview">WKWebView</a></code> einsetzen (<code>UIWebView</code> <em>nicht</em> einsetzen)</li>
+          <li>Auf natives <em>Android</em>, <code><a href="https://developer.android.com/reference/android/webkit/WebView">WebView</a></code> einsetzen (seit API19 wird diese Komponente unabhängig vom Betriebssystem aktualisiert)</li>
+        </ul>
       </section>
 
       <section class="compact">
-        <h1>Elemente lesen</h1>
-        <table>
-          <tr>
-            <th><code>getElementById()</code></th>
-            <td>Liefert das Element mit einem bestimmten ID</td>
-          </tr>
-          <tr>
-            <th><code>getElementsByTagName()</code></th>
-            <td>Liefert alle Elemente eines Tags</td>
-          </tr>
-          <tr>
-            <th><code>getElementsByClassName()</code></th>
-            <td>Liefert alle Elemente mit einem or mehreren CSS-Klassen</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>Lesen: Beispiel</h1>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <button id="a" class="primary">Test</button>
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const btn1 = document.getElementById("a");
-            const [btn2] = document.getElementsByTagName("button");
-            const [btn3] = document.getElementsByClassName("primary");
-            // btn1 === btn2 === btn3
-            // btn1.id == "a"
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Elemente selektieren</h1>
-        <table>
-          <tr>
-            <th><code>querySelector()</code></th>
-            <td>Liefert das erste Element für einen CSS-Selektor</td>
-          </tr>
-          <tr>
-            <th><code>querySelectorAll()</code></th>
-            <td>Liefert alle Elemente für einen CSS-Selektor</td>
-          </tr>
-        </table>
-        <p class="notes">Siehe <a href="https://developer.mozilla.org/docs/Learn/Getting_started_with_the_web/CSS_basics">CSS-Grundlagen</a>
-          und <a href="https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors">CSS Selektoren</a> (MDN)</a>
-          für eine CSS-Einführung bzw. Auffrischung.
-        </p>
-      </section>
-
-      <section>
-        <h1>Einfaches Selektieren</h1>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <button id="a" class="primary">Test</button>
-            <button id="b" class="secondary">Run</button>
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const btn1 = document.querySelector("#a");
-            const [btn2, btn3] = document.querySelectorAll("button");
-            // btn1 === btn2
-            // btn1.id == "a"
-            // btn3.id == "b"
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Komplexeres Selektieren</h1>
-        <p>Unterstützt Kombinationen von CSS-Selektoren</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <div>
-              <button id="a" class="primary">
-                <span class="strong">Test</span>
-              </button>
-              <button id="b" class="secondary">Run</button>
-            </div>
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const span = document.querySelector(
-              "div > button#a > span.strong"
-            );
-            // span.className == "strong"
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <div class="fifty-fifty-grid">
-          <img src="assets/look_of_disapproval.jpg">
-          <div style="text-align: right">
-            <p class="fragment" data-fragment-index="0">Das API ist echt riesig!</p>
-            <p class="fragment" data-fragment-index="1">...also, tief durchatmen. Holt euch einen Tee 🍵. Macht's euch gemütlich. Wir steigen durch!*</p>
-            <p class="fragment notes" data-fragment-index="1">*Für die, die <a href="https://www.youtube.com/channel/UCyHDQ5C6z1NDmJ4g6SerW8g">MaiLab</a> kennen...</p>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h1>DOM: <code>textContent</code></h1>
+        <h1>WebView Details</h1>
         <ul>
-          <li><code>textContent</code> entspricht dem Text-Inhalt eines Elements</li>
+          <li>Die Kontrolle ist ein Umhüllung um ein eigenes Prozess</li>
+          <li>Man kann auch mehrere WebViews einsetzen</li>
+          <li>HTML-Seiten können entweder aus App-Ressourcen oder von Remote-URLs geladen werden</li>
+          <li>CORS muss wie immer berücksichtigt werden</li>
         </ul>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <button id="a" data-test="b" data-data="c">Test</button>
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const element = document.getElementById("a");
-            // element.textContent == "Test"
-          </code>
-        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Hybrid Architecture</h1>
+        <img src="assets/Lesson05/Hybrid_Architecture.jpg" class="tall-screenshot">
+      </section>
+
+      <section class="compact">
+        <h1>Hybrid-Beispiel</h1>
+        <ul>
+          <li>Beispiel-Implementation in <code>APE2021_App</code></li>
+          <li>Branch: <code>feature/day5_hybrid_apps</code></li>
+          <li>Verzeichnis: <code>/Hybrid</code></li>
+          <li>Umsetzung: Xamarin mit nur Android</li>
+        </ul>
       </section>
 
       <section>
-        <h1>DOM: HTML Text</h1>
-        <ul>
-          <li><code><a href="https://developer.mozilla.org/docs/Web/API/Element/outerHTML">outerHTML</a></code> entspricht dem HTML-formatierten Inhalt eines Elements</li>
-          <li><code><a href="https://developer.mozilla.org/docs/Web/API/Element/innerHTML">innerHTML</a></code> entspricht dem HTML-formatierten Inhalt <em>aller Unterknoten</em> eines Elements</li>
-        </ul>
+        <h1>JS-Schnittstelle deklarieren</h1>
         <pre>
-          <code data-trim class="language-html hljs">
-            <button><span>Test</span></button>
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const [btn] = document.getElementsByTagName("button");
-            // btn.innerHTML == "<span>Test</span>"
-            // btn.outerHTML == "<button><span>Test</span></button>"
-          </code>
-        </pre>
-      </section>
+          <code data-trim class="language-csharp hljs">
+            public class JavaScriptInject : Object {
+              /// <summary>
+              /// Annotate methods with the <see cref="JavascriptInterfaceAttribute"/> and   /// the <see cref="ExportAttribute"/> to call them from JS.
+              /// </summary>
+              [JavascriptInterface]
+              [Export("doSomething")]
+              public void FromJavaScript() { /* ... */ }
 
-      <section>
-        <h1><code><a href="https://developer.mozilla.org/docs/Web/HTML/Global_attributes/style">style</a></code></h1>
-        <ul>
-          <li>Alle auf dem Objekt definierten CSS-Styles</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const links = document.getElementsByTagName("a");
-
-            for (const link of links) {
-              const style = link.style;
-
-              style.fontSize = "12px";
-              style.textDecoration = "underline";
-              style.textOverflow = "ellipsis";
-
-              console.log(window.getComputedStyle(link));
+              /// <summary>
+              /// Annotated methods can also accept parameters.
+              /// </summary>
+              [JavascriptInterface]
+              [Export("doSomething")]
+              public void FromJavaScript(string message) { /* ... */ }
             }
           </code>
         </pre>
       </section>
 
       <section>
-        <h1>DOM: Attributen</h1>
-        <table>
-          <tr>
-            <th><code>attributes</code></th>
-            <td>Liste alle Attributen</td>
-          </tr>
-          <tr>
-            <th><code>getAttribute()</code></th>
-            <td>Liefert das Attribut mit einem bestimmten Namen</td>
-          </tr>
-          <tr>
-            <th><code>hasAttribute()</code></th>
-            <td><code>true</code> wenn ein Attribut mit einem bestimmten Namen vorhanden ist</td>
-          </tr>
-          <tr>
-            <th><code>setAttribute()</code></th>
-            <td>Setzt oder ersetzt ein Attribut</td>
-          </tr>
-        </table>
-      </section>
+        <h1>JS-Schnittstelle registrieren</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            // Set the content layout which contains a simple web view.
+            SetContentView(Resource.Layout.activity_main);
 
-      <section class="compact">
-        <h1>DOM: Hinzufügen</h1>
-        <table>
-          <tr>
-            <th><code>createTextNode()</code></th>
-            <td>Erstellt einen neuen Textknoten</td>
-          </tr>
-          <tr>
-            <th><code>createElement()</code></th>
-            <td>Erstellt ein neues Element</td>
-          </tr>
-          <tr>
-            <th><code>appendChild()</code></th>
-            <td>Fügt ein Element am Ende der Liste hinzu</td>
-          </tr>
-          <tr>
-            <th><code>cloneNode(deep)</code></th>
-            <td>Erstellt eine Kopie eines Elements</td>
-          </tr>
-          <tr>
-            <th><code>insertBefore()</code></th>
-            <td>Fügt ein Element vor einem anderen hinzu</td>
-          </tr>
-          <tr>
-            <th><code>replaceChild()</code></th>
-            <td>Ersetzt ein bestehendes Element</td>
-          </tr>
-        </table>
-      </section>
+            // Extract the web view from the layout.
+            var webView = (WebView)FindViewById(Resource.Id.webView);
 
-      <section class="compact">
-        <h1>DOM: Löschen</h1>
-        <table>
-          <tr>
-            <th><code>removeChild()</code></th>
-            <td>Entfernt ein Element aus einer Sub-Liste</td>
-          </tr>
-          <tr>
-            <th><code>removeAttribute()</code></th>
-            <td>Entfernt ein Attribut</td>
-          </tr>
-          <tr>
-            <th><code>remove()</code></th>
-            <td>Entfernt eine Element selbst</td>
-          </tr>
-        </table>
+            // Configure WebView to allow JS and inject our custom interface.
+            webView.Settings.JavaScriptEnabled = true;
+            webView.AddJavascriptInterface(new JavaScriptInject(this), "Native");
+
+            // Load a local HTML file.
+            webView.LoadUrl("file:///android_asset/index.html");
+          </code>
+        </pre>
       </section>
 
       <section>
-        <h1>DOM: "data" Attributen</h1>
-        <ul>
-          <li>Attributen mit Präfix "data-" sind erlaubt</li>
-          <li>Auf dem Element als <code>dataset</code> verfügbar</li>
-          <li>Wert ist ein <code>Map</code> von allen Attribut-Werten mit <em>Suffix</em> als Schlüssel</li>
-        </ul>
+        <h1>WebView -> Native</h1>
+        <p>Mit <code>Native.doSomething()</code> ausführen</p>
         <pre>
           <code data-trim class="language-html hljs">
-            <button id="a" data-test="b" data-data="c">Test</button>
+            &lt;input type="button" onclick="Native.doSomething()" value="Invoke native" /&gt;
           </code>
         </pre>
+        <p>...oder mit Parametern ausführen</p>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            const element = document.getElementById("a");
-            // element.dataset == DOMStringMap {test: 'a', data: 'c'}
+          <code data-trim class="language-html hljs">
+            &lt;input type="button" onclick="Native.doSomething('Another message...')" value="Invoke native with param" /&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-gb/dotnet/api/android.webkit.webview.evaluatejavascript">Native -> WebView</a></h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            webView.EvaluateJavascript("do some JS magic...", null);
+
+            public class Callback : Java.Lang.Object, IValueCallback
+            {
+              public void OnReceiveValue(Object value)  {
+                // Do something with the value...
+              }
+            }
+
+            webView.EvaluateJavascript("do some JS magic...", new Callback());
           </code>
         </pre>
       </section>
@@ -604,12 +221,10 @@
       <section>
         <div class="seventy-thirty-grid">
           <div>
-            <h1>DOM</h1>
+            <h1>Hybrid-App</h1>
             <ul class="compact">
-              <li>Lesen</li>
-              <li>Selektieren</li>
-              <li>Erstellen</li>
-              <li>Ändern</li>
+              <li>Native -> Web</li>
+              <li>Web -> Native</li>
             </ul>
           </div>
           <img src="assets/demo.png">
