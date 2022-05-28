@@ -11,7 +11,7 @@ The course is in German.
 - [Lesson 1](lesson01.html): Vorstellung, Einführung und Aufsetzen von Werkzeugen
 - [Lesson 2](lesson02.html): MVVM, Bindings, Controls, Debugging
 - [Lesson 3](lesson03.html): Dialogs, Styling, IOC, Testing
-- [Lesson 4](lesson04.html): Benachrichtigungen (Local/Push/Remote)
+- [Lesson 4](lesson04.html): Benachrichtigungen (Lokal/Push/Remote)
 - [Lesson 5](lesson05.html): Hybrid-Apps
 - [Lesson 6](lesson06.html): Security & Biometrie
 - [Lesson 7](lesson07.html): Datenbanken (SQLite); Logging
