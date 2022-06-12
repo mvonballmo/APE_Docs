@@ -30,9 +30,9 @@
       <section data-background="assets/looking-back-dimmed.jpg">
         <h1>Rückblick</h1>
         <ul>
-          <li><a href="https://developer.mozilla.org/docs/Web/API/Document_Object_Model">DOM</a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/Events#standard_events">Ereignisse</a></li>
-          <li>Typisierung mit TypeScript</li>
+          <li>Übersicht: Hybrid Applikationen</li>
+          <li>Interoperabilität mit dem nativen Teil</li>
+          <li>Schnittstelle zwischen Web und nativem Code</li>
         </ul>
       </section>
 
@@ -44,996 +44,162 @@
           <li class="completed">Dialogs, Styling, IOC, Testing</li>
           <li class="completed">Benachrichtigungen (Lokal/Push/Remote)</li>
           <li class="completed">Hybrid-Apps</li>
-          <li class="selected">Security &amp; Biometrie</li>
-          <li>Datenbanken (SQLite); Logging</li>
+          <li class="selected">Datenbanken (SQLite); HTTP Client</li>
+          <li>Security &amp; Biometrie</li>
           <li><b>LK1</b>; Projektarbeit</li>
           <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
         </ol>
       </section>
 
       <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://developer.mozilla.org/docs/Web/HTML/Element/form">Formulare</a> und
-          <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input">Eingaben</a>
-        </h1>
+        <h1>Überblick</h1>
         <ul>
-          <li>Formulare in JavaScript</li>
-          <li>Formularen gestalten</li>
-          <li>Eingaben
-            <ul>
-              <li>Eigenschaften</li>
-              <li>Typen</li>
-            </ul>
-          </li>
-          <li>Anzeigen</li>
-          <li>Validierungen</li>
+          <li>SQLite einsetzen, um Daten <em>lokal, auf dem Gerät</em> zu Lesen und Speichern</li>
+          <li>HTTP Client einsetzen, um Daten <em>eines externen Servers</em> zu Lesen und Schreiben</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>SQLite</h1>
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/data-cloud/data/databases">SQLite</a></h1>
+        <ul>
+          <li>Eine Datei-basierte Datenbanken</li>
+          <li>Sehr einfach aufzusetzen und einzusetzen</li>
+          <li>Persistiert Daten lokal, auf dem Gerät</li>
         </ul>
       </section>
 
       <section>
-        <h1><code>document.forms</code></h1>
+        <h1>SQLite .NET Integration</h1>
+        <p>Es gibt zwei NuGet Paketen:</p>
         <ul>
-          <li>Forms sind in einem zusätzlichen Struktur auf dem <code>document</code> verfügbar</li>
-          <li><code>document.forms</code> ist ein Array, der sämtliche Formulare des Dokuments enthält</li>
-          <li><code>form.elements</code> ist ein Array, das sämtliche Felder des Formulars enthält</li>
-          <li>In <code>selects</code> Eingaben beinhaltet das Array <code>options</code> die Auswahloptionen</li>
+          <li><a href="https://www.nuget.org/packages/sqlite-net-pcl/">sqlite-net-pcl</a></li>
+          <li><a href="https://www.nuget.org/packages/sqlite-net-sqlcipher/">sqlite-net-sqlcipher</a> (für verschlüsselte Daten)</li>
         </ul>
       </section>
 
       <section>
-        <h1><code>forms</code> Beispiel</h1>
+        <h1>SQLite Verbindung erstellen</h1>
+        <ul>
+          <li><code>SQLiteConnection</code> einsetzen</li>
+          <li>Für unverschlüsselte Verbindungen kann man den "key" weglassen</li>
+        </ul>
         <pre>
-          <code data-trim class="language-html hljs">
-            <form id="vehicles">
-              <input id="firstName" type="text">
-              <input id="lastName" type="text">
-              <select id="numCars">
-                <option id="one">One</option>
-                <option id="two">Two</option>
-                <option id="three">Three</option>
-              </select>
-            </form>
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            document.forms[0].elements[0].id == "firstName"
-            document.vehicles.firstName.id == "firstName"
-            document.forms[0].elements[2].options[0].id == "one"
-            document.vehicles.numCars.options.one.id == "one"
+          <code data-trim class="language-csharp hljs">
+            var options = new SQLiteConnectionString(DatabasePath, true, key: key);
+            _connection = new SQLiteConnection(options);
           </code>
         </pre>
       </section>
 
       <section>
-        <h1 class="insertion">Jest: <code>skip()</code></h1>
+        <h1>SQLite Tabelle erstellen</h1>
         <ul>
-          <li>Es kann vorkommen, dass ein Test nicht erfolgreich ausgeführt werden kann</li>
-          <li>In <code>jest</code> kann man mit <code>skip()</code> ein <code>test()</code> oder ein <code>describe()</code> überspringen</li>
+          <li>Sicherstellen, dass die Tabelle existiert noch nicht</li>
+          <li>Tabelle wird mittels die <em>Reflection API</em> erstellt</li>
         </ul>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            describe("Forms", () => {
-              test.skip("some test that doesn't work yet", () => {
-              })
-            });
-          </code>
-        </pre>
-      </section>
+          <code data-trim class="language-csharp hljs">
+            var tableExists = _connection.TableMappings.Any(
+              m => m.TableName.Equals("TodoItem", StringComparison.InvariantCultureIgnoreCase)
+            );
 
-      <section>
-        <h1 class="insertion">Jest: <em>coverage</em></h1>
-        <ul>
-          <li>Bei Tests soll man fragen: wie gut ist die <em>Abdeckung</em>?</li>
-          <li>Man muss nicht unbedingt 100% anstreben</li>
-          <li>Im Terminal <code>jest --coverage</code> ausführen, um die Abdeckung anzuzeigen</li>
-          <li>In WebStorm geht auch <a href="https://www.jetbrains.com/help/webstorm/code-coverage.html">"Run ... with Coverage"</a>
-            <ul>
-              <li>Die Resultaten werden in einem Tool-Fenster eingeblendet</li>
-              <li>Code-Zeilen werden grün/rot (abgedeckt/nicht abgedeckt) markiert</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Formular: Layout</h1>
-        <p>Ein Form kann mit ein wenig CSS formatiert werden</p>
-        <pre>
-          <code data-trim class="language-css hljs">
-            .reveal form {
-              display: grid;
-              grid-template-columns: minmax(250px, auto) 1fr;
-              gap: var(--standard-spacing);
-            }
-
-            .reveal form *:nth-child(odd) {
-              justify-self: end;
-            }
-
-            .reveal form input {
-              align-self: center;
+            if (!tableExists)
+            {
+              _connection.CreateTable<TodoItem>();
             }
           </code>
         </pre>
       </section>
 
       <section>
-        <h1>Formular: Beispiel</h1>
-        <form>
-          <label>First name</label>
-          <input list="firstNames">
-          <label>Last name</label>
-          <input>
-          <label>Salary</label>
-          <input type="number">
-          <label>Birth date</label>
-          <input type="date">
-          <label>Manager</label>
-          <select>
-            <option value="Joe">Joe</option>
-            <option value="Jane">Jane</option>
-            <option value="John">John</option>
-            <option value="Jessica">Jessica</option>
-          </select>
-          <label>Status</label>
-          <div>
-            <input type="radio" name="status" value="1" checked> <label>Active</label>
-            <input type="radio" name="status" value="2"> <label>Retired</label>
-          </div>
-          <label>Pensum (%)</label>
-          <div>
-            <input type="range" id="pensum" min="20" max="100" step="20" value="80">
-            <output id="pensumOutput" for="pensum">80</output>
-            <script>
-              const pensum = document.getElementById("pensum");
-              const pensumOutput = document.getElementById("pensumOutput");
-
-              pensum.addEventListener("input", () => pensumOutput.value = pensum.value);
-            </script>
-          </div>
-        </form>
-        <datalist id="firstNames">
-          <option value="Joe"></option>
-          <option value="Jane"></option>
-          <option value="John"></option>
-          <option value="Jessica"></option>
-        </datalist>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
-        <h1>Eingaben: Einführung</h1>
+        <h1>SQLite Annotations</h1>
         <ul>
-          <li>Ein modernes Browser bietet eine sehr ausgereifte Komponentenbibliothek an</li>
-          <li>Zudem ist eine ausgereifte Validierung vorhanden</li>
-          <li>Vieles kann im HTML direkt spezifiziert werden</li>
-          <li>Das API in JavaScript deckt noch mehr ab (Ereignisse, Methoden, Eigenschaften)</li>
+          <li>Die Annotations sind sehr ähnlich zu denen von EF</li>
+          <li>Z.B. <code>PrimaryKey</code>, <code>AutoIncrement</code></li>
         </ul>
-      </section>
-
-      <section class="compact">
-        <h1>Allgemeine Eigenschaften</h1>
-        <table>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-name">name</a></code></th>
-            <td>Der Name der Eingabe (wird mit dem Formular am Server gesendet)</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-value">value</a></code></th>
-            <td>Initialer oder aktueller Wert</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-required">required</a></code></th>
-            <td>Gibt an, ob die Eingabe zwingend ist</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-readonly">readonly</a></code></th>
-            <td>Gibt an, ob die Eingabe geändert werden kann</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-disabled">disabled</a></code></th>
-            <td>Gibt an, ob die Eingabe <em>nicht</em> manipuliert werden kann</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-autofocus">autofocus</a></code></th>
-            <td>Gibt an, ob die Eingabe beim Laden der Seite den Tastatur-fokus bekommen soll</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="compact">
-        <h1>Text Eigenschaften I</h1>
-        <table>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-minlength">minlength</a></code></th>
-            <td>Minimale Länge des Werts einer Text-Eingabe</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-maxlength">maxlength</a></code></th>
-            <td>Maximale Länge des Werts einer Text-Eingabe</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-placeholder">placeholder</a></code></th>
-            <td>Der Text, der in einer leeren Eingabe angezeigt werden soll</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-pattern">pattern</a></code></th>
-            <td>Gibt an, welcher Reguläre Ausdruck den Wert entsprechen muss</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="compact">
-        <h1>Text Eigenschaften II</h1>
-        <table>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-autocomplete">autocomplete</a></code></th>
-            <td>Gibt an, ob und was für eine Vorschlagsliste angezeigt werden soll</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-list">list</a></code></th>
-            <td>Weist auf eine Liste von möglichen Werten zu</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-spellcheck">spellcheck</a></code></th>
-            <td>Gibt an, ob die Rechtschreibung geprüft werden soll</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-inputmode">inputmode</a></code></th>
-            <td>Ein Hinweis welche Tastatur angezeigt werden soll</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>Diskrete Eigenschaften</h1>
-        <table>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-min">min</a></code></th>
-            <td>Minimaler Wert (Zahl, Datum, Monat, usw.)</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-max">max</a></code></th>
-            <td>Maximaler Wert (Zahl, Datum, Monat, usw.)</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-step">step</a></code></th>
-            <td>Gibt an, welche Abstufung für Werte benutzt werden soll (ist spezifisch pro Eingabetyp)</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>Eingabe: Typen</h1>
-        <div class="fifty-fifty-grid">
-          <ul>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/text">text</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/password">password</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/checkbox">checkbox</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/radio">radio</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/select">select</a> vs. <a href="https://developer.mozilla.org/docs/Web/HTML/Element/datalist">datalist</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/file">file</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/email">email</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/url">url</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/tel">tel</a></li>
-          </ul>
-          <ul>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/date">date</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/time">time</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/datetime-local">datetime-local</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/month">month</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/week">week</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/number">number</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/color">color</a></li>
-            <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/range">range</a></li>
-          </ul>
-        </div>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/text">text</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für ein Text dar</li>
-          <li>Mit <code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input#attr-pattern">pattern</a></code> und
-            <a href="https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions">Reguläre Ausdrücke</a>
-            kann eingeschränkt werden
-          </li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="b">Greeting</label>
-          <input id="b" type="text" value="Hello!">
-        </form>
-        <p>Code</p>
         <pre>
-          <code data-trim class="language-html hljs">
-            <label for="b">Greeting</label>
-            <input id="b" type="text" value="Hello!">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/password">password</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für ein Passwort dar</li>
-          <li>Verbirgt den eingegebenen Wert</li>
-          <li>Wird von <em>Password Managers</em> erkennt</li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="b">Password</label>
-          <input id="b" type="password" value="Sample">
-        </form>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="b">Password</label>
-            <input id="b" type="password" value="Sample">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/checkbox">checkbox</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für ein Boolescher Wert dar</li>
-          <li><code>indeterminate</code> nur in JS unterstützt</li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="biking">Radfahren</label>
-          <input id="biking" type="checkbox" name="sports" checked value="biking">
-          <label for="hiking">Wandern</label>
-          <input id="hiking" type="checkbox" name="sports" value="hiking">
-        </form>
-        <script>
-          document.getElementById("hiking").indeterminate = true;
-        </script>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="biking">Radfahren</label>
-            <input id="biking" type="checkbox" name="sports" checked value="biking">
-            <label for="hiking">Wandern</label>
-            <input id="hiking" type="checkbox" name="sports" value="hiking">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/radio">radio</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für ein Auswahlliste dar</li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="biking">Radfahren</label>
-          <input id="biking" type="radio" name="sports" value="biking">
-          <label for="hiking">Wandern</label>
-          <input id="hiking" type="radio" name="sports" checked value="hiking">
-        </form>
-        <script>
-          document.getElementById("hiking").indeterminate = true;
-        </script>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="biking">Radfahren</label>
-            <input id="biking" type="radio" name="sports" value="biking">
-            <label for="hiking">Wandern</label>
-            <input id="hiking" type="radio" name="sports" checked value="hiking">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/select">select</a></code></h1>
-        <p>Definiert eine Liste mit einer fixen Liste von Elementen</p>
-        <form>
-          <label for="petSelect">Pet</label>
-          <select id="petSelect">
-            <option value="dog">Dog</option>
-            <option value="cat">Cat</option>
-            <option value="rabbit">Rabbit</option>
-            <option value="snake">Snake</option>
-            <option value="hamster">Hamster</option>
-          </select>
-        </form>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <form>
-              <label for="pet">Pet</label>
-              <select id="pet">
-                <option value="dog">Dog</option>
-                <option value="cat">Cat</option>
-                <option value="rabbit">Rabbit</option>
-                <option value="snake">Snake</option>
-                <option value="hamster">Hamster</option>
-              </select>
-            </form>
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/datalist">datalist</a></code></h1>
-        <p>Definiert eine Liste von Elementen, die mit einer Eingabe als Vorschlagsliste eingebunden werden kann</p>
-        <form>
-          <label for="pet">Pet</label>
-          <input list="pets" id="pet">
-          <datalist id="pets">
-            <option value="dog">Dog</option>
-            <option value="cat">Cat</option>
-            <option value="rabbit">Rabbit</option>
-            <option value="snake">Snake</option>
-            <option value="hamster">Hamster</option>
-          </datalist>
-        </form>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <form>
-              <label for="pet">Pet</label>
-              <input list="pets" id="pet">
-              <datalist id="pets">
-                <option value="dog">Dog</option>
-                <option value="cat">Cat</option>
-                <option value="rabbit">Rabbit</option>
-                <option value="snake">Snake</option>
-                <option value="hamster">Hamster</option>
-              </datalist>
-            </form>
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/file">file</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für eine Datei-Upload dar</li>
-          <li>Unterstützt <code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/file#capture">capture</a></code> (z.B. für Camera),
-            <code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/file#multiple">multiple</a></code> und
-            <code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/file#accept">accept</a></code> (einschränken von Dateitypen)
-          </li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="b">Avatar</label>
-          <input id="b" type="file" multiple accept="*.jpg;*.jpeg">
-        </form>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="b">Avatar</label>
-            <input id="b" type="file" multiple accept="*.jpg;*.jpeg">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/email">email</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für eine E-Mail dar</li>
-          <li>Validiert automatisch (ohne <code>pattern</code>)</li>
-          <li>Unterstützt mehrere Adresse mit <code>multiple</code></li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="b">Main</label>
-          <input id="b" type="email" value="bob@test.edu">
-        </form>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="b">Main</label>
-            <input id="b" type="email" value="bob@test.edu">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/url">url</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für eine Url dar</li>
-          <li>Validiert automatisch (ohne <code>pattern</code>)</li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="b">Web Page</label>
-          <input id="b" type="url" value="https://earthli.com/news">
-        </form>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="b">Web Page</label>
-            <input id="b" type="url" value="https://earthli.com/news">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/tel">tel</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für eine Telefonnummer dar</li>
-          <li>Kein Unterschied zu einer <code>text</code> Eingabe</li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="b">Mobile</label>
-          <input id="b" type="tel" pattern="\+[\d]{2} \(0\)[\d]{2} [\d]{3} [\d]{4}" value="+41 (0)66 212 0000">
-        </form>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="b">Mobile</label>
-            <input id="b" type="tel" pattern="\+[\d]{2} \(0\)[\d]{2} [\d]{3} [\d]{4}" value="+41 (0)66 212 0000">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/date">date</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für ein Datum dar</li>
-          <li>Default <code>step</code> ist ein Tag</li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="dob">Date of Birth</label>
-          <input id="dob" type="date" value="2000-02-28">
-        </form>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="dob">Date of Birth</label>
-            <input id="dob" type="date" value="2000-02-28">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/date">time</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für eine Zeit dar</li>
-          <li>Default <code>step</code> ist eine Sekunde</li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="start">Start</label>
-          <input id="start" type="time" value="17:50">
-        </form>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="start">Start</label>
-            <input id="start" type="time" value="17:50">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/datetime-local">datetime-local</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für ein Datum und eine Zeit dar</li>
-          <li>Default <code>step</code> ist eine Sekunde</li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="c">Created</label>
-          <input id="c" type="datetime-local" value="2000-02-28T17:50">
-        </form>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="c">Created</label>
-            <input id="c" type="datetime-local" value="2000-02-28T17:50">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/month">month</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für einen Monat dar</li>
-          <li>Default <code>step</code> ist ein Monat</li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="c">Membership Begin</label>
-          <input id="c" type="month" value="2000-02">
-        </form>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="c">Membership Begin</label>
-            <input id="c" type="month" value="2000-02">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/week">week</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für eine Woche dar</li>
-          <li>Default <code>step</code> ist eine Woche</li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="c">Starting Week</label>
-          <input id="c" type="week" value="2000-W05">
-        </form>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="c">Membership Begin</label>
-            <input id="c" type="week" value="2000-W05">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/number">number</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für eine Zahl dar</li>
-          <li>Default <code>step</code> ist <code>1</code></li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="age">Age</label>
-          <input id="age" type="number" min="0" max="130" value="25">
-        </form>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="age">Age</label>
-            <input id="age" type="number" min="0" max="130" value="25">
-          </code>
-        </pre>
-        <p class="notes">Siehe <a href="https://webdesign.tutsplus.com/tutorials/auto-formatting-input-value--cms-26745">Form Design: How to Automatically Format User Input</a> (2016) für Information zur Formatierung.</p>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/color">color</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für eine Farbe dar</li>
-          <li><code>value</code> ist einen Hex-Wert (z.B. "#FF0000" ist rot)</li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <label for="b">Background</label>
-          <input id="b" type="color" value="#FF0000">
-        </form>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label for="b">Background</label>
-            <input id="b" type="color" value="#FF0000">
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Eingabe: <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input/range">range</a></h1>
-        <ul>
-          <li>Stellt eine Eingabe für eine Spannbreite dar</li>
-          <li>Unterstützt <code>value</code>, <code>min</code>, <code>max</code> und <code>step</code></li>
-        </ul>
-        <p>Beispiel</p>
-        <form>
-          <input type="range" id="volume" id="volume" min="0" max="1" value=".45" step=".05">
-          <label for="volume">Volume (<output id="volumeLabel">0.45</output>)</label>
-        </form>
-        <script>
-          const volume = document.getElementById("volume");
-          const label = document.getElementById("volumeLabel");
-
-          volume.addEventListener("input", e => {
-            label.textContent = e.target.value;
-          });
-        </script>
-        <p>Code</p>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <input type="range" id="volume" name="volume" min="0" max="1" value=".45" step=".05">
-            <label for="volume">Volume (0.45)</label>
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Anzeige: Typen</h1>
-        <ul>
-          <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/output">output</a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/progress">progress</a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/meter">meter</a></li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Anzeige: <code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/output">output</a></code></h1>
-        <p>Definiert einen schreibbaren Bereich</p>
-        <form>
-          <label>Percent</label>
-          <div>
-            <input type="range" id="rangeInput" min="0" max="100" step="20" value="80">
-            <output id="rangeOutput" for="rangeInput" style="outline: 1px dotted orange">80</output>
-            <span style="color: orange">⬅</span> Output
-          </div>
-          <script>
-            const rangeInput = document.getElementById("rangeInput");
-            const rangeOutput = document.getElementById("rangeOutput");
-
-            rangeInput.addEventListener("input", () => rangeOutput.value = rangeInput.value);
-          </script>
-        </form>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <input type="range" id="testInput" min="0" max="100" step="20" value="80">
-            <output id="testOutput" for="testInput">80</output>
-            <script>
-              const i = document.getElementById("testInput");
-              const o = document.getElementById("testOutput");
-
-              i.addEventListener("input", () => o.value = i.value);
-            </script>
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Anzeige: <code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/progress">progress</a></code></h1>
-        <p>Definiert einen Fortschrittsbalken</p>
-        <form>
-          <label>Percent</label>
-          <div>
-            <input type="range" id="progressInput" min="0" max="100" step="20" value="80">
-            <progress id="progressOutput" value="80" min="0" max="100">80%</progress>
-          </div>
-          <script>
-            const progressInput = document.getElementById("progressInput");
-            const progressOutput = document.getElementById("progressOutput");
-
-            progressInput.addEventListener("input", () => progressOutput.value = progressInput.value);
-          </script>
-        </form>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <input type="range" id="progressInput" min="0" max="100" step="20" value="80">
-            <progress id="progressOutput" value="80" min="0" max="100">80%</progress>
-            <script>
-              const m = document.getElementById("progressInput");
-              const n = document.getElementById("progressOutput");
-
-              m.addEventListener("input", () => n.value = m.value);
-            </script>
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><code>progress</code> (unbestimmt)</h1>
-        <p>Ein Fortschrittsbalken ohne <code>value</code> wird mit einem schwebenden Balken dargestellt</p>
-        <form>
-          <label>Downloading</label>
-          <progress id="downloadProgress"></progress>
-        </form>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label>Downloading</label>
-            <progress id="downloadProgress"></progress>
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Anzeige: <code><a href="https://developer.mozilla.org/docs/Web/HTML/Element/meter">meter</a></code></h1>
-        <p>Wie ein <code>progress</code> aber mit Unterstützung für <code>low</code>, <code>high</code> und <code>optimum</code> mit unterschiedlichen Farben.</p>
-        <form>
-          <label>Fuel level:</label>
-          <meter min="0" max="100" low="33" high="66" optimum="80" value="50"></meter>
-          <label>Battery level:</label>
-          <meter min="0" max="100" low="33" high="66" optimum="80" value="90"></meter>
-          <label>Enthusiasm level:</label>
-          <meter min="0" max="100" low="33" high="66" optimum="80" value="10"></meter>
-        </form>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <label>Fuel level:</label>
-            <meter min="0" max="100" low="33" high="66" optimum="80" value="50"></meter>
-            <label>Battery level:</label>
-            <meter min="0" max="100" low="33" high="66" optimum="80" value="90"></meter>
-            <label>Enthusiasm level:</label>
-            <meter min="0" max="100" low="33" high="66" optimum="80" value="10"></meter>
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Validierungen</h1>
-        <ul>
-          <li>Wird beim "submit" automatisch ausgelöst</li>
-          <li>Kann auf einer Eingabe oder ein Formular mit <code><a href="https://developer.mozilla.org/docs/Web/API/HTMLInputElement/checkValidity">checkValidity()</a></code>
-            oder <code><a href="https://developer.mozilla.org/docs/Web/API/HTMLInputElement/reportValidity">reportValidity()</a></code>
-            ausgelöst werden</li>
-          <li>Mit <code><a href="https://developer.mozilla.org/docs/Web/API/HTMLInputElement/setCustomValidity">setCustomValidity()</a></code> kann die Validierungsnachricht angepasst werden</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Validierung: Beispiel</h1>
-        <form>
-          <label>Age</label>
-          <input id="age2" type="number" value="30" min="0" max="130">
-          <span></span>
-          <button type="submit">Check</button>
-        </form>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <form>
-              <label>Age</label>
-              <input id="age2" type="number" value="30" min="0" max="130">
-              <span></span>
-              <button type="submit">Check</button>
-            </form>
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-css hljs">
-            input:invalid {
-              outline: 1px dotted red;
-              background-color: mistyrose;
+          <code data-trim class="language-csharp hljs">
+            public class TodoItem
+            {
+              [PrimaryKey, AutoIncrement]
+              public int Id { get; set; }
             }
           </code>
         </pre>
       </section>
 
       <section>
-        <h1>Ereignisse</h1>
-        <table>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/API/HTMLElement/input_event">input</a></code></th>
-            <td>Wird bei jeder Änderung des Werts ausgelöst</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/API/HTMLElement/change_event">change</a></code></th>
-            <td>Wird erst bei einer Änderung des Werts ausgelöst, wenn wenn Änderungen "abgeschlossen" sind</td>
-          </tr>
-          <tr>
-            <th><code><a href="https://developer.mozilla.org/docs/Web/API/HTMLElement/invalid_event">invalid</a></code></th>
-            <td>Wird bei einer fehlgeschlagenen Validierung ausgelöst</td>
-          </tr>
-        </table>
+        <h1>Weitere Annotations</h1>
+        <ul>
+          <li><code>Table</code>: Klasse ist eine Tabelle</li>
+          <li><code>Column</code>: Eigenschaft ist eine Spalte</li>
+          <li><code>Ignore</code>: Eigenschaft kommt nicht in der Datenbank</li>
+          <li><code>Indexed</code>: Feld bekommt ein Index</li>
+          <li><code>MaxLength</code>: Feldlänge ist beschränkt</li>
+          <li><code>Unique</code>: Feldwert muss eindeutig über alle Datensätze sein</li>
+        </ul>
       </section>
 
       <section>
-        <h1>Ereignis: <code>input</code></h1>
+        <h1>SQLite CRUD Operationen</h1>
         <ul>
-          <li>Kann benutzt werden, um "live" Änderungen anzuzeigen</li>
+          <li>CRUD bedeutet <em>Create</em>, <em>Read</em>, <em>Update</em> und <em>Delete</em></li>
+          <li>SQLite bietet synchrone und asynchrone APIs</li>
         </ul>
-        <form>
-          <label>Foreground</label>
-          <div>
-            <input id="foreground" type="color" value="#FFFF00">
-            <output id="foregroundOutput">#FFFF00</output>
-          </div>
-        </form>
-        <script>
-          const foreground = document.getElementById("foreground");
-          const foregroundOutput = document.getElementById("foregroundOutput");
-
-          foreground.addEventListener("input", e => {
-            foregroundOutput.value = e.target.value;
-          });
-        </script>
-      </section>
-
-      <section>
-        <h1>Ereignis: <code>change</code></h1>
-        <ul>
-          <li>Kann benutzt werden, um nur explizite Änderungen anzuzeigen</li>
-        </ul>
-        <form>
-          <label>Foreground</label>
-          <div>
-            <input id="foreground2" type="color" value="#FFFF00">
-            <output id="foreground2Output">#FFFF00</output>
-          </div>
-        </form>
-        <script>
-          const foreground2 = document.getElementById("foreground2");
-          const foregroundOutput2 = document.getElementById("foreground2Output");
-
-          foreground2.addEventListener("change", e => {
-            foregroundOutput2.value = e.target.value;
-          });
-        </script>
-      </section>
-
-      <section>
-        <h1>Ereignis: <code>invalid</code></h1>
-        <ul>
-          <li>Mit <code>preventDefault()</code> kann das Anzeigen von der Browser-Default Validierung unterdrückt werden</li>
-        </ul>
-        <form>
-          <label>Age</label>
-          <div>
-            <input id="age3" type="number" value="30" min="0" max="130">
-            <output id="age3Output">Valid</output>
-          </div>
-          <span></span>
-          <button type="submit">Check</button>
-        </form>
-        <script>
-          const age3 = document.getElementById("age3");
-          const age3Output = document.getElementById("age3Output");
-
-          age3.addEventListener("input", e => {
-            age3Output.value = "Valid";
-          });
-
-          age3.addEventListener("invalid", e => {
-            age3Output.value = "Invalid!";
-            e.preventDefault();
-          });
-        </script>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            age.addEventListener("invalid", e => {
-              ageOutput.value = "Invalid!";
-              e.preventDefault();
-            });
-            age.addEventListener("input", e => {
-              ageOutput.value = "Valid";
-            });
+          <code data-trim class="language-csharp hljs">
+            _connection.Insert(obj);          // Create
+            _connection.Table&lt;T&gt;().ToList();  // Read
+            _connection.Update(obj);          // Update
+            _connection.Delete&lt;T&gt;(id);        // Delete
           </code>
         </pre>
       </section>
 
       <section>
-        <h1>Validierung Ausführen</h1>
-        <form>
-          <label>Age</label>
-          <input id="age4" type="number" value="30" min="0" max="130">
-          <span></span>
-          <button id="submit4" type="submit">Submit</button>
-        </form>
-        <script>
-          const age4 = document.getElementById("age4");
-          const submit4 = document.getElementById("submit4");
-
-          age4.addEventListener("input", e => {
-            submit4.disabled = !e.target.checkValidity();
-          });
-          submit4.addEventListener("click", e => {
-            e.preventDefault();
-          });
-        </script>
+        <h1>SQLite SQL</h1>
+        <p>Man kann beliebige SQL Befehle und Abfragen absetzen und deren Resultaten lesen</p>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            const age4 = document.getElementById("age4");
-            const submit4 = document.getElementById("submit4");
-
-            age4.addEventListener("input", e => {
-              submit4.disabled = !e.target.checkValidity();
-            });
+          <code data-trim class="language-csharp hljs">
+            var c = Connection;
+            var rowsAffected = await c.ExecuteAsync("UPDATE ...");
+            var count = await c.ExecuteScalarAsync&lt;int&gt;("SELECT COUNT(*) ...");
+            var rows = await c.QueryAsync&lt;ToDoItem&gt;("SELECT * FROM ...");
           </code>
         </pre>
+      </section>
+
+      <section>
+        <h1>SQLite einsetzen</h1>
+        <ul>
+          <li><code>SQLiteDataStore&lt;T&gt;</code> im Albums-Projekt anschauen</li>
+          <li>Datenbank muss initialisiert werden bzw. muss eine Datei im Benutzerbereich auf dem Gerät bekommen</li>
+          <li>Wie in den vorherigen Slides schon gesehen, die Datenbank ist ziemlich schlicht</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1 class="insertion">SQLite mit EF</h1>
+        <ul>
+          <li>Ist einsetzbar, aber...</li>
+          <li>...ist <a href="https://docs.microsoft.com/en-us/ef/core/providers/sqlite/limitations">limitiert</a> gegenüber andere Datenbanken</li>
+          <li>SQLite mit EF ist nicht "offiziell" unterstützt...</li>
+          <li>...ein NuGet Package existiert: <a href="https://docs.microsoft.com/en-us/ef/core/providers/sqlite/">Microsoft.EntityFrameworkCore.Sqlite</a></li>
+          <li><code>UseSqlite("Data Source=Path”)</code> aufrufen, um die Datenbank mit EF einzubinden</li>
+        </ul>
       </section>
 
       <section>
         <div class="seventy-thirty-grid">
           <div>
-            <h1>Eingaben</h1>
+            <h1>SQLite</h1>
             <ul>
-              <li>Formular aufbauen</li>
-              <li>Ereignisse abfangen</li>
-              <li>Eigenschaften testen</li>
+              <li><code>DataStore</code> mit SQLite implementieren</li>
+              <li>Mit <code>async</code> arbeiten</li>
             </ul>
           </div>
           <img src="assets/demo.png">
@@ -1052,8 +218,156 @@
           <div>
             <h1>Übungen</h1>
             <ul>
-              <li>Wert einer Eingabe zuweisen und wieder auslesen</li>
-              <li><code>datalist</code> mit einer Eingabe verbinden</li>
+              <li>SQLite im eigenen App einbinden</li>
+              <li>Daten aus vorherigen Sitzungen zurück lesen</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1><code>HTTPClient</code></h1>
+      </section>
+
+      <section>
+        <h1><code>HTTPClient</code></h1>
+        <ul>
+          <li>Jeder Dienst soll ein eigene Kopie bekommen</li>
+          <li>Muss als <em>Transient</em> im IOC registriert werden</li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/data-cloud/web-services/rest">Die Dokumentation</a> erklärt weiter</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            Services.Register(() => new HttpClient());
+
+            // Oder...
+
+            Services.Register&lt;HttpClient&gt;();
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>HTTP Headers setzen</h1>
+        <p>Headers müssen pro <code>HttpClient</code> Instanz gesetzt werden.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            _client.DefaultRequestHeaders.Authorization =
+              new AuthenticationHeaderValue("Bearer", “JWTToken”);
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1><code>HttpClient.BaseAddress</code></h1>
+        <ul>
+          <li><code>BaseAddress</code> muss ein Mal pro <code>HttpClient</code> Instanz gesetzt werden.</li>
+          <li>Abfragen mit <em>relativem</em> Pfad absetzen</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            _client.BaseAddress = new Uri("https://myapi.com");
+
+            var result = await _client.GetAsync("/api/");
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Datentransfer mit JSON</h1>
+        <ul>
+          <li><code>Newtonsoft.Json</code> NuGet Paket installieren</li>
+          <li>C# Objekten =&gt; JSON (serialisieren)</li>
+          <li>JSON =&gt; C# Objekten (deserialisieren)</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            var albumAsJson = JsonConvert.SerializeObject(album);
+
+            // ...und wieder zurück
+
+            var newAlbum = JsonConvert.DeserializeObject&lt;TodoItem&gt;(albumAsJson);
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1><code>GET</code> mit <code>HTTPClient</code></h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public async Task&lt;IEnumerable&lt;T&gt;&gt; Get&lt;T&gt;()
+            {
+              var result = await _client.GetAsync("https://google.com");
+
+              if (result.IsSuccessStatusCode)
+              {
+                // Do something with the result...
+                var stringResult = await result.Content.ReadAsStringAsync();
+
+                return JsonConvert.DeserializeObject&lt;IEnumerable&lt;T&gt;&gt;(stringResult);
+              }
+
+              // You might want to throw an exception here since the request was not successful.
+              return new List&lt;T&gt;();
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1><code>POST</code> mit <code>HTTPClient</code></h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public async Task&lt;int&gt; Post&lt;T&gt;(T toPost)
+            {
+              var serializedObject = JsonConvert.SerializeObject(toPost);
+              var content = new StringContent(serializedObject, Encoding.UTF8, "application/json");
+              var result = await _client.PostAsync("https://google.com", content);
+
+              _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "JWTToken");
+
+              // Same handling as with get. Check the status code and read out the result.
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1 class="insertion">Tipp: Tests!</h1>
+        <div class="seventy-thirty-grid">
+          <p>Tests einsetzen, um <code>GET</code> und <code>POST</code> Abfragen und Befehle nachvoll&shy;ziehbar zu testen</p>
+          <img src="assets/Debug.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1><code>HTTPClient</code></h1>
+            <ul>
+              <li><code>HTTPClient</code> im IOC einbauen</li>
+              <li>Daten mit <code>GET</code> herunterholen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li><code>HTTPClient</code> im eigenen App einbinden</li>
+              <li>Initialen Daten von einem lokalen Web-Server herunterladen</li>
             </ul>
           </div>
           <img src="assets/cog-wheels.png">
