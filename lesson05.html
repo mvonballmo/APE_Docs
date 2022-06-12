@@ -243,366 +243,68 @@
           <div>
             <h1>Übungen</h1>
             <ul>
-              <li>Element selektieren und dessen Inhalt anpassen</li>
-              <li>Daten vom Server abfragen und einem Dokument hinzufügen</li>
+              <li>Generische Schnittstelle für die Kommunikation zwischen Native &lt;-&gt; Web entwerfen</li>
+              <li>In Gruppen oder individuell</li>
+              <li>Design präsentieren</li>
             </ul>
           </div>
           <img src="assets/cog-wheels.png">
         </div>
       </section>
 
-      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://developer.mozilla.org/docs/Web/Events#standard_events">Ereignisse</a></h1>
-        <p>Hier geht es um Ereignisse aus der Laufzeitumgebung abzufangen und darauf zu reagieren.</p>
+      <section>
+        <h1>Eine Lösung: <a href="https://www.dofactory.com/net/mediator-design-pattern">Mediator</a></h1>
         <ul>
-          <li>Beispiele</li>
-          <li>Abfangen</li>
-          <li>Reihenfolge</li>
-          <li>Unterdrücken</li>
+          <li>"Messages" senden und verteilen</li>
+          <li>Die Web-App "treibt" das Native Teil</li>
+          <li>Native wird als “API” benutzt</li>
+          <li>Pattern ist als “Messenger” in WPF bekannt</li>
         </ul>
       </section>
 
       <section>
-        <h1>Ereignisse: Generell</h1>
-        <table>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onclick">onclick</th>
-            <td>Element wurde geklickt</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onmouseenter">onmouseenter
-            </th>
-            <td>Maus schwebte über das Element</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onmouseleave">onmouseleave
-            </th>
-            <td>Maus schwebte weg vom Element</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onkeypress">onkeypress
-            </th>
-            <td>Taste wurde betätigt</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/oninput">oninput</th>
-            <td>Wert wurde geändert</td>
-          </tr>
-        </table>
-        <p class="notes">Siehe <a href="https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers">GlobalEventHandlers</a> für eine
-          vollständige Liste.</p>
+        <h1>Mediator Architektur</h1>
+        <img src="assets/Lesson05/MediatorArchitecture.jpg" class="tall-screenshot">
+      </section>
+
+      <section>
+        <h1>Mediator für Dialog</h1>
+        <img src="assets/Lesson05/MediatorExample.jpg" class="tall-screenshot">
       </section>
 
       <section class="compact">
-        <h1>Ereignisse: Laden</h1>
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Beschreibung</th>
-            <th>Target</th>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/Window/load_event">onload</th>
-            <td>Alle Ressourcen eines URLs wurden fertig geladen</td>
-            <td><code>window</code></td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/Document/DOMContentLoaded_event">DOMContentLoaded</th>
-            <td>Dokument wurde fertig geladen</td>
-            <td><code>document</code></td>
-          </tr>
-        </table>
-        <p class="notes">Siehe <a href="https://developer.mozilla.org/docs/Web/API/Document">document</a> und
-          <a href="https://developer.mozilla.org/docs/Web/API/Window">window</a> für eine
-          vollständige Liste.
-        </p>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/Events/Event_handlers">Ereignisse</a> abfangen</h1>
-        <ul>
-          <li>Ereignisse werden vom Browser ausgelöst.</li>
-          <li>Z.B. Mausklicks oder -bewegungen, Wert-Änderungen, usw.</li>
-          <li>Mögliche Ereignisbehandlungsmethoden:
-            <ul>
-              <li>🤨 Attribut auf dem Element</li>
-              <li>🤨 EventHandler</li>
-              <li>😎 EventListener</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Ereignisobjekt</h1>
-        <table>
-          <tr>
-            <th><code>target</code></th>
-            <td>Auslösendes Element</td>
-          </tr>
-          <tr>
-            <th><code>currentTarget</code></th>
-            <td>Element mit EventHandler</td>
-          </tr>
-          <tr>
-            <th><code>timeStamp</code></th>
-            <td>Zeitpunkt des Ereignisses</td>
-          </tr>
-          <tr>
-            <th><code>view</code></th>
-            <td>Referenz auf <code>window</code> (oder <code>frame</code>)</td>
-          </tr>
-          <tr>
-            <th><code>offsetX</code>/<code>offsetY</code></th>
-            <td>relative Mausposition</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1><code>onclick</code> Attribut</h1>
-        <ul>
-          <li>😎 Ist klar welcher Script ausgeführt wird</li>
-          <li>🤨 Wird im globalen Kontext ausgeführt</li>
-          <li>🤨 Mischt Darstellung mit Logik</li>
-          <li>🤨 Führt zu dupliziertem Code</li>
-          <li>🤨 Obsoleter Zugriff auf dem Ereignisobjekt</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <button onclick="console.log(this.id)" id="a">Log Value</button>
-            <button onclick="console.log(this.id)" id="b">Log Value</button>
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><code>onclick</code> EventHandler</h1>
-        <ul>
-          <li>😎 Wird im Funktionskontext ausgeführt</li>
-          <li>😎 Darstellung und Logik sind separat</li>
-          <li>😎 Meidet dupliziertes Code</li>
-          <li>🤨 Überschreibt andere <em>EventHandlers</em></li>
-        </ul>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <button id="a">Log Value</button>
-            <button id="b">Log Value</button>
-          </code>
-        </pre>
+        <h1>Mediator: Web Code</h1>
+        <p>Das Absenden einer Nachricht ergibt ein Promise, welches ein Booleschen Wert zurückgibt.</p>
         <pre>
           <code data-trim class="language-javascript hljs">
-            const buttons = document.getElementsByTagName("button");
-            for (const button of buttons) {
-              button.onclick = e => console.log(e.target.id);
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><code>click</code> EventListener</h1>
-        <ul>
-          <li>😎 Wird im Funktionskontext ausgeführt</li>
-          <li>😎 Darstellung und Logik sind separat</li>
-          <li>😎 Meidet dupliziertes Code</li>
-          <li>😎 Lässt andere <em>EventListeners</em> stehen</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <button id="a">Log Value</button>
-            <button id="b">Log Value</button>
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const buttons = document.getElementsByTagName("button");
-            for (const button of buttons) {
-              button.addEventListener("click", e => console.log(e.target.id));
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1 class="insertion">Funktionen und <code>this</code></h1>
-        <table>
-          <tr>
-            <th><code>function</code></th>
-            <td><code>this</code> referenziert das Ereignis&shy;element</td>
-          </tr>
-          <tr>
-            <th><code>=></code></th>
-            <td><code>this</code> referenziert das umliegende Kontext
-              <table>
-                <tr>
-                  <th>im Dokument</th>
-                  <td><code>window</code></td>
-                </tr>
-                <tr>
-                  <th>im Modul</th>
-                  <td><code>undefined</code></td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>EventListener: Entfernen</h1>
-        <ul>
-          <li>Listeners können mit <code>removeEventListener()</code> entfernt werden</li>
-          <li>Dazu ist eine fixe Referenz nötig (z.B. eine Funktion)</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const logId = e => console.log(e.target.id);
-            const button = document.getElementById("a");
-            button.addEventListener("click", logId);
-            button.removeEventListener("click", logId);
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1 class="insertion">Funktionen: Kurzform</h1>
-        <p>Bei einer benannten Funktion kann man das auflisten von Parametern weglassen, wenn die Parameter einfach
-          weitergegeben werden sollen.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const log = e => console.log(e);
-
-            // Die folgende Aufrufe sind Equivalent
-            document.AddEventListener("click", e => console.log(e))
-            document.addEventListener("click", e => log(e));
-            document.addEventListener("click", log);
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Event Reihenfolge</h1>
-        <ul>
-          <li>Normalerweise werden Ereignisse bei allen "Parent"-Elementen ausgelöst</li>
-          <li>In <code>addEventListener</code> kann man mit dem Setzen des dritten Parameters <code>capture</code> auf
-            <code>true</code> sicherstellen, dass das Ereignis zuerst bei diesem Element ausgelöst wird.
-          </li>
-          <li>Mit <code>stopPropagation()</code> kann man das <em>propagieren</em> verhindern</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><a href="https://www.w3.org/TR/DOM-Level-3-Events/#event-flow">Event Flow</a></h1>
-        <p>"Capture" zuerst und danach "Bubbling"</p>
-        <img src="assets/Lesson03/eventflow.svg" style="max-width: 400px">
-      </section>
-
-      <section class="compact">
-        <h1>Normale Reihenfolge</h1>
-        <p>Elemente fangen Events in die "Bubbling" Phase ab.</p>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const log = e => console.log(e.currentTarget.nodeName);
-            document.addEventListener("click", log);
-            form.addEventListener("click", log);
-            button.addEventListener("click", log);
-          </code>
-        </pre>
-        <p>Bei einem Klick auf dem Button kommt:</p>
-        <pre>
-          <code data-trim class="language-text hljs">
-            BUTTON
-            FORM
-            #document
+            return
+              this.messenger
+                .send(new SetBiometricValueMessage(entry, btoa(value)))
+                .then((response: OperationResponse) => response.success);
           </code>
         </pre>
       </section>
 
       <section class="compact">
-        <h1>Angepasste Reihenfolge</h1>
-        <p>Elemente können in die "Capture" Phase Events abfangen.</p>
+        <h1>Mediator: Java Code</h1>
+        <p>"Handlers" werden registriert, um bestimmten Typen von Nachrichten zu implementieren.</p>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            const log = e => console.log(e.currentTarget.nodeName);
-            document.addEventListener("click", log, { capture: true });
-            form.addEventListener("click", log);
-            button.addEventListener("click", log);
-          </code>
-        </pre>
-        <p>Bei einem Klick kommt:</p>
-        <pre>
-          <code data-trim class="language-text hljs">
-            #document
-            BUTTON
-            FORM
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Propagieren verhindern</h1>
-        <ul>
-          <li><code>stopPropagation()</code> bricht Event-Handling ab</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const log = e => {
-              console.log(e.currentTarget.nodeName);
-              e.stopPropagation();
-            };
-            document.addEventListener("click", log, { capture: true });
-            form.addEventListener("click", log);
-            button.addEventListener("click", log);
-          </code>
-        </pre>
-        <p>Bei einem Klick kommt:</p>
-        <pre>
-          <code data-trim class="language-text hljs">
-            #document
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Default Verhalten</h1>
-        <ul>
-          <li><code>preventDefault()</code> unterdrückt das Default Verhalten des Browsers (z.B. Navigieren bei einem
-            <code>a</code> Element)
-          </li>
-        </ul>
-        <pre>
-          <code data-trim class="language-html hljs">
-            <a href="https://duckduckgo.com" id="search">DuckDuckGo</a>
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const duckDuckGo = document.getElementById("search");
-
-            duckDuckGo.addEventListener("click", e => {
-              if (!confirm("Are you sure?")) {
-                e.preventDefault();
+          <code data-trim class="language-java hljs">
+            messageRegistrar.registerHandler(
+              SetBiometricValueMessage.TAG,
+              SetBiometricValueMessage.class,
+              new MessageHandler&lt;EmptyResponse, SetBiometricValueMessage&gt;() {
+                @Override
+                public MapPromise&lt;EmptyResponse&gt; invoke(SetBiometricValueMessage setBiometricValueMessage) {
+                  return biometricStorage.setValue(
+                    setBiometricValueMessage.key,
+                    encodingUtils.fromBase64(setBiometricValueMessage.value)
+                  );
+                }
               }
-            });
+            );
           </code>
         </pre>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Ereignisse</h1>
-            <ul>
-              <li>Event Handlers</li>
-              <li>Event Listeners</li>
-              <li>Reihenfolge</li>
-              <li>Propagieren verhindern</li>
-              <li>Default verhindern</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
       </section>
 
       <section>
@@ -617,40 +319,11 @@
           <div>
             <h1>Übungen</h1>
             <ul>
-              <li>Klick-Handler für ein Button schreiben</li>
-              <li>Klick-Handler für ein Link schreiben</li>
+              <li>Eigenes Projekt ausbauen</li>
             </ul>
           </div>
           <img src="assets/cog-wheels.png">
         </div>
-      </section>
-
-      <section class="compact">
-        <h1 class="insertion"><a href="https://jestjs.io/docs/snapshot-testing">Jest Snapshots</a></h1>
-        <ul>
-          <li>Die Funktion <code>toMatchSnapshot()</code> speichert die Erwartung in einer Datei</li>
-          <li>Beim ersten Ausführen wird die Datei einfach geschrieben</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            test("initialize", async () => {
-              const l = document.getElementById("l");
-              await new application().initialize();
-              expect(listItems.innerHTML).toMatchSnapshot(); // <-- Snapshot
-            });
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1 class="insertion"><a href="https://jestjs.io/docs/snapshot-testing">Updating Snapshots</a></h1>
-        <ul>
-          <li>Bei Änderungen schlägt der Test fehl</li>
-          <li>Snapshots aktualisieren mit <code>jest -u</code> im Terminal</li>
-          <li>WebStorm zeigt Links im Test-Runner an<br>
-            <img src="assets/Lesson06/ws_jest_update_snapshot.png" class="screenshot">
-          </li>
-        </ul>
       </section>
 
     </div>
