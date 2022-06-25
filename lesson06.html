@@ -109,7 +109,7 @@
 
             if (!tableExists)
             {
-              _connection.CreateTable<TodoItem>();
+              _connection.CreateTable&lt;TodoItem&gt;();
             }
           </code>
         </pre>
@@ -287,7 +287,7 @@
 
             // ...und wieder zurück
 
-            var newAlbum = JsonConvert.DeserializeObject&lt;TodoItem&gt;(albumAsJson);
+            var newAlbum = JsonConvert.DeserializeObject&lt;Album&gt;(albumAsJson);
           </code>
         </pre>
       </section>
