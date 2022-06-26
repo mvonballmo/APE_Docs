@@ -30,10 +30,8 @@
       <section data-background="assets/looking-back-dimmed.jpg">
         <h1>Rückblick</h1>
         <ul>
-          <li>Formulare</li>
-          <li>Eingaben</li>
-          <li>Anzeigen</li>
-          <li>Validierung</li>
+          <li>SQLite einsetzen, um Daten <em>lokal, auf dem Gerät</em> zu Lesen und Speichern</li>
+          <li>HTTP Client einsetzen, um Daten <em>eines externen Servers</em> zu Lesen und Schreiben</li>
         </ul>
       </section>
 
@@ -53,22 +51,73 @@
       </section>
 
       <section>
-        <li>Overview Prüfung (LK1)</li>
-        <li class="insertion">Sicherheit</li>
-        <li>Browser-Objekte</li>
-        <li>Persistenz</li>
-        <li>Animationen</li>
-        <li>Media</li>
+        <h1>Überblick</h1>
+        <ul>
+          <li>Android "Root-detection"</li>
+          <li>iOS "Jailbreak-detection"</li>
+          <li>Benutzerdaten mit einem Kennwort verschlüsseln und entschlüsseln</li>
+          <li>Biometrische Authentifizierung</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Android "Root-detection"</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
       </section>
 
       <section>
-        <h1>Prüfung (LK1)</h1>
+        <h1>Android "Root-detection"</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
         <ul>
-          <li>Word Formular mit Schreibbaren Feldern</li>
-          <li>Wird am Anfang der Lektion euch zugeschickt</li>
-          <li>Digital auszufüllen und zurückzusenden</li>
-          <li>Zeit: Eine Stunde</li>
-          <li>Stoff: Folien und Quelltext für <b>Lektionen 1-7</b></li>
+          <li>Offizielles API einsetzen</li>
+          <li><a href="https://developer.android.com/topic/security/best-practices">Best Practices</a> folgen</li>
+          <li>Bibliothek <a href="https://developer.android.com/training/safetynet/attestation">SafetyNet</a>
+            <ul>
+              <li>"nonce" beziehen</li>
+              <li>Prüfungsabfrage ("check request") stellen</li>
+              <li>Antwort validieren</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Android "Root-detection"</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Offizielles NuGet Package (<code><a href="https://www.nuget.org/packages/Xamarin.GooglePlayServices.SafetyNet/">Xamarin.GooglePlayServices.SafetyNet</a></code>) für Xamarin Forms einsetzen</li>
+          <li>Wird im Android Projekt aufgenommen</li>
+          <li><a href="https://github.com/xamarin/GooglePlayServicesComponents/blob/main/samples/com.google.android.gms/play-services-safetynet/SafetyNetSample/MainActivity.cs">Offizielles Beispiel</a> anschauen</li>
+          <li>Nicht immer 100% aktuell (die Hackers forschen immer weiter)</li>
+          <li>Überlegen wie die App reagieren soll, wenn das Gerät gerootet ist</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>iOS "Jailbreak-detection"</h1>
+        <img src="assets/iOS_logo.png" class="platform-logo">
+      </section>
+
+      <section>
+        <h1>iOS "Jailbreak-detection"</h1>
+        <img src="assets/iOS_logo.png" class="platform-logo">
+        <ul>
+          <li><a href="https://github.com/xamarin/Essentials/issues/359">Katz & Maus</a> Spiel
+            <ul>
+              <li>Von Apple gar nicht unterstützt</li>
+              <li>Kann zu jeder Zeit umgegangen werden</li>
+            </ul>
+          </li>
+          <li>Bibliothek einsetzen
+            <ul>
+              <li><a href="https://www.nuget.org/packages/Plugin.BreachDetector/">BreachDetector</a> (<a href="https://github.com/nmilcoff/BreachDetector">GitHub</a>)</li>
+            </ul>
+          </li>
+          <li>Eigene Version bauen?
+            <ul>
+              <li>Könnte ein Zeitfresser werden</li>
+            </ul>
+          </li>
         </ul>
       </section>
 
@@ -81,886 +130,85 @@
             <p class="fragment">Keine Frage?</p>
             <p class="fragment">Alles klar?</p>
             <p class="fragment">OK. 💪 👍</p>
+            <p class="fragment">Kommt so oder so für unsere Apps nicht darauf an.</p>
           </div>
-        </div>
-      </section>
-
-      <section>
-        <h1 class="insertion">Sicherheit</h1>
-        <ul>
-          <li>Ist ein sehr <em>breites</em> Thema</li>
-          <li>Ist in die <em>Webentwicklung</em> ein wichtiges Thema</li>
-          <li>Wird von modernen Browsers sehr gut umgesetzt</li>
-          <li>Ist nicht <em>JavaScript-spezifisch</em></li>
-        </ul>
-      </section>
-
-      <section class="compact">
-        <h1>Sicherheitsthemen</h1>
-        <p>Wir werden die folgende Themen <em>nicht</em> in Detail anschauen</p>
-        <table>
-          <tr>
-            <td><a href="https://developer.mozilla.org/docs/Glossary/https">HTTPS</a></td>
-            <td>Verschlüsselte Verbindung</td>
-          </tr>
-          <tr>
-            <td><a href="https://developer.mozilla.org/docs/Web/Security/Transport_Layer_Security">TLS</a></td>
-            <td>Transport Layer Security</td>
-          </tr>
-          <tr>
-            <td><a href="https://developer.mozilla.org/docs/Glossary/Cryptography">Kryptographie</a></td>
-            <td>Verschlüsselung von Informationen</td>
-          </tr>
-          <tr>
-            <td><a href="https://de.wikipedia.org/wiki/Verschlüsselung">Verschlüsselung</a></td>
-            <td>Geheimhaltung von Nachrichten</td>
-          </tr>
-          <tr>
-            <td><a href="https://de.wikipedia.org/wiki/Hashfunktion">Hashing</a></td>
-            <td>Berechnung von eindeutigen Prüfwerten</td>
-          </tr>
-          <tr>
-            <td><a href="https://developer.mozilla.org/docs/Glossary/Key">Schlüssel</a></td>
-            <td>Steuert ein Verschlüsselungs- oder Hash-Algorithmus</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="compact">
-        <h1>Sicherheitsthemen</h1>
-        <p>Wir werden die folgende Themen <em>nicht</em> in Detail anschauen</p>
-        <table>
-          <tr>
-            <td><a href="https://developer.mozilla.org/docs/Glossary/Signature/Security">Signierung</a></td>
-            <td>Bestätigung der Integrität</td>
-          </tr>
-          <tr>
-            <td><a href="https://developer.mozilla.org/docs/Web/API/Web_Authentication_API">Authentifizierung</a></td>
-            <td>Wer bist du?</td>
-          </tr>
-          <tr>
-            <td><a href="https://de.wikipedia.org/wiki/Zugriffskontrolle">Autorisierung</a></td>
-            <td>Was darfst du?</td>
-          </tr>
-          <tr>
-            <td><a href="https://de.wikipedia.org/wiki/Biometrie#Biometrische_Erkennungsverfahren">Biometrie</a></td>
-            <td>Authentifizierung durch Verhaltens- oder Körpercharakteristika</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="compact">
-        <h1>Angriffe</h1>
-        <p>Wir werden die folgende Themen <em>nicht</em> in Detail anschauen</p>
-        <table>
-          <tr>
-            <td><a href="https://developer.mozilla.org/docs/Web/Security/Types_of_attacks#cross-site_scripting_xss">XSS</a></td>
-            <td>Cross-site Scripting</td>
-          </tr>
-          <tr>
-            <td><a href="https://developer.mozilla.org/docs/Web/Security/Types_of_attacks#cross-site_request_forgery_csrf">CSRF</a></td>
-            <td>Cross-site request forgery</td>
-          </tr>
-          <tr>
-            <td><a href="https://developer.mozilla.org/docs/Web/Security/Types_of_attacks#man-in-the-middle_mitm">MitM</a></td>
-            <td>Man in the Middle</td>
-          </tr>
-          <tr>
-            <td><a href="https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy">CSP</a></td>
-            <td>Content Security Policy</td>
-          </tr>
-          <tr>
-            <td><a href="https://developer.mozilla.org/docs/Web/HTTP/CORS">CORS</a></td>
-            <td>Cross-Origin Resource Sharing</td>
-          </tr>
-          <tr>
-            <td><a href="https://developer.mozilla.org/docs/Web/Security/Same-origin_policy">SOP</a></td>
-            <td>Same Origin Policy</td>
-          </tr>
-          <tr>
-            <td><a href="https://www.w3schools.com/sql/sql_injection.asp">SQL Injection</a></td>
-            <td></td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section class="compact" data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/Document_Object_Model">Browser API</a></h1>
-        <p>Hier geht es um Browser-spezifische APIs</p>
-        <ul>
-          <li>Browserobjekte</li>
-          <li>Dialogfenster</li>
-          <li>Fenstereigenschaften</li>
-          <li><code>open()</code>/<code>close()</code></li>
-          <li>Markierter Text</li>
-          <li><code>screen</code></li>
-          <li><code>history</code></li>
-          <li><code>location</code></li>
-          <li><code>navigator</code></li>
-          <li>Timers</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><code>window</code></h1>
-        <ul>
-          <li>Methoden und Eigenschaften des Window-Objekts können ohne Nennung von <code>window</code> aufgerufen werden</li>
-          <li>Viele sind <em>nur</em> im Kontext vom Browser verfügbar</li>
-          <li>Dafür gibt es Mocks in Jest. Die können leider nicht wirklich zur Prüfung benutzt werden</li>
-        </ul>
-
-      </section>
-
-      <section>
-        <h1>Dialogfenster</h1>
-        <table>
-          <tr>
-            <th>Methode</th>
-            <th>Beschreibung</th>
-            <th>Rückgabetyp</th>
-          </tr>
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/API/Window/alert">alert()</a></code></td>
-            <td>Text-Nachricht mit "OK"</td>
-            <td>keiner</td>
-          </tr>
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/API/Window/confirm">confirm()</a></code></td>
-            <td>Text-Nachricht mit "OK/Cancel"</td>
-            <td><code>boolean</code></td>
-          </tr>
-          <tr>
-            <td><code><a href="https://developer.mozilla.org/docs/Web/API/Window/prompt">prompt()</a></code></td>
-            <td>Text-Nachricht mit Text-Eingabefeld</td>
-            <td><code>string</code></td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>Dialogfenster</h1>
-        <form id="dialogTest">
-          <span>Alert</span><button>alert("This is an alert dialog box.")</button>
-          <span>Confirm</span><button>confirm("Save this document?")</button>
-          <span>Prompt</span><button>prompt("Please enter your name.")</button>
-        </form>
-        <script>
-          const [a, c, p] = document.querySelectorAll("#dialogTest button");
-          const [la, lc, lp] = document.querySelectorAll("#dialogTest span");
-          a.addEventListener("click", e => {
-            alert("This is an alert dialog box.");
-            e.preventDefault();
-          });
-          c.addEventListener("click", e => {
-            const shouldSave = confirm("Save this document?");
-            lc.textContent = shouldSave ? "Saving..." : "Not saved.";
-            e.preventDefault();
-          });
-          p.addEventListener("click", e => {
-            const name = prompt("Please enter your name.");
-            lp.textContent = name ? `Hello ${name}.` : "Fine. Don't tell me.";
-            e.preventDefault();
-          });
-        </script>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const [a, c, p] = document.querySelectorAll("#dialogTest button");
-            const [la, lc, lp] = document.querySelectorAll("#dialogTest span");
-            a.addEventListener("click", e => {
-              alert("This is an alert dialog box.");
-            });
-            c.addEventListener("click", e => {
-              const shouldSave = confirm("Save this document?");
-              lc.textContent = shouldSave ? "Saving..." : "Not saved.";
-            });
-            p.addEventListener("click", e => {
-              const name = prompt("Please enter your name.");
-              lp.textContent = name ? `Hello ${name}.` : "Fine. Don't tell me.";
-            });
-              </code>
-        </pre>
-      </section>
-
-      <section class="compact">
-        <h1>Fenstereigenschaften</h1>
-        <p></p>
-        <table>
-          <tr>
-            <th>Eigenschaft</th>
-            <th>Beschreibung</th>
-            <th>Wert</th>
-          </tr>
-          <tr>
-            <th><code>outerWidth</code> &amp; <code>outerHeight</code></th>
-            <td>Grösse des Fensters in Pixeln</td>
-            <td><output id="outerProps"></output></td>
-          </tr>
-          <tr>
-            <th><code>innerWidth</code> &amp; <code>innerHeight</code></th>
-            <td>Grösse des Viewports in Pixeln.</td>
-            <td><output id="innerProps"></output></td>
-          </tr>
-          <tr>
-            <th><code>screenLeft</code> &amp; <code>screenTop</code></th>
-            <td>Abstand der linken oberen Ecke vom linken resp. oberen Rand.</td>
-            <td><output id="screenProps"></output></td>
-          </tr>
-        </table>
-        <script>
-          const updateWindowValues = () => {
-            const outerProps = document.getElementById("outerProps");
-            outerProps.value = `${outerWidth} x ${outerHeight}`;
-
-            const innerProps = document.getElementById("innerProps");
-            innerProps.value = `${innerWidth} x ${outerHeight}`;
-
-            const screenProps = document.getElementById("screenProps");
-            screenProps.value = `${screenLeft} x ${screenTop}`;
-          }
-
-          updateWindowValues();
-
-          window.addEventListener("resize", () => {
-            updateWindowValues();
-          })
-        </script>
-      </section>
-
-      <section class="compact">
-        <h1><code>open</code> &amp; <code>close</code></h1>
-        <p>Mit <code>open</code> &amp; <code>close</code> können Fenster/Tabs geöffnet bzw. geschlossen werden.</p>
-        <form>
-          <span></span><button id="openMLZ">MLZ Öffnen</button>
-          <span></span><button id="closeMLZ">MLZ Schliessen</button>
-        </form>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const openMLZ = document.getElementById("openMLZ");
-            openMLZ.addEventListener("click", () => {
-              const mlzWindow = window.open("./mlz.html", "MLZ", );
-              const closeMLZ = document.getElementById("closeMLZ");
-
-              closeMLZ.addEventListener("click", () => mlzWindow.close());
-            });
-          </code>
-        </pre>
-        <script>
-          const openMLZ = document.getElementById("openMLZ");
-          openMLZ.addEventListener("click", () => {
-            const mlzWindow = window.open("./mlz.html", "MLZ",);
-            const closeMLZ = document.getElementById("closeMLZ");
-
-            closeMLZ.addEventListener("click", () => mlzWindow.close());
-          });
-        </script>
-      </section>
-
-      <section>
-        <h1>Markierter Text</h1>
-        <form>
-          <span></span><button id="selectText">Copy selected text to output</button>
-          <label>Selected text</label><output id="selectedText"></output>
-        </form>
-        <script>
-          const selectTextButton = document.getElementById("selectText");
-          const selectedTextOutput = document.getElementById("selectedText");
-          selectTextButton.addEventListener("click", () => {
-            const selection = window.getSelection();
-            selectedTextOutput.value = selection.rangeCount === 0 ? "Nothing selected" : selection;
-          });
-        </script>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const btn = document.getElementById("selectText");
-            const out = document.getElementById("selectedText");
-            btn.addEventListener("click", () => {
-              const s = window.getSelection();
-              out.value = s.rangeCount === 0 ? "Nothing selected" : s;
-            });
-            </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><code>screen</code></h1>
-        <p><code><a href="https://developer.mozilla.org/docs/Web/API/Screen">screen</a></code> liefert Informationen über den Bildschirm.</p>
-        <table>
-          <tr>
-            <th><code>height</code>, <code>width</code></th>
-            <td>Höhe, Breite</td>
-          </tr>
-          <tr>
-            <th><code>availHeight</code>, <code>availWidth</code></th>
-            <td>verfügbare Höhe, Breite (Grösse ohne feste Elemente wie Taskleisten).</td>
-          </tr>
-          <tr>
-            <th><code>colorDepth</code>, <code>pixelDepth</code></th>
-            <td>Farbtiefe, Pixeltiefe</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1><code>history</code></h1>
-        <p>Das Objekt history gibt zugriff auf die Browserhistory</p>
-        <table>
-          <tr>
-            <th><code>length</code></th>
-            <td>Gibt die Länge der aktuellen Browserhistory an.</td>
-            <td>
-              <script>document.write(history.length)</script>
-            </td>
-          </tr>
-          <tr>
-            <th><code>forward()</code></th>
-            <td>Geht zur nächsten Seite</td>
-            <td><button onclick="history.forward()">&gt;</button></td>
-          </tr>
-          <tr>
-            <th><code>back()</code></th>
-            <td>Geht zur vorherigen Seite</td>
-            <td><button onclick="history.back()">&lt;</button></td>
-          </tr>
-          <tr>
-            <th><code>go(i)</code></th>
-            <td>Springt zum History-eintrag mit Index <code>i</code>.</td>
-            <td><button onclick="history.go(0)">&lt;</button></td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="compact">
-        <h1><code>location</code></h1>
-        <pre>
-          <code>https://earthli.com:80/news/?searchText=logic#chapter1</code>
-        </pre>
-        <table>
-          <tr>
-            <th><code>href</code></th>
-            <td>https://earthli.com/news/?
-              searchText=logic#chapter1</td>
-          </tr>
-          <tr>
-            <th><code>protocol</code></th>
-            <td>https</td>
-          <tr>
-          <tr>
-            <th><code>host</code></th>
-            <td>earthli.com:80</td>
-          </tr>
-          <tr>
-            <th><code>hostname</code></th>
-            <td>earthli.com</td>
-          </tr>
-          <tr>
-            <th><code>pathname</code></th>
-            <td>/news</td>
-          <tr>
-          <tr>
-            <th><code>search</code></th>
-            <td>searchText=logic</td>
-          </tr>
-          <tr>
-            <th><code>hash</code></th>
-            <td>chapter1</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="compact">
-        <h1><code><a href="https://developer.mozilla.org/docs/Web/API/Navigator">navigator</a></code></h1>
-        <p>Bietet Zugang zu verschieden Eigenschaften des Browsers.</p>
-        <ul>
-          <li><a href="https://developer.mozilla.org/docs/Web/API/Navigator/languages"><code>languages</code></a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/API/Navigator/mediaCapabilities"><code>mediaCapabilities</code></a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/API/Navigator/geolocation"><code>geolocation</code></a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/API/Navigator/keyboard"><code>keyboard</code></a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/API/Navigator/deviceMemory"><code>deviceMemory</code></a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/API/Navigator/getBattery"><code>getBattery()</code></a></li>
-          <li>und viel mehr</li>
-        </ul>
-      </section>
-
-      <section class="compact">
-        <h1><code><a href="https://developer.mozilla.org/docs/Web/API/Navigator/userAgent">User Agent</a></code></h1>
-        <table>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/Navigator/userAgent"><code>userAgent</code></a></th>
-            <td>Identifikationstext eines Browsers</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/Navigator/userAgentData"><code>userAgentData</code></a></th>
-            <td>Strukturierte Identifikation eines Browsers
-              <ul>
-                <li><code>brands[{brand, version}]</code></li>
-                <li><code>mobile</code></li>
-                <li><code>platform</code></li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/Navigator/vendor"><code>vendor</code></a></th>
-            <td>Name des Herstellers (z.B. "Apple Computer, Inc.")</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>Timers</h1>
-        <table>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/setTimeout"><code>setTimeout()</code></a></th>
-            <td>führt eine Funktion nach einer gewisse Zeitspanne aus</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/setInterval"><code>setInterval()</code></a></th>
-            <td>führt eine Funktion <em>wiederholend</em> nach einer gewisse Zeitspanne aus</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/clearTimeout"><code>clearTimeout()</code></a></th>
-            <td>bricht ein Timer ab</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="compact">
-        <h1><code>setTimeout()</code> Beispiel</h1>
-        <form id="timerForm">
-          <label>Idle</label><button>Start</button>
-          <label>&nbsp;</label><button>Stop</button>
-        </form>
-        <script>
-          const timerForm = document.getElementById("timerForm");
-          const [start, stop] = timerForm.getElementsByTagName("button");
-          const [startLabel] = timerForm.getElementsByTagName("label");
-
-          let timerHandle;
-
-          start.addEventListener("click", e => {
-            startLabel.textContent = "Timer running...";
-            timerHandle = setTimeout(() => {
-              startLabel.textContent = "Timer done.";
-            }, 1000);
-            e.preventDefault();
-          });
-
-          stop.addEventListener("click", e => {
-            startLabel.textContent = "Timer aborted.";
-            clearTimeout(timerHandle);
-            e.preventDefault();
-          });
-        </script>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            let timerHandle;
-
-            start.addEventListener("click", () => {
-              startLabel.textContent = "Timer running...";
-              timerHandle = setTimeout(() => {
-                startLabel.textContent = "Timer done.";
-              }, 1000);
-            });
-
-            stop.addEventListener("click", () => {
-              startLabel.textContent = "Timer aborted.";
-              clearTimeout(timerHandle);
-            });
-          </code>
-        </pre>
-      </section>
-
-      <section class="compact">
-        <h1><code>setInterval()</code> Beispiel</h1>
-        <form id="intervalForm">
-          <label>Idle</label><button>Start</button>
-          <label>&nbsp;</label><button>Stop</button>
-        </form>
-        <script>
-          {
-            const intervalForm = document.getElementById("intervalForm");
-            const [start, stop] = intervalForm.getElementsByTagName("button");
-            const [startLabel] = intervalForm.getElementsByTagName("label");
-
-            let timerHandle;
-            let counter = 0;
-
-            start.addEventListener("click", e => {
-              startLabel.textContent = counter;
-              timerHandle = setInterval(() => {
-                counter += 1;
-                startLabel.textContent = counter;
-              }, 100);
-              e.preventDefault();
-            });
-
-            stop.addEventListener("click", e => {
-              startLabel.textContent = "Timer aborted.";
-              clearTimeout(timerHandle);
-              e.preventDefault();
-            });
-          }
-        </script>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            let timerHandle;
-            let counter = 0;
-
-            start.addEventListener("click", () => {
-              startLabel.textContent = counter;
-              timerHandle = setInterval(() => {
-                counter += 1;
-                startLabel.textContent = counter;
-              }, 100);
-            });
-
-            stop.addEventListener("click", () => {
-              startLabel.textContent = "Timer aborted.";
-              clearTimeout(timerHandle);
-            });
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Browserobjekte</h1>
-            <ul>
-              <li>Dialogfenster</li>
-              <li>Fenstereigenschaften</li>
-              <li><code>open()</code>/<code>close()</code></li>
-              <li>Markierter Text</li>
-              <li><code>screen</code></li>
-              <li><code>history</code></li>
-              <li><code>location</code></li>
-              <li><code>navigator</code></li>
-              <li>Timers</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Übungen</h1>
-            <ul>
-              <li>Markierter Text in einem Dialog anzeigen</li>
-              <li>Mit JavaScript und <code>history</code> navigieren</li>
-              <li>Timer mit <code>setTimeout()</code> erstellen</li>
-            </ul>
-          </div>
-          <img src="assets/cog-wheels.png">
         </div>
       </section>
 
       <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1>Persistenz</h1>
-        <p>Hier geht es um Browser-spezifische APIs</p>
-        <ul>
-          <li>Cookies</li>
-          <li>Web Storage</li>
-          <li>IndexedDB</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/Document/cookie">Cookies</a></h1>
-        <ul>
-          <li>Speichert ein Text unter einem Schlüssel</li>
-          <li>Kann ein Ablaufdatum haben</li>
-          <li>Alle Cookies für eine Domain sind in einem String, durch Semikola getrennt</li>
-          <li>Werden in HTTP Headers <em>zum Server mitgeschickt</em></li>
-          <li>Können vom Server per HTTP Header <em>gesetzt werden</em></li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Cookies verfügbar?</h1>
-        <ul>
-          <li>User können das Setzen von Cookies <em>verhindern</em></li>
-          <li>Mit <code><a href="https://developer.mozilla.org/docs/Web/API/Navigator/cookieEnabled">navigator.cookieEnabled</a></code> kann geprüft werden, ob Cookies erlaubt sind</li>
-          <li>Funktioniert in alle Browsers für <em>first-party</em> Cookies</li>
-          <li>Funktioniert teilweise für <em>third-party</em> Cookies (die Separat blockiert werden können, auch wenn first-party Cookies erlaubt sind)</li>
-        </ul>
+        <h1>Passwörter</h1>
       </section>
 
       <section class="compact">
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/Document/cookie#write_a_new_cookie">Cookie Properties</a></h1>
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Beschreibung</th>
-            <th>Default</th>
-          </tr>
-          <tr>
-            <th>path</th>
-            <td>Pfad wofür die Cookie gültig ist</td>
-            <td>Pfad des Dokuments</td>
-          </tr>
-          <tr>
-            <th>domain</th>
-            <td>Domäne wofür die Cookie gültig ist</td>
-            <td>Domäne des Dokuments</td>
-          </tr>
-          <tr>
-            <th style="white-space: nowrap">max-age</th>
-            <td>Anzahl Sekunden bis die Cookie gelöscht werden soll</td>
-            <td>Keine</td>
-          </tr>
-          <tr>
-            <th>expires</th>
-            <td>Zeit nachdem die Cookie gelöscht werden soll</td>
-            <td>Keine</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="compact">
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/Document/cookie#write_a_new_cookie">Cookie Properties</a></h1>
-        <table>
-          <tr>
-            <th>secure</th>
-            <td>Cookie soll nur über HTTPS geschickt werden</td>
-            <td><code>false</code></td>
-          </tr>
-          <tr>
-            <th>samesite</th>
-            <td>
-              Definiert für welche Navigationen die Cookie mitgeschickt werden soll
-              <table>
-                <tr>
-                  <th>lax</th>
-                  <td><em>same-site</em> und "top-level" <em>cross-site</em> (verhindert <em>CSRF</em>)</td>
-                </tr>
-                <tr>
-                  <th>strict</th>
-                  <td>Nur <em>same-site</em></td>
-                </tr>
-                <tr>
-                  <th>none</th>
-                  <td><em>same-site</em> und alle <em>cross-site</em></td>
-                </tr>
-              </table>
-            </td>
-            <td><code>lax</code></td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>Cookie API</h1>
-        <ul>
-          <li>Über <code>document.cookie</code> zugänglich</li>
-          <li>Als <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#description">"data accessors"</a> definiert: was geschrieben wird ist <em>nicht</em> das was gelesen wird</li>
-          <li><code>encodeURIComponent()</code> kann für die Normalisierung von Daten eingesetzt werden</li>
-        </ul>
+        <h1>Passwort Authentifizierung</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Ein Passwort soll man mit einer sogenannten "key-derivation" Funktion konvertieren</p>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            document.cookie = "lastUsername=John; secure; max-age=86400";
-            document.cookie = "expertMode=true; secure; max-age=86400";
-
-            const cookie = document.cookie;
-            // cookie = "lastUsername=John; expertMode=true"
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Cookies lesen</h1>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            document.cookie = "lastUsername=John";
-            document.cookie = "expertMode=true";
-
-            const cookie = document.cookie.split(";").map(s => {
-              const [key, value] = s.trim().split("=");
-              return {key, value};
-            });
-
-            /* cookie =
-               [
-                 { key: "lastUsername", value: "John" },
-                 { key: "expertMode", value: "true" }
-               ]
-            */
-          </code>
-        </pre>
-        <p class="notes">Siehe auch NPM Modul <a href="https://www.npmjs.com/package/js-cookie">js-cookie</a> für eine ausgereifte API.</p>
-      </section>
-
-      <section>
-        <h1>Cookies löschen</h1>
-        <ul>
-          <li>User/Browser können das Ablaufdatum übersteuern und Cookie <em>vorzeitig löschen</em></li>
-          <li>Ablaufdatum in die Vergangenheit setzten</li>
-          <li>Wert auf <code>null</code> oder <code>undefined</code> setzen</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            var past = new Date(1);
-            document.cookie = `key=;expires=${past.toUTCString()}`;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/Web_Storage_API">Web Storage</a></h1>
-        <ul>
-          <li>Mit HTML5 wurde das <a href="https://developer.mozilla.org/docs/Web/API/Storage">Storage-Objekt</a> eingeführt.</li>
-          <li>Von Domäne <em>und</em> Protokoll abhängig (<code>http</code> und <code>https</code> sind Separat).</li>
-          <li>Der User kann den Web Storage jederzeit löschen.</li>
-          <li><em>Nicht</em> auf dem Server verfügbar (benötigt weder Ablaufdatum noch "samesite" noch "secure")</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><code>local</code> vs. <code>session</code></h1>
-        <p>Web Storage stellt zwei Objekte zur Verfügung</p>
-        <ul>
-          <li><code>window.localStorage</code> für unbegrenzte Speicherung</li>
-          <li><code>window.sessionStorage</code> zum Speichern von Daten für eine Session (wird nach dem Schliessen des Fensters automatisch gelöscht)</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Speicherlimit</h1>
-        <div class="seventy-thirty-grid">
-          <ul>
-            <li>Die Speicherkapazität ist Browserabhängig</li>
-            <li>Spezifizierte Minimum ist <b>5MB</b></li>
-            <li><a href="http://dev-test.nemikor.com/web-storage/support-test/">Test</a></li>
-          </ul>
-          <img src="assets/Lesson07/WebStorageTestRun.png">
-        </div>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/Storage">Storage-Objekt</a></h1>
-
-        <table>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/Storage/length">length</a></th>
-            <td>Anzahl Einträge</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/Storage/key">key(n)</a></th>
-            <td>Name des Eintrags bei Position <code>n</code></td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/Storage/getitem">getItem(k)</a></th>
-            <td>Wert von Eintrag mit Namen <code>k</code></td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/Storage/setitem">setItem(k, v)</a></th>
-            <td>Speichert den Wert <code>v</code> unter dem Namen <code>k</code></td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/Storage/remoteitem">remoteItem(k)</a></th>
-            <td>Löscht den Wert unter dem Namen <code>k</code></td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/API/Storage/clear">clear()</a></th>
-            <td>Löscht alle Einträge</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="compact">
-        <h1>Storage: Beispiel</h1>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            localStorage.setItem("lastUsername", "John");
-            localStorage.setItem("expertMode", "true");
-
-            function* getLocalStorageItems() {
-              for (let i = 0; i &lt; localStorage.length; i++) {
-                const key = localStorage.key(i);
-                yield {key, value: localStorage.getItem(key)};
-              }
+          <code data-trim class="language-csharp hljs">
+            public byte[] GenerateKey(string passphrase) {
+              // Number of PBKDF2 hardening rounds to use. Larger values increase
+              // computation time. You should select a value that causes computation
+              // to take >100ms.
+              int iterations = 5000;
+              int outputKeyLength = 256; // Generate a 256-bit key
+              var secretKeyFactory = SecretKeyFactory.GetInstance("PBKDF2WithHmacSHA1");
+              IKeySpec keySpec = new PBEKeySpec(
+                passphrase.ToCharArray(),
+                _salt.Take(32).ToArray(),
+                iterations, outputKeyLength);
+              var secretKey = secretKeyFactory.GenerateSecret(keySpec);
+              return secretKey.GetEncoded();
             }
+            public static byte[] _salt = Encoding.UTF8.GetBytes(
+              "SuperSalt1234"
+            );
+          </code>
+        </pre>
+      </section>
 
-            const local = [...getLocalStorageItems()];
+      <section class="compact">
+        <h1>Passwort Authentifizierung II</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>Cipher</code> und <code>SecretKey</code> einsetzen, um mit dem Schlüssel Daten zu verschlüsseln.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public byte[] Encrypt(byte[] input, byte[] key) {
+              var secretKey = new SecretKeySpec(key, "AES");
+              var cipher = Cipher.GetInstance("AES");
+              cipher.Init(CipherMode.EncryptMode, secretKey);
 
-            /* local =
-               [
-                 { key: "lastUsername", value: "John" },
-                 { key: "expertMode", value: "true" }
-               ]
-            */
+              // TODO: In production you should generate a random IV and store it somewhere.
+
+              return cipher.DoFinal(input);
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Passwort Dienst registrieren</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>DependencyService</code> einsetzen, um auf dem Dienst aus Forms zuzugreifen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            // Android code
+            [assembly: Dependency(typeof(PasswordEncryptionService))]
+
+            // Shared code
+            var service = DependencyService.Get&lt;IPasswordEncryptionService&gt;();
+            var key = service.GenerateKey(Password);
           </code>
         </pre>
       </section>
 
       <section>
-        <h1><code><a href="https://developer.mozilla.org/docs/Web/API/WindowEventHandlers/onstorage">Storage Ereignis</a></code></h1>
-        <ul>
-          <li>Kann auf dem <code>window</code> abonniert werden</li>
-          <li>Ereignis ist vom Typ <code><a href="https://developer.mozilla.org/docs/Web/API/StorageEvent">StorageEvent</a></code></li>
-        </ul>
-        <table>
-          <tr>
-            <th><code>key</code></th>
-            <td>Schlüssel welcher geändert wurde</td>
-          </tr>
-          <tr>
-            <th><code>newValue</code></th>
-            <td>Neuer Wert</td>
-          </tr>
-          <tr>
-            <th><code>oldValue</code></th>
-            <td>Vorheriger Wert</td>
-          </tr>
-          <tr>
-            <th><code>storageArea</code></th>
-            <td>Referenz zu dem geänderten <code>Storage</code> Objekt (local oder session)</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1><code><a href="https://developer.mozilla.org/docs/Web/API/IndexedDB_API">IndexedDB</a></code></h1>
-        <ul>
-          <li>Ist eine vollständige Objekt-Datenbank mit einem Schema, Schlüsseln, Indexes, Transaktionen, usw.</li>
-          <li>Nützlich für Offline-Apps</li>
-          <li>Ist ein <em>low-level</em> API und <a href="https://developer.mozilla.org/docs/Web/API/IndexedDB_API/Basic_Terminology">viel komplexer</a> als die andere Lösungen</li>
-          <li>Siehe <a href="https://developer.mozilla.org/docs/Web/API/IndexedDB_API/Using_IndexedDB">Using IndexedDB</a> für weitere Infos</li>
-          <li>Evtl. ein Wrapper wie <a href="https://dexie.org/">Dexie</a> wäre nützlich</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1 class="deprecated"><a href="https://en.wikipedia.org/wiki/Web_SQL_Database">Web SQL Database</a></h1>
-        <ul>
-          <li>Ist <em>deprecated</em> und wurde nie zum Standard</li>
-          <li><a href="https://caniuse.com/?search=Web%20SQL%20Database">Unterstützt</a> von Blink-basierten Browsers (Chrome, Edge, Opera)</li>
-          <li><em>Nicht</em> unterstützt von Firefox und Safari</li>
-          <li><a href="https://hacks.mozilla.org/2010/06/beyond-html5-database-apis-and-the-road-to-indexeddb/">Das Problem</a> damit war, dass es "nur" eine Umhüllung von <a href="http://www.sqlite.org/">SQLite</a> war und damit zu breit ein Standard</li>
-        </ul>
-      </section>
-
-      <section>
         <div class="seventy-thirty-grid">
           <div>
-            <h1>Persistenz</h1>
+            <h1>Passwort</h1>
             <ul>
-              <li>Cookies</li>
-              <li>Web Storage</li>
+              <li>Verschlüsseln</li>
+              <li>Entschlüsseln</li>
+              <li>Dienst erstellen</li>
             </ul>
           </div>
           <img src="assets/demo.png">
@@ -974,447 +222,191 @@
         </div>
       </section>
 
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Übungen</h1>
-            <ul>
-              <li>Cookie schreiben und wieder einlesen (Test oder im Browser)</li>
-              <li><code>localStorage</code> schreiben und wieder einlesen (Test oder im Browser)</li>
-            </ul>
-          </div>
-          <img src="assets/cog-wheels.png">
-        </div>
-      </section>
-
       <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1>Animationen</h1>
-        <p>Hier geht es um Elemente aus dem Dokument in Bewegung zu bringen.</p>
+        <h1>Biometrie</h1>
+      </section>
+
+      <section class="compact">
+        <h1>Vorteile von Biometrie</h1>
         <ul>
-          <li>Naives Vorgehen ("good old days")</li>
-          <li><code>requestAnimationFrame</code></li>
-          <li>CSS Transitions</li>
-          <li>CSS Transforms</li>
-          <li>CSS Keyframes</li>
-          <li>Web Animations API</li>
+          <li>Benutzer tendieren schwächere PIN/Muster für Geräte einzusetzen</li>
+          <li>Ist sehr bequem</li>
+          <li>Sehr schwer zu knacken, wenn man den Besitzer des Geräts kennt</li>
         </ul>
       </section>
 
-      <section>
-        <h1>Naives Animieren</h1>
+      <section class="compact">
+        <h1>Biometrie aufsetzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
         <ul>
-          <li>Man kann das DOM direkt manipulieren</li>
-          <li>Mit <code>setInterval()</code> und <code>clearTimeout()</code> kann man iterative einen Wert anpassen</li>
-          <li>Ist weder effizient für die Entwickler/in zu schreiben noch das Browser auszuführen (skaliert nicht)</li>
+          <li>Sicherstellen, dass das Gerät oder der Emulator mit zumindest <code>API 28</code> arbeitet</li>
+          <li>"Target Version" vom Android Projekt zumindest auf <code>API 28</code></li>
         </ul>
       </section>
 
+      <section class="compact">
+        <h1>Biometrie aufsetzen II</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Berechtigungen aktualisieren</li>
+          <li><code>AndroidManifest.xml</code> öffnen</li>
+          <li>Berechtigung <code>USE_BIOMETRIC</code> einfügen</li>
+          <li>Diese Berechtigung ist "non-sensitive" (muss vom Benutzer nicht bestätigt werden, wie GPS z.B.)</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="ch.hfu.todo"&gt;
+              &lt;!—use-sdk etc. --&gt;
+              &lt;uses-permission android:name="android.permission.USE_BIOMETRIC" /&gt;
+              &lt;!-- application etc. --&gt;
+            &lt;/manifest&gt;
+          </code>
+        </pre>
+      </section>
+
       <section>
-        <h1>Naives Beispiel</h1>
-        <form id="naiveAnimation">
-          <label style="background-color: darkseagreen; width: 100%"></label><button>Start</button>
-        </form>
-        <script>
-          {
-            const naiveAnimation = document.getElementById("naiveAnimation");
-            const [start] = naiveAnimation.getElementsByTagName("button");
-            const [startLabel] = naiveAnimation.getElementsByTagName("label");
+        <h1>Biometrie aufsetzen III</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Schnittstelle im geteilte Projekt erstellen</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public interface IBiometricAuthenticationService {
+              void Authenticate(Action success, Action&lt;string&gt; onError);
+            }
+          </code>
+        </pre>
+      </section>
 
-            start.addEventListener("click", () => {
-              function changeOpacity() {
-                startLabel.style.opacity -= 0.01;
+      <section>
+        <h1>Biometrie aufsetzen IV</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Falls noch nicht gemacht, statisches Referenz auf dem <code>Activity</code> im Android-Projekt auf dem <code>MainActivity</code> setzen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity {
+              public MainActivity()  {
+                Activity = this;
+              }
 
-                if (startLabel.style.opacity <= 0.3) {
-                  window.clearInterval(timeoutHandle);
+              public static Activity Activity { get; private set; }
+
+              // EXCLUDED THE REST OF THE CODE FOR CLARITY
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie aufsetzen V</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Implementation im Android-Projekt erstellen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            [assembly: Dependency(typeof(BiometricAuthenticationService))]
+            namespace Todo.Droid.Security {
+              public class BiometricAuthenticationService : IBiometricAuthenticationService  {
+                public void Authenticate(Action success, Action&lt;string&gt; onError) {
+                  var builder = new BiometricPrompt.Builder(MainActivity.Activity)
+                    .SetDescription("Authenticate with Biometrics!")
+                    .SetTitle("TODO BIO")
+                    .SetNegativeButton("Cancel", MainActivity.Activity.MainExecutor, new CancelClickListener())
+                    .Build();
+
+                    builder.Authenticate(
+                      new CancellationSignal(),
+                      MainActivity.Activity.MainExecutor,
+                      new BiometricAuthenticationCallback(success, onError));
                 }
               }
-
-              startLabel.style.opacity = 1;
-              const timeoutHandle = window.setInterval(changeOpacity, 20);
-            });
-          }
-        </script>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const element = document.getElementById("naiveBlock");
-
-            function changeOpacity() {
-              element.style.opacity -= 0.01;
-
-              if (element.style.opacity &lt;= 0.3) {
-                window.clearInterval(timeoutHandle);
-              }
             }
-
-            element.style.opacity = 1;
-            const timeoutHandle = window.setInterval(changeOpacity, 20);
           </code>
         </pre>
       </section>
 
       <section>
-        <h1><code><a href="https://developer.mozilla.org/docs/Web/API/window/requestAnimationFrame">requestAnimationFrame</a></code></h1>
-        <ul>
-          <li>Gliedert ein Animation in die Aktualisierung des Browsers ein</li>
-          <li>Ist effizienter als mit <em>intervals</em> zu arbeiten</li>
-          <li>Man muss den Zwischenwerten weiterhin selbst berechnen ("tweening")</li>
-          <li>Ist immer noch sehr aufwendig für eine Entwickler/in zu schreiben</li>
-        </ul>
-      </section>
+        <h1>Biometrie aufsetzen VI</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>CancelClickListener</code> im eben erstellte Klasse einfügen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricAuthenticationService : IBiometricAuthenticationService{
+              // REMOVED CODE FOR CLARITY
 
-      <section>
-        <h1>RAF Beispiel</h1>
-        <form id="rafAnimation">
-          <label style="background-color: darkseagreen; width: 100%"></label><button>Start</button>
-        </form>
-        <script>
-          {
-            const rafAnimation = document.getElementById("rafAnimation");
-            const [start] = rafAnimation.getElementsByTagName("button");
-            const [startLabel] = rafAnimation.getElementsByTagName("label");
-
-            start.addEventListener("click", () => {
-              function step() {
-                startLabel.style.opacity -= 0.01;
-
-                if (startLabel.style.opacity > 0.3) {
-                  window.requestAnimationFrame(step);
+              private class CancelClickListener : Java.Lang.Object, IDialogInterfaceOnClickListener  {
+                public void OnClick(IDialogInterface dialog, int which)    {
+                  // NOP
                 }
               }
+            }
+          </code>
+        </pre>
+      </section>
 
-              startLabel.style.opacity = 1;
-              window.requestAnimationFrame(step);
-            });
-          }
-        </script>
+      <section class="compact">
+        <h1>Biometrie aufsetzen VII</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>AuthenticationCallback</code> Ableitung erstellen.</p>
         <pre>
-          <code data-trim class="language-javascript hljs">
-            const element = document.getElementById("rafBlock");
-
-            function step() {
-              element.style.opacity -= 0.01;
-
-              if (element.style.opacity > 0.3) {
-                window.requestAnimationFrame(step);
+          <code data-trim class="language-csharp hljs">
+            public class BiometricAuthenticationService : IBiometricAuthenticationService {
+              // REMOVED CODE FOR CLARITY
+              private class BiometricAuthenticationCallback : BiometricPrompt.AuthenticationCallback  {
+                public BiometricAuthenticationCallback(Action callback, Action<string> onError) {
+                  _callback = callback;
+                  _onError = onError;
+                }
+                public override void OnAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                  _callback();
+                }
+                public override void OnAuthenticationError(
+                  [GeneratedEnum] BiometricErrorCode errorCode,
+                  ICharSequence errString) {
+                    _onError(errString.ToString());
+                  }
+                  private readonly Action _callback;
+                  private readonly Action<string> _onError;
               }
             }
-
-            element.style.opacity = 1;
-            window.requestAnimationFrame(step);
           </code>
         </pre>
       </section>
 
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/CSS/transition">CSS Transitions</a></h1>
-        <ul>
-          <li>Animationen werden in CSS geschrieben</li>
-          <li>Wird animiert beim Anpassen des Werts der Eigenschaft</li>
-          <li>Werden automatisch unterbrochen, wenn der Wert wieder geändert wird</li>
-          <li>Können <a href="https://developer.mozilla.org/docs/Web/CSS/CSS_animated_properties">mit sehr vielen Eigenschaften</a> eingesetzt werden</li>
-        </ul>
-      </section>
-
       <section class="compact">
-        <h1>CSS Transition Properties</h1>
-        <p>Folgende Eigenschaften können kontrolliert werden</p>
-        <table>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/CSS/transition-delay">transition-delay</a></th>
-            <td>Zeit bis eine Animation starten soll</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/CSS/transition-duration">transition-duration</a></th>
-            <td>Wie lange soll animiert werden</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/CSS/transition-property">transition-property</a></th>
-            <td>Welche CSS Eigenschaft soll animiert werden?</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/CSS/transition-timing-function">transition-timing-function</a></th>
-            <td>Wie soll animiert werden (z.B. <code>ease-in</code>)</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>CSS Transition Auslösen</h1>
-        <ul>
-          <li>Eine CSS-Transition wird bei allen Änderungen eingesetzt</li>
-          <li>Wenn in JavaScript direkt geändert (z.B. mit <code>element.style.width</code>)</li>
-          <li>Wenn ein Wert durch einer CSS Pseudo-Klasse angepasst wird (z.B. beim <code>:hover</code>)</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>CSS Transitions</h1>
-        <form id="cssTransitionsAnimation">
-          <label>&nbsp;</label><button>Start</button>
-          <label>Hover me!</label><button>Reset</button>
-        </form>
-        <style>
-          #cssTransitionsAnimation label {
-            background-color: darkseagreen;
-            width: 100%;
-            transition: opacity 1s;
-          }
-
-          #cssTransitionsAnimation label:hover {
-            opacity: 0.3;
-          }
-        </style>
-        <script>
-          {
-            const form = document.getElementById("cssTransitionsAnimation");
-            const [start, reset] = form.getElementsByTagName("button");
-            const [startLabel] = form.getElementsByTagName("label");
-
-            start.addEventListener("click", () => {
-              startLabel.style.opacity = 0.3;
-            });
-            reset.addEventListener("click", () => {
-              startLabel.style.opacity = 1;
-            });
-          }
-        </script>
+        <h1>Biometrie aufsetzen VIII</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Biometrische Authentifizierung irgendwo fordern.</p>
         <pre>
-          <code data-trim class="language-css hljs">
-            #cssTransitionsAnimation label {
-              transition: opacity 1s;
+          <code data-trim class="language-csharp hljs">
+            private void AuthenticateWithBiometrics() {
+              var biometricService = DependencyService.Get&lt;IBiometricAuthenticationService&gt;();
+              biometricService.Authenticate(() =>  {
+                // We are authenticated. Do something.
+              },
+              (error) => {
+                // Failed to authenticate
+              });
             }
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            start.addEventListener("click", () => {
-              startLabel.style.opacity = 0.3;
-            });
           </code>
         </pre>
       </section>
 
       <section class="compact">
-        <h1>CSS Transforms</h1>
+        <h1>Biometrie Testen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
         <ul>
-          <li>Die <code><a href="https://developer.mozilla.org/docs/Web/CSS/transform">transform</a></code> Eigenschaft definiert wie ein Element transformiert werden soll</li>
-          <li>Dazu gibt es zahlreiche Möglichkeiten. Z.B.
-            <code><a href="https://developer.mozilla.org/docs/Web/CSS/transform-function/scale()">scale</a></code>,
-            <code><a href="https://developer.mozilla.org/docs/Web/CSS/transform-function/translate()">translate</a></code>,
-            <code><a href="https://developer.mozilla.org/docs/Web/CSS/transform-function/rotate()">rotate</a></code>,
-            <code><a href="https://developer.mozilla.org/docs/Web/CSS/transform-function/skew()">skew</a></code>, usw.
-          </li>
-          <li>Viele Funktionen haben eine 3D Variante (z.B. <code><a href="https://developer.mozilla.org/docs/Web/CSS/transform-function/scale3d()">scale3d</a></code>)</li>
-          <li>Es können mehrere Transformation gleichzeitig gesetzt werden</li>
-          <li>Diese Transformationen können alle animiert werden (siehe Links oben)</li>
+          <li>Im Emulator die drei Punkte in der grauen Tafel klicken</li>
+          <li>“Fingerprint” Menü im linken Bereich im geöffneten Popup öffnen</li>
+          <li>Im Emulator in die Einstellungen -> Sicherheit -> Fingerprint anwählen und einen Fingerabdruck aufsetzen</li>
+          <li>Um einen "Touch" zu simulieren, "Touch the Screen" im grauen Popup anwählen</li>
         </ul>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/CSS/@keyframes">CSS Keyframes</a></h1>
-        <ul>
-          <li>Erlaubt nicht nur Start und Ende, sondern beliebige Zwischenstufen</li>
-          <li>Erlaubt eine präzise Mischung diversen Animationen</li>
-          <li>Können ein Mal in CSS definiert und danach per Name referenziert werden</li>
-          <li>Werden mit <code><a href="https://developer.mozilla.org/docs/Web/CSS/animation-name">animation</a></code> angesprochen</li>
-        </ul>
-      </section>
-
-      <section class="compact">
-        <h1>CSS Keyframes Properties</h1>
-        <p>Folgende Eigenschaften können kontrolliert werden</p>
-        <table>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/CSS/animation-delay">animation-delay</a></th>
-            <td>Zeit bis eine Animation starten soll</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/CSS/animation-duration">animation-duration</a></th>
-            <td>Wie lange soll animiert werden</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/CSS/animation-name">animation-name</a></th>
-            <td>Welche CSS Eigenschaft soll animiert werden?</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/CSS/animation-timing-function">animation-timing-function</a></th>
-            <td>Wie soll animiert werden (z.B. <code>ease-in</code>)</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="compact">
-        <h1>CSS Keyframes Properties II</h1>
-        <p>Folgende weitere Eigenschaften können kontrolliert werden</p>
-        <table>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/CSS/animation-delay">animation-direction</a></th>
-            <td>Vorwärts, Rückwärts, Abwechselnd, usw.</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/CSS/animation-duration">animation-fill-mode</a></th>
-            <td>Wie soll eine Animation beenden?</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/CSS/animation-name">animation-iteration-count</a></th>
-            <td>Wie oft soll animiert werden?</td>
-          </tr>
-          <tr>
-            <th><a href="https://developer.mozilla.org/docs/Web/CSS/animation-timing-function">animation-play-state</a></th>
-            <td>Pausiert oder laufend?</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="compact">
-        <h1>CSS Keyframes Beispiel</h1>
-        <form id="cssAnimations">
-          <label>&nbsp;</label><button>Start</button>
-          <label>&nbsp;</label><button>Reset</button>
-        </form>
-        <script>
-          {
-            const form = document.getElementById("cssAnimations");
-            const [start, reset] = form.getElementsByTagName("button");
-            const [startLabel] = form.getElementsByTagName("label");
-
-            start.addEventListener("click", () => {
-              startLabel.style.animationName = "fadeOut";
-              startLabel.style.animationPlayState = "running";
-            });
-            reset.addEventListener("click", () => {
-              startLabel.style.animationName = "fadeIn";
-            });
-          }
-        </script>
-        <style>
-          #cssAnimations label {
-            background-color: darkseagreen;
-            width: 100%;
-            animation: 1s fadeOut paused forwards;
-          }
-
-          @keyframes fadeOut {
-            0% {
-              opacity: 1
-            }
-
-            100% {
-              opacity: .3
-            }
-          }
-
-          @keyframes fadeIn {
-            0% {
-              opacity: 0.3
-            }
-
-            100% {
-              opacity: 1
-            }
-          }
-        </style>
-        <pre>
-          <code data-trim class="language-css hljs">
-            #cssAnimations label {
-              animation: 1s fadeOut paused forwards;
-            }
-
-            @keyframes fadeOut {
-              0% { opacity: 1 }
-              100% { opacity: .3 }
-            }
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            start.addEventListener("click", () => {
-              startLabel.style.animationPlayState = "running";
-            });
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/Web_Animations_API">Web Animations API</a></h1>
-        <ul>
-          <li>Ein sehr umfangreiches API für alle Animationen in einem Dokument</li>
-          <li>Mit <code>document.getAnimations()</code> bekommt man alle Animationen (inkl. CSS definierte)</li>
-          <li>Mit <code>Element.animate()</code> kann eine Animation für ein bestehendes Element definiert werden</li>
-          <li>Mit <code><a href="https://developer.mozilla.org/docs/Web/API/Animation/play">play()</a></code>,
-            <code><a href="https://developer.mozilla.org/docs/Web/API/Animation/pause">pause()</a></code>,
-            <code><a href="https://developer.mozilla.org/docs/Web/API/Animation/cancel">cancel()</a></code>,
-            <code><a href="https://developer.mozilla.org/docs/Web/API/Animation/finish">finish()</a></code>,
-            <code><a href="https://developer.mozilla.org/docs/Web/API/Animation/reverse">reverse()</a></code>,
-            usw. können Animationen kontrolliert werden
-          </li>
-        </ul>
-      </section>
-
-      <section class="compact">
-        <h1>Web Animations Beispiel</h1>
-        <form id="webAnimationAPI">
-          <label>&nbsp;</label><button>Start</button>
-        </form>
-        <script>
-          {
-            const form = document.getElementById("webAnimationAPI");
-            const [start, reset] = form.getElementsByTagName("button");
-            const [startLabel] = form.getElementsByTagName("label");
-
-            let animation;
-            start.addEventListener("click", () => {
-              const options = {
-                duration: 1000,
-                fill: "forwards"
-              };
-              const keyFrames = [{ opacity: 1 }, { opacity: 0.3 }];
-              if (!animation) {
-                animation = startLabel.animate(keyFrames, options);
-              } else {
-                animation.reverse();
-              }
-            });
-            reset.addEventListener("click", () => {
-              animation.reverse();
-            });
-          }
-        </script>
-        <style>
-          #webAnimationAPI label {
-            background-color: darkseagreen;
-            width: 100%;
-          }
-        </style>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            let animation;
-            start.addEventListener("click", () => {
-              const options = { duration: 1000, fill: "forwards" };
-              const keyFrames = [{ opacity: 1 }, { opacity: 0.3 }];
-              if (!animation) {
-                animation = startLabel.animate(keyFrames, options);
-              } else {
-                animation.reverse();
-              }
-            });
-            reset.addEventListener("click", () => {
-              animation.reverse();
-            });
-          </code>
-        </pre>
       </section>
 
       <section>
         <div class="seventy-thirty-grid">
           <div>
-            <h1>Animationen</h1>
+            <h1>Biometrie</h1>
             <ul>
-              <li><code>requestAnimationFrame</code></li>
-              <li>CSS Transitions</li>
-              <li>CSS Transforms</li>
-              <li>CSS Animations</li>
-              <li>Web Animations API</li>
+              <li>Einfache Implementation</li>
             </ul>
           </div>
           <img src="assets/demo.png">
@@ -1433,184 +425,269 @@
           <div>
             <h1>Übungen</h1>
             <ul>
-              <li>Element mit CSS Transitions animieren</li>
-              <li>Element mit CSS Transforms animieren</li>
+              <li>Biometrie in der eigenen App einbauen</li>
             </ul>
           </div>
           <img src="assets/cog-wheels.png">
         </div>
       </section>
 
-      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1>Media</h1>
-        <p>Hier geht es um eine Übersicht von Media Unterstützung im Browser.</p>
+      <section class="compact">
+        <h1>Biometrie Ausbauen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
         <ul>
-          <li>SVG</li>
-          <li>Canvas</li>
-          <li>Video</li>
-          <li>Audio</li>
-          <li>WebGL</li>
-          <li>Charts</li>
-          <li>Sensoren</li>
+          <li>Die obige Methode ist nicht ideal</li>
+          <li>Ist leider nicht sicher genug</li>
+          <li>Normalerweise will man sensitiven Daten schützen (Benutzername, Passwort, Schlüssel, usw.)</li>
         </ul>
       </section>
 
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/SVG">SVG</a></h1>
-        <ul>
-          <li>[S]calable [V]ector [G]raphics definiert Zweidimensionale Grafiken</li>
-          <li>Sind XML-Basiert und können in HTML eingebettet oder in eigenen SVG-Dateien gespeichert werden</li>
-          <li>Elemente in SVG-Grafiken sind im DOM und können gleich zugegriffen werden wie auf HTML-Elemente</li>
-          <li>Ebenso können SVG-Elemente mit JavaScript erzeugt werden</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>SVG: Beispiel</h1>
-        <svg xmlns="http://www.w3.org/2000/svg" width="400" height="150">
-          <rect x="10" y="10" width="100" height="50" fill="darkseagreen" />
-        </svg>
+      <section class="compact">
+        <h1>Schnittstelle erweitern</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
         <pre>
-          <code data-trim class="language-svg hljs">
-            <svg xmlns="http://www.w3.org/2000/svg" width="400" height="150">
-              <rect x="10" y="10" width="100" height="50" fill="darkseagreen" />
-            </svg>
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/Canvas_API">Canvas</a></h1>
-        <ul>
-          <li><code>&lt;canvas&gt;</code> Tag erstellt eine leere Leinwand</li>
-          <li>Bietet ein sehr umfangreiches API</li>
-          <li>Das API ist ziemlich "low-level" und ermöglicht fast alles was ein auf einem modernen Betriebssystem zu Verfügung steht</li>
-          <li>Siehe <a href="https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial">Canvas tutorial</a> für eine vertiefte Anleitung</li>
-          <li>Dazu gibt es zahlreiche <a href="https://developer.mozilla.org/docs/Web/API/Canvas_API#libraries">Libraries</a> die das Arbeiten mit einem Canvas vereinfachen</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Canvas: Beispiel</h1>
-        <canvas id="canvasExample" style="height: 200px"></canvas>
-        <script>
-          const canvas = document.getElementById("canvasExample");
-
-          const context = canvas.getContext("2d");
-
-          context.fillStyle = "darkseagreen";
-          context.fillRect(10, 10, 100, 50);
-        </script>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            const canvas = document.getElementById("canvasExample");
-
-            const context = canvas.getContext("2d");
-
-            context.fillStyle = "darkseagreen";
-            context.fillRect(10, 10, 100, 50);
+          <code data-trim class="language-csharp hljs">
+            public interface IBiometricAuthenticationService {
+              void Encrypt(byte[] input, Action&lt;byte[]&gt; success, Action&lt;string&gt; error);
+              void Decrypt(byte[] input, Action&lt;byte[]&gt; success, Action&lt;string&gt; error);
+            }
           </code>
         </pre>
       </section>
 
       <section class="compact">
-        <h1><a href="https://developer.mozilla.org/docs/Web/HTML/Element/video">Video</a></h1>
-        <div class="seventy-thirty-grid">
-          <ul>
-            <li>Unterstützt mehrere Quellen</li>
-            <li>Die default <code>controls</code> können mit <a href="https://developer.mozilla.org/docs/Web/API/HTMLMediaElement">HTMLMediaElement</a> angepasst werden</li>
-            <li>Kann mit JavaScript manipuliert und mit <a href="https://developer.mozilla.org/docs/Web/Guide/Audio_and_video_delivery/Video_player_styling_basics">CSS gestylt</a> werden</li>
-            <li>Child-Elemente werden im Fallback-Modus angezeigt</li>
-            <li>Das <code>poster</code> Attribut zeigt aum einem Platzhalterbild</li>
-          </ul>
-          <video controls src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4" poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217">
-            Sorry, your browser doesn't support embedded videos,
-            but don't worry, you can <a href="https://archive.org/details/BigBuckBunny_124">download it</a>
-            and watch it with your favorite video player!
-          </video>
-        </div>
+        <h1>"CryptoHelper" erstellen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Im Android Projekt einen "CryptoHelper" erstellen.</p>
         <pre>
-          <code data-trim class="language-html hljs">
-            <video
-            controls src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"
-            poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
-            >
-              Your browser doesn't support embedded video. <a href="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4">Download the video instead.</a>
-            </video>
-            </code>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricCryptoHelper
+            {
+              public BiometricCryptoHelper() {
+                _keystore = KeyStore.GetInstance(KeyStoreName);
+                _keystore.Load(null);
+                // TODO For testing we delete the key on every restart.
+                if (_keystore.ContainsAlias(KeyAlias)) {
+                  _keystore.DeleteEntry(KeyAlias);
+                }
+                CreateKey();
+              }
+              public static byte[] IV { get; set; }
+              private readonly KeyStore _keystore;
+              private const string KeyStoreName = "AndroidKeyStore";
+              private const string KeyAlias = "_todoKey";
+            }
+          </code>
         </pre>
       </section>
 
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/HTML/Element/audio">Audio</a></h1>
-        <div class="seventy-thirty-grid">
-          <ul>
-            <li>Unterstützt mehrere Quellen</li>
-            <li>Die default <code>controls</code> können mit <a href="https://developer.mozilla.org/docs/Web/API/HTMLMediaElement">HTMLMediaElement</a> angepasst werden</li>
-            <li>Kann mit JavaScript manipuliert und mit <a href="https://developer.mozilla.org/docs/Web/Guide/Audio_and_video_delivery/Video_player_styling_basics">CSS gestylt</a> werden</li>
-            <li>Child-Elemente werden im Fallback-Modus angezeigt</li>
-          </ul>
-          <audio src="https://archive.org/download/testmp3testfile/mpthreetest.mp3" controls>
-            Your browser doesn't support embedded audio. <a href="https://archive.org/download/testmp3testfile/mpthreetest.mp3">Download the audio instead.</a>
-          </audio>
-        </div>
+      <section class="compact">
+        <h1>Schlüssel aufsetzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Schlüsselerstellungslogik einbauen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricCryptoHelper {
+              // REMOVED CODE FOR CLARITY
+              private void CreateKey() {
+                var keyGen = KeyGenerator.GetInstance(KeyProperties.KeyAlgorithmAes, KeyStoreName);
+                var keyGenSpec = new KeyGenParameterSpec.Builder(
+                  KeyAlias,
+                  KeyStorePurpose.Encrypt | KeyStorePurpose.Decrypt);
+
+                keyGenSpec
+                  .SetKeySize(256)
+                  .SetBlockModes(KeyProperties.BlockModeCbc)
+                  .SetEncryptionPaddings(KeyProperties.EncryptionPaddingPkcs7)
+                  .SetUserAuthenticationRequired(true)
+                  .Build();
+
+                keyGen.Init(keyGenSpec);
+                keyGen.GenerateKey();
+              }
+            }
+          </code>
+        </pre>
       </section>
 
-      <section>
-        <h1><a href="https://developer.mozilla.org/docs/Web/API/WebGL_API">WebGL</a></h1>
+      <section class="compact">
+        <h1>Cipher initialisieren</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricCryptoHelper {
+              // REMOVED CODE FOR CLARITY
+              private Cipher CreateCipher(CipherMode mode) {
+                var key = _keystore.GetKey(KeyAlias, null);
+                var cipher = Cipher.GetInstance($”{KeyProperties.KeyAlgorithmAes}/{KeyProperties.BlockModeCbc}/{KeyProperties.EncryptionPaddingPkcs7}");
+                try {
+                  if (mode == CipherMode.DecryptMode) {
+                    cipher.Init(mode, key, new IvParameterSpec(IV));
+                  } else {
+                    cipher.Init(mode, key);
+                  }
+                }
+                catch (KeyPermanentlyInvalidatedException ex) {
+                  // TODO: The key was invalidated because the Biometric setup changed
+                  // or a permanent lock out happened.
+                }
+                return cipher;
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Methode einbinden</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Public Methode erstellen, umd das <code>CryptoObject</code> zu erstellen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricCryptoHelper{
+              // REMOVED CODE FOR CLARITY
+
+              public BiometricPrompt.CryptoObject CreateCryptoObject(CipherMode mode) {
+                var cipher = CreateCipher(mode);
+
+                return new BiometricPrompt.CryptoObject(cipher);
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Service anpassen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricAuthenticationService : IBiometricAuthenticationService {
+              public void Encrypt(byte[] input, Action&lt;byte[]&gt; success, Action&lt;string&gt; error) {
+                var prompt = BuildPrompt();
+                prompt.Authenticate(
+                  _cryptoHelper.CreateCryptoObject(CipherMode.EncryptMode),
+                  new CancellationSignal(), MainActivity.Activity.MainExecutor,
+                  new BiometricEncryptionCallback(input, success, error));
+              }
+              public void Decrypt(byte[] input, Action&lt;byte[]&gt; success, Action&lt;string&gt; error) {
+                var prompt = BuildPrompt();
+                prompt.Authenticate(
+                  _cryptoHelper.CreateCryptoObject(CipherMode.DecryptMode),
+                  new CancellationSignal(), MainActivity.Activity.MainExecutor,
+                  new BiometricEncryptionCallback(input, success, error));
+              }
+
+              private readonly BiometricCryptoHelper _cryptoHelper = new BiometricCryptoHelper();
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Prompt extrahieren</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricAuthenticationService : IBiometricAuthenticationService {
+              // REMOVED CODE FOR CLARITY
+              private BiometricPrompt BuildPrompt() {
+                return new BiometricPrompt.Builder(MainActivity.Activity)
+                  .SetDescription("Authenticate with Biometrics!")
+                  .SetTitle("TODO BIO")
+                  .SetNegativeButton(
+                    "Cancel",
+                    MainActivity.Activity.MainExecutor,
+                    new CancelClickListener())
+                  .Build();
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Callback aktualisieren</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            private class BiometricEncryptionCallback : BiometricPrompt.AuthenticationCallback {
+              public BiometricEncryptionCallback(byte[] input, Action<byte[]> success, Action<string> error) {
+                _input = input;
+                _success = success;
+                _error = error;
+              }
+              public override void OnAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                if (BiometricCryptoHelper.IV == null) {
+                  BiometricCryptoHelper.IV = result.CryptoObject.Cipher.GetIV();
+                }
+                _success(result.CryptoObject.Cipher.DoFinal(_input));
+              }
+              public override void OnAuthenticationError([GeneratedEnum] BiometricErrorCode errorCode, ICharSequence errString) {
+                _error(errString.ToString());
+              }
+              private readonly byte[] _input;  private readonly Action<byte[]> _success;
+                private readonly Action<string> _error;
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Ver- und Entschlüsseln</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            private void DecryptWithBiometric() {
+              var service = DependencyService.Get&lt;IBiometricAuthenticationService&gt;();
+              service.Decrypt(
+                Convert.FromBase64String(TextToEncrypt),
+                (obj) => Output = Encoding.UTF8.GetString(obj),
+                (obj) => Output = "An error occurred");
+            }
+
+            private void EncryptWithBiometric() {
+              var service = DependencyService.Get&lt;IBiometricAuthenticationService&gt;();
+              service.Encrypt(
+                Encoding.UTF8.GetBytes(TextToEncrypt),
+                (obj) => Output = Convert.ToBase64String(obj),
+                (obj) => Output = "An error occurred");
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrisches Workflow</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Typisches Workflow (für moderate Sicherheit):</p>
         <ul>
-          <li>Ermöglicht 3D-Rendering in einem Browser</li>
-          <li>Bietet ein sehr umfangreiches API</li>
-          <li>Wird meisten auf einem <code>canvas</code> gerendert</li>
-          <li>Das API ist ziemlich "low-level" und ermöglicht fast alles was ein auf einem modernen 3D-Rendering zu Verfügung steht</li>
-          <li>Siehe <a href="https://developer.mozilla.org/docs/Web/API/WebGL_API/Tutorial">WebGL tutorial</a> für eine vertiefte Anleitung</li>
-          <li>Dafür gibt es zahlreiche <a href="https://developer.mozilla.org/docs/Web/API/WebGL_API#libraries">Libraries</a>, die das Arbeiten mit WebGL vereinfachen (z.B. <a href="https://threejs.org/">three.js</a>)</li>
+          <li>Authentifizierung mit Benutzername &amp; Passwort</li>
+          <li>Falls gültig, mit dem biometrischen Dienst verschlüsseln</li>
+          <li>Verschlüsselte Werte sichern</li>
+          <li>Beim nächsten Startup prüfen, ob gesicherte Daten vorhanden sind</li>
+          <li>Mit dem biometrischen Dienst laden und entschlüsseln</li>
+          <li>Mit den Werten einloggen</li>
         </ul>
       </section>
 
       <section>
-        <h1>Charts</h1>
+        <h1>Dateien Speichern</h1>
+        <p>Im Code gibt's ein Beispiel für einfaches Datei-Handling</p>
         <ul>
-          <li>Ermöglichen das "live" Anzeigen von Daten im grafischen Form</li>
-          <li>Dafür gibt es zahlreiche <a href="https://developer.mozilla.org/docs/Web/API/WebGL_API#libraries">Libraries</a> die das Arbeiten mit WebGL vereinfachen
-            <ul>
-              <li><a href="https://d3js.org/">D3.js</a> (<a href="https://observablehq.com/@d3/gallery">Beispiele</a>)</li>
-              <li><a href="https://observablehq.com/@observablehq/plot">Observable Plot</a></li>
-              <li><a href="https://vega.github.io/vega-lite/">Vega-Lite</a> (<a href="https://vega.github.io/vega-lite/examples/">Beispiele</a>)</li>
-            </ul>
-          </li>
-          <li>Werden meistens auf einem <code>canvas</code> oder als SVG gerendert</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Sensoren</h1>
-        <ul>
-          <li>Kamera &amp; Mikrophon:
-            <ul>
-              <li><a href="https://developer.mozilla.org/docs/Web/API/Media_Streams_API"></a>Media Capture and Streams API</a></li>
-              <li><a href="https://developer.mozilla.org/docs/Web/API/ImageCapture"><code>ImageCapture</code></a></li>
-              <li><a href="https://developer.mozilla.org/docs/Web/API/MediaDevices/getDisplayMedia"><code>MediaDevices.getDisplayMedia()</code></a></li>
-              <li><a href="https://developer.mozilla.org/docs/Web/API/MediaDevices/getUserMedia"><code>MediaDevices.getUserMedia()</code></a></li>
-            </ul>
-          </li>
-          <li><a href="https://developer.mozilla.org/docs/Web/API/Geolocation_API"><code>navigator.geolocation</code></a></li>
-          <li><a href="https://developer.mozilla.org/docs/Web/API/Sensor_APIs">Sensor APIs (Lagesensor, Beschleunigungssensor, usw.</a>); wird z.Z. nur von Blink unterstützt</li>
+          <li><code>IFileService</code> und <code>SimpleFileService</code> anschauen</li>
+          <li>Die Implementationen können erweitert werden, um Daten zu persistieren</li>
+          <li><em>NewtonSoft</em> NuGet Paket einsetzen, um von und nach JSON zu konvertieren</li>
         </ul>
       </section>
 
       <section>
         <div class="seventy-thirty-grid">
           <div>
-            <h1>Media</h1>
+            <h1>Biometrie mit Verschlüsselung</h1>
             <ul>
-              <li>Canvas</li>
-              <li>SVG</li>
-              <li>Video</li>
-              <li>Audio</li>
-              <li>WebGL</li>
-              <li>Charts</li>
-              <li>Sensoren</li>
+              <li>Einfache Implementation</li>
+              <li><code>SimpleFileService</code> anschauen</li>
             </ul>
           </div>
           <img src="assets/demo.png">
@@ -1629,7 +706,7 @@
           <div>
             <h1>Übungen</h1>
             <ul>
-              <li>SVG Grafik definieren und mit CSS oder Web Animation API animieren</li>
+              <li>Biometrie in der eigenen App erweitern</li>
             </ul>
           </div>
           <img src="assets/cog-wheels.png">
