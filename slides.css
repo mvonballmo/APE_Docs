@@ -27,8 +27,21 @@
   width: 100%;
 }
 
+.reveal table th {
+  vertical-align: top;
+}
+
 .reveal img {
   max-width: 300px;
+}
+
+.reveal ul li {
+  line-height: 160%;
+}
+
+.reveal ul li::marker {
+  content: "〉";
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .reveal img.tall-screenshot {
@@ -61,6 +74,9 @@
 
 .reveal .done {
   opacity: 35%;
+}
+
+.reveal .schedule {
 }
 
 .reveal .fifty-fifty-grid {
