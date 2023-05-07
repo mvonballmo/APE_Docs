@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Mobile App Entwicklung, Lektion 02, MVVM, Bindings, Controls, Debugging</title>
+  <title>Mobile App Entwicklung, Lektion 02: Evaluation, Auswahl und Konfiguration</title>
 
   <link rel=" stylesheet" href="dist/reset.css">
   <link rel="stylesheet" href="dist/reveal.css">
@@ -22,152 +22,615 @@
       <section data-background="assets/MonteRosa.jpg" class="white-text">
         <h1>Mobile App Entwicklung</h1>
         <h2>Lektion 2</h2>
-        <p class="notes">
-          MVVM, Bindings, Controls, Debugging
+        <p>
+          Evaluation, Auswahl und Konfiguration
         </p>
       </section>
 
-      <section data-background="assets/looking-back-dimmed.jpg">
-        <h1>Rückblick</h1>
-        <ul>
-          <li>Jeder hat ein Projekt auf GitHub eingerichtet</li>
-          <li>Jeder hat alle benötigte Werkzeuge eingerichtet</li>
-          <li>Jeder kann mit dem Simulator oder Gerät ausführen</li>
-          <li class="insertion">
-            Habt ihr eine <code>.gitignore</code> Datei erstellt?
+      <section data-background="assets/YellowLeaves.jpeg" class="white-text">
+        <h1>Lektion 02</h1>
+        <h2>Evaluation und Auswahl</h2>
+      </section>
+
+      <section>
+        <h2>Wo waren wir?</h2>
+        <div class="seventy-thirty-grid">
+          <div>
+            <p>Wir haben:</p>
             <ul>
-              <li><code>bin/</code> und <code>obj/</code> ausschliessen</li>
-              <li>Unerwünschte Dateien aus dem Repo löschen</li>
+              <li><em>Evaluationskriterien</em> festgelegt</li>
+              <li><em>Kandidaten</em> ausgesucht</li>
+              <li>eine <em>Evaluationsmatrix</em> erfasst und teilweise ausgefüllt</li>
             </ul>
-          </li>
+          </div>
+          <img src="assets/checklist.png">
+        </div>
+      </section>
+
+      <section>
+        <h2>Nächste Schritte</h2>
+        <div class="seventy-thirty-grid">
+          <div>
+            <ul>
+              <li>Kandidaten installieren und testen</li>
+              <li>Installation erfolgreich?</li>
+              <li>IDE testen (debug/"Hot Reload")?</li>
+              <li>Emulatoren integriert?</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section>
+        <h2>Evaluierte Kandidaten</h2>
+        <ul>
+          <li><a href="https://www.embarcadero.com/products/delphi/starter">Delphi</a></li>
+          <li><a href="https://platform.uno/docs/articles/get-started-vs-2022.html">Uno</a></li>
+          <li><a href="https://docs.avaloniaui.net/docs/getting-started">Avalonia</a></li>
+          <li><a href="https://dotnet.microsoft.com/en-us/apps/xamarin">Xamarin</a></li>
+          <li><a href="https://reactnative.dev/docs/environment-setup?guide=quickstart">ReactNative</a></li>
+          <li><a href="https://docs.flutter.dev/get-started/install/">Flutter</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/dotnet/maui/">Maui</a></li>
         </ul>
       </section>
 
       <section>
-        <h1>Übersicht Lektionen</h1>
-        <ol class="compact">
-          <li class="completed">Vorstellung, Einführung und Aufsetzen von Werkzeugen</li>
-          <li class="selected">MVVM, Bindings, Controls, Debugging</li>
-          <li>Dialogs, Styling, IOC, Testing</li>
-          <li>Benachrichtigungen (Lokal/Push/Remote)</li>
-          <li>Hybrid-Apps</li>
-          <li>Datenbanken (SQLite); HTTP Client</li>
-          <li>Sicherheit &amp; Biometrie</li>
-          <li><b>LK1</b>; Projektarbeit</li>
-          <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
+        <h2>Allgemeine Eindrücke</h2>
+        <ul>
+          <li>Alle Umgebungen benötigten mehrere zusätzliche GBs diverse SDKs, Vorlagen, Emulatoren, usw.</li>
+          <li>Mit gewissen Produkten konnte man effizient starten und entwickeln</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://www.embarcadero.com/products/delphi/starter">Delphi</a></h2>
+        <ul>
+          <li>Abschreckende Lizenzbedingungen</li>
+          <li>⛔️ Ab 5'000.- Firmeneinkommen wird eine kommerzielle Lizenz nötig</li>
+          <li>⛔️ IDE geht nur unter Windows</li>
+          <li>⛔️ Evaluation abgebrochen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://platform.uno/docs/articles/get-started-vs-2022.html">Uno</a></h2>
+        <ul>
+          <li>Musste viel installieren</li>
+          <li>⛔️ Am Schluss fehlte trotzdem noch "GenerateXamlTask"</li>
+          <li>⛔️ Evaluation abgebrochen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://docs.avaloniaui.net/docs/getting-started">Avalonia</a></h2>
+        <ul>
+          <li>Ging relativ einfach</li>
+          <li>Bietet nicht so viel</li>
+          <li>⚠️ Nicht so klar wie man iOS oder Android als Target setzen kann</li>
+          <li>⛔️ Kein "Hot Reload" eingeschaltet</li>
+          <li>⛔️ Evaluation abgebrochen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://docs.flutter.dev/get-started/install/macos">Xamarin</a></h2>
+        <ul>
+          <li>Ging auf Anhieb aus Visual Studio</li>
+          <li>⚠️ Unverändert gegenüber letztes Jahr</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://docs.flutter.dev/get-started/install/macos">ReactNative</a></h2>
+        <ul>
+          <li>Laufend mit nur wenig Fehlern</li>
+          <li>✅ "Hot-Reload" ging sofort auf iOS</li>
+          <li>⚠️ Lernkurve nicht ganz so flach, auch wenn man bereits React-Entwickler ist</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://docs.flutter.dev/get-started/install/">Flutter</a></h2>
+        <ul>
+          <li>⚠️ Verwirrende Einführung; zu viele Möglichkeiten</li>
+          <li>⛔️ Anleitung war nicht ganz korrekt</li>
+          <li>⛔️ Neues Projekt Wizard ging nicht auf Anhieb</li>
+          <li>⛔️ Build ging nie vorwärts; einfache App konnte nicht ausgeführt werden</li>
+          <li>⚠️ Ging endlich vorwärts; Target-Liste instabil</li>
+          <li>✅ "Hot-Reload" ging auf alle Plattformen gut</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://learn.microsoft.com/en-us/dotnet/maui/">Maui</a></h2>
+        <ul>
+          <li>✅ Ging auf Anhieb aus Visual Studio</li>
+          <li>✅ Mac, iOS und Android waren sehr leicht auszuführen</li>
+          <li>✅ "Hot-Reload" ging sofort auf alle Plattformen</li>
+        </ul>
+      </section>
+
+
+      <section data-background="assets/YellowLeaves.jpeg" class="white-text">
+        <h1>Lektion 02</h1>
+        <h2>Umgebung einrichten</h2>
+      </section>
+
+      <section data-background="assets/Rusty_tools_dimmed.jpg">
+        <h1>Was benötigen wir?</h1>
+        <ul>
+          <li>Source-Kontrolle: <a href="https://git-scm.com/">Git</a> (mit <a href="https://www.syntevo.com/smartgit/">SmartGit</a> GUI)</li>
+          <li>Online Code Repo: <a href="https://github.com/">GitHub</a></li>
+          <li>IDE: <a href="https://visualstudio.microsoft.com/vs/community/">Visual Studio</a></li>
+          <li>Laufzeitumgebung: <a href="https://dotnet.microsoft.com/">.NET</a>/<a href="https://learn.microsoft.com/en-us/dotnet/maui/">Maui</a></li>
+          <li>Package Manager: <a href="https://www.nuget.org/">NuGet</a></li>
+          <li>Testing Framework: <a href="https://nunit.org/">nUnit</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>GitHub Einrichten</h1>
+        <ul>
+          <li>Konto auf <a href="https://github.com/">GitHub</a> erstellen</li>
+          <li>Github Repository erstellen (z.B. "HFU_APE_app")
+            <ul>
+              <li><em>Entweder</em> veröffentlichen</li>
+              <li><em>Oder</em> mich (<b>mvonballmo</b>) einladen</li>
+            </ul>
+          </li>
+          <li><a href="https://github.com/mvonballmo/APE_Docs">Docs</a> und <a href="https://github.com/mvonballmo/APE_Apps">Apps</a> merken (entweder mit "Watch" oder "⭐️")</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Einführung <a href="https://www.trello.com/">GitHub Issues</a></h1>
+        <ul>
+          <li>Unterstützt die Projektführung
+            <ul>
+              <li>Projekte</li>
+              <li>Boards</li>
+              <li>Issues</li>
+              <li>Spalten/Status</li>
+            </ul>
+          </li>
+          <li><b>Aufgaben:</b> Konto, Repository, Projekt, und ein Issue erstellen</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Wo steht ihr?</h1>
+            <ul>
+              <li><em>GitHub</em> ist eingerichtet</li>
+              <li><em>GitHub</em> Projekt ist aufgesetzt</li>
+            </ul>
+          </div>
+          <img src="assets/checklist.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Einführung Git</h1>
+            <ul>
+              <li>Pull vs. Fetch</li>
+              <li>Push vs. Commit</li>
+              <li>Local vs. Remote</li>
+              <li>Merge vs. Rebase</li>
+              <li>Working Tree vs. Stage vs. Stash</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <h1>SmartGit</h1>
+        <ul>
+          <li>Gratis für nicht kommerzielle Zwecke</li>
+          <li>GUI für Git
+            <ul>
+              <li>Git kann man auch mit VSC, WebStorm oder Kommandozeile benutzen</li>
+              <li>SmartGit ist <em>besser</em></li>
+            </ul>
+          </li>
+          <li><a href="https://www.syntevo.com/smartgit/download/">Herunterladen</a> und installieren</li>
+          <li>Ausführen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>SmartGit Lizenz</h1>
+        <p>Letzte Option wählen und bestätigen.</p>
+        <img src="assets/Lesson01/smartgit_install_license.png" class="screenshot">
+      </section>
+
+      <section>
+        <h1>Repo(s) Herunterladen</h1>
+        <ul class="compact">
+          <li>Repos:
+            <ul>
+              <li><a href="https://github.com/mvonballmo/APE_Docs">https://github.com/mvonballmo/APE_Docs</a></a></li>
+              <li><a href="https://github.com/mvonballmo/APE_Apps">https://github.com/mvonballmo/APE_Apps</a></a></li>
+              <li>Eigenes Projekt-Repo</li>
+            </ul>
+          </li>
+          <li>In <em>SmartGit</em>, <code>Repository/Clone</code> selektieren und das URL eingeben</li>
+          <li>In <em>SmartGit</em>, <code>Repository/Clone</code> selektieren, GitHub als <em>Hosting Provider</em> einrichten, und dein eigenes Projekt selektieren</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Wo steht ihr?</h1>
+            <ul>
+              <li class="done"><em>GitHub</em> ist eingerichtet</li>
+              <li class="done"><em>GitHub</em> Projekt ist aufgesetzt</li>
+              <li><em>SmartGit</em> ist eingerichtet</li>
+              <li>"app" und "doc" Repositories sind bei euch lokal verfügbar</li>
+            </ul>
+          </div>
+          <img src="assets/checklist.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>IDE Aufsetzen</h1>
+        <ul>
+          <li>OS und Zielgerät feststellen</li>
+          <li>Visual Studio 2022 installieren</li>
+          <li>Emulator (Android) oder Simulator (iOS) einrichten</li>
+          <li>Optional: <a href="https://docs.microsoft.com/xamarin/android/get-started/installation/set-up-device-for-development">Einrichten eines Geräts für die Entwicklung und Debugging</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Wo steht ihr?</h1>
+        <div class="seventy-thirty-grid">
+          <div>
+            <ul>
+              <li class="done"><em>GitHub</em> ist eingerichtet</li>
+              <li class="done"><em>GitHub</em> Projekt ist aufgesetzt</li>
+              <li class="done"><em>SmartGit</em> ist eingerichtet</li>
+              <li class="done">"app" und "doc" Repositories sind lokal verfügbar</li>
+              <li><em>Visual Studio</em> ist installiert</li>
+              <li>Ein Emulator ist eingerichtet</li>
+            </ul>
+          </div>
+          <img src="assets/checklist.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Wir sind bereit!</h1>
+        <img src="assets/its_so_beautiful.png">
+      </section>
+
+      <section data-background="assets/legobricks-dimmed.jpg" class="white-text">
+        <h1>Bauen wir etwas zusammen!</h1>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Projekt erstellen</h1>
+            <ul>
+              <li class="fragment highlight-current-blue">".NET MAUI App" wählen</li>
+              <li class="fragment highlight-current-blue">Drei Projekte werden erstellt</li>
+              <li class="fragment highlight-current-blue">"Shared" Projekt zielt auf <em>.NET Standard</em></li>
+              <li class="fragment highlight-current-blue">Im Emulator Ausführen</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Commit und Push</h1>
+            <ul>
+              <li class="fragment highlight-current-blue">Änderungen in Git "committen"</li>
+              <li class="fragment highlight-current-blue">Commit(s) nach GitHub "pushen"</li>
+            </ul>
+          </div>
+          <img src="assets/up_down.png">
+        </div>
+        <p class="notes">Um ein lokal erstelltes Projekt mit GitHub zu verbinden, siehe <a href="https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github">How to Push an Existing Project to GitHub</a>.</p>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Wo steht ihr?</h1>
+            <ul>
+              <li>Alle Werkzeuge sind installiert und eingerichtet</li>
+              <li>Eure Code ist auf GitHub gesichert</li>
+            </ul>
+          </div>
+          <img src="assets/checklist.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Lektion 2: Themen</h1>
+        <ol>
+          <li>IOC (Inversion of Control)</li>
+          <li>Testing</li>
         </ol>
       </section>
 
       <section>
-        <h1>Einführung UI</h1>
+        <h1>Lektion 3: Themen</h1>
         <ul>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/xaml/xaml-basics/data-bindings-to-mvvm">MVVM</a></li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/xaml/xaml-basics/essential-xaml-syntax">XAML for Forms</a></li>
-          <li>Verfügbare views/layouts/controls</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/basic-bindings">Bindings</a></li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/commanding">Commands</a></li>
+          <li>Dialogs</li>
+          <li>Styling</li>
+          <li>Xamarin Forms</li>
+          <li>Cross-Platform</li>
+          <li>Navigation</li>
+          <li>MVVM</li>
+          <li>XAML für Forms</li>
+          <li>Controls</li>
+          <li>Commands</li>
         </ul>
       </section>
 
       <section>
-        <h1>MVVM Pattern</h1>
+        <h1>Lektion 4: Themen</h1>
         <ul>
-          <li>MVVM = [M]odel [V]iew [V]iew[M]odel</li>
-          <li>Entkoppelt Logik von Ansichten</li>
-          <li>Setzt <em>Bindings</em> ein, um View mit Logik zu verbinden</li>
-          <li>Das automatisiertes Testen von <em>Views</em> oder mit denen assoziierten "code-behind" Code ist schwer.</li>
-          <li>Deshalb soll das "ViewModel" vom Ansicht entkoppelt sein.</li>
+          <li>Notifications
+            <ul>
+              <li>Local</li>
+              <li>PUSH/Remote</li>
+            </ul>
+          </li>
         </ul>
       </section>
 
       <section>
-        <h1>MVVM Pattern</h1>
-        <img src="assets/Lesson02/MVVM.jpg" class="full-width">
+        <h1>Lektion 5: Themen</h1>
+        <ul>
+          <li>LK1</li>
+          <li>Hybrid Applikationen</li>
+          <li>Interoperabilität mit dem Nativen Teil</li>
+          <li>UI-Entwurf</li>
+          <li>Ansatz Präsentieren</li>
+          <li>Laufendes Beispiel erstellen</li>
+        </ul>
       </section>
 
       <section>
-        <h1>ViewModels</h1>
-        <p>Beinhalt die Logik für das Anzeigen vom UI (<em>nicht</em> Business-Logik)</p>
+        <h1>Lektion 6: Themen</h1>
         <ul>
-          <li>Welche Controls sind aktiviert (enabled)?</li>
-          <li>Welche Items beinhalten Listen?</li>
-          <li>Was passiert beim interagieren mit dem UI? (Z.B. beim anklicken eines Elements?)</li>
-          <li>Ansicht-spezifische Konvertierungen von Daten (z.B. <code>Age</code> von <code>Birthdate</code> berechnen)</li>
+          <li>Einführung Sicherheit (Hash vs. Encryption, PKI)</li>
+          <li>Mobile Sicherheit</li>
+          <li>Biometrie</li>
         </ul>
+      </section>
+
+      <section>
+        <h1>Lektion 7: Themen</h1>
+        <ul>
+          <li>LK2</li>
+          <li>Lokale Datenbank (SQLite)</li>
+          <li>Logging</li>
+          <li>Telemetrie</li>
+          <li>Eigene Projekte ausbauen</li>
+          <li>Reviews &amp; Beratung</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Lektion 8: Themen</h1>
+        <ol>
+          <li>Eigene Projekte ausbauen</li>
+          <li>Reviews &amp; Beratung</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>Lektion 9: Themen</h1>
+        <ol>
+          <li>Projekte präsentieren</li>
+          <li>Themen nach Wahl</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>Dokumentationen</h1>
+        <p>Die folgende Online-Referenzen sind sehr nützlich und werden statt einem Buch eingesetzt.</p>
+        <ul>
+          <li><a href="https://docs.microsoft.com/xamarin/">Microsoft Xamarin</a></li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/">Xamarin Forms</a></li>
+          <li><a href="https://docs.microsoft.com/dotnet/maui/">MAUI</a></li>
+        </ul>
+      </section>
+
+      <section class="compressed">
+        <h1>Übersicht Landschaft</h1>
+        <li>Xamarin ermöglicht Android/iOS Entwicklung mit .NET/C#</li>
+        <div>
+          <table>
+            <tr>
+              <th></th>
+              <th>IDE</th>
+              <th>Languages</th>
+              <th>Frameworks</th>
+              <th>Build/Deploy</th>
+            </tr>
+            <tr>
+              <th style="writing-mode: vertical-lr;">Android</th>
+              <td>
+                Android Studio<br>
+                Eclipse<br>
+                NetBeans
+              </td>
+              <td>
+                Java<br>
+                Kotlin<br>
+                C++
+              </td>
+              <td>
+                Google Play Service<br>
+                Dagger<br>
+                data-bind<br>
+                gson<br>
+                jdeferred
+              </td>
+              <td>
+                PlayStore<br>
+                Gradle<br>
+                Maven
+              </td>
+            </tr>
+            <tr>
+              <th style="writing-mode: vertical-lr">iOS</th>
+              <td>
+                xCode<br>
+                AppCode
+              </td>
+              <td>
+                Swift<br>
+                Objective-C
+              </td>
+              <td>
+                AlamoFire<br>
+                CryptoSwift<br>
+                SwiftyJSON<br>
+                SwiftyRSA<br>
+                PromiseKit
+              </td>
+              <td>
+                TestFlight<br>
+                AppStore<br>
+                CocoaPods
+              </td>
+            </tr>
+            <tr>
+              <th style="writing-mode: vertical-lr">Cross-Platform</th>
+              <td>
+                <span class="fragment highlight-blue">Visual Studio</span><br>
+                Rider<br>
+                WebStorm<br>
+                Visual Studio Code<br>
+              </td>
+              <td>
+                <span class="fragment highlight-blue">C#</span><br>
+                F#<br>
+                TypeScript
+              </td>
+              <td>
+                <span class="fragment highlight-blue">Xamarin</span><br>
+                MAUI<br>
+                React Native<br>
+                Ionic<br>
+                Cordova (ehem. PhoneGap)<br>
+                NativeScript
+              </td>
+              <td>
+                fastlane<br>
+                HockeyApp<br>
+                Artifactory<br>
+                Jenkins<br>
+                TeamCity<br>
+                Azure<br>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h1>Geschichte Xamarins</h1>
+        <ul>
+          <li>Die Linux .NET Laufzeitumgebung <em>Mono</em> wurde von der Firma <em>Ximian</em> entwickelt</li>
+          <li>Aus <em>Ximian</em> wurde die Firma <em>Xamarin</em></li>
+          <li>Das Produkt <em>Xamarin</em> ermöglicht iOS/Android Apps mit <em>C#</em> mit <em>Mono</em></li>
+          <li>In 2016 wurde <em>Mono</em> von <em>Microsoft</em> gekauft</li>
+          <li>Wird immer weiter in .NET integriert</li>
+          <li>Wird in 2022 durch <a href="https://docs.microsoft.com/dotnet/maui/">MAUI</a> ersetzt/erweitert</li>
+        </ul>
+        <p class="notes">Siehe den <a href="https://en.wikipedia.org/wiki/Xamarin">Wikipedia Eintrag dazu</a>.</p>
+      </section>
+
+      <section>
+        <h1>Xamarin mit Native UIs</h1>
+        <ul>
+          <li>Xamarin.iOS &amp; Xamarin.Android Projekte</li>
+          <li>Ein 1:1 Mapping zu den jeweiligen Plattform-APIs</li>
+          <li>Neue APIs werden innerhalb 24 Stunden angeboten</li>
+          <li><em>Core Elemente</em> werden geteilt</li>
+          <li><em>UIs</em> sind Plattform-spezifisch und werden <em>nicht</em> geteilt (ausser mit Hybrid-UIs)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Diagramm Xamarin Native</h1>
+        <img src="assets/Lesson01/XamarinClassic.jpg" class="screenshot">
+      </section>
+
+      <section>
+        <h1>Xamarin Forms</h1>
+        <ul>
+          <li><em>UIs</em> werden geteilt und mit <em>XAML</em> geschrieben</li>
+          <li>Bietet <code>DependencyService</code> (IoC) für plattformabhängige Features an</li>
+          <li>Bietet Schnittstellen für gemeinsame Features (wie z.B. Dialogs, Notifications, usw.) an</li>
+          <li>Bietet Unterstützung für Navigation an</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Beispiele Xamarin Forms</h1>
+        <img src="assets/Lesson01/XamarinFormsDemos.jpg" class="screenshot">
+      </section>
+
+      <section>
+        <h1>Übersicht Architektur</h1>
+        <img src="assets/Lesson01/XamarinProjectStructure.jpg" class="screenshot">
       </section>
 
       <section class="compact">
-        <h1>ViewModel Benachrichtigungen</h1>
-        <ul class="compact">
-          <li>Findet meistens über <a href="https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a> statt</li>
-          <li>Kann generisch abgefangen werden (wir werden eine Basis-Klasse dafür definieren)</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-csharp hljs">
-            public bool IsSelected
-            {
-              get => _isSelected;
-              set
-              {
-                _isSelected = value;
-                RaisePropertyChanged();
-              }
-            }
-
-            protected void RaisePropertyChanged([CallerMemberName] string property = "")
-            {
-              PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Listen von Elementen</h1>
+        <h1>.NET Standard</h1>
         <ul>
-          <li>Findet über <a href="https://docs.microsoft.com/dotnet/api/system.collections.specialized.inotifycollectionchanged=">INotifyCollectionChanged</a> statt</li>
-          <li><a href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1">ObservableCollection</a> implementiert diese und benachrichtigt von Änderungen</li>
+          <li>Definiert ein gemeinsames <em>API</em> oder <em>Schnittstelle</em></li>
+          <li>Je höher die Version desto breiter die API Oberfläche</li>
+          <li>Version 2.1 ist die neuste Version</li>
+          <li><em>Mono</em> implementiert <em>.NET Standard</em> for iOS/Android</li>
+          <li><em>.NET Framework</em> und <em>.NET</em> implementieren sie for Windows</li>
+          <li><em>.NET 6</em> is die allerneuste und aktuelle <em>LTS*</em> Version (Nov. 2021)</li>
         </ul>
-        <pre>
-          <code data-trim class="language-csharp hljs">
-            public ObservableCollection&lt;TodoItemViewModel&gt; Items
-            {
-              get => _items;
-              set
-              {
-                _items = value;
-                RaisePropertyChanged();
-              }
-            }
-          </code>
-        </pre>
+        <p class="notes">LTS = Long-Term Support</p>
       </section>
 
       <section>
-        <h2>Unterschied <em>Modell</em> vom <em>ViewModell</em></h2>
-        <p>Ein <em>Modell</em></p>
+        <h1>.NET Standard APIs</h1>
         <ul>
-          <li>Repräsentiert die unverzierte Daten (z.B. das, was in die Datenbank gespeichert ist)</li>
-          <li>Beinhaltet keine Logik</li>
-          <li>Benachrichtigt Änderungen nur sehr selten</li>
+          <li>File (System.IO)</li>
+          <li>Collections &amp; LINQ</li>
+          <li>Task &amp; <code>async</code>/<code>await</code></li>
+          <li>Http (Client) (System.NET)</li>
+          <li>Und viel mehr...</li>
         </ul>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
       </section>
 
       <section>
         <div class="seventy-thirty-grid">
           <div>
-            <h1>MVVM</h1>
+            <h1>Erster Blick</h1>
             <ul>
-              <li>Modell definieren</li>
-              <li>ViewModell definieren</li>
-              <li>View definieren</li>
+              <li>Einfaches Applikation ausführen und debuggen</li>
+              <li>Tests ausführen und debuggen</li>
             </ul>
           </div>
           <img src="assets/demo.png">
@@ -175,525 +638,105 @@
       </section>
 
       <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Übungen</h1>
-            <p>Mindestens ein Modell und ein ViewModell in die eigene App erstellen</p>
-            <ul>
-              <li>Benötigte Properties hinzufügen</li>
-              <li><code>PropertyChanged</code> wo nötig aufrufen</li>
-            </ul>
-          </div>
-          <img src="assets/cog-wheels.png">
-        </div>
-      </section>
-
-      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/controls/pages">Pages</a>
-          und
-          <a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/controls/layouts">Layouts</a>
-        </h1>
-      </section>
-
-      <section>
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/controls/pages">Pages</a></h1>
-        <p>Repräsentiert ein <em>Screen</em> (ganzer Bildschirm)</p>
-        <ul>
-          <li><a href="https://docs.microsoft.com/dotnet/api/Xamarin.Forms.ContentPage?view=xamarin-forms">ContentPage</a></li>
-          <li><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.navigationpage?view=xamarin-forms">NavigationPage</a></li>
-          <li><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.tabbedpage?view=xamarin-forms">TabbedPage</a></li>
-          <li><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.carouselpage?view=xamarin-forms">CarouselPage</a></li>
-          <li><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.flyoutpage?view=xamarin-forms">FlyoutPage</a>*</li>
-        </ul>
-        <p class="notes">* Dokumentiert mit dem obsoleten <a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.masterdetailpage?view=xamarin-forms">MasterDetailPage</a></p>
-      </section>
-
-      <section>
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/controls/layouts">Layouts</a></h1>
-        <p>Ableitungen von <em>Views</em></p>
-        <ul>
-          <li><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.contentview?view=xamarin-forms">ContentPage</a> beinhaltet ein einziges Element</li>
-          <li><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.frame?view=xamarin-forms">Frame</a> ist ein <code>ContentView</code> mit Position und Rand</li>
-          <li><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.scrollview?view=xamarin-forms">ScrollView</a> verwaltet einen scrollbaren Bereich</li>
-          <li><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.stacklayout?view=xamarin-forms">StackLayout</a> arrangiert Elemente vertikal oder horizontal</li>
-          <li><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.grid?view=xamarin-forms">Grid</a> arrangiert Elemente in Spalten und Zeilen</li>
-          <li><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.flexlayout?view=xamarin-forms">FlexLayout</a> arrangiert Elemente mit <a href="https://developer.mozilla.org/docs/Learn/CSS/CSS_layout/Flexbox">CSS Flexbox</a></li>
-          <li><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.tableview?view=xamarin-forms">TableView</a> arrangiert Elemente in einer Tabelle</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Grid Layout</h1>
-        <ul>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/layouts/grid">Grid</a> ist eine der mächtigsten Kontrollen</li>
-          <li>Definiert Reihen und Spalten mit <code>RowDefinitions</code> und <code>ColumnDefinitions</code></li>
-          <li>Elementen hinzufügen und einen <code>RowIndex</code> und/oder <code>ColumnIndex</code> zuweisen</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Grid: Zellen einteilen</h1>
-        <p>Die Grösse einer Zelle kann:</p>
-        <ul>
-          <li>Automatisch von Elementen berechnet werden ("content sizing")</li>
-          <li><strong>Default</strong>: Proportional berechnet werden ("*-sizing")</li>
-          <li>Auf einem absoluten Wert "fixiert" werden ("fixed sizing")</li>
-        </ul>
-        <p class="notes">Siehe Beispiel in <a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.grid?view=xamarin-forms">die Dokumentation</a></p>
-      </section>
-
-      <section>
-        <h1>Grid XAML Beispiel</h1>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;Grid&gt;
-              &lt;Grid.RowDefinitions&gt;
-                &lt;RowDefinition Height="*" /&gt;
-                &lt;RowDefinition Height="*" /&gt;
-              &lt;/Grid.RowDefinitions&gt;
-              &lt;Grid.ColumnDefinitions&gt;
-                &lt;ColumnDefinition Width="*" /&gt;
-                &lt;ColumnDefinition Width="*" /&gt;
-              &lt;/Grid.ColumnDefinitions&gt;
-
-              &lt;Label Text="Top Left" Grid.Row="0" Grid.Column="0" /&gt;
-              &lt;Label Text="Top Right" Grid.Row="0" Grid.Column="1" /&gt;
-              &lt;Label Text="Bottom Left" Grid.Row="1" Grid.Column="0" /&gt;
-              &lt;Label Text="Bottom Right" Grid.Row="1" Grid.Column="1" /&gt;
-            &lt;/Grid&gt;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Grid Beispiel Visualisierung</h1>
-        <img src="assets/Lesson02/GridExample.jpg" class="tall-screenshot">
-      </section>
-
-      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/">Controls</a></h1>
-      </section>
-
-      <section>
-        <h1>Common <a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/">Controls</a></h1>
-        <ul>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/text/label"><code>Label</code></a>: nicht editierbare Text</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/button"><code>Button</code></a>: klickbares/tippbares Element</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/text/entry"><code>Entry</code></a>: Ein Editor für eine Textzeile</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/text/editor"><code>Editor</code></a>: Ein Editor für mehrere Textzeilen</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/listview/"><code>ListView</code></a>: eine vertikale Liste von Daten</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/picker/"><code>Picker</code></a>: ermöglicht der Auswahl eines Elements aus einer Liste (auch "dropdown" oder "combobox")</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/datepicker"><code>DatePicker</code></a>: vereinfacht der Auswahl eines Datums</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Common <a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/">Controls II</a></h1>
-        <ul>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/timepicker"><code>TimePicker</code></a>: vereinfacht der Auswahl einer Zeit</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/imagebutton"><code>ImageButton</code></a>: ein <code>Button</code> mit Text und Bild</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/stepper"><code>Stepper</code></a>: vereinfacht der Auswahl einer Zahl</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/slider"><code>Slider</code></a>: vereinfacht der Auswahl einer Wert aus einer Bandbreite</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/checkbox"><code>Checkbox</code></a> stellt einen booleschen Wert dar</li>
-        </ul>
-      </section>
-
-      <section class="compact">
-        <h1>Controls XAML Beispiel</h1>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;Grid Margin="10"&gt;
-              &lt;Grid.RowDefinitions&gt;
-                &lt;RowDefinition Height="*" /&gt;
-                &lt;RowDefinition Height="3*" /&gt;
-                &lt;RowDefinition Height="*" /&gt;
-              &lt;/Grid.RowDefinitions&gt;
-
-              &lt;Entry Grid.Row=“0" VerticalOptions=“Center" Placeholder="Your title here” /&gt;
-
-              &lt;Frame Grid.Row="1"&gt;
-                &lt;Editor VerticalOptions=“FillAndExpand" Placeholder="Your description here” /&gt;
-              &lt;/Frame&gt;
-
-              &lt;Button Grid.Row=“2" HorizontalOptions=“End" VerticalOptions=“End&gt;
-                      WidthRequest=“100" HeightRequest=“50" Text="Save" />
-            &lt;/Grid&gt;
-          </code>
-        </pre>
-      </section>
-
-      <section class="compact">
-        <h1>Controls Visualisierung</h1>
-        <img src="assets/Lesson02/ControlsExample.jpg">
-      </section>
-
-      <section>
-        <h1>Anordnung von Controls</h1>
-        <ul>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/layouts/layout-options">Layout Options</a>: <code>VerticalOptions</code> and <code>HorizontalOptions</code>
-            <ul>
-              <li><code>Start</code>, <code>End</code>, <code>Center</code> und <code>Fill</code></li>
-              <li>Suffix <code>AndExpand</code> kontrolliert die Zuteilung von zusätzlichem Platz
-                (siehe Beispiele auf <a href="https://stackoverflow.com/questions/25338533/what-is-the-difference-between-xamarin-forms-layoutoptions-especially-fill-and">StackOverflow</a>)</li>
-            </ul>
-          </li>
-          <li>Expansion wird in <code>StackLayouts</code> benutzt</li>
-      </section>
-
-      <section class="compact">
-        <h1>Anordnung Visualisierung</h1>
-        <img src="assets/Lesson02/AlignmentExample.jpg" class="tall-screenshot">
-      </section>
-
-      <section>
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/text/label"><code>Label</code></a>: Eigenschaften</h1>
-        <ul>
-          <li><code>Text</code> wird im Layout angezeigt</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/button"><code>Button</code></a>: Eigenschaften</h1>
-        <ul>
-          <li><code>Text</code> wird im Layout angezeigt</li>
-          <li><code>Command</code> wird beim Klicken oder Tippen ausgeführt</li>
-          <li><code>CommandParameter</code> wird dem <code>Command</code> weitergegeben</li>
-        </ul>
-      </section>
-
-      <section class="compact">
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/text/entry"><code>Entry</code></a>: Eigenschaften</h1>
-        <ul>
-          <li><code>Text</code> ist die angezeigte und/oder eingegebene Text</li>
-          <li><code>Placeholder</code> wird im leeren Entry angezeigt</li>
-          <li><code>MaxLength</code> schränkt die maximale Länge der Text ein</li>
-          <li><code>IsPassword</code> gibt an, ob <code>*</code> soll für eingegebene Text benutzt werden</li>
-          <li><code>ClearButtonVisibility</code> gibt an, ob ein Button angezeigt werden soll womit den Inhalt gelöscht werden kann</li>
-          <li><code>Keyboard</code> kontrolliert welche Tastatur angezeigt werden soll</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/editor/"><code>Editor</code></a>: Eigenschaften</h1>
-        <ul>
-          <li>Eigenschaften von <code>Entry</code></li>
-          <li><code>IsPassword</code> wird <em>nicht</em> unterstützt</li>
-          <li><code>Autosize</code> gibt an, ob die Grösse der Kontrolle an den Inhalt angepasst werden soll</li>
-          <li><code>IsSpellCheckEnabled</code> gibt an, ob Rechtschreibung eingeschaltet ist</li>
-          <li><code>IsTextPredictionEnabled</code> gibt an, ob Selbstkorrektur eingeschaltet ist</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1 class="insertion"><a href="https://docs.microsoft.com/xamarin/xamarin-forms/xaml/hot-reload">"Hot Reload"</a></a>
-        </h1>
-        <ul>
-          <li>Ermöglicht das Wahrnehmen von Änderungen ohne, dass die App neu ausgeführt werden muss</li>
-          <li>
-            Siehe <a href="https://docs.microsoft.com/de-de/xamarin/xamarin-forms/xaml/hot-reload#known-limitations">Bekannte Einschränkungen</a>
-            <ul>
-              <li>Geht nur für XAML-Änderungen (leider noch keine C#-Änderungen)</li>
-              <li>Benötigt "Link None" oder "Don't Link" in die Build-Optionen</li>
-            </ul>
-          </li>
-          <li>
-            Siehe Troubleshooting
-            <ul>
-              <li>"XAML Hot Reload" Output-Fenster anzeigen</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Controls und Layouts</h1>
-            <ul>
-              <li>Beispiele von oben einbauen und anschauen</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
+        <h1>Könnt ihr das auch?</h1>
         <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
+          <img src="assets/hahaha_please.jpg">
           <div>
-            <h1>Übungen</h1>
-            <ul>
-              <li>Layout erstellen und damit spielen</li>
-              <li>Verschieden Controls einbauen, um ein Gefühl dafür zu bekommen</li>
-            </ul>
+            <p class="fragment">Noch nicht...</p>
+            <p class="fragment" style="text-align: right">...aber gleich!</p>
           </div>
-          <img src="assets/cog-wheels.png">
         </div>
       </section>
 
-      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/xaml/xaml-basics/data-binding-basics">Data-Binding</a></h1>
+
+      <section data-background="assets/A river near Forestport.jpeg" class="white-text">
+        <h1>Navigation und Tabs</h1>
       </section>
 
       <section>
-        <h1>Beispiel mit <a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/listview/">ListView</a></h1>
-        <ul>
-          <li>Als <code>ItemsSource</code> ein <code>ObservableCollection&lt;T&gt;</code> einsetzen</li>
-          <li><code>ItemTemplate</code> beeinflusst die visuelle Repräsentation</li>
-          <li>Mit <code>SelectedItem</code> können Änderungen abgefangen werden</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Code von <a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/listview/">ListView</a> Beispiel</h2>
-        <p>Das ViewModell:</p>
+        <h1>Navigation</h1>
+        <p>Seiten auf dem "View Stack" setzen</p>
         <pre>
           <code data-trim class="language-csharp hljs">
-            public ObservableCollection&lt;TodoItemViewModel&gt; Items
-            {
-              get => _items;
-              set
-              {
-                _items = value;
-                RaisePropertyChanged();
-              }
-            }
+            // App.xaml.cs
+            MainPage = new MainPage();
 
-            private ObservableCollection&lt;TodoItemViewModel&gt; _items;
+            // ItemsPage.xaml.cs
+            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            // NewItemPage.xaml.cs
+            await Navigation.PopModalAsync();
           </code>
         </pre>
-      </section>
-
-      <section>
-        <h2>Code von <a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/listview/">ListView</a> Beispiel</h2>
-        <p>Das View:</p>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;ListView
-              ItemsSource="{Binding Path=MyList}"
-              SelectedItem="{Binding SelectedItem, Mode=TwoWay}"&gt;
-              &lt;ListView.ItemTemplate&gt;
-                &lt;DataTemplate&gt;
-                  &lt;ViewCell&gt;
-                    &lt;StackLayout&gt;
-                      &lt;Label Text="{Binding Firstname}" /&gt;
-                      &lt;Label Text="{Binding Lastname}" /&gt;
-                    &lt;/StackLayout&gt;
-                  &lt;/ViewCell&gt;
-                &lt;/DataTemplate&gt;
-              &lt;/ListView.ItemTemplate&gt;
-            &lt;/ListView&gt;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Binding erstellen</h1>
-        <ul>
-          <li>
-            <code><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/basic-bindings">BindingContext</a></code> zum ViewModell definieren
-            <ul>
-              <li>Syntax: <code>{Binding Path=Value}</code></li>
-              <li><code><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/binding-mode">BindingMode</a></code> kann <code>Default</code>, <code>OneWay</code>, <code>TwoWay</code> oder <code>OneTime</code> sein</li>
-            </ul>
-          </li>
-          <li><code><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/binding-mode#viewmodels-and-property-change-notifications">INotifyPropertyChanged</a></code> implementieren</li>
-          <li><code><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/converters">IValueConverter</a></code> einsetzen, um Werten "on the fly" zu konvertieren</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>BindingContext</h1>
-        <ul>
-          <li><code>BindingContext</code> ist die “Source”</li>
-          <li><code>BindingContext</code> wird geerbt</li>
-          <li><code><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/relative-bindings">x:Reference</a></code> einsetzen um ein Control mit Namen zu referenzieren</li>
-          <li><code>RelativeSource</code> ermöglicht eine bessere Kapslung für Komponenten</li>
-        </ul>
+        <p class="notes"><code>async</code> und <code>await</code> werden wir jetzt einfach benutzen und in einer späteren Lektion genauer erklären</p>
       </section>
 
       <section class="compact">
-        <h1>Kompilierte Bindings Beispiel</h1>
-        <pre>
-          <code data-trim class="language-javascript hljs">
-            &lt;ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:viewModels="clr-namespace:ToDo.ViewModels"
-              x:Class="Todo.Views.TodoDetailPage"
-              x:DataType="viewModels:TodoItemViewModel"
-              Title="Details"&gt;
-              &lt;ContentPage.Content&gt;
-                &lt;Grid Margin="10"&gt;
-                  &lt;Grid.RowDefinitions&gt;
-                    &lt;RowDefinition Height="1*" /&gt;
-                    &lt;RowDefinition Height="1*" /&gt;
-                    &lt;RowDefinition Height="3*" /&gt;
-                    &lt;RowDefinition Height="1*" /&gt;
-                  &lt;/Grid.RowDefinitions&gt;
-                  &lt;Entry Grid.Row="0" VerticalOptions="Center" Text="{Binding Title}" /&gt;
-                  &lt;Picker Grid.Row="1" ItemsSource="{Binding Priorities}" SelectedItem="{Binding Priority, Mode=TwoWay}" /&gt;
-                  &lt;Frame Grid.Row="2"&gt;
-                    &lt;Editor VerticalOptions="FillAndExpand" Text="{Binding Description}" /&gt;
-                  &lt;/Frame&gt;
-                  &lt;Button Grid.Row="3" Command="{Binding SaveCommand}" Text="Save" /&gt;
-                &lt;/Grid&gt;
-              &lt;/ContentPage.Content&gt;
-            &lt;/ContentPage&gt;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1><code><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/converters">IValueConverter</a></code></h1>
-        <ul>
-          <li>Einsetzen um den Wert eines Bindings anzupassen</li>
-          <li><code>IValueConverter</code> Schnittstelle implementieren</li>
-        </ul>
+        <h1>Xamarin Forms: Tabs</h1>
+        <p>Populate pages as tabs in <code>MainPage.xaml.cs</code> in the <code>TabbedPage.Children</code></p>
         <pre>
           <code data-trim class="language-xml hljs">
-            &lt;ContentPage.Resources&gt;
-              &lt;ResourceDictionary&gt;
-                &lt;local:IntToBoolConverter x:Key="Converter" /&gt;
-              &lt;/ResourceDictionary&gt;
-            &lt;/ContentPage.Resources&gt;
-            &lt;Button
-                IsEnabled="{Binding Path=SomeValue, Converter={StaticResource Converter}}”
-                Text="Click me" /&gt;
+            &lt;TabbedPage.Children&gt;
+              &lt;NavigationPage Title="Browse"&gt;
+                  &lt;x:Arguments&gt;
+                      &lt;views:ItemsPage /&gt;
+                  &lt;/x:Arguments&gt;
+                  &lt;NavigationPage.Icon&gt;
+                      &lt;OnPlatform x:TypeArguments="FileImageSource"&gt;
+                          &lt;On Platform="iOS" Value="tab_feed.png"/&gt;
+                      &lt;/OnPlatform&gt;
+                  &lt;/NavigationPage.Icon&gt;
+              &lt;/NavigationPage&gt;
+
+              &lt;NavigationPage Title="About"&gt;
+                  &lt;x:Arguments&gt;
+                      &lt;views:AboutPage /&gt;
+                  &lt;/x:Arguments&gt;
+                  &lt;NavigationPage.Icon&gt;
+                      &lt;OnPlatform x:TypeArguments="FileImageSource"&gt;
+                          &lt;On Platform="iOS" Value="tab_about.png"/&gt;
+                      &lt;/OnPlatform&gt;
+                  &lt;/NavigationPage.Icon&gt;
+              &lt;/NavigationPage&gt;
+            &lt;/TabbedPage.Children&gt;
           </code>
         </pre>
       </section>
 
       <section>
-        <h1>Fragen?</h1>
+        <h1>Xamarin Forms UI</h1>
+        <p>Weitere UI-Elemente sind:</p>
+        <ul>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/navigation/master-detail-page">Master-Detail</a></li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/navigation/carousel-page">Carousel</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Wo steht ihr?</h1>
+            <ul>
+              <li class="done">Alle Werkzeuge sind installiert und eingerichtet</li>
+              <li class="done">Eure Code ist auf GitHub gesichert</li>
+              <li>Ihr könnt eure App im Emulator und auf dem Gerät
+                <ul>
+                  <li>ausführen</li>
+                  <li>debuggen</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <img src="assets/checklist.png">
+        </div>
+      </section>
+
+      <section>
         <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
+          <img src="assets/look_of_disapproval.jpg">
           <div>
-            <h1>Bindings</h1>
-            <ul>
-              <li>Binding definieren</li>
-              <li><code>IValueConverter</code> definieren</li>
-              <li>Kompilierte Bindings benutzen</li>
-            </ul>
+            <p class="fragment" style="margin-top: 5em">Können wir jetzt endlich<br> mehr Mobile-Entwicklung lernen?</p>
+            <p class="fragment" style="text-align: right">Ja! Nächstes mal...</p>
           </div>
-          <img src="assets/demo.png">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Übungen</h1>
-            <ul>
-              <li>Ein kompilierte Binding mit einem <code>IValueConverter</code> erstellen</li>
-            </ul>
-          </div>
-          <img src="assets/cog-wheels.png">
-        </div>
-      </section>
-
-      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/commanding">Commands</a></h1>
-      </section>
-
-      <section>
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/commanding">Commands</a></h1>
-        <ul>
-          <li>Einsetzen um Code auszuführen</li>
-          <li><code>Command</code> Klasse mit einem <em>delegate</em> einsetzen</li>
-          <li><code>CanExecute</code> <em>noch</em> nicht benutzen</li>
-          <li>Bestehende Implementation aus Xamarin einsetzen (eine eigene Version muss man <em>nicht</em> schreiben)</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;Button Command="{Binding Path=AddTodoCommand}" Text="Click me" /&gt;
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-csharp hljs">
-            AddTodoCommand = new Command(() => { /* ... */ });
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Kommandos mit Parametern</h1>
-        <ul>
-          <li>Generische <code>Command</code> Klasse einsetzen</li>
-          <li><code>CommandParameter</code> in XAML setzen</li>
-        </ul>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;Button Command="{Binding Path=AddTodoCommand}" CommandParameter="1" Text="Click" /&gt;
-          </code>
-        </pre>
-        <pre>
-          <code data-trim class="language-csharp hljs">
-            AddTodoCommand = new Command&lt;int&gt;(parameter => { /* ... */ });
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Konkretes Beispiel</h1>
-        <p>XAML Datei</p>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;Button Command="{Binding SaveCommand}" Text="Save" /&gt;
-          </code>
-        </pre>
-        <p>ViewModell</p>
-        <pre>
-          <code data-trim class="language-csharp hljs">
-            public ICommand SaveCommand => new Command(() =>
-            {
-              _listViewModel.Items.Add(this);
-              _navigation.PopAsync();
-            });
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Bindings</h1>
-            <ul>
-              <li>Kommando zeigen</li>
-              <li>Kommando mit Parameter zeigen</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Übungen</h1>
-            <ul>
-              <li>Eigenes Kommando mit Parameter definieren</li>
-              <li><code>ListView</code> DataTemplate mit einem Konverter für eine Farbe oder Icon ergänzen (siehe <a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/images">images</a>)</li>
-            </ul>
-          </div>
-          <img src="assets/cog-wheels.png">
         </div>
       </section>
 
