@@ -351,7 +351,7 @@
             public class BiometricAuthenticationService : IBiometricAuthenticationService {
               // REMOVED CODE FOR CLARITY
               private class BiometricAuthenticationCallback : BiometricPrompt.AuthenticationCallback  {
-                public BiometricAuthenticationCallback(Action callback, Action<string> onError) {
+                public BiometricAuthenticationCallback(Action callback, Action&lt;string&gt; onError) {
                   _callback = callback;
                   _onError = onError;
                 }
@@ -364,7 +364,7 @@
                     _onError(errString.ToString());
                   }
                   private readonly Action _callback;
-                  private readonly Action<string> _onError;
+                  private readonly Action&lt;string&gt; _onError;
               }
             }
           </code>
