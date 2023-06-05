@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Mobile App Entwicklung, Lektion 04, Benachrichtigungen (Lokal/Push/Remote)</title>
+  <title>Mobile App Entwicklung, Lektion 06, Benachrichtigungen &amp; Biometrie</title>
 
-  <link rel=" stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reset.css">
   <link rel="stylesheet" href="dist/reveal.css">
   <link rel="stylesheet" href="dist/theme/white.css">
   <link rel="stylesheet" href="slides.css">
@@ -21,35 +21,61 @@
     <div class="slides">
       <section data-background="assets/MonteRosa.jpg" class="white-text">
         <h1>Mobile App Entwicklung</h1>
-        <h2>Lektion 4</h2>
+        <h2>Lektion 6</h2>
         <p>
-          Benachrichtigungen (Lokal/Push/Remote)
+          Benachrichtigungen &amp; Biometrie
         </p>
       </section>
 
       <section data-background="assets/looking-back-dimmed.jpg">
         <h1>Rückblick</h1>
         <ul>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/pop-ups">Dialogs</a> (Pop-Ups)</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/styles/xaml/">Styles</a></li>
-          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/dependency-injection">IoC</a></li>
-          <li><a href="https://docs.microsoft.com/en-us/dotnet/core/testing/">Testing</a></li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/xaml/xaml-basics/data-bindings-to-mvvm">MVVM</a></li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/xaml/xaml-basics/essential-xaml-syntax">XAML for Forms</a></li>
+          <li>Verfügbare views/layouts/controls</li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/basic-bindings">Bindings</a></li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/commanding">Commands</a></li>
         </ul>
       </section>
 
       <section>
         <h1>Übersicht Lektionen</h1>
         <ol class="compact">
-          <li class="completed">Vorstellung, Einführung und Aufsetzen von Werkzeugen</li>
-          <li class="completed">MVVM, Bindings, Controls, Debugging</li>
-          <li class="completed">Dialogs, Styling, IOC, Testing</li>
-          <li class="selected">Benachrichtigungen (Lokal/Push/Remote)</li>
-          <li>Hybrid-Apps</li>
+          <li class="completed">Vorstellung, Einführung und Framework-Evaluation</li>
+          <li class="completed">Evaluation, Selektion und Aufsetzen eines Frameworks</li>
+          <li class="completed">IOC und Testing</li>
+          <li class="completed">Popupelementen (Dialogen)</li>
+          <li class="completed"><b>LK1</b>; MVVM, Bindings, Controls</li>
+          <li class="selected">Benachrichtigungen &amp; Biometrie</li>
           <li>Datenbanken (SQLite); HTTP Client</li>
-          <li>Sicherheit &amp; Biometrie</li>
-          <li><b>LK1</b>; Projektarbeit</li>
+          <li><b>LK2</b>; Hybrid-Apps</li>
           <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
         </ol>
+      </section>
+
+      <section class="compact">
+        <h2>LZ1</h2>
+        <div class="fifty-fifty-grid">
+          <div>
+            <ul>
+              <li>Maui App erstellen</li>
+              <li>Core Library erstellen</li>
+              <li>Test Library erstellen</li>
+              <li>Mindestens ein Service erstellen</li>
+              <li>Service soll im IOC registriert werden</li>
+              <li>Service und IOC testen</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>Service soll im View-Constructor injiziert werden</li>
+              <li>Service aus dem UI aufrufen</li>
+              <li>Anzeige mit anderen Elementen verbessern</li>
+              <li>Auf GitHub im Verzeichnis LZ1 hochladen</li>
+              <li>Eine Stunde Zeit</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">

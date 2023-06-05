@@ -91,6 +91,12 @@
   grid-column-gap: 1em;
 }
 
+.reveal .eighty-twenty-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 85%) minmax(0, 15%);
+  grid-column-gap: 1em;
+}
+
 .reveal .white-text {
   --r-heading-color: white;
   color: white;

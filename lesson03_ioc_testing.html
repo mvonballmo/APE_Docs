@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Mobile App Entwicklung, Lektion 03, IOC, Testing, Dialogs, Styling</title>
+  <title>Mobile App Entwicklung, Lektion 03, Dialogs, IOC, Testing</title>
 
   <link rel=" stylesheet" href="dist/reset.css">
   <link rel="stylesheet" href="dist/reveal.css">
@@ -106,7 +106,7 @@
         <h1>Mobile App Entwicklung</h1>
         <h2>Lektion 3</h2>
         <p>
-          Dialogs, Styling, IOC, Testing
+          IOC, Testing
         </p>
       </section>
       <section>
@@ -131,6 +131,21 @@
             </ul>
           </li>
         </ul>
+      </section>
+
+      <section>
+        <h1>Übersicht Lektionen</h1>
+        <ol class="compact">
+          <li class="completed">Vorstellung, Einführung und Framework-Evaluation</li>
+          <li class="completed">Evaluation, Selektion und Aufsetzen eines Frameworks</li>
+          <li class="selected">IOC und Testing</li>
+          <li>Popupelementen (Dialogen) und Steuerelemente</li>
+          <li><b>LK1</b>; MVVM, Bindings, Controls</li>
+          <li>Benachrichtigungen &amp; Biometrie</li>
+          <li>Datenbanken (SQLite); HTTP Client</li>
+          <li><b>LK2</b>; Hybrid-Apps</li>
+          <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
+        </ol>
       </section>
 
       <section>
@@ -548,41 +563,6 @@
       </section>
 
       <section>
-        <h1>IoC: Eine Alternative</h1>
-        <p><a href="https://simpleinjector.readthedocs.io/en/latest/quickstart.html">SimpleInjector</a> ist:</p>
-        <ul>
-          <li>Viel mächtiger</li>
-          <li>Plattformunabhängig</li>
-          <li>Exzellent Dokumentiert</li>
-          <li>Wird in unseren Projekten eingesetzt</li>
-        </ul>
-      </section>
-
-      <section class="compact">
-        <h1>SimpleInjector: Beispiel</h1>
-        <pre>
-          <code data-trim class="language-csharp hljs">
-            // REGISTER services we need to set up our application.
-            Services.RegisterInstance&lt;Page&gt;(navigationPage);
-            Services.RegisterSingleton&lt;IViewMapper, ViewMapper&gt;();
-            Services.RegisterSingleton&lt;ITodoViewModelFactory, TodoViewModelFactory&gt;();
-            Services.RegisterSingleton&lt;ITodoItemProvider, TodoItemProvider&gt;();
-            Services.RegisterSingleton&lt;MainViewModel&gt;();
-            Services.RegisterSingleton&lt;TodoListViewModel&gt;();
-            Services.Register&lt;TodoItemViewModel&gt;();
-
-            public TodoListViewModel(INavigation navigation, IViewMapper viewMapper,
-              ITodoViewModelFactory viewModelFactory, ITodoItemProvider provider)
-            {
-              // Constructor
-            }
-
-            Services.GetInstance&lt;TodoListViewModel&gt;();  // RESOLVE
-          </code>
-        </pre>
-      </section>
-
-      <section>
         <h1>IOC: Schnittstelle definieren</h1>
         <pre>
           <code data-trim class="language-csharp hljs">
@@ -761,7 +741,6 @@
         </pre>
       </section>
 
-
       <section>
         <h1>Fragen?</h1>
         <div class="fifty-fifty-grid">
@@ -788,437 +767,6 @@
           <div>
             <h1>Übungen</h1>
             <p>Mindestens einen Test im eigenen Projekt erstellen und ausführen</p>
-          </div>
-          <img src="assets/cog-wheels.png">
-        </div>
-      </section>
-
-      <section data-background="assets/A river near Forestport.jpeg" class="white-text">
-        <h1>Navigation und Tabs</h1>
-      </section>
-
-      <section>
-        <h1>Navigation</h1>
-        <p>Seiten auf dem "View Stack" setzen</p>
-        <pre>
-          <code data-trim class="language-csharp hljs">
-            // App.xaml.cs
-            MainPage = new MainPage();
-
-            // ItemsPage.xaml.cs
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
-            // NewItemPage.xaml.cs
-            await Navigation.PopModalAsync();
-          </code>
-        </pre>
-        <p class="notes"><code>async</code> und <code>await</code> werden wir jetzt einfach benutzen und in einer späteren Lektion genauer erklären</p>
-      </section>
-
-      <section class="compact">
-        <h1>Xamarin Forms: Tabs</h1>
-        <p>Populate pages as tabs in <code>MainPage.xaml.cs</code> in the <code>TabbedPage.Children</code></p>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;TabbedPage.Children&gt;
-              &lt;NavigationPage Title="Browse"&gt;
-                  &lt;x:Arguments&gt;
-                      &lt;views:ItemsPage /&gt;
-                  &lt;/x:Arguments&gt;
-                  &lt;NavigationPage.Icon&gt;
-                      &lt;OnPlatform x:TypeArguments="FileImageSource"&gt;
-                          &lt;On Platform="iOS" Value="tab_feed.png"/&gt;
-                      &lt;/OnPlatform&gt;
-                  &lt;/NavigationPage.Icon&gt;
-              &lt;/NavigationPage&gt;
-
-              &lt;NavigationPage Title="About"&gt;
-                  &lt;x:Arguments&gt;
-                      &lt;views:AboutPage /&gt;
-                  &lt;/x:Arguments&gt;
-                  &lt;NavigationPage.Icon&gt;
-                      &lt;OnPlatform x:TypeArguments="FileImageSource"&gt;
-                          &lt;On Platform="iOS" Value="tab_about.png"/&gt;
-                      &lt;/OnPlatform&gt;
-                  &lt;/NavigationPage.Icon&gt;
-              &lt;/NavigationPage&gt;
-            &lt;/TabbedPage.Children&gt;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Xamarin Forms UI</h1>
-        <p>Weitere UI-Elemente sind:</p>
-        <ul>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/navigation/master-detail-page">Master-Detail</a></li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/navigation/carousel-page">Carousel</a></li>
-        </ul>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Wo steht ihr?</h1>
-            <ul>
-              <li class="done">Alle Werkzeuge sind installiert und eingerichtet</li>
-              <li class="done">Eure Code ist auf GitHub gesichert</li>
-              <li>Ihr könnt eure App im Emulator und auf dem Gerät
-                <ul>
-                  <li>ausführen</li>
-                  <li>debuggen</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <img src="assets/checklist.png">
-        </div>
-      </section>
-
-      <section>
-        <div class="fifty-fifty-grid">
-          <img src="assets/look_of_disapproval.jpg">
-          <div>
-            <p class="fragment" style="margin-top: 5em">Können wir jetzt endlich<br> mehr Mobile-Entwicklung lernen?</p>
-            <p class="fragment" style="text-align: right">Ja! Nächstes mal...</p>
-          </div>
-        </div>
-      </section>
-
-      <section data-background="assets/looking-back-dimmed.jpg">
-        <h1>Rückblick</h1>
-        <ul>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/xaml/xaml-basics/data-bindings-to-mvvm">MVVM</a></li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/xaml/xaml-basics/essential-xaml-syntax">XAML for Forms</a></li>
-          <li>Verfügbare views/layouts/controls</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/basic-bindings">Bindings</a></li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/commanding">Commands</a></li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Übersicht Lektionen</h1>
-        <ol class="compact">
-          <li class="completed">Vorstellung, Einführung und Aufsetzen von Werkzeugen</li>
-          <li class="completed">MVVM, Bindings, Controls, Debugging</li>
-          <li class="selected">Dialogs, Styling, IOC, Testing</li>
-          <li>Benachrichtigungen (Lokal/Push/Remote)</li>
-          <li>Hybrid-Apps</li>
-          <li>Datenbanken (SQLite); HTTP Client</li>
-          <li>Sicherheit &amp; Biometrie</li>
-          <li><b>LK1</b>; Projektarbeit</li>
-          <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
-        </ol>
-      </section>
-
-      <section>
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/pop-ups">Dialogs</a> (Pop-Ups)</h1>
-        <ul>
-          <li><code>DisplayAlert("", "")</code> auf irgendeine Seite aufrufen</li>
-          <li>"Fragen" können mit <em>overloads</em> gestellt werden</li>
-          <li><code>await</code> das Resultat</li>
-          <li>"Action Sheets" für Verhalten wie “DropDown” einsetzen</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Dialogs: API</h1>
-        <pre>
-          <code data-trim class="language-csharp hljs">
-            DisplayAlert(string title, string message, string cancel);
-
-            DisplayAlert(string title, string message,
-                         string accept, string cancel);
-
-            DisplayActionSheet(string title, string cancel,
-                               string destruction, params string[] buttons);
-
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Nachricht</h1>
-        <img src="assets/Lesson03/StandardAlerts.jpg" class="tall-screenshot">
-      </section>
-
-      <section>
-        <h1>Frage Stellen</h1>
-        <img src="assets/Lesson03/QuestionAlert.jpg" class="full-width">
-      </section>
-
-      <section>
-        <h1>Frage mit Auswahl</h1>
-        <img src="assets/Lesson03/SelectionDialog.jpg" class="tall-screenshot">
-      </section>
-
-      <section>
-        <h1>Dialogs: C# Code</h1>
-        <pre>
-          <code data-trim class="language-csharp hljs">
-            DeleteItemCommand = new Command&lt;Page&gt;(async page =>
-            {
-              var result = await page.DisplayAlert("Confirm", "Are you sure?", "YES", "NO");
-              if (result)
-              {
-                Items.Remove(SelectedItem);
-              }
-            });
-
-            async void OnActionSheetSimpleClicked(object sender, EventArgs e)
-            {
-              string action = await DisplayActionSheet("ActionSheet: Send to?", "Cancel",
-                                                        null, "Email", "Twitter", "Facebook");
-              Debug.WriteLine("Action: " + action);
-            }
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Dialogs: XAML Code</h1>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;?xml version="1.0" encoding="utf-8"?&gt;
-              &lt;ContentPage
-                xmlns="http://xamarin.com/schemas/2014/forms"
-                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                x:Class="Todo.Views.TodoListPage"
-                xmlns:local="clr-namespace:Todo.Converters;assembly:Todo"
-                xmlns:viewModels="clr-namespace:Todo.ViewModels;assembly:Todo"
-                x:DataType="viewModels:TodoListViewModel"
-                x:Name="Page"&gt;
-                &lt;ContentPage.Content&gt;
-                  &lt;Button Text="Delete" WidthRequest="100" Margin="20,0,0,0"
-                    Command="{Binding DeleteItemCommand}" CommandParameter="{x:Reference Page}" /&gt;
-                &lt;/ContentPage.Content&gt;
-             &lt;/ContentPage&gt;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Dialogs</h1>
-            <ul>
-              <li>Verschiedene Variante probieren</li>
-              <li><code>Page</code> als Command-Parameter mitgeben</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Übungen</h1>
-            <p>Ein Dialog in der eigenen App einbauen</p>
-          </div>
-          <img src="assets/cog-wheels.png">
-        </div>
-      </section>
-
-      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
-        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/styles/xaml/">Styles</a></h1>
-      </section>
-
-      <section>
-        <h1>Styles</h1>
-        <ul>
-          <li>Man kann mit XAML oder CSS stylen</li>
-          <li>Wir setzen den Fokus auf XAML</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/styles/xaml/">Online Doku</a> durchsuchen, um herauszufinden welche Properties von welchen Controls unterstützt sind</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Style Hierarchie</h1>
-        <ul>
-          <li><em>Inline Styles</em>: Direkt auf einem Element gesetzt (wie "inline styles" in HTML)</li>
-          <li><em>Explicit Styles</em>: Auf dem <code>&lt;Style&gt;</code> Element eines Elements gesetzt</li>
-          <li><em>Implicit Styles</em>: Den <code>TargetType</code> bestimmt den geerbten Style</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Inline Styles: Beispiel</h1>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;Label
-              Grid.Column=“2"
-              Text="X"
-              TextColor=“Red" /&gt;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Explicit Style: Beispiel</h1>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;ContentPage
-              xmlns="http://xamarin.com/schemas/2014/forms"
-              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              x:Class="Todo.Views.TodoListPage"
-              Title="List"&gt;
-              &lt;ContentPage.Style&gt;
-                &lt;Style&gt;
-                  &lt;Setter
-                    Property="BackgroundColor"
-                    Value="Black" /&gt;
-                &lt;/Style&gt;
-              &lt;/ContentPage.Style&gt;
-              &lt;!-- other content --&gt;
-            &lt;ContentPage/&gt;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Styling im App</h1>
-        <p><code>ResourceDictionary</code> aufsetzen:</p>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;Application
-              xmlns="http://xamarin.com/schemas/2014/forms"
-              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              x:Class="Todo.App"&gt;
-              &lt;Application.Resources&gt;
-                &lt;ResourceDictionary&gt;
-                  &lt;Color x:Key="Background"&gt;Black&lt;/Color&gt;
-                  &lt;Style x:Key=“ContentPageStyle" TargetType="ContentPage"&gt;
-                    &lt;Setter Property="BackgroundColor" Value="{StaticResource Background}" /&gt;
-                  &lt;/Style&gt;
-                &lt;/ResourceDictionary&gt;
-              &lt;/Application.Resources&gt;
-            &lt;/Application&gt;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>App Styles einsetzen</h1>
-        <p><code>ContentPageStyle</code> aus dem App <code>ResourceDictionary</code> referenzieren:</p>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              x:Class="Todo.Views.TodoListPage"
-              x:Name="Page"
-              Title="List"
-              Style="{StaticResource ContentPageStyle}"&gt;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Implicit Styling: Beispiel</h1>
-        <p>Style mit einem <code>TargetType</code> assoziieren:</p>
-        <pre>
-          <code data-trim class="language-xml hljs">
-            &lt;Style TargetType="Button"&gt;
-              &lt;Setter Property="BackgroundColor" Value="#3541a0" /&gt;
-              &lt;Setter Property="TextColor" Value="White" /&gt;
-              &lt;Setter Property="HeightRequest" Value="50" /&gt;
-            &lt;/Style&gt;
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h1>Styling: <code><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.button">Button</a></code></h1>
-        <ul>
-          <li>BackgroundColor</li>
-          <li>BorderRadius</li>
-          <li>BorderWidth</li>
-          <li>BorderColor</li>
-          <li>TextColor</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Styling: <code><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.entry">Entry</a></code></h1>
-        <ul>
-          <li>TextColor</li>
-          <li>FontSize</li>
-          <li>FontFamily</li>
-          <li>PlaceholderColor</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Styling: <code><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.picker">Picker</a></code></h1>
-        <ul>
-          <li>TextColor</li>
-          <li>FontSize</li>
-          <li>FontFamily</li>
-          <li>TitleColor</li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Styling: <code><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.label">Label</a></code></h1>
-        <ul>
-          <li>TextColor</li>
-          <li>BackgroundColor</li>
-          <li>FontSize</li>
-          <li>FontFamily</li>
-          <li>TextDecorations</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Styling: Weitere Ressourcen</h2>
-        <table>
-          <tr>
-            <td><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/triggers">Triggers</a></td>
-            <td>Auf Events in XAML reagieren</td>
-          </tr>
-          <tr>
-            <td><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/custom-renderer/">Custom Renderer</a></td>
-            <td>Das Aussehen eines Native-Controls komplett anpassen</td>
-          </tr>
-          <tr>
-            <td><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/effects/">Effects</a></td>
-            <td>Plattformspezifische Anpassungen ohne Renderer</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h1>Fragen?</h1>
-        <div class="fifty-fifty-grid">
-          <img src="assets/okaaaay.jpg">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Styles</h1>
-            <ul>
-              <li>Inline Styles</li>
-              <li>Explicit Styling</li>
-              <li>Implicit Styling</li>
-            </ul>
-          </div>
-          <img src="assets/demo.png">
-        </div>
-      </section>
-
-      <section>
-        <div class="seventy-thirty-grid">
-          <div>
-            <h1>Übungen</h1>
-            <p>Eure Apps ein bisschen stylen</p>
           </div>
           <img src="assets/cog-wheels.png">
         </div>
