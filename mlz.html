@@ -48,6 +48,32 @@
     nav ul {
       padding-inline-start: 1.5rem;
     }
+
+    main .requirements li:before {
+      padding-left: 1.5rem;
+      opacity: 50%;
+      font-weight: bold;
+    }
+
+    main .requirements li.onePoint:before {
+      content: "[1] ";
+    }
+
+    main .requirements li.twoPoints:before {
+      content: "[2] ";
+    }
+
+    main .requirements li.threePoints:before {
+      content: "[3] ";
+    }
+
+    main .requirements li.fourPoints:before {
+      content: "[4] ";
+    }
+
+    main .requirements li.fivePoints:before {
+      content: "[5] ";
+    }
   </style>
 </head>
 
@@ -55,80 +81,51 @@
   <nav id="toc"></nav>
   <main>
     <h1>Bewertungskriterien MLZ</h1>
-    <p class="notes">Die Angaben <a href="lesson03.html">3️⃣</a>, <a href="lesson04.html">4️⃣</a>, <a href="lesson05.html">5️⃣</a>,
-      <a href="lesson06.html">6️⃣</a>, <a href="lesson07.html">7️⃣</a> weisen auf die Lektionen hin, wo die dafür benötigte
-      Technologien vorgestellt werden.
-    </p>
-    <h2 id="übersicht">Übersicht</h2>
-    <p>Es soll ein App geben womit man:</p>
-    <ul>
-      <li>Daten von einem Server abfragen und anzeigen kann. <a href="lesson07.html">7️⃣</a></li>
-      <li>Die Daten können vom Benutzer geändert und lokal oder remote gespeichert werden. <a href="lesson05.html">5️⃣</a>, <a href="lesson07.html">7️⃣</a></li>
-      <li>Die Daten können auch gelöscht werden. <a href="lesson04.html">4️⃣</a></li>
-      <li>Die App unterstützt mindestens zwei den folgenden Features:
+    <h2 id="bewertung-aspekte">Funktionale Anforderungen</h2>
+    <p>Es soll ein App mit folgenden Eingenschaften geben:</p>
+    <ul class="requirements">
+      <li class="threePoints">Kann Daten für einen Entität in einer Liste darstellen.</a>
         <ul>
-          <li>Login <a href="lesson06.html">6️⃣</a></li>
-          <li>Dialoge <a href="lesson03.html">3️⃣</a></li>
-          <li>Notifications <a href="lesson04.html">4️⃣</a></li>
-          <li>Lokale DB <a href="lesson07.html">7️⃣</a></li>
-          <li>HTTPClient <a href="lesson07.html">7️⃣</a></li>
-          <li>Biometrie <a href="lesson06.html">6️⃣</a></li>
-          <li>IoC <a href="lesson03.html">3️⃣</a></li>
+          <li class="twoPoints">Die Daten werden per HTTPClient von einem Server geladen.</li>
+        </ul>
+      </li>
+      <li class="fivePoints">Diese Daten können vom Benutzer geändert und lokal gespeichert werden.
+        <ul>
+          <li class="twoPoints">Die Daten werden lokal persistiert und überleben das Neustart der Applikation.</li>
+          <li class="onePoint">Die Daten bestehen aus verschiedenen Typen (z.B. Datum, Text, Zahlen, Boolean, usw.).</li>
+          <li class="twoPoints">Die Daten werden validiert (z.B. Textlänge, Datumsbereich, Zahlengrösse, Zwangsfelder usw.).</li>
+          <li class="onePoint">Die Validierung verhindert das Speichern.</li>
+          <li class="threePoints">Die Daten werden per HTTPClient zurück auf dem Server gespeichert.</li>
+        </ul>
+      </li>
+      <li class="onePoint">Ein neues Entität kann erstellt werden.
+        <ul>
+          <li class="twoPoints">Die Daten werden per HTTPClient zurück auf dem Server gespeichert.</li>
+        </ul>
+      </li>
+      <li class="onePoint">Ein Entität kann gelöscht werden.
+        <ul>
+          <li class="twoPoints">Die Daten werden per HTTPClient zurück auf dem Server gelöscht.</li>
+        </ul>
+      </li>
+      <li class="fivePoints">Das erstellen, ändern, und löschen von Entitäten wird möglichst ohne UI mit Automatisierten Tests geprüft.
+        <ul>
+          <li class="twoPoints">Services werden für Logik eingesetzt.</li>
+          <li class="twoPoints">Abhängigkeiten zwischen Services werden mit DI / Constructor-injection konfiguriert.</li>
+          <li class="onePoint">Ein IOC Container wird dafür eingesetzt.</li>
+          <li class="onePoint">Dasselbe Container wird auch in die Tests eingesetzt.</li>
+        </ul>
+      </li>
+      <li class="twoPoints">Die App bestätigt Änderungen durch Popup-Dialogen.
+        <ul>
+          <li class="twoPoints">Diese Abläufe werden mit automatisierten Tests geprüft.</li>
         </ul>
       </li>
     </ul>
-    <h2 id="bewertung-aspekte">Bewertung Aspekte</h2>
-    <h3 id="erfolderlich">Erforderlich</h3>
-    <p>Der App beinhaltet zumindest die folgende Aspekte</p>
+    <h3>Bewertung</h3>
     <ul>
-      <li>Daten von mindestens einer Entität sollen vom Server abgeholt und in einer Liste angezeigt werden. <a href="lesson04.html">4️⃣</a></li>
-      <li>Details einer Entität können angezeigt werden (Liste/Detail). <a href="lesson05.html">5️⃣</a>, <a href="lesson06.html">6️⃣</a></li>
-      <li>Die Daten sollen aus verschiedenen Typen (z.B. Datum, Text, Zahlen, Boolean, usw.) bestehen. <a href="lesson06.html">6️⃣</a></li>
-      <li>Einen Datensatz kann in einem Formular editiert werden, mit Validierung von den verschiedenen Typen. Zumindest
-        ein Feld muss ein Zwangsfeld sein. <a href="lesson06.html">6️⃣</a></li>
-      <li>Die Validierung muss mindestens so ausgeprägt sein, dass Fehler auf der Seite beim Drücken des Speichern-Buttons
-        angezeigt werden. Dies kann entweder mit Dialogen geschehen, oder die Infos können in-line angezeigt werden. <a href="lesson06.html">6️⃣</a></li>
-      <li>Ist das Formular fehlerfrei und der Benutzer klickt auf den Speichern-Button soll <strong>entweder</strong> ein JSON Objekt mit allen
-        eingegebenen Informationen anzeigt an dem lokalen Server gesendet werden <strong>oder</strong> in einem lokalen DB gespeichert werden (oder beides).
-        <a href="lesson04.html">4️⃣</a>, <a href="lesson06.html">6️⃣</a>
-      </li>
-      <li>Ein neues Objekt kann erstellt werden. <a href="lesson04.html">4️⃣</a></li>
-    </ul>
-    <h3 id="optional">Optional</h3>
-    <p>Zusatzpunkte gibt's für:</p>
-    <h4>Ausgereifte Validierung</h4>
-    <ul>
-      <li>Die benötigten Felder müssen vorgängig validiert werden und der Button zum Abschicken des Kontaktformulars soll
-        nur aktiv sein, falls keine Fehler mehr vorhanden sind. <a href="lesson06.html">6️⃣</a></li>
-      <li>Fehler sollen direkt dort angezeigt werden wo sie entstehen (beispielsweise mit einem roten Rahmen und einem
-        Informationstext über dem Problem). <a href="lesson06.html">6️⃣</a></li>
-      <li>Einschränkung der Länge von Text-Feldern validieren (z.b. eine Maximallänge) <a href="lesson06.html">6️⃣</a></li>
-    </ul>
-    <h4>Suchen</h4>
-    <ul>
-      <li>Der Benutzer kann nach Freitext in den Feldern suchen, um passenden Entitäten zu finden. Die gefundene
-        Entitäten werden in einer Liste angezeigt. <a href="lesson03.html">3️⃣</a>, <a href="lesson05.html">5️⃣</a></li>
-      <li>Der Benutzer kann einschränken, welche Felder durchgesucht werden. <a href="lesson03.html">3️⃣</a></li>
-      <li>Die gefundene Texte aus den Entitäten werden angezeigt. <a href="lesson03.html">3️⃣</a>, <a href="lesson05.html">5️⃣</a></li>
-      <li>Der Suchtext wird in den gefundenen Texten hervorgehoben (highlighted) <a href="lesson03.html">3️⃣</a>, <a href="lesson05.html">5️⃣</a></li>
-    </ul>
-    <h4>Benutzerkomfort</h4>
-    <ul>
-      <li>Gewisse Felder und Einstellungen in einer lokalen DB speichern. Wenn der User eine Seite wieder aufruft,
-        sollen die Felder mit den gespeicherten Werten ausgefüllt werden. <a href="lesson07.html">7️⃣</a></li>
-      <li>Der Benutzer kann Test-Daten erstellen lassen.</li>
-      <li>Der Benutzer kann allen Daten löschen.</li>
-    </ul>
-    <h4>Multi-Entität</h4>
-    <ul>
-      <li>Die App hat mehrere miteinander verbundene Objekttypen (z.B. Firmen und Personen und Herkunftsländer). In dem
-        einen Formular kann Entitäten aus einer anderen Listen selektiert werden (z.B. bei einer Person die Firma
-        selektieren).</li>
-    </ul>
-    <h4>Mandantenfähigkeit</h4>
-    <ul>
-      <li>Der Benutzer kann sich anmelden und nur die eigenen Daten anzeigen lassen.</li>
-      <li>Die Anmeldung ist mit einem Passwort gesichert.</li>
+      <li>Maximale Punktzahl: <strong>40</strong></li>
+      <li>Minimum Punktzahl: <strong>24</strong> (Note = 4)</li>
     </ul>
     <h2 id="allgemeine-bewertung">Allgemeine Bewertung</h2>
     <h3 id="architektur">Architektur</h3>

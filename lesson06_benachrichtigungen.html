@@ -30,11 +30,9 @@
       <section data-background="assets/looking-back-dimmed.jpg">
         <h1>Rückblick</h1>
         <ul>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/xaml/xaml-basics/data-bindings-to-mvvm">MVVM</a></li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/xaml/xaml-basics/essential-xaml-syntax">XAML for Forms</a></li>
-          <li>Verfügbare views/layouts/controls</li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/basic-bindings">Bindings</a></li>
-          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/commanding">Commands</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/dotnet/maui/xaml/fundamentals/mvvm">MVVM Pattern</a></li>
+          <li>LZK1</li>
+          <li>Testing und Mocking</li>
         </ul>
       </section>
 
@@ -46,35 +44,51 @@
           <li class="completed">IOC und Testing</li>
           <li class="completed">Popupelementen (Dialogen)</li>
           <li class="completed"><b>LK1</b>; MVVM, Bindings, Controls</li>
-          <li class="selected">Benachrichtigungen &amp; Biometrie</li>
+          <li class="selected">Testing &amp; Benachrichtigungen</li>
           <li>Datenbanken (SQLite); HTTP Client</li>
           <li><b>LK2</b>; Hybrid-Apps</li>
           <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
         </ol>
       </section>
 
-      <section class="compact">
-        <h2>LZ1</h2>
-        <div class="fifty-fifty-grid">
-          <div>
-            <ul>
-              <li>Maui App erstellen</li>
-              <li>Core Library erstellen</li>
-              <li>Test Library erstellen</li>
-              <li>Mindestens ein Service erstellen</li>
-              <li>Service soll im IOC registriert werden</li>
-              <li>Service und IOC testen</li>
-            </ul>
-          </div>
-          <div>
-            <ul>
-              <li>Service soll im View-Constructor injiziert werden</li>
-              <li>Service aus dem UI aufrufen</li>
-              <li>Anzeige mit anderen Elementen verbessern</li>
-              <li>Auf GitHub im Verzeichnis LZ1 hochladen</li>
-              <li>Eine Stunde Zeit</li>
-            </ul>
-          </div>
+      <section>
+        <h1>Möglichkeiten für heute</h1>
+        <ul>
+          <li>LZK1 Fragen?</li>
+          <li>Testing/Mocking/Faking Beispiel (aus der letzten Lektion)</li>
+          <li>Benachrichtigungen (Übersicht)</li>
+          <li>Biometrie (Übersicht)</li>
+          <li>Projektarbeit</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Benachrichtigungen/h1>
+      </section>
+
+      <section>
+        <h1>Varianten</h1>
+        <div>
+          <ul>
+            <li><a href="https://console.firebase.google.com/">Firebase</a> (Android und iOS)</li>
+            <li><a href="https://learn.microsoft.com/en-us/azure/notification-hubs/ios-sdk-get-started">Azure Notification Hubs</a> (alle)</li>
+            <li><a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html#//apple_ref/doc/uid/TP40008194-CH8-SW1">APNS (Apple Push Notification Service)</a> (iOS)</li>
+            <li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/apps/hh913756(v=win.10)">Windows Push Notification Services (WNS)</a> (alle)</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h1>Einschränkungen</h1>
+        <div>
+          <ul>
+            <li>Kosten: Windows und Apple kosten zwischen CHF19.- und CHF99.- pro Jahr</li>
+            <li>Setup: Zertifikaten, eindeutige IDs, usw.</li>
+            <li>Debugging ist nicht immer durchschaubar order einfach</li>
+          </ul>
+          <p>
+            Das ganze Thema ist mit Sicherheit verbunden und ist dadurch komplexer.
+          </p>
         </div>
       </section>
 
@@ -91,7 +105,7 @@
         <h1>Lokale Benachrichtigungen</h1>
         <ul>
           <li>Berechtigungen zuerst abfragen (nur für iOS)</li>
-          <li><em>Notification channel</em> aussetzen (nur für Android)</li>
+          <li><em>Notification channel</em> aufsetzen (nur für Android)</li>
           <li>Nachricht mit Details abfüllen (Text, Priority, usw.)</li>
           <li>Nachricht für die Auslieferung freigeben (<em>schedule</em>)</li>
         </ul>
@@ -571,6 +585,497 @@
             </ul>
           </li>
         </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Biometrie</h1>
+      </section>
+
+      <section class="compact">
+        <h1>Vorteile von Biometrie</h1>
+        <ul>
+          <li>Benutzer tendieren schwächere PIN/Muster für Geräte einzusetzen</li>
+          <li>Ist sehr bequem</li>
+          <li>Sehr schwer zu knacken, wenn man den Besitzer des Geräts kennt</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie aufsetzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Sicherstellen, dass das Gerät oder der Emulator mit zumindest <code>API 28</code> arbeitet</li>
+          <li>"Target Version" vom Android Projekt zumindest auf <code>API 28</code></li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie aufsetzen II</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Berechtigungen aktualisieren</li>
+          <li><code>AndroidManifest.xml</code> öffnen</li>
+          <li>Berechtigung <code>USE_BIOMETRIC</code> einfügen</li>
+          <li>Diese Berechtigung ist "non-sensitive" (muss vom Benutzer nicht bestätigt werden, wie GPS z.B.)</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="ch.hfu.todo"&gt;
+              &lt;!—use-sdk etc. --&gt;
+              &lt;uses-permission android:name="android.permission.USE_BIOMETRIC" /&gt;
+              &lt;!-- application etc. --&gt;
+            &lt;/manifest&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Biometrie aufsetzen III</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Schnittstelle im geteilte Projekt erstellen</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public interface IBiometricAuthenticationService {
+              void Authenticate(Action success, Action&lt;string&gt; onError);
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Biometrie aufsetzen IV</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Falls noch nicht gemacht, statisches Referenz auf dem <code>Activity</code> im Android-Projekt auf dem <code>MainActivity</code> setzen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity {
+              public MainActivity()  {
+                Activity = this;
+              }
+
+              public static Activity Activity { get; private set; }
+
+              // EXCLUDED THE REST OF THE CODE FOR CLARITY
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie aufsetzen V</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Implementation im Android-Projekt erstellen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            [assembly: Dependency(typeof(BiometricAuthenticationService))]
+            namespace Todo.Droid.Security {
+              public class BiometricAuthenticationService : IBiometricAuthenticationService  {
+                public void Authenticate(Action success, Action&lt;string&gt; onError) {
+                  var builder = new BiometricPrompt.Builder(MainActivity.Activity)
+                    .SetDescription("Authenticate with Biometrics!")
+                    .SetTitle("TODO BIO")
+                    .SetNegativeButton("Cancel", MainActivity.Activity.MainExecutor, new CancelClickListener())
+                    .Build();
+
+                    builder.Authenticate(
+                      new CancellationSignal(),
+                      MainActivity.Activity.MainExecutor,
+                      new BiometricAuthenticationCallback(success, onError));
+                }
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Biometrie aufsetzen VI</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>CancelClickListener</code> im eben erstellte Klasse einfügen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricAuthenticationService : IBiometricAuthenticationService{
+              // REMOVED CODE FOR CLARITY
+
+              private class CancelClickListener : Java.Lang.Object, IDialogInterfaceOnClickListener  {
+                public void OnClick(IDialogInterface dialog, int which)    {
+                  // NOP
+                }
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie aufsetzen VII</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>AuthenticationCallback</code> Ableitung erstellen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricAuthenticationService : IBiometricAuthenticationService {
+              // REMOVED CODE FOR CLARITY
+              private class BiometricAuthenticationCallback : BiometricPrompt.AuthenticationCallback  {
+                public BiometricAuthenticationCallback(Action callback, Action&lt;string&gt; onError) {
+                  _callback = callback;
+                  _onError = onError;
+                }
+                public override void OnAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                  _callback();
+                }
+                public override void OnAuthenticationError(
+                  [GeneratedEnum] BiometricErrorCode errorCode,
+                  ICharSequence errString) {
+                    _onError(errString.ToString());
+                  }
+                  private readonly Action _callback;
+                  private readonly Action&lt;string&gt; _onError;
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie aufsetzen VIII</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Biometrische Authentifizierung irgendwo fordern.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            private void AuthenticateWithBiometrics() {
+              var biometricService = DependencyService.Get&lt;IBiometricAuthenticationService&gt;();
+              biometricService.Authenticate(() =>  {
+                // We are authenticated. Do something.
+              },
+              (error) => {
+                // Failed to authenticate
+              });
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie Testen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Im Emulator die drei Punkte in der grauen Tafel klicken</li>
+          <li>“Fingerprint” Menü im linken Bereich im geöffneten Popup öffnen</li>
+          <li>Im Emulator in die Einstellungen -> Sicherheit -> Fingerprint anwählen und einen Fingerabdruck aufsetzen</li>
+          <li>Um einen "Touch" zu simulieren, "Touch the Screen" im grauen Popup anwählen</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Biometrie</h1>
+            <ul>
+              <li>Einfache Implementation</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>Biometrie in der eigenen App einbauen</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie Ausbauen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Die obige Methode ist nicht ideal</li>
+          <li>Ist leider nicht sicher genug</li>
+          <li>Normalerweise will man sensitiven Daten schützen (Benutzername, Passwort, Schlüssel, usw.)</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Schnittstelle erweitern</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public interface IBiometricAuthenticationService {
+              void Encrypt(byte[] input, Action&lt;byte[]&gt; success, Action&lt;string&gt; error);
+              void Decrypt(byte[] input, Action&lt;byte[]&gt; success, Action&lt;string&gt; error);
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>"CryptoHelper" erstellen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Im Android Projekt einen "CryptoHelper" erstellen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricCryptoHelper
+            {
+              public BiometricCryptoHelper() {
+                _keystore = KeyStore.GetInstance(KeyStoreName);
+                _keystore.Load(null);
+                // TODO For testing we delete the key on every restart.
+                if (_keystore.ContainsAlias(KeyAlias)) {
+                  _keystore.DeleteEntry(KeyAlias);
+                }
+                CreateKey();
+              }
+              public static byte[] IV { get; set; }
+              private readonly KeyStore _keystore;
+              private const string KeyStoreName = "AndroidKeyStore";
+              private const string KeyAlias = "_todoKey";
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Schlüssel aufsetzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Schlüsselerstellungslogik einbauen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricCryptoHelper {
+              // REMOVED CODE FOR CLARITY
+              private void CreateKey() {
+                var keyGen = KeyGenerator.GetInstance(KeyProperties.KeyAlgorithmAes, KeyStoreName);
+                var keyGenSpec = new KeyGenParameterSpec.Builder(
+                  KeyAlias,
+                  KeyStorePurpose.Encrypt | KeyStorePurpose.Decrypt);
+
+                keyGenSpec
+                  .SetKeySize(256)
+                  .SetBlockModes(KeyProperties.BlockModeCbc)
+                  .SetEncryptionPaddings(KeyProperties.EncryptionPaddingPkcs7)
+                  .SetUserAuthenticationRequired(true)
+                  .Build();
+
+                keyGen.Init(keyGenSpec);
+                keyGen.GenerateKey();
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Cipher initialisieren</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricCryptoHelper {
+              // REMOVED CODE FOR CLARITY
+              private Cipher CreateCipher(CipherMode mode) {
+                var key = _keystore.GetKey(KeyAlias, null);
+                var cipher = Cipher.GetInstance($”{KeyProperties.KeyAlgorithmAes}/{KeyProperties.BlockModeCbc}/{KeyProperties.EncryptionPaddingPkcs7}");
+                try {
+                  if (mode == CipherMode.DecryptMode) {
+                    cipher.Init(mode, key, new IvParameterSpec(IV));
+                  } else {
+                    cipher.Init(mode, key);
+                  }
+                }
+                catch (KeyPermanentlyInvalidatedException ex) {
+                  // TODO: The key was invalidated because the Biometric setup changed
+                  // or a permanent lock out happened.
+                }
+                return cipher;
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Methode einbinden</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Public Methode erstellen, umd das <code>CryptoObject</code> zu erstellen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricCryptoHelper{
+              // REMOVED CODE FOR CLARITY
+
+              public BiometricPrompt.CryptoObject CreateCryptoObject(CipherMode mode) {
+                var cipher = CreateCipher(mode);
+
+                return new BiometricPrompt.CryptoObject(cipher);
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Service anpassen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricAuthenticationService : IBiometricAuthenticationService {
+              public void Encrypt(byte[] input, Action&lt;byte[]&gt; success, Action&lt;string&gt; error) {
+                var prompt = BuildPrompt();
+                prompt.Authenticate(
+                  _cryptoHelper.CreateCryptoObject(CipherMode.EncryptMode),
+                  new CancellationSignal(), MainActivity.Activity.MainExecutor,
+                  new BiometricEncryptionCallback(input, success, error));
+              }
+              public void Decrypt(byte[] input, Action&lt;byte[]&gt; success, Action&lt;string&gt; error) {
+                var prompt = BuildPrompt();
+                prompt.Authenticate(
+                  _cryptoHelper.CreateCryptoObject(CipherMode.DecryptMode),
+                  new CancellationSignal(), MainActivity.Activity.MainExecutor,
+                  new BiometricEncryptionCallback(input, success, error));
+              }
+
+              private readonly BiometricCryptoHelper _cryptoHelper = new BiometricCryptoHelper();
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Prompt extrahieren</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricAuthenticationService : IBiometricAuthenticationService {
+              // REMOVED CODE FOR CLARITY
+              private BiometricPrompt BuildPrompt() {
+                return new BiometricPrompt.Builder(MainActivity.Activity)
+                  .SetDescription("Authenticate with Biometrics!")
+                  .SetTitle("TODO BIO")
+                  .SetNegativeButton(
+                    "Cancel",
+                    MainActivity.Activity.MainExecutor,
+                    new CancelClickListener())
+                  .Build();
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Callback aktualisieren</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            private class BiometricEncryptionCallback : BiometricPrompt.AuthenticationCallback {
+              public BiometricEncryptionCallback(byte[] input, Action<byte[]> success, Action<string> error) {
+                _input = input;
+                _success = success;
+                _error = error;
+              }
+              public override void OnAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                if (BiometricCryptoHelper.IV == null) {
+                  BiometricCryptoHelper.IV = result.CryptoObject.Cipher.GetIV();
+                }
+                _success(result.CryptoObject.Cipher.DoFinal(_input));
+              }
+              public override void OnAuthenticationError([GeneratedEnum] BiometricErrorCode errorCode, ICharSequence errString) {
+                _error(errString.ToString());
+              }
+              private readonly byte[] _input;  private readonly Action<byte[]> _success;
+                private readonly Action<string> _error;
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Ver- und Entschlüsseln</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            private void DecryptWithBiometric() {
+              var service = DependencyService.Get&lt;IBiometricAuthenticationService&gt;();
+              service.Decrypt(
+                Convert.FromBase64String(TextToEncrypt),
+                (obj) => Output = Encoding.UTF8.GetString(obj),
+                (obj) => Output = "An error occurred");
+            }
+
+            private void EncryptWithBiometric() {
+              var service = DependencyService.Get&lt;IBiometricAuthenticationService&gt;();
+              service.Encrypt(
+                Encoding.UTF8.GetBytes(TextToEncrypt),
+                (obj) => Output = Convert.ToBase64String(obj),
+                (obj) => Output = "An error occurred");
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrisches Workflow</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Typisches Workflow (für moderate Sicherheit):</p>
+        <ul>
+          <li>Authentifizierung mit Benutzername &amp; Passwort</li>
+          <li>Falls gültig, mit dem biometrischen Dienst verschlüsseln</li>
+          <li>Verschlüsselte Werte sichern</li>
+          <li>Beim nächsten Startup prüfen, ob gesicherte Daten vorhanden sind</li>
+          <li>Mit dem biometrischen Dienst laden und entschlüsseln</li>
+          <li>Mit den Werten einloggen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Dateien Speichern</h1>
+        <p>Im Code gibt's ein Beispiel für einfaches Datei-Handling</p>
+        <ul>
+          <li><code>IFileService</code> und <code>SimpleFileService</code> anschauen</li>
+          <li>Die Implementationen können erweitert werden, um Daten zu persistieren</li>
+          <li><em>NewtonSoft</em> NuGet Paket einsetzen, um von und nach JSON zu konvertieren</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Biometrie mit Verschlüsselung</h1>
+            <ul>
+              <li>Einfache Implementation</li>
+              <li><code>SimpleFileService</code> anschauen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>Biometrie in der eigenen App erweitern</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
       </section>
 
       <section>
