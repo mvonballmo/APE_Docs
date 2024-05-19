@@ -1,0 +1,400 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mobile App Entwicklung, Lektion 02: Evaluation, Auswahl und Konfiguration</title>
+
+  <link rel=" stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/white.css">
+  <link rel="stylesheet" href="slides.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/github.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="assets/MonteRosa.jpg" class="white-text">
+        <h1>Mobile App Entwicklung</h1>
+        <h2>Lektion 2</h2>
+        <p>
+          Evaluation, Auswahl und Konfiguration
+        </p>
+      </section>
+
+      <section data-background="assets/YellowLeaves.jpeg" class="white-text">
+        <h1>Lektion 02</h1>
+        <h2>Evaluation und Auswahl</h2>
+      </section>
+
+      <section>
+        <h1>Übersicht Lektionen</h1>
+        <ol class="compact">
+          <li class="completed">Vorstellung, Einführung und Framework-Evaluation</li>
+          <li class="selected">Evaluation, Selektion und Aufsetzen eines Frameworks</li>
+          <li>IOC und Testing</li>
+          <li>Popupelementen (Dialogen) und Steuerelemente</li>
+          <li><b>LK1</b>; MVVM, Bindings, Controls</li>
+          <li>Benachrichtigungen &amp; Biometrie</li>
+          <li>Datenbanken (SQLite); HTTP Client</li>
+          <li><b>LK2</b>; Hybrid-Apps</li>
+          <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Wo waren wir?</h2>
+        <div class="seventy-thirty-grid">
+          <div>
+            <p>Wir haben:</p>
+            <ul>
+              <li><em>Evaluationskriterien</em> festgelegt</li>
+              <li><em>Kandidaten</em> ausgesucht</li>
+              <li>eine <em>Evaluationsmatrix</em> erfasst und teilweise ausgefüllt</li>
+            </ul>
+          </div>
+          <img src="assets/checklist.png">
+        </div>
+      </section>
+
+      <section>
+        <h2>Nächste Schritte</h2>
+        <div class="seventy-thirty-grid">
+          <div>
+            <ul>
+              <li>Kandidaten installieren und testen</li>
+              <li>Installation erfolgreich?</li>
+              <li>IDE testen (debug/"Hot Reload")?</li>
+              <li>Emulatoren integriert?</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section>
+        <h2>Evaluierte Kandidaten</h2>
+        <ul>
+          <li><a href="https://www.embarcadero.com/products/delphi/starter">Delphi</a></li>
+          <li><a href="https://platform.uno/docs/articles/get-started-vs-2022.html">Uno</a></li>
+          <li><a href="https://docs.avaloniaui.net/docs/getting-started">Avalonia</a></li>
+          <li><a href="https://dotnet.microsoft.com/en-us/apps/xamarin">Xamarin</a></li>
+          <li><a href="https://reactnative.dev/docs/environment-setup?guide=quickstart">ReactNative</a></li>
+          <li><a href="https://docs.flutter.dev/get-started/install/">Flutter</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/dotnet/maui/">Maui</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Allgemeine Eindrücke</h2>
+        <ul>
+          <li>Alle Umgebungen benötigten mehrere zusätzliche GBs diverse SDKs, Vorlagen, Emulatoren, usw.</li>
+          <li>Mit gewissen Produkten konnte man effizient starten und entwickeln</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://www.embarcadero.com/products/delphi/starter">Delphi</a></h2>
+        <ul>
+          <li>Abschreckende Lizenzbedingungen</li>
+          <li>⛔️ Ab 5'000.- Firmeneinkommen wird eine kommerzielle Lizenz nötig</li>
+          <li>⛔️ IDE geht nur unter Windows</li>
+          <li>⛔️ Evaluation abgebrochen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://platform.uno/docs/articles/get-started-vs-2022.html">Uno</a></h2>
+        <ul>
+          <li>Musste viel installieren</li>
+          <li>⛔️ Am Schluss fehlte trotzdem noch "GenerateXamlTask"</li>
+          <li>⛔️ Evaluation abgebrochen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://docs.avaloniaui.net/docs/getting-started">Avalonia</a></h2>
+        <ul>
+          <li>Ging relativ einfach</li>
+          <li>Bietet nicht so viel</li>
+          <li>⚠️ Nicht so klar wie man iOS oder Android als Target setzen kann</li>
+          <li>⛔️ Kein "Hot Reload" eingeschaltet</li>
+          <li>⛔️ Evaluation abgebrochen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://docs.flutter.dev/get-started/install/macos">Xamarin</a></h2>
+        <ul>
+          <li>Ging auf Anhieb aus Visual Studio</li>
+          <li>⚠️ Unverändert gegenüber letztes Jahr</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://docs.flutter.dev/get-started/install/macos">ReactNative</a></h2>
+        <ul>
+          <li>Laufend mit nur wenig Fehlern</li>
+          <li>✅ "Hot-Reload" ging sofort auf iOS</li>
+          <li>⚠️ Lernkurve nicht ganz so flach, auch wenn man bereits React-Entwickler ist</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://docs.flutter.dev/get-started/install/">Flutter</a></h2>
+        <ul>
+          <li>⚠️ Verwirrende Einführung; zu viele Möglichkeiten</li>
+          <li>⛔️ Anleitung war nicht ganz korrekt</li>
+          <li>⛔️ Neues Projekt Wizard ging nicht auf Anhieb</li>
+          <li>⛔️ Build ging nie vorwärts; einfache App konnte nicht ausgeführt werden</li>
+          <li>⚠️ Ging endlich vorwärts; Target-Liste instabil</li>
+          <li>✅ "Hot-Reload" ging auf alle Plattformen gut</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><a href="https://learn.microsoft.com/en-us/dotnet/maui/">Maui</a></h2>
+        <ul>
+          <li>✅ Ging auf Anhieb aus Visual Studio</li>
+          <li>✅ Mac, iOS und Android waren sehr leicht auszuführen</li>
+          <li>✅ "Hot-Reload" ging sofort auf alle Plattformen</li>
+        </ul>
+      </section>
+
+
+      <section data-background="assets/YellowLeaves.jpeg" class="white-text">
+        <h1>Lektion 02</h1>
+        <h2>Umgebung einrichten</h2>
+      </section>
+
+      <section data-background="assets/Rusty_tools_dimmed.jpg">
+        <h1>Was benötigen wir?</h1>
+        <ul>
+          <li>Source-Kontrolle: <a href="https://git-scm.com/">Git</a> (mit <a href="https://www.syntevo.com/smartgit/">SmartGit</a> GUI)</li>
+          <li>Online Code Repo: <a href="https://github.com/">GitHub</a></li>
+          <li>IDE: <a href="https://visualstudio.microsoft.com/vs/community/">Visual Studio</a></li>
+          <li>Laufzeitumgebung: <a href="https://dotnet.microsoft.com/">.NET</a>/<a href="https://learn.microsoft.com/en-us/dotnet/maui/">Maui</a></li>
+          <li>Package Manager: <a href="https://www.nuget.org/">NuGet</a></li>
+          <li>Testing Framework: <a href="https://nunit.org/">nUnit</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>GitHub Einrichten</h1>
+        <ul>
+          <li>Konto auf <a href="https://github.com/">GitHub</a> erstellen</li>
+          <li>Github Repository erstellen (z.B. "HFU_APE_app")
+            <ul>
+              <li><em>Entweder</em> veröffentlichen</li>
+              <li><em>Oder</em> mich (<b>mvonballmo</b>) einladen</li>
+            </ul>
+          </li>
+          <li><a href="https://github.com/mvonballmo/APE_Docs">Docs</a> und <a href="https://github.com/mvonballmo/APE_Apps">Apps</a> merken (entweder mit "Watch" oder "⭐️")</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Einführung <a href="https://www.trello.com/">GitHub Issues</a></h1>
+        <ul>
+          <li>Unterstützt die Projektführung
+            <ul>
+              <li>Projekte</li>
+              <li>Boards</li>
+              <li>Issues</li>
+              <li>Spalten/Status</li>
+            </ul>
+          </li>
+          <li><b>Aufgaben:</b> Konto, Repository, Projekt, und ein Issue erstellen</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Wo steht ihr?</h1>
+            <ul>
+              <li><em>GitHub</em> ist eingerichtet</li>
+              <li><em>GitHub</em> Projekt ist aufgesetzt</li>
+            </ul>
+          </div>
+          <img src="assets/checklist.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Einführung Git</h1>
+            <ul>
+              <li>Pull vs. Fetch</li>
+              <li>Push vs. Commit</li>
+              <li>Local vs. Remote</li>
+              <li>Merge vs. Rebase</li>
+              <li>Working Tree vs. Stage vs. Stash</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <h1>SmartGit</h1>
+        <ul>
+          <li>Gratis für nicht kommerzielle Zwecke</li>
+          <li>GUI für Git
+            <ul>
+              <li>Git kann man auch mit VSC, WebStorm oder Kommandozeile benutzen</li>
+              <li>SmartGit ist <em>besser</em></li>
+            </ul>
+          </li>
+          <li><a href="https://www.syntevo.com/smartgit/download/">Herunterladen</a> und installieren</li>
+          <li>Ausführen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>SmartGit Lizenz</h1>
+        <p>Letzte Option wählen und bestätigen.</p>
+        <img src="assets/Lesson01/smartgit_install_license.png" class="screenshot">
+      </section>
+
+      <section>
+        <h1>Repo(s) Herunterladen</h1>
+        <ul class="compact">
+          <li>Repos:
+            <ul>
+              <li><a href="https://github.com/mvonballmo/APE_Docs">https://github.com/mvonballmo/APE_Docs</a></a></li>
+              <li><a href="https://github.com/mvonballmo/APE_Apps">https://github.com/mvonballmo/APE_Apps</a></a></li>
+              <li>Eigenes Projekt-Repo</li>
+            </ul>
+          </li>
+          <li>In <em>SmartGit</em>, <code>Repository/Clone</code> selektieren und das URL eingeben</li>
+          <li>In <em>SmartGit</em>, <code>Repository/Clone</code> selektieren, GitHub als <em>Hosting Provider</em> einrichten, und dein eigenes Projekt selektieren</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Wo steht ihr?</h1>
+            <ul>
+              <li class="done"><em>GitHub</em> ist eingerichtet</li>
+              <li class="done"><em>GitHub</em> Projekt ist aufgesetzt</li>
+              <li><em>SmartGit</em> ist eingerichtet</li>
+              <li>"app" und "doc" Repositories sind bei euch lokal verfügbar</li>
+            </ul>
+          </div>
+          <img src="assets/checklist.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>IDE Aufsetzen</h1>
+        <ul>
+          <li>OS und Zielgerät feststellen</li>
+          <li>Visual Studio 2022 installieren</li>
+          <li>Emulator (Android) oder Simulator (iOS) einrichten</li>
+          <li>Optional: <a href="https://docs.microsoft.com/xamarin/android/get-started/installation/set-up-device-for-development">Einrichten eines Geräts für die Entwicklung und Debugging</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Wo steht ihr?</h1>
+        <div class="seventy-thirty-grid">
+          <div>
+            <ul>
+              <li class="done"><em>GitHub</em> ist eingerichtet</li>
+              <li class="done"><em>GitHub</em> Projekt ist aufgesetzt</li>
+              <li class="done"><em>SmartGit</em> ist eingerichtet</li>
+              <li class="done">"app" und "doc" Repositories sind lokal verfügbar</li>
+              <li><em>Visual Studio</em> ist installiert</li>
+              <li>Ein Emulator ist eingerichtet</li>
+            </ul>
+          </div>
+          <img src="assets/checklist.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Wir sind bereit!</h1>
+        <img src="assets/its_so_beautiful.png">
+      </section>
+
+      <section data-background="assets/legobricks-dimmed.jpg" class="white-text">
+        <h1>Bauen wir etwas zusammen!</h1>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Projekt erstellen</h1>
+            <ul>
+              <li class="fragment highlight-current-blue">".NET MAUI App" wählen</li>
+              <li class="fragment highlight-current-blue">Ein Projekt wird erstellt</li>
+              <li class="fragment highlight-current-blue">Im Emulator Ausführen</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Commit und Push</h1>
+            <ul>
+              <li class="fragment highlight-current-blue">Änderungen in Git "committen"</li>
+              <li class="fragment highlight-current-blue">Commit(s) nach GitHub "pushen"</li>
+            </ul>
+          </div>
+          <img src="assets/up_down.png">
+        </div>
+        <p class="notes">Um ein lokal erstelltes Projekt mit GitHub zu verbinden, siehe <a href="https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github">How to Push an Existing Project to GitHub</a>.</p>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Wo steht ihr?</h1>
+            <ul>
+              <li>Alle Werkzeuge sind installiert und eingerichtet</li>
+              <li>Eure Code ist auf GitHub gesichert</li>
+            </ul>
+          </div>
+          <img src="assets/checklist.png">
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>

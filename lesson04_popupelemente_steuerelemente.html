@@ -1,0 +1,902 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mobile App Entwicklung, Lektion 04, Popupelemente (Dialogs) und Steuerelemente</title>
+
+  <link rel=" stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/white.css">
+  <link rel="stylesheet" href="slides.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/github.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="assets/MonteRosa.jpg" class="white-text">
+        <h1>Mobile App Entwicklung</h1>
+        <h2>Lektion 4</h2>
+        <p>
+          Popupelemente (Dialogs) und Steuerelemente
+        </p>
+      </section>
+
+      <section data-background="assets/looking-back-dimmed.jpg">
+        <h1>Rückblick</h1>
+        <ul>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/dependency-injection">IoC</a></li>
+          <li><a href="https://docs.microsoft.com/en-us/dotnet/core/testing/">Testing</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Übersicht Lektionen</h1>
+        <ol class="compact">
+          <li class="completed">Vorstellung, Einführung und Framework-Evaluation</li>
+          <li class="completed">Evaluation, Selektion und Aufsetzen eines Frameworks</li>
+          <li class="completed">IOC und Testing</li>
+          <li class="selected">Popupelementen (Dialogen) und Steuerelemente</li>
+          <li><b>LK1</b>; MVVM, Bindings, Controls</li>
+          <li>Benachrichtigungen &amp; Biometrie</li>
+          <li>Datenbanken (SQLite); HTTP Client</li>
+          <li><b>LK2</b>; Hybrid-Apps</li>
+          <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
+        </ol>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>LZ1</h1>
+            <ul>
+              <li>Statt eine Prüfung macht ihr ein kleines Projekt</li>
+              <li>Maui App erstellen</li>
+              <li>Auf GitHub und Verzeichnis LZ1 hochladen</li>
+              <li>Mindestens ein Service wird eingesetzt</li>
+              <li>Dieser Service wird getestet</li>
+            </ul>
+          </div>
+          <img src="assets/checklist.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1><a href="https://learn.microsoft.com/de-de/dotnet/maui/user-interface/pop-ups">Popupelementen</a></h1>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1><a href="https://learn.microsoft.com/de-de/dotnet/maui/user-interface/pop-ups">Popupelementen</a></h1>
+            <ul>
+              <li>Verschiedene Variante probieren</li>
+              <li><code>Page</code> als Command-Parameter mitgeben</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/pop-ups">Dialogs</a> (Pop-Ups)</h1>
+        <ul>
+          <li><code>DisplayAlert("", "")</code> auf irgendeine Seite aufrufen</li>
+          <li>"Fragen" können mit <em>overloads</em> gestellt werden</li>
+          <li><code>await</code> das Resultat</li>
+          <li>"Action Sheets" für Verhalten wie “DropDown” einsetzen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Dialogs: API</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            DisplayAlert(string title, string message, string cancel);
+
+            DisplayAlert(string title, string message,
+                         string accept, string cancel);
+
+            DisplayActionSheet(string title, string cancel,
+                               string destruction, params string[] buttons);
+
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Nachricht</h1>
+        <img src="assets/Lesson03/StandardAlerts.jpg" class="tall-screenshot">
+      </section>
+
+      <section>
+        <h1>Frage Stellen</h1>
+        <img src="assets/Lesson03/QuestionAlert.jpg" class="full-width">
+      </section>
+
+      <section>
+        <h1>Frage mit Auswahl</h1>
+        <img src="assets/Lesson03/SelectionDialog.jpg" class="tall-screenshot">
+      </section>
+
+      <section>
+        <h1>Dialogs: C# Code</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            DeleteItemCommand = new Command&lt;Page&gt;(async page =>
+            {
+              var result = await page.DisplayAlert("Confirm", "Are you sure?", "YES", "NO");
+              if (result)
+              {
+                Items.Remove(SelectedItem);
+              }
+            });
+
+            async void OnActionSheetSimpleClicked(object sender, EventArgs e)
+            {
+              string action = await DisplayActionSheet("ActionSheet: Send to?", "Cancel",
+                                                        null, "Email", "Twitter", "Facebook");
+              Debug.WriteLine("Action: " + action);
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Dialogs: XAML Code</h1>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;?xml version="1.0" encoding="utf-8"?&gt;
+              &lt;ContentPage
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="Todo.Views.TodoListPage"
+                xmlns:local="clr-namespace:Todo.Converters;assembly:Todo"
+                xmlns:viewModels="clr-namespace:Todo.ViewModels;assembly:Todo"
+                x:DataType="viewModels:TodoListViewModel"
+                x:Name="Page"&gt;
+                &lt;ContentPage.Content&gt;
+                  &lt;Button Text="Delete" WidthRequest="100" Margin="20,0,0,0"
+                    Command="{Binding DeleteItemCommand}" CommandParameter="{x:Reference Page}" /&gt;
+                &lt;/ContentPage.Content&gt;
+             &lt;/ContentPage&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <p>Ein Dialog in der eigenen App einbauen</p>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/styles/xaml/">Styles</a></h1>
+      </section>
+
+      <section>
+        <h1>Styles</h1>
+        <ul>
+          <li>Man kann mit XAML oder CSS stylen</li>
+          <li>Wir setzen den Fokus auf XAML</li>
+          <li><a href="https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/styles/xaml/">Online Doku</a> durchsuchen, um herauszufinden welche Properties von welchen Controls unterstützt sind</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Style Hierarchie</h1>
+        <ul>
+          <li><em>Inline Styles</em>: Direkt auf einem Element gesetzt (wie "inline styles" in HTML)</li>
+          <li><em>Explicit Styles</em>: Auf dem <code>&lt;Style&gt;</code> Element eines Elements gesetzt</li>
+          <li><em>Implicit Styles</em>: Den <code>TargetType</code> bestimmt den geerbten Style</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Inline Styles: Beispiel</h1>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;Label
+              Grid.Column=“2"
+              Text="X"
+              TextColor=“Red" /&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Explicit Style: Beispiel</h1>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;ContentPage
+              xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              x:Class="Todo.Views.TodoListPage"
+              Title="List"&gt;
+              &lt;ContentPage.Style&gt;
+                &lt;Style&gt;
+                  &lt;Setter
+                    Property="BackgroundColor"
+                    Value="Black" /&gt;
+                &lt;/Style&gt;
+              &lt;/ContentPage.Style&gt;
+              &lt;!-- other content --&gt;
+            &lt;ContentPage/&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Styling im App</h1>
+        <p><code>ResourceDictionary</code> aufsetzen:</p>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;Application
+              xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              x:Class="Todo.App"&gt;
+              &lt;Application.Resources&gt;
+                &lt;ResourceDictionary&gt;
+                  &lt;Color x:Key="Background"&gt;Black&lt;/Color&gt;
+                  &lt;Style x:Key=“ContentPageStyle" TargetType="ContentPage"&gt;
+                    &lt;Setter Property="BackgroundColor" Value="{StaticResource Background}" /&gt;
+                  &lt;/Style&gt;
+                &lt;/ResourceDictionary&gt;
+              &lt;/Application.Resources&gt;
+            &lt;/Application&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>App Styles einsetzen</h1>
+        <p><code>ContentPageStyle</code> aus dem App <code>ResourceDictionary</code> referenzieren:</p>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              x:Class="Todo.Views.TodoListPage"
+              x:Name="Page"
+              Title="List"
+              Style="{StaticResource ContentPageStyle}"&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Implicit Styling: Beispiel</h1>
+        <p>Style mit einem <code>TargetType</code> assoziieren:</p>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;Style TargetType="Button"&gt;
+              &lt;Setter Property="BackgroundColor" Value="#3541a0" /&gt;
+              &lt;Setter Property="TextColor" Value="White" /&gt;
+              &lt;Setter Property="HeightRequest" Value="50" /&gt;
+            &lt;/Style&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Styling: <code><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.button">Button</a></code></h1>
+        <ul>
+          <li>BackgroundColor</li>
+          <li>BorderRadius</li>
+          <li>BorderWidth</li>
+          <li>BorderColor</li>
+          <li>TextColor</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Styling: <code><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.entry">Entry</a></code></h1>
+        <ul>
+          <li>TextColor</li>
+          <li>FontSize</li>
+          <li>FontFamily</li>
+          <li>PlaceholderColor</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Styling: <code><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.picker">Picker</a></code></h1>
+        <ul>
+          <li>TextColor</li>
+          <li>FontSize</li>
+          <li>FontFamily</li>
+          <li>TitleColor</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Styling: <code><a href="https://docs.microsoft.com/dotnet/api/xamarin.forms.label">Label</a></code></h1>
+        <ul>
+          <li>TextColor</li>
+          <li>BackgroundColor</li>
+          <li>FontSize</li>
+          <li>FontFamily</li>
+          <li>TextDecorations</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Styling: Weitere Ressourcen</h2>
+        <table>
+          <tr>
+            <td><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/triggers">Triggers</a></td>
+            <td>Auf Events in XAML reagieren</td>
+          </tr>
+          <tr>
+            <td><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/custom-renderer/">Custom Renderer</a></td>
+            <td>Das Aussehen eines Native-Controls komplett anpassen</td>
+          </tr>
+          <tr>
+            <td><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/effects/">Effects</a></td>
+            <td>Plattformspezifische Anpassungen ohne Renderer</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Styles</h1>
+            <ul>
+              <li>Inline Styles</li>
+              <li>Explicit Styling</li>
+              <li>Implicit Styling</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <p>Eure Apps ein bisschen stylen</p>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Benachrichtigungen</h1>
+        <ul>
+          <li>Unterscheiden sich auf iOS und Android</li>
+          <li>Beide unterstützen <em>Remote</em> (oder <em>Push</em>) <em>Notifications</em></li>
+          <li>Dies ist ein perfektes Einsatzgebiet für <em>IoC</em></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Lokale Benachrichtigungen</h1>
+        <ul>
+          <li>Berechtigungen zuerst abfragen (nur für iOS)</li>
+          <li><em>Notification channel</em> aussetzen (nur für Android)</li>
+          <li>Nachricht mit Details abfüllen (Text, Priority, usw.)</li>
+          <li>Nachricht für die Auslieferung freigeben (<em>schedule</em>)</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Android</h1>
+        <div class="fifty-fifty-grid">
+          <p>Vor dem wir beginnen, müssen wir ein bisschen mehr über Android lernen.</p>
+          <img src="assets/Android_Logo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Android: Basics</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li><em>Activities</em> sind die Controllers im <em>MVC</em></li>
+          <li><code>Xamarin.Forms</code> Apps haben normalerweise nur das <code>MainActivity</code></li>
+          <li>Xamarin generiert ein gross Teil dieses Code (<em>scaffolding</em>)</li>
+          <li>Inclusive das Code womit <code>Xamarin.Forms</code> selbst gestartet wird (<em>bootstrapping</em>)</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1><a href="https://developer.android.com/guide/components/activities/activity-lifecycle">Android Lifecycle</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <img src="assets/Lesson04/AndroidLifeCycle.png">
+      </section>
+
+      <section>
+        <h1><a href="https://developer.android.com/guide/topics/manifest/manifest-intro">Android Manifest</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>In die Datei <code>AndroidManifest.xml</code> definiert</li>
+          <li>Beinhaltet die <em>Metadaten</em> für die Applikation
+            <ul>
+              <li>Package Name</li>
+              <li>Minimum SDK Level</li>
+              <li>Geforderte Berechtigungen</li>
+              <li><em>Intent filters</em></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.android.com/guide/components/intents-filters">Android Intents</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Sind Objekten womit eine Aktion oder Benachrichtigung gestartet werden kann</li>
+          <li>Benutzt um zwischen <em>Activities</em> zu wechseln</li>
+          <li>Wir werden eine Benachrichtigung mit einem <em>Intent</em> bestücken, um das Bearbeiten der Nachricht durch die App zu beeinflussen</li>
+          <li>Ein <em>Intent</em> kann zusätzlichen Daten beinhalten</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/android/app-fundamentals/notifications/local-notifications">Notification Channels</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Eine App muss zumindest ein <em>Notification Channel</em> definieren, um Nachrichten zu bekommen</li>
+          <li>Ein <em>Notification Channel</em> beinhaltet
+            <ul>
+              <li>Eine Priorität</li>
+              <li>Eine Beschreibung</li>
+            </ul>
+          </li>
+          <li>Die können vom Benutzer im Betriebssystem verwaltet werden</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Android Settings</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <div class="fifty-fifty-grid">
+          <img src="assets/Lesson04/NotificationSettings.png">
+          <img src="assets/Lesson04/ChannelSettings.png">
+        </div>
+      </section>
+
+      <section class="compact">
+        <h1>Channel Erstellen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Ein <em>Channel</em> kann in einem Service definiert werden.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            public class NotificationService : INotificationService {
+              private const string ChannelId = "Channel ID";
+              private const string ChannelName = "TODO Channel";
+              private const string ChannelDescription = "Messages for the TODO App";
+
+              public void CreateNotificationChannel() {
+                var channel = new NotificationChannel(ChannelId, ChannelName, NotificationImportance.Default) {
+                  Description = ChannelDescription
+                };
+
+                var notificationManager = (NotificationManager)MainActivity.Activity.GetSystemService(Context.NotificationService);
+                notificationManager.CreateNotificationChannel(channel);
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Notification Erstellen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            var builder = new NotificationCompat.Builder(MainActivity.Activity, ChannelId)
+              .SetContentTitle(title)
+              .SetContentText(description)
+              .SetSmallIcon(Resource.Drawable.notify_panel_notification_icon_bg);
+
+            var notification = builder.Build();
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Notification Layout</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <img src="assets/Lesson04/NotificationExample.png" class="full-width">
+      </section>
+
+      <section>
+        <h1>Notification Anzeigen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Benachrichtigungen werden mit demselben <code>NotificationService</code> gesendet als für die Registrierung benutzt wurde.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            var a = MainActivity.Activity;
+            var svc = a.GetSystemService(Context.NotificationService);
+            var notificationManager = (NotificationManager)svc;
+
+            const int notificationId = 0;
+
+            notificationManager.Notify(notificationId, notification);
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h2>Lokale Benachrichtigungen</h2>
+            <ul>
+              <li><em>Notification Channel</em> registrieren</li>
+              <li>Lokale Nachricht senden und empfangen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li><em>Notification Channel</em> registrieren</li>
+              <li>Lokale Nachricht senden und empfangen</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Push Notifications</h1>
+      </section>
+
+      <section>
+        <h1>Push Notifications</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Wir schauen das generelle Setup an</li>
+          <li>Wir schauen das Backend für den Push-Dienst <em>nicht</em> in Detail an</li>
+          <li>Wir setzen <em>Firebase</em> direkt ein</li>
+          <li><em>Firebase</em> ist das offizielle Android/Google Push-Notification Provider</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/android/data-cloud/google-messaging/firebase-cloud-messaging">Firebase Architektur</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <img src="assets/Lesson04/FireBaseArchitecture.png" class="screenshot">
+      </section>
+
+      <section>
+        <h1>Packages einziehen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Folgende <em>NuGet</em> Packages im Android Projekt installieren</p>
+        <ul>
+          <li><code>Xamarin.GooglePlayServices.Base</code></li>
+          <li><code>Xamarin.Firebase.Messaging</code></li>
+          <li><code>Xamarin.Google.Dagger</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Firebase aufsetzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ol>
+          <li><a href="https://console.firebase.google.com">https://console.firebase.google.com</a> öffnen</li>
+          <li>Einloggen oder Konto erstellen</li>
+          <li>Projekt erstellen</li>
+          <li><em>Google Analytics</em> müsst ihr nicht einschalten</li>
+          <li>Android App mit dem Package-Namen aus der <code>AndroidManifest.xml</code> einfügen</li>
+          <li><code>google-services.json</code> herunterladen</li>
+          <li>Diese Datei im Android-Projekt einfügen</li>
+          <li><em>Build Action</em> für diese Datei auf <code>GoogleServicesJson</code> setzen</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>App aufsetzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Im <code>AndroidManifest.xml</code> innerhalb des <code>&lt;application&gt;</code> Tags die folgenden Zeilen einfügen</p>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="false" /&gt;
+            &lt;receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND"&gt;
+              &lt;intent-filter&gt;
+                &lt;action android:name="com.google.android.c2dm.intent.RECEIVE" /&gt;
+                &lt;action android:name="com.google.android.c2dm.intent.REGISTRATION" /&gt;
+                &lt;category android:name="${applicationId}" /&gt;
+              &lt;/intent-filter&gt;
+            &lt;/receiver&gt;
+          </code>
+        </pre>
+        <p class="notes">Sicherstellen, dass ein <em>Notification Channel</em> definiert ist, sonst kommen keine Nachrichten an.</p>
+      </section>
+
+      <section class="compact">
+        <h1><code>FirebaseService</code></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Im Android Projekt <code>FirebaseService</code> definieren, um das <code>Token</code> für das Gerät abzuhandeln</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            [Service]
+            [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
+            [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
+            public class FirebaseService : FirebaseMessagingService {
+              public override void OnNewToken(string token) {
+                Log.Debug(nameof(FirebaseService), "FCM token: " + token);
+
+                SendRegistrationToServer(token);
+
+                DependencyService.Get&lt;INotificationService&gt;().CreateNotificationChannel();
+              }
+
+              public void SendRegistrationToServer(string token) {
+                // Send the token to the server, if desired
+                // Using this, you can send notifications to specific recipients
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><code>OnMessageReceived()</code></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>FirebaseService</code> erweitern, um Nachrichten abzuhandeln, wenn die App im Vordergrund ist</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            [Service]
+            [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
+            [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
+            public class FirebaseService : FirebaseMessagingService {
+
+              // Neu
+              public override void OnMessageReceived(RemoteMessage message) {
+                Log.Debug(nameof(FirebaseService), $"Received message. {message}");
+
+                DependencyService.Get&lt;INotificationService&gt;().ShowNotification(message.From, message.GetNotification().Body);
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Nachricht Testen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>App starten und Token aus dem Output lesen (oder Breakpoint in <code>FirebaseService</code> setzen)</li>
+          <li>App schliessen oder im Hintergrund setzen</li>
+          <li><em>Firebase Console</em> öffnen
+            <ul>
+              <li>Links auf dem Menü "Engage" klicken</li>
+              <li>Sub-Menü “Cloud Messaging” wählen</li>
+              <li>Neue Nachricht mit einem Titel und einer Beschreibung kreieren</li>
+              <li>“Testnachricht senden” klicken</li>
+              <li>Token eingeben und “Test” klicken</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h2>Push Notifications</h2>
+            <ul>
+              <li>App für Push Notifications einrichten</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>App für Push Notifications einrichten</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>"Taps" und App-spezifische Daten</h1>
+      </section>
+
+      <section class="compact">
+        <h1>App öffnen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Mit einem <code>Intent</code> kann die App im Vordergrund gebracht oder gestartet werden</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            var notificationIntent = MainActivity.Activity.PackageManager.GetLaunchIntentForPackage(MainActivity.Activity.PackageName);
+            notificationIntent.SetFlags(ActivityFlags.SingleTop);
+            notificationIntent.PutExtra("FromNotification", true);
+
+            var pendingIntent = PendingIntent.GetActivity(MainActivity.Activity,
+              0, notificationIntent, PendingIntentFlags.UpdateCurrent);
+
+            var builder = new NotificationCompat.Builder(MainActivity.Activity, channelId)
+              .SetContentTitle(title)
+              .SetContentText(description)
+              .SetContentIntent(pendingIntent) // &lt;== neue Zeile
+              .SetSmallIcon(Resource.Drawable.ic_app);
+
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1><code>MainActivity</code> anpassen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>Intent</code> im <code>MainActivity</code> abfangen und abhandeln</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            protected override void OnNewIntent(Intent intent) {
+              // Do something with the data you pass from the notification.
+              var extra = intent.GetBooleanExtra("FromNotification", false);
+              if (extra) {
+                // Do something with it
+              }
+              base.OnNewIntent(intent);
+            }
+
+            protected override void OnCreate(Bundle savedInstanceState) {
+              // Forms startup here...
+
+              // Check if our notification was clicked while the app was closed.
+              var extra = Intent.GetBooleanExtra("FromNotification", false);
+              if (extra) {
+                // Do something with it
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Werten auslesen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Key/Value Paare können mitgeschickt werden, die an die App weitergeleitet werden</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            protected override void OnCreate(Bundle savedInstanceState) {
+              if (!Forms.IsInitialized) {
+                   // Forms init code
+              }
+              else {
+                // We need to make sure we call the base method in any case
+                base.OnCreate(savedInstanceState);
+              }
+
+              // Check if we've some extras because we've been started by a notification tap.
+              if (Intent.Extras?.Get("RemoteKey") != null) {
+                // Let's do something with that information.
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>App im Vordergrund</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Klicks auf Nachrichten für eine laufende App können mit folgendem Code abgehandelt werden</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            protected override void OnNewIntent(Intent intent)
+            {
+              // Check for key/values from notifications.
+              var extra = intent.GetStringExtra("FromNotification");
+              if (!string.IsNullOrEmpty(extra))
+              {
+                // Do something with the value.
+              }
+
+              base.OnNewIntent(intent);
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Icon setzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Im <code>AndroidManifest.xml</code> innerhalb des <code>&lt;application&gt;</code> Tags die folgenden Zeilen einfügen</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            &lt;meta-data
+              android:name="com.google.firebase.messaging.default_notification_icon"
+              android:resource="@drawable/ic_mtrl_chip_checked_circle"
+            /&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Und iOS?</h1>
+        <img src="assets/iOS_logo.png" class="platform-logo">
+        <ul>
+          <li>Man muss ein kostenpflichtiges <em>Apple Developer</em> Konto haben</li>
+          <li>APN geht im Simulator nicht; muss auf einem echten Gerät getestet werden</li>
+          <li>Man kann FireBase und/oder Azure auch für iOS einsetzen</li>
+        </ul>
+        <p>Wir fokussieren auf Android.</p>
+      </section>
+
+      <section>
+        <h1>Und Senden?</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Das automatisierte Senden von Nachrichten läuft auch über das <em>Firebase</em> API</li>
+          <li>Man muss ein weiteres API-Schlüssel anlegen und diverse Registrierungen machen</li>
+          <li>So etwas ist "out of scope" für das Modul</li>
+          <li>Siehe
+            <ul>
+              <li><a href="https://firebase.google.com/docs/cloud-messaging/send-message">Build app server send requests</a></li>
+              <li><a href="https://firebase.google.com/docs/cloud-messaging/server">Your server environment and FCM</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>

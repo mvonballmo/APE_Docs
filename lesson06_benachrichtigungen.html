@@ -1,0 +1,1108 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mobile App Entwicklung, Lektion 06, Benachrichtigungen &amp; Biometrie</title>
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/white.css">
+  <link rel="stylesheet" href="slides.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/github.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="assets/MonteRosa.jpg" class="white-text">
+        <h1>Mobile App Entwicklung</h1>
+        <h2>Lektion 6</h2>
+        <p>
+          Benachrichtigungen &amp; Biometrie
+        </p>
+      </section>
+
+      <section data-background="assets/looking-back-dimmed.jpg">
+        <h1>Rückblick</h1>
+        <ul>
+          <li><a href="https://learn.microsoft.com/en-us/dotnet/maui/xaml/fundamentals/mvvm">MVVM Pattern</a></li>
+          <li>LZK1</li>
+          <li>Testing und Mocking</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Übersicht Lektionen</h1>
+        <ol class="compact">
+          <li class="completed">Vorstellung, Einführung und Framework-Evaluation</li>
+          <li class="completed">Evaluation, Selektion und Aufsetzen eines Frameworks</li>
+          <li class="completed">IOC und Testing</li>
+          <li class="completed">Popupelementen (Dialogen)</li>
+          <li class="completed"><b>LK1</b>; MVVM, Bindings, Controls</li>
+          <li class="selected">Testing &amp; Benachrichtigungen</li>
+          <li>Datenbanken (SQLite); HTTP Client</li>
+          <li><b>LK2</b>; Hybrid-Apps</li>
+          <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>Möglichkeiten für heute</h1>
+        <ul>
+          <li>LZK1 Fragen?</li>
+          <li>Testing/Mocking/Faking Beispiel (aus der letzten Lektion)</li>
+          <li>Benachrichtigungen (Übersicht)</li>
+          <li>Biometrie (Übersicht)</li>
+          <li>Projektarbeit</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Benachrichtigungen/h1>
+      </section>
+
+      <section>
+        <h1>Varianten</h1>
+        <div>
+          <ul>
+            <li><a href="https://console.firebase.google.com/">Firebase</a> (Android und iOS)</li>
+            <li><a href="https://learn.microsoft.com/en-us/azure/notification-hubs/ios-sdk-get-started">Azure Notification Hubs</a> (alle)</li>
+            <li><a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html#//apple_ref/doc/uid/TP40008194-CH8-SW1">APNS (Apple Push Notification Service)</a> (iOS)</li>
+            <li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/apps/hh913756(v=win.10)">Windows Push Notification Services (WNS)</a> (alle)</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h1>Einschränkungen</h1>
+        <div>
+          <ul>
+            <li>Kosten: Windows und Apple kosten zwischen CHF19.- und CHF99.- pro Jahr</li>
+            <li>Setup: Zertifikaten, eindeutige IDs, usw.</li>
+            <li>Debugging ist nicht immer durchschaubar order einfach</li>
+          </ul>
+          <p>
+            Das ganze Thema ist mit Sicherheit verbunden und ist dadurch komplexer.
+          </p>
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Benachrichtigungen</h1>
+        <ul>
+          <li>Unterscheiden sich auf iOS und Android</li>
+          <li>Beide unterstützen <em>Remote</em> (oder <em>Push</em>) <em>Notifications</em></li>
+          <li>Dies ist ein perfektes Einsatzgebiet für <em>IoC</em></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Lokale Benachrichtigungen</h1>
+        <ul>
+          <li>Berechtigungen zuerst abfragen (nur für iOS)</li>
+          <li><em>Notification channel</em> aufsetzen (nur für Android)</li>
+          <li>Nachricht mit Details abfüllen (Text, Priority, usw.)</li>
+          <li>Nachricht für die Auslieferung freigeben (<em>schedule</em>)</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Android</h1>
+        <div class="fifty-fifty-grid">
+          <p>Vor dem wir beginnen, müssen wir ein bisschen mehr über Android lernen.</p>
+          <img src="assets/Android_Logo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Android: Basics</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li><em>Activities</em> sind die Controllers im <em>MVC</em></li>
+          <li><code>Xamarin.Forms</code> Apps haben normalerweise nur das <code>MainActivity</code></li>
+          <li>Xamarin generiert ein gross Teil dieses Code (<em>scaffolding</em>)</li>
+          <li>Inclusive das Code womit <code>Xamarin.Forms</code> selbst gestartet wird (<em>bootstrapping</em>)</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1><a href="https://developer.android.com/guide/components/activities/activity-lifecycle">Android Lifecycle</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <img src="assets/Lesson04/AndroidLifeCycle.png">
+      </section>
+
+      <section>
+        <h1><a href="https://developer.android.com/guide/topics/manifest/manifest-intro">Android Manifest</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>In die Datei <code>AndroidManifest.xml</code> definiert</li>
+          <li>Beinhaltet die <em>Metadaten</em> für die Applikation
+            <ul>
+              <li>Package Name</li>
+              <li>Minimum SDK Level</li>
+              <li>Geforderte Berechtigungen</li>
+              <li><em>Intent filters</em></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://developer.android.com/guide/components/intents-filters">Android Intents</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Sind Objekten womit eine Aktion oder Benachrichtigung gestartet werden kann</li>
+          <li>Benutzt um zwischen <em>Activities</em> zu wechseln</li>
+          <li>Wir werden eine Benachrichtigung mit einem <em>Intent</em> bestücken, um das Bearbeiten der Nachricht durch die App zu beeinflussen</li>
+          <li>Ein <em>Intent</em> kann zusätzlichen Daten beinhalten</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/android/app-fundamentals/notifications/local-notifications">Notification Channels</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Eine App muss zumindest ein <em>Notification Channel</em> definieren, um Nachrichten zu bekommen</li>
+          <li>Ein <em>Notification Channel</em> beinhaltet
+            <ul>
+              <li>Eine Priorität</li>
+              <li>Eine Beschreibung</li>
+            </ul>
+          </li>
+          <li>Die können vom Benutzer im Betriebssystem verwaltet werden</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Android Settings</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <div class="fifty-fifty-grid">
+          <img src="assets/Lesson04/NotificationSettings.png">
+          <img src="assets/Lesson04/ChannelSettings.png">
+        </div>
+      </section>
+
+      <section class="compact">
+        <h1>Channel Erstellen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Ein <em>Channel</em> kann in einem Service definiert werden.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            public class NotificationService : INotificationService {
+              private const string ChannelId = "Channel ID";
+              private const string ChannelName = "TODO Channel";
+              private const string ChannelDescription = "Messages for the TODO App";
+
+              public void CreateNotificationChannel() {
+                var channel = new NotificationChannel(ChannelId, ChannelName, NotificationImportance.Default) {
+                  Description = ChannelDescription
+                };
+
+                var notificationManager = (NotificationManager)MainActivity.Activity.GetSystemService(Context.NotificationService);
+                notificationManager.CreateNotificationChannel(channel);
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Notification Erstellen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            var builder = new NotificationCompat.Builder(MainActivity.Activity, ChannelId)
+              .SetContentTitle(title)
+              .SetContentText(description)
+              .SetSmallIcon(Resource.Drawable.notify_panel_notification_icon_bg);
+
+            var notification = builder.Build();
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Notification Layout</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <img src="assets/Lesson04/NotificationExample.png" class="full-width">
+      </section>
+
+      <section>
+        <h1>Notification Anzeigen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Benachrichtigungen werden mit demselben <code>NotificationService</code> gesendet als für die Registrierung benutzt wurde.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            var a = MainActivity.Activity;
+            var svc = a.GetSystemService(Context.NotificationService);
+            var notificationManager = (NotificationManager)svc;
+
+            const int notificationId = 0;
+
+            notificationManager.Notify(notificationId, notification);
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h2>Lokale Benachrichtigungen</h2>
+            <ul>
+              <li><em>Notification Channel</em> registrieren</li>
+              <li>Lokale Nachricht senden und empfangen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li><em>Notification Channel</em> registrieren</li>
+              <li>Lokale Nachricht senden und empfangen</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Push Notifications</h1>
+      </section>
+
+      <section>
+        <h1>Push Notifications</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Wir schauen das generelle Setup an</li>
+          <li>Wir schauen das Backend für den Push-Dienst <em>nicht</em> in Detail an</li>
+          <li>Wir setzen <em>Firebase</em> direkt ein</li>
+          <li><em>Firebase</em> ist das offizielle Android/Google Push-Notification Provider</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/android/data-cloud/google-messaging/firebase-cloud-messaging">Firebase Architektur</a></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <img src="assets/Lesson04/FireBaseArchitecture.png" class="screenshot">
+      </section>
+
+      <section>
+        <h1>Packages einziehen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Folgende <em>NuGet</em> Packages im Android Projekt installieren</p>
+        <ul>
+          <li><code>Xamarin.GooglePlayServices.Base</code></li>
+          <li><code>Xamarin.Firebase.Messaging</code></li>
+          <li><code>Xamarin.Google.Dagger</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Firebase aufsetzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ol>
+          <li><a href="https://console.firebase.google.com">https://console.firebase.google.com</a> öffnen</li>
+          <li>Einloggen oder Konto erstellen</li>
+          <li>Projekt erstellen</li>
+          <li><em>Google Analytics</em> müsst ihr nicht einschalten</li>
+          <li>Android App mit dem Package-Namen aus der <code>AndroidManifest.xml</code> einfügen</li>
+          <li><code>google-services.json</code> herunterladen</li>
+          <li>Diese Datei im Android-Projekt einfügen</li>
+          <li><em>Build Action</em> für diese Datei auf <code>GoogleServicesJson</code> setzen</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>App aufsetzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Im <code>AndroidManifest.xml</code> innerhalb des <code>&lt;application&gt;</code> Tags die folgenden Zeilen einfügen</p>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="false" /&gt;
+            &lt;receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND"&gt;
+              &lt;intent-filter&gt;
+                &lt;action android:name="com.google.android.c2dm.intent.RECEIVE" /&gt;
+                &lt;action android:name="com.google.android.c2dm.intent.REGISTRATION" /&gt;
+                &lt;category android:name="${applicationId}" /&gt;
+              &lt;/intent-filter&gt;
+            &lt;/receiver&gt;
+          </code>
+        </pre>
+        <p class="notes">Sicherstellen, dass ein <em>Notification Channel</em> definiert ist, sonst kommen keine Nachrichten an.</p>
+      </section>
+
+      <section class="compact">
+        <h1><code>FirebaseService</code></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Im Android Projekt <code>FirebaseService</code> definieren, um das <code>Token</code> für das Gerät abzuhandeln</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            [Service]
+            [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
+            [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
+            public class FirebaseService : FirebaseMessagingService {
+              public override void OnNewToken(string token) {
+                Log.Debug(nameof(FirebaseService), "FCM token: " + token);
+
+                SendRegistrationToServer(token);
+
+                DependencyService.Get&lt;INotificationService&gt;().CreateNotificationChannel();
+              }
+
+              public void SendRegistrationToServer(string token) {
+                // Send the token to the server, if desired
+                // Using this, you can send notifications to specific recipients
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><code>OnMessageReceived()</code></h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>FirebaseService</code> erweitern, um Nachrichten abzuhandeln, wenn die App im Vordergrund ist</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            [Service]
+            [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
+            [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
+            public class FirebaseService : FirebaseMessagingService {
+
+              // Neu
+              public override void OnMessageReceived(RemoteMessage message) {
+                Log.Debug(nameof(FirebaseService), $"Received message. {message}");
+
+                DependencyService.Get&lt;INotificationService&gt;().ShowNotification(message.From, message.GetNotification().Body);
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Nachricht Testen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>App starten und Token aus dem Output lesen (oder Breakpoint in <code>FirebaseService</code> setzen)</li>
+          <li>App schliessen oder im Hintergrund setzen</li>
+          <li><em>Firebase Console</em> öffnen
+            <ul>
+              <li>Links auf dem Menü "Engage" klicken</li>
+              <li>Sub-Menü “Cloud Messaging” wählen</li>
+              <li>Neue Nachricht mit einem Titel und einer Beschreibung kreieren</li>
+              <li>“Testnachricht senden” klicken</li>
+              <li>Token eingeben und “Test” klicken</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h2>Push Notifications</h2>
+            <ul>
+              <li>App für Push Notifications einrichten</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>App für Push Notifications einrichten</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>"Taps" und App-spezifische Daten</h1>
+      </section>
+
+      <section class="compact">
+        <h1>App öffnen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Mit einem <code>Intent</code> kann die App im Vordergrund gebracht oder gestartet werden</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            var notificationIntent = MainActivity.Activity.PackageManager.GetLaunchIntentForPackage(MainActivity.Activity.PackageName);
+            notificationIntent.SetFlags(ActivityFlags.SingleTop);
+            notificationIntent.PutExtra("FromNotification", true);
+
+            var pendingIntent = PendingIntent.GetActivity(MainActivity.Activity,
+              0, notificationIntent, PendingIntentFlags.UpdateCurrent);
+
+            var builder = new NotificationCompat.Builder(MainActivity.Activity, channelId)
+              .SetContentTitle(title)
+              .SetContentText(description)
+              .SetContentIntent(pendingIntent) // &lt;== neue Zeile
+              .SetSmallIcon(Resource.Drawable.ic_app);
+
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1><code>MainActivity</code> anpassen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>Intent</code> im <code>MainActivity</code> abfangen und abhandeln</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            protected override void OnNewIntent(Intent intent) {
+              // Do something with the data you pass from the notification.
+              var extra = intent.GetBooleanExtra("FromNotification", false);
+              if (extra) {
+                // Do something with it
+              }
+              base.OnNewIntent(intent);
+            }
+
+            protected override void OnCreate(Bundle savedInstanceState) {
+              // Forms startup here...
+
+              // Check if our notification was clicked while the app was closed.
+              var extra = Intent.GetBooleanExtra("FromNotification", false);
+              if (extra) {
+                // Do something with it
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Werten auslesen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Key/Value Paare können mitgeschickt werden, die an die App weitergeleitet werden</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            protected override void OnCreate(Bundle savedInstanceState) {
+              if (!Forms.IsInitialized) {
+                   // Forms init code
+              }
+              else {
+                // We need to make sure we call the base method in any case
+                base.OnCreate(savedInstanceState);
+              }
+
+              // Check if we've some extras because we've been started by a notification tap.
+              if (Intent.Extras?.Get("RemoteKey") != null) {
+                // Let's do something with that information.
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>App im Vordergrund</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Klicks auf Nachrichten für eine laufende App können mit folgendem Code abgehandelt werden</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            protected override void OnNewIntent(Intent intent)
+            {
+              // Check for key/values from notifications.
+              var extra = intent.GetStringExtra("FromNotification");
+              if (!string.IsNullOrEmpty(extra))
+              {
+                // Do something with the value.
+              }
+
+              base.OnNewIntent(intent);
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Icon setzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Im <code>AndroidManifest.xml</code> innerhalb des <code>&lt;application&gt;</code> Tags die folgenden Zeilen einfügen</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            &lt;meta-data
+              android:name="com.google.firebase.messaging.default_notification_icon"
+              android:resource="@drawable/ic_mtrl_chip_checked_circle"
+            /&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Und iOS?</h1>
+        <img src="assets/iOS_logo.png" class="platform-logo">
+        <ul>
+          <li>Man muss ein kostenpflichtiges <em>Apple Developer</em> Konto haben</li>
+          <li>APN geht im Simulator nicht; muss auf einem echten Gerät getestet werden</li>
+          <li>Man kann FireBase und/oder Azure auch für iOS einsetzen</li>
+        </ul>
+        <p>Wir fokussieren auf Android.</p>
+      </section>
+
+      <section>
+        <h1>Und Senden?</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Das automatisierte Senden von Nachrichten läuft auch über das <em>Firebase</em> API</li>
+          <li>Man muss ein weiteres API-Schlüssel anlegen und diverse Registrierungen machen</li>
+          <li>So etwas ist "out of scope" für das Modul</li>
+          <li>Siehe
+            <ul>
+              <li><a href="https://firebase.google.com/docs/cloud-messaging/send-message">Build app server send requests</a></li>
+              <li><a href="https://firebase.google.com/docs/cloud-messaging/server">Your server environment and FCM</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Biometrie</h1>
+      </section>
+
+      <section class="compact">
+        <h1>Vorteile von Biometrie</h1>
+        <ul>
+          <li>Benutzer tendieren schwächere PIN/Muster für Geräte einzusetzen</li>
+          <li>Ist sehr bequem</li>
+          <li>Sehr schwer zu knacken, wenn man den Besitzer des Geräts kennt</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie aufsetzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Sicherstellen, dass das Gerät oder der Emulator mit zumindest <code>API 28</code> arbeitet</li>
+          <li>"Target Version" vom Android Projekt zumindest auf <code>API 28</code></li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie aufsetzen II</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Berechtigungen aktualisieren</li>
+          <li><code>AndroidManifest.xml</code> öffnen</li>
+          <li>Berechtigung <code>USE_BIOMETRIC</code> einfügen</li>
+          <li>Diese Berechtigung ist "non-sensitive" (muss vom Benutzer nicht bestätigt werden, wie GPS z.B.)</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-xml hljs">
+            &lt;manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="ch.hfu.todo"&gt;
+              &lt;!—use-sdk etc. --&gt;
+              &lt;uses-permission android:name="android.permission.USE_BIOMETRIC" /&gt;
+              &lt;!-- application etc. --&gt;
+            &lt;/manifest&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Biometrie aufsetzen III</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Schnittstelle im geteilte Projekt erstellen</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public interface IBiometricAuthenticationService {
+              void Authenticate(Action success, Action&lt;string&gt; onError);
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Biometrie aufsetzen IV</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Falls noch nicht gemacht, statisches Referenz auf dem <code>Activity</code> im Android-Projekt auf dem <code>MainActivity</code> setzen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity {
+              public MainActivity()  {
+                Activity = this;
+              }
+
+              public static Activity Activity { get; private set; }
+
+              // EXCLUDED THE REST OF THE CODE FOR CLARITY
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie aufsetzen V</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Implementation im Android-Projekt erstellen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            [assembly: Dependency(typeof(BiometricAuthenticationService))]
+            namespace Todo.Droid.Security {
+              public class BiometricAuthenticationService : IBiometricAuthenticationService  {
+                public void Authenticate(Action success, Action&lt;string&gt; onError) {
+                  var builder = new BiometricPrompt.Builder(MainActivity.Activity)
+                    .SetDescription("Authenticate with Biometrics!")
+                    .SetTitle("TODO BIO")
+                    .SetNegativeButton("Cancel", MainActivity.Activity.MainExecutor, new CancelClickListener())
+                    .Build();
+
+                    builder.Authenticate(
+                      new CancellationSignal(),
+                      MainActivity.Activity.MainExecutor,
+                      new BiometricAuthenticationCallback(success, onError));
+                }
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Biometrie aufsetzen VI</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>CancelClickListener</code> im eben erstellte Klasse einfügen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricAuthenticationService : IBiometricAuthenticationService{
+              // REMOVED CODE FOR CLARITY
+
+              private class CancelClickListener : Java.Lang.Object, IDialogInterfaceOnClickListener  {
+                public void OnClick(IDialogInterface dialog, int which)    {
+                  // NOP
+                }
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie aufsetzen VII</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p><code>AuthenticationCallback</code> Ableitung erstellen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricAuthenticationService : IBiometricAuthenticationService {
+              // REMOVED CODE FOR CLARITY
+              private class BiometricAuthenticationCallback : BiometricPrompt.AuthenticationCallback  {
+                public BiometricAuthenticationCallback(Action callback, Action&lt;string&gt; onError) {
+                  _callback = callback;
+                  _onError = onError;
+                }
+                public override void OnAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                  _callback();
+                }
+                public override void OnAuthenticationError(
+                  [GeneratedEnum] BiometricErrorCode errorCode,
+                  ICharSequence errString) {
+                    _onError(errString.ToString());
+                  }
+                  private readonly Action _callback;
+                  private readonly Action&lt;string&gt; _onError;
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie aufsetzen VIII</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Biometrische Authentifizierung irgendwo fordern.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            private void AuthenticateWithBiometrics() {
+              var biometricService = DependencyService.Get&lt;IBiometricAuthenticationService&gt;();
+              biometricService.Authenticate(() =>  {
+                // We are authenticated. Do something.
+              },
+              (error) => {
+                // Failed to authenticate
+              });
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie Testen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Im Emulator die drei Punkte in der grauen Tafel klicken</li>
+          <li>“Fingerprint” Menü im linken Bereich im geöffneten Popup öffnen</li>
+          <li>Im Emulator in die Einstellungen -> Sicherheit -> Fingerprint anwählen und einen Fingerabdruck aufsetzen</li>
+          <li>Um einen "Touch" zu simulieren, "Touch the Screen" im grauen Popup anwählen</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Biometrie</h1>
+            <ul>
+              <li>Einfache Implementation</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>Biometrie in der eigenen App einbauen</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrie Ausbauen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <ul>
+          <li>Die obige Methode ist nicht ideal</li>
+          <li>Ist leider nicht sicher genug</li>
+          <li>Normalerweise will man sensitiven Daten schützen (Benutzername, Passwort, Schlüssel, usw.)</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Schnittstelle erweitern</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public interface IBiometricAuthenticationService {
+              void Encrypt(byte[] input, Action&lt;byte[]&gt; success, Action&lt;string&gt; error);
+              void Decrypt(byte[] input, Action&lt;byte[]&gt; success, Action&lt;string&gt; error);
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>"CryptoHelper" erstellen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Im Android Projekt einen "CryptoHelper" erstellen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricCryptoHelper
+            {
+              public BiometricCryptoHelper() {
+                _keystore = KeyStore.GetInstance(KeyStoreName);
+                _keystore.Load(null);
+                // TODO For testing we delete the key on every restart.
+                if (_keystore.ContainsAlias(KeyAlias)) {
+                  _keystore.DeleteEntry(KeyAlias);
+                }
+                CreateKey();
+              }
+              public static byte[] IV { get; set; }
+              private readonly KeyStore _keystore;
+              private const string KeyStoreName = "AndroidKeyStore";
+              private const string KeyAlias = "_todoKey";
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Schlüssel aufsetzen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Schlüsselerstellungslogik einbauen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricCryptoHelper {
+              // REMOVED CODE FOR CLARITY
+              private void CreateKey() {
+                var keyGen = KeyGenerator.GetInstance(KeyProperties.KeyAlgorithmAes, KeyStoreName);
+                var keyGenSpec = new KeyGenParameterSpec.Builder(
+                  KeyAlias,
+                  KeyStorePurpose.Encrypt | KeyStorePurpose.Decrypt);
+
+                keyGenSpec
+                  .SetKeySize(256)
+                  .SetBlockModes(KeyProperties.BlockModeCbc)
+                  .SetEncryptionPaddings(KeyProperties.EncryptionPaddingPkcs7)
+                  .SetUserAuthenticationRequired(true)
+                  .Build();
+
+                keyGen.Init(keyGenSpec);
+                keyGen.GenerateKey();
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Cipher initialisieren</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricCryptoHelper {
+              // REMOVED CODE FOR CLARITY
+              private Cipher CreateCipher(CipherMode mode) {
+                var key = _keystore.GetKey(KeyAlias, null);
+                var cipher = Cipher.GetInstance($”{KeyProperties.KeyAlgorithmAes}/{KeyProperties.BlockModeCbc}/{KeyProperties.EncryptionPaddingPkcs7}");
+                try {
+                  if (mode == CipherMode.DecryptMode) {
+                    cipher.Init(mode, key, new IvParameterSpec(IV));
+                  } else {
+                    cipher.Init(mode, key);
+                  }
+                }
+                catch (KeyPermanentlyInvalidatedException ex) {
+                  // TODO: The key was invalidated because the Biometric setup changed
+                  // or a permanent lock out happened.
+                }
+                return cipher;
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Methode einbinden</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Public Methode erstellen, umd das <code>CryptoObject</code> zu erstellen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricCryptoHelper{
+              // REMOVED CODE FOR CLARITY
+
+              public BiometricPrompt.CryptoObject CreateCryptoObject(CipherMode mode) {
+                var cipher = CreateCipher(mode);
+
+                return new BiometricPrompt.CryptoObject(cipher);
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Service anpassen</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricAuthenticationService : IBiometricAuthenticationService {
+              public void Encrypt(byte[] input, Action&lt;byte[]&gt; success, Action&lt;string&gt; error) {
+                var prompt = BuildPrompt();
+                prompt.Authenticate(
+                  _cryptoHelper.CreateCryptoObject(CipherMode.EncryptMode),
+                  new CancellationSignal(), MainActivity.Activity.MainExecutor,
+                  new BiometricEncryptionCallback(input, success, error));
+              }
+              public void Decrypt(byte[] input, Action&lt;byte[]&gt; success, Action&lt;string&gt; error) {
+                var prompt = BuildPrompt();
+                prompt.Authenticate(
+                  _cryptoHelper.CreateCryptoObject(CipherMode.DecryptMode),
+                  new CancellationSignal(), MainActivity.Activity.MainExecutor,
+                  new BiometricEncryptionCallback(input, success, error));
+              }
+
+              private readonly BiometricCryptoHelper _cryptoHelper = new BiometricCryptoHelper();
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Prompt extrahieren</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class BiometricAuthenticationService : IBiometricAuthenticationService {
+              // REMOVED CODE FOR CLARITY
+              private BiometricPrompt BuildPrompt() {
+                return new BiometricPrompt.Builder(MainActivity.Activity)
+                  .SetDescription("Authenticate with Biometrics!")
+                  .SetTitle("TODO BIO")
+                  .SetNegativeButton(
+                    "Cancel",
+                    MainActivity.Activity.MainExecutor,
+                    new CancelClickListener())
+                  .Build();
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Callback aktualisieren</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            private class BiometricEncryptionCallback : BiometricPrompt.AuthenticationCallback {
+              public BiometricEncryptionCallback(byte[] input, Action<byte[]> success, Action<string> error) {
+                _input = input;
+                _success = success;
+                _error = error;
+              }
+              public override void OnAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                if (BiometricCryptoHelper.IV == null) {
+                  BiometricCryptoHelper.IV = result.CryptoObject.Cipher.GetIV();
+                }
+                _success(result.CryptoObject.Cipher.DoFinal(_input));
+              }
+              public override void OnAuthenticationError([GeneratedEnum] BiometricErrorCode errorCode, ICharSequence errString) {
+                _error(errString.ToString());
+              }
+              private readonly byte[] _input;  private readonly Action<byte[]> _success;
+                private readonly Action<string> _error;
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Ver- und Entschlüsseln</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            private void DecryptWithBiometric() {
+              var service = DependencyService.Get&lt;IBiometricAuthenticationService&gt;();
+              service.Decrypt(
+                Convert.FromBase64String(TextToEncrypt),
+                (obj) => Output = Encoding.UTF8.GetString(obj),
+                (obj) => Output = "An error occurred");
+            }
+
+            private void EncryptWithBiometric() {
+              var service = DependencyService.Get&lt;IBiometricAuthenticationService&gt;();
+              service.Encrypt(
+                Encoding.UTF8.GetBytes(TextToEncrypt),
+                (obj) => Output = Convert.ToBase64String(obj),
+                (obj) => Output = "An error occurred");
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Biometrisches Workflow</h1>
+        <img src="assets/Android_Logo.png" class="platform-logo">
+        <p>Typisches Workflow (für moderate Sicherheit):</p>
+        <ul>
+          <li>Authentifizierung mit Benutzername &amp; Passwort</li>
+          <li>Falls gültig, mit dem biometrischen Dienst verschlüsseln</li>
+          <li>Verschlüsselte Werte sichern</li>
+          <li>Beim nächsten Startup prüfen, ob gesicherte Daten vorhanden sind</li>
+          <li>Mit dem biometrischen Dienst laden und entschlüsseln</li>
+          <li>Mit den Werten einloggen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Dateien Speichern</h1>
+        <p>Im Code gibt's ein Beispiel für einfaches Datei-Handling</p>
+        <ul>
+          <li><code>IFileService</code> und <code>SimpleFileService</code> anschauen</li>
+          <li>Die Implementationen können erweitert werden, um Daten zu persistieren</li>
+          <li><em>NewtonSoft</em> NuGet Paket einsetzen, um von und nach JSON zu konvertieren</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Biometrie mit Verschlüsselung</h1>
+            <ul>
+              <li>Einfache Implementation</li>
+              <li><code>SimpleFileService</code> anschauen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>Biometrie in der eigenen App erweitern</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>

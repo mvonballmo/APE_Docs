@@ -1,0 +1,411 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0>
+
+  <title>Mobile App Entwicklung, Lektion 07: Datenbanken (SQLite); HTTP Client</title>
+
+  <link rel=" stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/white.css">
+  <link rel="stylesheet" href="slides.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/github.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="assets/MonteRosa.jpg" class="white-text">
+        <h1>Mobile App Entwicklung</h1>
+        <h2>Lektion 7</h2>
+        <p>
+          Datenbanken (SQLite); HTTP Client
+        </p>
+      </section>
+
+      <section data-background="assets/looking-back-dimmed.jpg">
+        <h1>Rückblick</h1>
+        <ul>
+          <li>Benachrichtigungen</li>
+          <li>Faking/Mocking</li>
+          <li>MLZ</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Übersicht Lektionen</h1>
+        <ol class="compact">
+          <li class="completed">Vorstellung, Einführung und Framework-Evaluation</li>
+          <li class="completed">Evaluation, Selektion und Aufsetzen eines Frameworks</li>
+          <li class="completed">IOC und Testing</li>
+          <li class="completed">Popupelementen (Dialogen)</li>
+          <li class="completed"><b>LK1</b>; MVVM, Bindings, Controls</li>
+          <li class="completed">Testing &amp; Benachrichtigungen</li>
+          <li class="selected">Datenbanken (SQLite); HTTP Client</li>
+          <li><b>LK1</b>; Projektarbeit</li>
+          <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>Allgemeines</h1>
+        <ul>
+          <li>MLZ Kriterien wurden vereinfacht</li>
+          <li>LZK2 ist nächste Woche
+            <ul>
+              <li>Nur kodieren (wie bei der ersten Kontrolle)</li>
+              <li>Baut auf dem vorherigen LZK1 auf</li>
+              <li>Inhalt wird erst vor der Prüfung bekanntgegeben</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>Überblick</h1>
+        <ul>
+          <li>SQLite einsetzen, um Daten <em>lokal, auf dem Gerät</em> zu Lesen und Speichern</li>
+          <li>HTTP Client einsetzen, um Daten <em>eines externen Servers</em> zu Lesen und Schreiben</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1>SQLite</h1>
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/data-cloud/data/databases">SQLite</a></h1>
+        <ul>
+          <li>Eine Datei-basierte Datenbanken</li>
+          <li>Sehr einfach aufzusetzen und einzusetzen</li>
+          <li>Persistiert Daten lokal, auf dem Gerät</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>SQLite .NET Integration</h1>
+        <p>Es gibt zwei NuGet Paketen:</p>
+        <ul>
+          <li><a href="https://www.nuget.org/packages/sqlite-net-pcl/">sqlite-net-pcl</a></li>
+          <li><a href="https://www.nuget.org/packages/sqlite-net-sqlcipher/">sqlite-net-sqlcipher</a> (für verschlüsselte Daten)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>SQLite Verbindung erstellen</h1>
+        <ul>
+          <li><code>SQLiteConnection</code> einsetzen</li>
+          <li>Für unverschlüsselte Verbindungen kann man den "key" weglassen</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            var options = new SQLiteConnectionString(DatabasePath, true, key: key);
+            _connection = new SQLiteConnection(options);
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>SQLite Tabelle erstellen</h1>
+        <ul>
+          <li>Sicherstellen, dass die Tabelle existiert noch nicht</li>
+          <li>Tabelle wird mittels die <em>Reflection API</em> erstellt</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            var tableExists = _connection.TableMappings.Any(
+              m => m.TableName.Equals("TodoItem", StringComparison.InvariantCultureIgnoreCase)
+            );
+
+            if (!tableExists)
+            {
+              _connection.CreateTable&lt;TodoItem&gt;();
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>SQLite Annotations</h1>
+        <ul>
+          <li>Die Annotations sind sehr ähnlich zu denen von EF</li>
+          <li>Z.B. <code>PrimaryKey</code>, <code>AutoIncrement</code></li>
+        </ul>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class TodoItem
+            {
+              [PrimaryKey, AutoIncrement]
+              public int Id { get; set; }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Weitere Annotations</h1>
+        <ul>
+          <li><code>Table</code>: Klasse ist eine Tabelle</li>
+          <li><code>Column</code>: Eigenschaft ist eine Spalte</li>
+          <li><code>Ignore</code>: Eigenschaft kommt nicht in der Datenbank</li>
+          <li><code>Indexed</code>: Feld bekommt ein Index</li>
+          <li><code>MaxLength</code>: Feldlänge ist beschränkt</li>
+          <li><code>Unique</code>: Feldwert muss eindeutig über alle Datensätze sein</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>SQLite CRUD Operationen</h1>
+        <ul>
+          <li>CRUD bedeutet <em>Create</em>, <em>Read</em>, <em>Update</em> und <em>Delete</em></li>
+          <li>SQLite bietet synchrone und asynchrone APIs</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            _connection.Insert(obj);          // Create
+            _connection.Table&lt;T&gt;().ToList();  // Read
+            _connection.Update(obj);          // Update
+            _connection.Delete&lt;T&gt;(id);        // Delete
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>SQLite SQL</h1>
+        <p>Man kann beliebige SQL Befehle und Abfragen absetzen und deren Resultaten lesen</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            var c = Connection;
+            var rowsAffected = await c.ExecuteAsync("UPDATE ...");
+            var count = await c.ExecuteScalarAsync&lt;int&gt;("SELECT COUNT(*) ...");
+            var rows = await c.QueryAsync&lt;ToDoItem&gt;("SELECT * FROM ...");
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>SQLite einsetzen</h1>
+        <ul>
+          <li><code>SQLiteDataStore&lt;T&gt;</code> im Albums-Projekt anschauen</li>
+          <li>Datenbank muss initialisiert werden bzw. muss eine Datei im Benutzerbereich auf dem Gerät bekommen</li>
+          <li>Wie in den vorherigen Slides schon gesehen, die Datenbank ist ziemlich schlicht</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1 class="insertion">SQLite mit EF</h1>
+        <ul>
+          <li>Ist einsetzbar, aber...</li>
+          <li>...ist <a href="https://docs.microsoft.com/en-us/ef/core/providers/sqlite/limitations">limitiert</a> gegenüber andere Datenbanken</li>
+          <li>SQLite mit EF ist nicht "offiziell" unterstützt...</li>
+          <li>...ein NuGet Package existiert: <a href="https://docs.microsoft.com/en-us/ef/core/providers/sqlite/">Microsoft.EntityFrameworkCore.Sqlite</a></li>
+          <li><code>UseSqlite("Data Source=Path”)</code> aufrufen, um die Datenbank mit EF einzubinden</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>SQLite</h1>
+            <ul>
+              <li><code>DataStore</code> mit SQLite implementieren</li>
+              <li>Mit <code>async</code> arbeiten</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>SQLite im eigenen App einbinden</li>
+              <li>Daten aus vorherigen Sitzungen zurück lesen</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1><code>HTTPClient</code></h1>
+      </section>
+
+      <section>
+        <h1><code>HTTPClient</code></h1>
+        <ul>
+          <li>Jeder Dienst soll ein eigene Kopie bekommen</li>
+          <li>Muss als <em>Transient</em> im IOC registriert werden</li>
+          <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/data-cloud/web-services/rest">Die Dokumentation</a> erklärt weiter</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            Services.Register(() => new HttpClient());
+
+            // Oder...
+
+            Services.Register&lt;HttpClient&gt;();
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>HTTP Headers setzen</h1>
+        <p>Headers müssen pro <code>HttpClient</code> Instanz gesetzt werden.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            _client.DefaultRequestHeaders.Authorization =
+              new AuthenticationHeaderValue("Bearer", “JWTToken”);
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1><code>HttpClient.BaseAddress</code></h1>
+        <ul>
+          <li><code>BaseAddress</code> muss ein Mal pro <code>HttpClient</code> Instanz gesetzt werden.</li>
+          <li>Abfragen mit <em>relativem</em> Pfad absetzen</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            _client.BaseAddress = new Uri("https://myapi.com");
+
+            var result = await _client.GetAsync("/api/");
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Datentransfer mit JSON</h1>
+        <ul>
+          <li><code>Newtonsoft.Json</code> NuGet Paket installieren</li>
+          <li>C# Objekten =&gt; JSON (serialisieren)</li>
+          <li>JSON =&gt; C# Objekten (deserialisieren)</li>
+        </ul>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            var albumAsJson = JsonConvert.SerializeObject(album);
+
+            // ...und wieder zurück
+
+            var newAlbum = JsonConvert.DeserializeObject&lt;Album&gt;(albumAsJson);
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1><code>GET</code> mit <code>HTTPClient</code></h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public async Task&lt;IEnumerable&lt;T&gt;&gt; Get&lt;T&gt;()
+            {
+              var result = await _client.GetAsync("https://google.com");
+
+              if (result.IsSuccessStatusCode)
+              {
+                // Do something with the result...
+                var stringResult = await result.Content.ReadAsStringAsync();
+
+                return JsonConvert.DeserializeObject&lt;IEnumerable&lt;T&gt;&gt;(stringResult);
+              }
+
+              // You might want to throw an exception here since the request was not successful.
+              return new List&lt;T&gt;();
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1><code>POST</code> mit <code>HTTPClient</code></h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public async Task&lt;int&gt; Post&lt;T&gt;(T toPost)
+            {
+              var serializedObject = JsonConvert.SerializeObject(toPost);
+              var content = new StringContent(serializedObject, Encoding.UTF8, "application/json");
+              var result = await _client.PostAsync("https://google.com", content);
+
+              _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "JWTToken");
+
+              // Same handling as with get. Check the status code and read out the result.
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1 class="insertion">Tipp: Tests!</h1>
+        <div class="seventy-thirty-grid">
+          <p>Tests einsetzen, um <code>GET</code> und <code>POST</code> Abfragen und Befehle nachvoll&shy;ziehbar zu testen</p>
+          <img src="assets/Debug.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1><code>HTTPClient</code></h1>
+            <ul>
+              <li><code>HTTPClient</code> im IOC einbauen</li>
+              <li>Daten mit <code>GET</code> herunterholen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li><code>HTTPClient</code> im eigenen App einbinden</li>
+              <li>Initialen Daten von einem lokalen Web-Server herunterladen</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>

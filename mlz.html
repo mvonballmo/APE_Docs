@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Beschreibung und Bewertungskriterien MLZ</title>
+  <link rel="stylesheet" href="slides.css">
+  <style>
+    body {
+      display: grid;
+      grid-template-rows: 250px minmax(100px, 1fr);
+      gap: 1rem;
+      line-height: 1.75;
+      font-size: 1.25em;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    }
+
+    @media (min-width: 600px) {
+      body {
+        grid-template-rows: auto;
+        grid-template-columns: 300px minmax(10px, 70ch);
+      }
+    }
+
+    img {
+      width: 100%
+    }
+
+    .notes {
+      font-size: 75%;
+    }
+
+    .notes:before {
+      content: "👉 "
+    }
+
+    a:link,
+    a:visited {
+      text-decoration: none;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      align-self: start;
+    }
+
+    nav ul {
+      padding-inline-start: 1.5rem;
+    }
+
+    main .requirements li:before {
+      padding-left: 1.5rem;
+      opacity: 50%;
+      font-weight: bold;
+    }
+
+    main .requirements li.onePoint:before {
+      content: "[1] ";
+    }
+
+    main .requirements li.twoPoints:before {
+      content: "[2] ";
+    }
+
+    main .requirements li.threePoints:before {
+      content: "[3] ";
+    }
+
+    main .requirements li.fourPoints:before {
+      content: "[4] ";
+    }
+
+    main .requirements li.fivePoints:before {
+      content: "[5] ";
+    }
+  </style>
+</head>
+
+<body>
+  <nav id="toc"></nav>
+  <main>
+    <h1>Bewertungskriterien MLZ</h1>
+    <h2 id="bewertung-aspekte">Funktionale Anforderungen</h2>
+    <p>Es soll ein App mit folgenden Eingenschaften geben:</p>
+    <ul class="requirements">
+      <li class="fivePoints">Präsentation</li>
+      <li class="threePoints">Kann Daten für einen Entität in einer Liste darstellen.</a>
+        <ul>
+          <li class="twoPoints">Die Daten werden per HTTPClient von einem Server geladen.</li>
+        </ul>
+      </li>
+      <li class="fivePoints">Diese Daten können vom Benutzer geändert und lokal gespeichert werden.
+        <ul>
+          <li class="twoPoints">Die Daten werden lokal persistiert und überleben das Neustart der Applikation.</li>
+          <li class="onePoint">Die Daten bestehen aus verschiedenen Typen (z.B. Datum, Text, Zahlen, Boolean, usw.).</li>
+          <li class="twoPoints">Die Daten werden validiert (z.B. Textlänge, Datumsbereich, Zahlengrösse, Zwangsfelder usw.).</li>
+          <li class="onePoint">Die Validierung verhindert das Speichern.</li>
+          <li class="threePoints">Die Daten werden per HTTPClient zurück auf dem Server gespeichert.</li>
+        </ul>
+      </li>
+      <li class="onePoint">Ein neues Entität kann erstellt werden.
+        <ul>
+          <li class="twoPoints">Die Daten werden per HTTPClient zurück auf dem Server gespeichert.</li>
+        </ul>
+      </li>
+      <li class="onePoint">Ein Entität kann gelöscht werden.
+        <ul>
+          <li class="twoPoints">Die Daten werden per HTTPClient zurück auf dem Server gelöscht.</li>
+        </ul>
+      </li>
+      <li class="fivePoints">Das erstellen, ändern, und löschen von Entitäten wird möglichst ohne UI mit automatisierten Tests geprüft.
+        <ul>
+          <li class="twoPoints">Services werden für Logik eingesetzt.</li>
+          <li class="twoPoints">Abhängigkeiten zwischen Services werden mit DI / Constructor-injection konfiguriert.</li>
+          <li class="onePoint">Ein IOC Container wird dafür eingesetzt.</li>
+          <li class="onePoint">Dasselbe Container wird auch in die Tests eingesetzt.</li>
+        </ul>
+      </li>
+      <li class="twoPoints">Die App bestätigt Änderungen durch Popup-Dialogen.
+        <ul>
+          <li class="twoPoints">Diese Abläufe werden mit automatisierten Tests geprüft.</li>
+        </ul>
+      </li>
+    </ul>
+    <h3>Bewertung</h3>
+    <ul>
+      <li>Maximale Punktzahl: <strong>45</strong></li>
+      <li>Minimum Punktzahl: <strong>22</strong> (Note = 4)</li>
+    </ul>
+    <h2 id="allgemeine-bewertung">Allgemeine Bewertung</h2>
+    <h3 id="architektur">Architektur</h3>
+    <p>Die Software hat eine ersichtliche Architektur.</p>
+    <ul>
+      <li>Ordner und Dateistruktur ist vorhanden und logisch</li>
+      <li>Die erlernten Pattern wurden angewendet</li>
+    </ul>
+    <h3 id="benutzeroberfläche">Ergonomie</h3>
+    <p>Die Benutzeroberfläche erfüllt ergonomische Grundregeln.</p>
+    <ul>
+      <li>Die Navigation ist logisch und konsistent</li>
+      <li>Das Styling wurde konsequent umgesetzt</li>
+      <li>Die Bedienung der App fühlt sich natürlich an</li>
+    </ul>
+    <h3 id="strukturiert">Struktur</h3>
+    <p>Die Implementation ist strukturiert.</p>
+    <ul>
+      <li>Es findet sich kein auskommentierter Code</li>
+      <li>Es wurde Code wo nötig und sinnvoll ausgelagert</li>
+      <li>Services wurden sinnvoll erstellt und eingesetzt</li>
+    </ul>
+    <h3 id="lauffähig">lauffähig</h3>
+    <p>Die Applikation ist lauffähig und hat keine grösseren "Bugs".</p>
+    <ul>
+      <li>Die App kann nicht sofort zum Absturz gebracht werden</li>
+      <li>Zu erwartende Exceptions sind gehandelt</li>
+    </ul>
+    <h3 id="dokumentier">Dokumentation</h3>
+    <p>Notwendige Code-Stellen sind dokumentiert.</p>
+    <ul>
+      <li>Öffentliche und nicht einfach verständliche Code-Stellen sind dokumentiert</li>
+    </ul>
+    <h3 id="tests">Tests</h3>
+    <p>Die richtige Funktionsweise ist mit Tests verifiziert.</p>
+    <ul>
+      <li>Es gibt Unit-Tests für die zentralen Punkte der App</li>
+      <li>Es wurde manuell getestet und dokumentiert</li>
+    </ul>
+    <h3 id="allgemeiner-eindruck">Allgemeiner Eindruck</h3>
+    <ul>
+      <li>Fachliche Umsetzung?</li>
+      <li>Offensichtliche Fehler?</li>
+      <li>Bad Practices?</li>
+      <li>Eigene Ideen?</li>
+      <li>Einheitliche Formatierung?</li>
+      <li>Sinnvolle Variablennamen?</li>
+    </ul>
+    <h2 id="presentation">Präsentation</h2>
+    <ul>
+      <li>Die Präsentation hat eine Einführung.</li>
+      <li>Die Präsentation ist sachlogisch aufgebaut.</li>
+      <li>Die wesentlichen Funktionen werden vorgeführt.</li>
+      <li>Die Zeit (10 Minuten) wird eingehalten.</li>
+    </ul>
+    <h2 id="mockup">Mockup/Beispiel</h2>
+    <img src="assets/Lesson01/MLZ_UI_Mockup.svg">
+  </main>
+</body>
+<script>
+  class tocBuilder {
+    applyToc(minLevel = 1, maxLevel = 6) {
+      const tocElement = document.querySelector("#toc");
+      if (tocElement) {
+        tocElement.innerHTML = this.createTocHTML(minLevel, maxLevel);
+      }
+    }
+
+    createTocHTML(minLevel = 1, maxLevel = 6) {
+      const allLevels = [...Array(7).keys()];
+      const levels = allLevels.slice(minLevel, maxLevel + 1);
+      const headingLevels = levels.map(l => `h${l}`);
+      const headingSelectors = headingLevels.join();
+
+      const headings = document.querySelectorAll(headingSelectors);
+
+      let result = "<ul>";
+      let currentLevel = undefined;
+
+      for (const heading of headings) {
+        const headingLevel = heading.tagName[1];
+
+        if (currentLevel) {
+          if (currentLevel < headingLevel) {
+            result += "<ul>\n";
+          } else if (currentLevel > headingLevel) {
+            for (let index = 0; index < currentLevel; index++) {
+              result += "</ul>\n";
+            }
+            currentLevel = headingLevel;
+            result += "<ul>";
+          }
+        }
+
+        heading.id = heading.textContent.replaceAll(/[^A-Zöäü0-9]/gi, "-");
+
+        result += `<li><a href="#${heading.id}">${heading.textContent}</a></li>\n`;
+
+        currentLevel = headingLevel;
+      }
+
+      result += "</ul>";
+
+      return result;
+    }
+  }
+
+  new tocBuilder().applyToc(2, 4);
+</script>
+
+</html>

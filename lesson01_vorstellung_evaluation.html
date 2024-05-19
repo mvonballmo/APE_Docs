@@ -1,0 +1,469 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mobile App Entwicklung, Lektion 01: Vorstellung, Einführung und Setup von Werkzeugen</title>
+
+  <link rel=" stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/white.css">
+  <link rel="stylesheet" href="slides.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/github.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="assets/MonteRosa.jpg" class="white-text">
+        <h1>Mobile App Entwicklung</h1>
+        <h2>Lektion 1</h2>
+        <p>
+          Vorstellung, Einführung und Setup von Werkzeugen
+        </p>
+      </section>
+
+      <section>
+        <h1>Wer bin ich?</h1>
+        <h2>Marco von Ballmoos</h2>
+        <ul>
+          <li><em>DevOps System Engineer</em>
+            <ul>
+              <li><a href="https://uster.com">Uster Technologies AG</a></li>
+            </ul>
+          </li>
+          <li>BA Mathematik<ul>
+              <li><a href="https://hamilton.edu">Hamilton College</a>, USA</li>
+            </ul>
+          </li>
+          <li>Dozent bei HFU seit 2020<ul>
+              <li><em>JavaScript</em> Grundkurs</li>
+              <li>Mobile Applikationsentwicklung</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1><a href="https://www.earthli.com/users/marco/cv/2022_09.php?full=1">Qualifikationen</a></h1>
+        <table>
+          <tr>
+            <th>Sprachen</th>
+            <td>C#, TS/JS, Delphi, Java, Swift, PHP, C++, u.a.</td>
+          </tr>
+          <tr>
+            <th>Plattformen</th>
+            <td>Windows, iOS, Android, MacOS, Linux</td>
+          </tr>
+          <tr>
+            <th>Branchen</th>
+            <td>Banking, Pharma, Industrie, Schulverwaltung, Frameworks</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h1>Vorstellung</h1>
+        <p>Bitte stellt euch kurz vor:</p>
+        <ul>
+          <li>Name</li>
+          <li>Beruf &amp; Arbeitgeber</li>
+          <li>Vorkenntnisse / Erfahrung / Technologien</li>
+          <li>Erfahrung mit Mobile-App Entwicklung?</li>
+          <li>Motivation</li>
+          <li>Ziele für das Modul</li>
+          <li>Welches OS und Gerät (iOS/Android)?</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Was, wie, wann?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <h1>Sprachen</h1>
+        <p></p>
+        <ul>
+          <li>Deutsch
+            <ul>
+              <li>Folien</li>
+              <li>Unterricht</li>
+            </ul>
+          </li>
+          <li>Englisch
+            <ul>
+              <li>Beispiele und Referenzen (z.B. Blogs)</li>
+              <li>Gewisse Referenzen sind leider gar nicht&mdash;oder nicht immer/schlecht&mdash;übersetzt</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Planung</h1>
+        <style>
+          .pause {
+            background-color: cornsilk
+          }
+
+          .school {
+            background-color: lightblue
+          }
+
+          .project {
+            background-color: orange
+          }
+        </style>
+        <div class="schedule" style="display: grid; grid-template-columns: repeat(24, 1fr);">
+          <div style="grid-row: 1; grid-column: 1 / span 7;">17:50</div>
+          <div class="pause" style="grid-row: 1 / span 8; grid-column: 8 / span 2;">19h</div>
+          <div style="grid-row: 1; grid-column: 10 / span 6;">19:20</div>
+          <div class="pause" style="grid-row: 1 / span 8; grid-column: 16 / span 1;">20:20</div>
+          <div style="grid-row: 1; grid-column: 17 / span 3;">20:30</div>
+          <div class="pause" style="grid-row: 1 / span 8; grid-column: 20 / span 1;">21h</div>
+          <div style="grid-row: 1; grid-column: 21 / span 3;">21:10</div>
+          <div class="school" style="grid-row: 2; grid-column: 1 / span 7;">1:10</div>
+          <div class="pause" style="grid-row: 3; grid-column: 8 / span 2;">0:20</div>
+          <div class="school" style="grid-row: 4; grid-column: 10 / span 6;">1:00</div>
+          <div class="pause" style="grid-row: 5; grid-column: 16 / span 1;">0:10</div>
+          <div class="school" style="grid-row: 6; grid-column: 17 / span 3;">0:30</div>
+          <div class="pause" style="grid-row: 7; grid-column: 20 / span 1;">0:10</div>
+          <div class="project" style="grid-row: 8; grid-column: 21 / span 3;">0:30</div>
+        </div>
+      </section>
+
+      <section>
+        <h1>Leistungskontrolle</h1>
+        <table>
+          <tr>
+            <th>Beschreibung</th>
+            <th>Datum</th>
+            <th>Anteil</th>
+          </tr>
+          <tr>
+            <td>Prüfung (LK1)</td>
+            <td>05.06.2022</td>
+            <td>25%</td>
+          </tr>
+          <tr>
+            <td>Prüfung (LK2)</td>
+            <td>26.06.2022</td>
+            <td>25%</td>
+          </tr>
+          <tr>
+            <td>Projekt (MLZ)</td>
+            <td>10.07.2022</td>
+            <td>50%</td>
+          </tr>
+        </table>
+        <p class="notes">Für das Runden wird die Aktive Beteiligung im Unterricht berücksichtigt</p>
+      </section>
+
+      <section>
+        <h1>Prüfungen (LK1 &amp; LK2)</h1>
+        <ul>
+          <li>Word Formular mit änderbaren Feldern</li>
+          <li>Wird am Anfang der Lektion zugeschickt</li>
+          <li>Eine Stunde Zeit</li>
+          <li>Digital auszufüllen und zurückzusenden</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Projekt (MLZ)</h1>
+        <ul class="compact">
+          <li>Ist ein eigenes Mobile-App Projekt</li>
+          <li>Wird am Ende des Moduls präsentiert</li>
+          <li><a href="mlz.html">Beschreibung und Bewertungskriterien</a></li>
+          <li>Bis <b>05.06.2023</b>
+            <ul>
+              <li>Bewertungsdokument anschauen</li>
+              <li>Idee/Konzept per E-Mail einreichen</li>
+            </ul>
+          </li>
+          <li>Bis <b>10.07.2023</b>
+            <ul>
+              <li>Fertigstellen</li>
+              <li>Präsentieren</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Kursmaterialien</h1>
+        <p>Die folgende Repos werden benutzt (auch im Moodle zu finden).</p>
+        <ul>
+          <li><a href="https://github.com/mvonballmo/APE_Docs">Alle Folien als Git Repo</a></li>
+          <li><a href="https://mvonballmo.github.io/APE_Docs/">Alle Folien online</a></li>
+          <li><a href="https://github.com/mvonballmo/APE_Apps">Alle Beispiel-Projekte als Git Repo</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Ziele des Moduls</h1>
+        <ul>
+          <li>Allgemeine Software-Entwicklung
+            <ul>
+              <li>Prozesse und Werkzeuge kennenlernen</li>
+              <li>Ausführen, Debuggen, Testen, usw.</li>
+            </ul>
+          </li>
+          <li>Übersicht Mobile-App Entwicklung
+            <ul>
+              <li>Evaluation diverse Kandidaten</li>
+              <li>Umgebung aufsetzen</li>
+              <li>Übliche Einsatzgebiete anschauen</li>
+              <li>Cross-Platform vs. Native Code</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Das Curriculum</h1>
+        <ul>
+          <li><b>2018:</b> Begann auf Englisch mit <i>Microsoft Xamarin</i></li>
+          <li><b>2021:</b> Wurde aktualisiert und modernisiert</li>
+          <li><b>2022:</b> Wurde ins Deutsche übersetzt</li>
+          <li><b>2023:</b> Schon wieder eine Neugestaltung...</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Neugestaltung? Warum?</h1>
+        <ul>
+          <li>Microsoft Xamarin wird nicht weiter entwickelt</li>
+          <li>Maui ist die neue Mobile-App Framework von Microsoft</li>
+          <li>Aber es gibt andere Frameworks...</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>So sah es letztes Jahr aus</h1>
+        <ol class="compact">
+          <li class="completed">Vorstellung, Einführung und Framework-Evaluation</li>
+          <li class="completed">Evaluation, Selektion und Aufsetzen eines Frameworks</li>
+          <li class="completed">IOC und Testing</li>
+          <li class="completed">Popupelementen (Dialogen)</li>
+          <li class="selected"><b>LK1</b>; Benachrichtigungen (Lokal/Push/Remote)</li>
+          <li>Datenbanken (SQLite); HTTP Client</li>
+          <li>Hybrid-Apps, Sicherheit &amp; Biometrie</li>
+          <li><b>LK2</b>; Projektarbeit</li>
+          <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
+
+          <li class="selected">Vorstellung, Einführung und Framework-Evaluation</li>
+          <li>IOC, Testing, Debugging</li>
+          <li>MVVM, Bindings, Controls, Dialogs, Styling</li>
+          <li>Datenbanken (SQLite); HTTP Client</li>
+          <li><b>LK1</b>; Benachrichtigungen (Lokal/Push/Remote)</li>
+          <li>Hybrid-Apps</li>
+          <li><b>LK2</b>; Sicherheit &amp; Biometrie</li>
+          <li>Projektarbeit</li>
+          <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>Passt das noch?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+          <div>
+            <div style="margin-top: 5em" class="fragment">Wir werden es zusammen herausfinden...</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h1>Lektion 1: Themen</h1>
+        <ul>
+          <li>Vorstellung Curriculum</li>
+          <li>Evaluation Framework
+            <ul>
+              <li>Evaluationskriterien</li>
+              <li>Kandidaten</li>
+              <li>Matrix erstellen</li>
+              <li>Werkzeug/Plattform wählen</li>
+            </ul>
+          </li>
+          <li>Umgebung einrichten</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section data-background="assets/YellowLeaves.jpeg" class="white-text">
+        <h1>Lektion 01</h1>
+        <h2>Evaluation Framework</h2>
+      </section>
+
+      <section>
+        <h1>Wir wird evaluiert?</h1>
+        <ul>
+          <li>Erste Runde Evaluationskriterien</li>
+          <li>Kandidaten finden</li>
+          <li>Weitere Evaluationskriterien finden</li>
+          <li>Evaluationskriterien fertigstellen</li>
+          <li>Evaluationsmatrix erstellen</li>
+          <li>Produkt wählen</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Gruppenarbeit</h1>
+        <div class="seventy-thirty-grid">
+          <div>
+            <ul>
+              <li>In Gruppen aufteilen oder Einzeln arbeiten</li>
+              <li>Evaluationskriterien
+                <ul>
+                  <li>Finden</li>
+                  <li>Präsentieren</li>
+                  <li>List erfassen</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <img src="assets/cog-wheels.png">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h1>Evaluationskriterien</h1>
+        <div class="fifty-fifty-grid">
+          <div>
+            <ul>
+              <li>Entwicklungs&shy;plattformen</li>
+              <li>Target-Plattformen</li>
+              <li>Programmiersprache</li>
+              <li>Wie geht Debugging?</li>
+              <li>Wie geht Testing?</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>Integration mit Emulatoren?</li>
+              <li>Bestehende Erfahrung?</li>
+              <li>Kosten?</li>
+              <li>Lock-in?</li>
+              <li>Wird weiter entwickelt?</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h1>Gruppenarbeit</h1>
+        <div class="seventy-thirty-grid">
+          <div>
+            <ul>
+              <li>In Gruppen aufteilen oder Einzeln arbeiten</li>
+              <li>Produkten/Frameworks
+                <ul>
+                  <li>Finden</li>
+                  <li>Liste Erfassen</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <img src="assets/cog-wheels.png">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h1>Kandidaten</h1>
+        <div class="fifty-fifty-grid">
+          <div>
+            <ul>
+              <li><a href="https://dotnet.microsoft.com/en-us/apps/xamarin">Xamarin</a></li>
+              <li><a href="https://dotnet.microsoft.com/en-us/apps/maui">Maui</a></li>
+              <li><a href="https://platform.uno/">Uno</a></li>
+              <li><a href="https://www.avaloniaui.net/">Avalonia</a></li>
+              <li><a href="https://www.embarcadero.com/products/Delphi">Delphi</a></li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li><a href="https://reactnative.dev/">ReactNative</a></li>
+              <li><a href="https://flutter.dev/">Flutter</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps">PWAs</a></li>
+              <li>Native (<a href="https://developer.apple.com/tutorials/app-dev-training">iOS/Swift</a>, <a href="https://developer.android.com/ndk/guides/">Android/Java/Kotlin</a>)</li>
+              <li>Hybrid</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h1>Evaluationsmatrix</h1>
+        <ol>
+          <li>Kandidaten als Spalten</li>
+          <li>Kriterien als Zeilen</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>Gruppenarbeit</h1>
+        <div class="seventy-thirty-grid">
+          <div>
+            <ul>
+              <li>In Gruppen aufteilen oder Einzeln arbeiten</li>
+              <li>Evaluationsmatrix
+                <ul>
+                  <li>Erstellen</li>
+                  <li>Auswerten</li>
+                  <li>Selektion machen</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <img src="assets/cog-wheels.png">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>

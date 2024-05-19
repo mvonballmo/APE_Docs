@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mobile App Entwicklung, Lektion 08: LK2; Projektarbeit</title>
+
+  <link rel=" stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/white.css">
+  <link rel="stylesheet" href="slides.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/github.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="assets/MonteRosa.jpg" class="white-text">
+        <h1>Mobile App Entwicklung</h1>
+        <h2>Lektion 8</h2>
+        <p class="notes">
+          <b>LZK2</b>; Projektarbeit
+        </p>
+      </section>
+
+      <section data-background="assets/looking-back-dimmed.jpg">
+        <h1>Rückblick</h1>
+        <ul>
+          <li>SQLite einsetzen, um Daten <em>lokal, auf dem Gerät</em> zu Lesen und Speichern</li>
+          <li>HTTP Client einsetzen, um Daten <em>eines externen Servers</em> zu Lesen und Schreiben</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Übersicht Lektionen</h1>
+        <ol class="compact">
+          <li class="completed">Vorstellung, Einführung und Framework-Evaluation</li>
+          <li class="completed">Evaluation, Selektion und Aufsetzen eines Frameworks</li>
+          <li class="completed">IOC und Testing</li>
+          <li class="completed">Popupelementen (Dialogen)</li>
+          <li class="completed"><b>LK1</b>; MVVM, Bindings, Controls</li>
+          <li class="completed">Testing &amp; Benachrichtigungen</li>
+          <li class="completed">Datenbanken (SQLite); HTTP Client</li>
+          <li class="selected"><b>LZK2</b>; Projektarbeit</li>
+          <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
+        </ol>
+      </section>
+
+      <section class="compact">
+        <h1>LZK2: Vorbereitung</h1>
+        <ol>
+          <li><code>https://github.com/mvonballmo/HFU_APE_LKZ2.git</code> klonen</li>
+          <li>Solution <code>src/client/PartsClient/PartsClient.sln</code> nach eigenem Git repo in einem Subverzeichnis namens LZK2 kopieren</li>
+          <li><code>LZK2/PartsClient.sln</code> in <em>VisualStudio</em> oder <em>Rider</em> öffnen</li>
+          <li>Solution ausführen und bestätigen, dass initiale Daten heruntergeladen werden</li>
+          <li>Auf GitHub pushen, um sicherzustellen, dass die Prüfung hochgeladen werden kann</li>
+          <li>Sich melden, wenn du so weit bist</li>
+        </ol>
+      </section>
+
+      <section class="compact">
+        <h1>LZK2: Mögliche Aufgaben</h1>
+        <ol>
+          <li><code>PartsManager</code> als Singleton im IOC registrieren und durchgehend einsetzen</li>
+          <li><code>HTTPClient</code> aus dem <code>PartsManager</code> extrahieren und im IOC registrieren und einsetzen</li>
+          <li>Fehlermeldungen abfangen und anzeigen</li>
+          <li>Ändern und Löschen bestätigen lassen</li>
+          <li>Heruntergeladene Daten in SQLite speichern</li>
+          <li><code>PartsManager.Add</code>, <code>Update</code> und/oder <code>Delete</code> implementieren</li>
+          <li>Tests für <code>PartsViewModel</code> erstellen</li>
+          <li>Tests für <code>PartManager</code> erstellen</li>
+        </ol>
+      </section>
+
+      <section class="compact">
+        <h1>LZK2: Angaben</h1>
+        <ul>
+          <li>Basiert auf die <a href="https://learn.microsoft.com/de-de/training/modules/consume-rest-services-maui/5-exercise-consume-rest-web-service?source=learn">Übung: Nutzen eines REST-Diensts mit HttpClient</a></li>
+          <li>Es geht um das Projekt zu <strong>verbessern</strong> und/oder <strong>ergänzen</strong></li>
+          <li>Ihr habt 60 Minuten (braucht ihr mehr?)</li>
+          <li>Zumindest <strong>2</strong> von den <strong>8</strong> mögliche Aufgaben sauber ausführen (ergibt mindestens eine <strong>4.0</strong>)</li>
+          <li class="fragment">Mehr gelöste Aufgaben => eine bessere Note 👍</li>
+          <li class="fragment">Ausführlichere Lösungen => eine bessere Note 👍</li>
+          <li class="fragment">Clean Code => eine bessere Note 👍</li>
+          <li class="fragment">Ihr müsst nicht <em>alle</em> Aufgaben lösen!</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/YellowLeaves.jpeg" class="white-text">
+        <h1>Lektion 08</h1>
+        <h2>Rückblick und weiteres</h2>
+      </section>
+
+      <section data-background="assets/looking-back-dimmed.jpg" class="compact">
+        <h1>Rückblick: Evaluation</h1>
+        <p>Was haben wir über Mobile-App Entwicklung gelernt?</p>
+        <ul>
+          <li>Es gibt viele Möglichkeiten Mobile-Apps zu entwickeln</li>
+          <li>Wir haben diverse Möglichkeiten angeschaut und evaluiert</li>
+          <li>Wir sind bei Maui geblieben, u.A. weil es Cross-Plattform ist</li>
+          <li>PWA wäre eine andere gangbare Option gewesen</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/looking-back-dimmed.jpg" class="compact">
+        <h1>Rückblick: Maui</h1>
+        <p>Was haben wir über Maui gelernt?</p>
+        <ul>
+          <li>Aufbau eines UIs mit Bindings, usw.</li>
+          <li>Commands, MVVM, usw.</li>
+          <li><a href="https://learn.microsoft.com/de-de/training/modules/consume-rest-services-maui/">Interaktion mit einem REST Server</a></li>
+          <li><a href="https://learn.microsoft.com/de-de/training/modules/store-local-data/">Interaktion mit einer lokalen Datenbank</a></li>
+        </ul>
+      </section>
+
+      <section data-background="assets/looking-back-dimmed.jpg" class="compact">
+        <h1>Rückblick: Programmierung</h1>
+        <p>Was haben wir generell gelernt?</p>
+        <ul>
+          <li>Die Techniken für Mobile-Apps sind ähnlich als bei anderen Targets (WPF, ASP.Net, Web Front-end, etc.)</li>
+          <li>Asynchrone Programmierung (<code>async</code>/<code>await</code>)</li>
+          <li>Nützlichkeit von DI, IOC und Automatisiertes Testing</li>
+        </ul>
+      </section>
+
+      <section data-background="assets/YellowLeaves.jpeg" class="white-text">
+        <h1></h1>
+        <h2>Diverses</h2>
+        <p>Kamera, Mikrofon, Neigungssensor, Animationen, usw.</p>
+      </section>
+
+      <section>
+        <h1>Allgemein: Berechtigung</h1>
+        <ul>
+          <li><a href="https://learn.microsoft.com/de-de/dotnet/maui/platform-integration/appmodel/permissions?tabs=android">Berechtigungen</a></li>
+          <li>Müssen gefordert werden</li>
+          <li>Plattformspezifische Unterstützung (siehe Tabelle)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Kamera &amp; Ort</h1>
+        <ul>
+          <li><a href="https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/device-media/picker">Medienauswahl für Fotos und Videos</a></li>
+          <li><a href="https://learn.microsoft.com/de-de/dotnet/maui/platform-integration/device/geolocation?tabs=android">Geolocation</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Gerätesensoren</h1>
+        <ul>
+          <li><a href="https://learn.microsoft.com/de-de/dotnet/maui/platform-integration/device/sensors?tabs=android">Zugreifen auf Gerätesensoren</a></li>
+          <li>Orientierung</li>
+          <li>Beschleunigungsmesser</li>
+          <li>Gyroskop</li>
+          <li>Schütteln</li>
+          <li>usw.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Animationen</h1>
+        <ul>
+          <li><a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/animations/">Maui Animationen</a></li>
+          <li>Verfügbar in die <a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/">.NET MAUI Community Toolkit</a></li>
+          <li><a href="https://learn.microsoft.com/de-de/dotnet/maui/user-interface/animation/basic">Grundlegende Animation</a></li>
+          <li>Ähnlich zu CSS: siehe <a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/behaviors/animation-behavior#additional-examples"><code>AnimationBehavior</code></a></li>
+          <li><a href="https://learn.microsoft.com/de-de/dotnet/maui/user-interface/animation/custom">Benutzerdefinierte Animation</a></li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h2>Biometrische Authentifizierung</h2>
+        <ul>
+          <li>Z.Z. eher Plattformspezifisch</li>
+          <li>Plattformunabhängige Lösungen ähnlich zu Xamarin (nur partiell)</li>
+          <li>NuGet Package <a href="https://www.nuget.org/packages/Plugin.Fingerprint/">Plugin.Fingerprint</a> füllt die Lücke</li>
+          <li><a href="https://github.com/dotnet/maui/discussions/157">[Enhancement] Cross Platform Biometric Authentication #157</a> GitHub Issue steht noch offen</li>
+          <li><a href="https://github.com/xamarin/Essentials/issues/71">Biometrics API #71</a> GitHub Issue steht noch offen</li>
+          <li><a href="https://www.c-sharpcorner.com/article/implementing-biometric-authentication-in-net-maui/">Implementing Biometric Authentication In .NET MAUI</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Zahlungsmöglichkeiten &amp; Kontakte</h1>
+        <ul>
+          <li><a href="https://learn.microsoft.com/de-de/dotnet/maui/platform-integration/communication/contacts?tabs=android">Kontakte</a> (<code>IContacts</code>)</li>
+          <li><a href="https://github.com/jamesmontemagno/InAppBillingPlugin">InAppBillingPlugin</a>: Open Source Lösung</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Mikrofon &amp; Lautsprecher</h1>
+        <ul>
+          <li><a href="https://www.syncfusion.com/blogs/post/building-an-audio-recorder-and-player-app-in-net-maui.aspx">Building an Audio Recorder and Player App in .NET MAUI</a></li>
+          <li>Teilweise Plattformspezifisch; es gibt kein gemeinsames Konstrukt in Maui, um Audio aufzunehmen</li>
+          <li><a href="https://learn.microsoft.com/de-de/dotnet/maui/platform-integration/device-media/text-to-speech?tabs=android">Sprachsynthese</a></li>
+          <li>Vergleichen mit: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API">Using the Web Speech API</a> und <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Build_a_phone_with_peerjs/Connect_peers/Get_microphone_permission">Getting browser microphone permission</a> und <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API">Using the Web Speech API</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>

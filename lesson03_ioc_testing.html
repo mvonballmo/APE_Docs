@@ -1,0 +1,795 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mobile App Entwicklung, Lektion 03, Dialogs, IOC, Testing</title>
+
+  <link rel=" stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/white.css">
+  <link rel="stylesheet" href="slides.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/github.css">
+
+  <style>
+    section.whiteText h1 {
+      color: white;
+      text-shadow: 5px 5px 5px black;
+    }
+
+    section.whiteText h2 {
+      color: white;
+      text-shadow: 5px 5px 5px black;
+    }
+
+    section.whiteText h3 {
+      color: white;
+      text-shadow: 5px 5px 5px black;
+    }
+
+    section.shadowText h1 {
+      text-shadow: 3px 3px 5px black;
+    }
+
+    section.shadowText h2 {
+      text-shadow: 3px 3px 5px black;
+    }
+
+    section.shadowText h3 {
+      text-shadow: 3px 3px 5px black;
+    }
+
+    .chat li {
+      border-radius: 15px;
+      background: #CCFFCC;
+      padding: 10px;
+      padding-top: 5px;
+      margin-bottom: 10px;
+    }
+
+    .chat li.other {
+      background: pink;
+    }
+
+    .side-by-side {
+      display: flex;
+      align-items: center;
+    }
+
+    .side-by-side>div {
+      flex: 1;
+    }
+
+    .side-by-side>div:nth-child(2)>h3 {
+      text-align: center;
+    }
+
+    .side-by-side.end {
+      align-items: flex-end;
+    }
+
+    .side-by-side.end>div:nth-child(2) {
+      margin-left: 20px;
+    }
+
+    .box-legend {
+      display: inline-block;
+      border-radius: 5px;
+      padding: 10px;
+      background: #49D;
+      text-align: center;
+      width: 150px;
+      color: white;
+    }
+
+    .box-legend.green {
+      background: #6A6;
+    }
+
+    .reveal .slides li code {
+      border: 1px solid silver;
+      padding: 1px;
+      background-color: #F0F0F6;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="assets/MonteRosa.jpg" class="white-text">
+        <h1>Mobile App Entwicklung</h1>
+        <h2>Lektion 3</h2>
+        <p>
+          IOC, Testing
+        </p>
+      </section>
+      <section>
+        <h1>Lektion 3: Themen</h1>
+        <ol>
+          <li>IOC (Inversion of Control)</li>
+          <li>Testing</li>
+        </ol>
+      </section>
+
+      <section data-background="assets/looking-back-dimmed.jpg">
+        <h1>Rückblick</h1>
+        <ul>
+          <li>Jeder hat ein Projekt auf GitHub eingerichtet</li>
+          <li>Jeder hat alle benötigte Werkzeuge eingerichtet</li>
+          <li>Jeder kann mit dem Simulator oder Gerät ausführen</li>
+          <li class="insertion">
+            Habt ihr eine <code>.gitignore</code> Datei erstellt?
+            <ul>
+              <li><code>bin/</code> und <code>obj/</code> ausschliessen</li>
+              <li>Unerwünschte Dateien aus dem Repo löschen</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Übersicht Lektionen</h1>
+        <ol class="compact">
+          <li class="completed">Vorstellung, Einführung und Framework-Evaluation</li>
+          <li class="completed">Evaluation, Selektion und Aufsetzen eines Frameworks</li>
+          <li class="selected">IOC und Testing</li>
+          <li>Popupelementen (Dialogen) und Steuerelemente</li>
+          <li><b>LK1</b>; MVVM, Bindings, Controls</li>
+          <li>Benachrichtigungen &amp; Biometrie</li>
+          <li>Datenbanken (SQLite); HTTP Client</li>
+          <li><b>LK2</b>; Hybrid-Apps</li>
+          <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>Dokumentationen</h1>
+        <p>Die folgende Online-Referenzen sind sehr nützlich und werden statt einem Buch eingesetzt.</p>
+        <ul>
+          <li><a href="https://learn.microsoft.com/de-de/dotnet/maui/">Dokumentation zur .NET Multi-Platform App UI</a></li>
+          <li><a href="https://learn.microsoft.com/de-de/dotnet/maui/what-is-maui">Was ist .NET MAUI?</a></li>
+          <li><a href="https://learn.microsoft.com/de-de/dotnet/maui/get-started/resources">Lernressourcen für .NET MAUI</a></li>
+          <li><a href="https://learn.microsoft.com/de-de/training/paths/build-apps-with-dotnet-maui/">Erstellen Sie mobile und Desktop-Anwendungen mit .NET MAUI</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Geschichte Mauis</h1>
+        <ul>
+          <li>Die Linux .NET Laufzeitumgebung <em>Mono</em> wurde von der Firma <em>Ximian</em> entwickelt</li>
+          <li>Aus <em>Ximian</em> wurde die Firma <em>Xamarin</em></li>
+          <li>Das Produkt <em>Xamarin</em> ermöglicht iOS/Android Apps mit <em>C#</em> mit <em>Mono</em></li>
+          <li>In 2016 wurde <em>Mono</em> von <em>Microsoft</em> gekauft</li>
+          <li>Wird immer weiter in .NET integriert</li>
+          <li>Xamarin wurde in 2022 durch <a href="https://docs.microsoft.com/dotnet/maui/">MAUI</a> ersetzt/erweitert</li>
+        </ul>
+        <p class="notes">Siehe den <a href="https://en.wikipedia.org/wiki/Xamarin">Wikipedia Eintrag dazu</a>.</p>
+      </section>
+
+      <section>
+        <h1>Maui mit Native UIs</h1>
+        <ul>
+          <li>Platforms/iOS &amp; Platforms/Android Verzeichnisse</li>
+          <li>Ein 1:1 Mapping zu den jeweiligen Plattform-APIs</li>
+          <li>Neue APIs werden innerhalb 24 Stunden angeboten</li>
+          <li><em>Core Elemente</em> werden geteilt</li>
+          <li><em>UIs</em> sind Plattform-spezifisch und werden <em>nicht</em> geteilt (ausser mit Hybrid-UIs)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Diagramm Xamarin Native</h1>
+        <img src="assets/Lesson01/XamarinClassic.jpg" class="screenshot">
+      </section>
+
+      <section>
+        <h1>Cross-Plattform UIs</h1>
+        <ul>
+          <li><em>UIs</em> werden geteilt und mit <em>XAML</em> geschrieben</li>
+          <li>Bietet <code>DependencyService</code> (IoC) für plattformabhängige Features an</li>
+          <li>Bietet Schnittstellen für gemeinsame Features (wie z.B. Dialogs, Notifications, usw.) an</li>
+          <li>Bietet Unterstützung für Navigation an</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Beispiele Xamarin Forms</h1>
+        <img src="assets/Lesson01/XamarinFormsDemos.jpg" class="screenshot">
+      </section>
+
+      <section>
+        <h1>Übersicht Architektur</h1>
+        <img src="assets/Lesson01/XamarinProjectStructure.jpg" class="screenshot">
+      </section>
+
+      <section class="compact">
+        <h1>.NET Standard</h1>
+        <ul>
+          <li>Definiert ein gemeinsames <em>API</em> oder <em>Schnittstelle</em></li>
+          <li>Je höher die Version desto breiter die API Oberfläche</li>
+          <li>Version 2.1 ist die neuste Version</li>
+          <li><em>Mono</em> implementiert <em>.NET Standard</em> for iOS/Android</li>
+          <li><em>.NET Framework</em> und <em>.NET</em> implementieren sie for Windows</li>
+          <li><em>.NET 6</em> is die allerneuste und aktuelle <em>LTS*</em> Version (Nov. 2021)</li>
+        </ul>
+        <p class="notes">LTS = Long-Term Support</p>
+      </section>
+
+      <section>
+        <h1>.NET Standard APIs</h1>
+        <ul>
+          <li>File (System.IO)</li>
+          <li>Collections &amp; LINQ</li>
+          <li>Task &amp; <code>async</code>/<code>await</code></li>
+          <li>Http (Client) (System.NET)</li>
+          <li>Und viel mehr...</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Erster Blick</h1>
+            <ul>
+              <li>Einfaches Applikation ausführen und debuggen</li>
+              <li>Tests ausführen und debuggen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Könnt ihr das auch?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/hahaha_please.jpg">
+          <div>
+            <p class="fragment">Noch nicht...</p>
+            <p class="fragment" style="text-align: right">...aber gleich!</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/dependency-injection">IoC</a></h1>
+      </section>
+
+      <section>
+        <h2>Was ist IOC?</h2>
+        <ul>
+          <li>IoC bedeutet [I]nversion [o]f [C]ontrol
+            <ul>
+              <li>Ist das generelle Konzept implementiert von <em>DI</em></li>
+              <li>Equivalent zu [D]ependency [I]nversion [P]rinciple</li>
+              <li>Transferiert Kontrolle vom <i>Aufgerufenen</i> zum <i>Aufrufer</i></li>
+            </ul>
+          </li>
+          <li>Das Muster erstellt einen <em>Graph</em> von <em>Komponenten</em> von <i>oben nach unten</i></li>
+          <li>Ein <em>Container</em> <i>unterstützt</i> oder <em>implementiert</em> IOC*</li>
+        </ul>
+        <p class="notes">*Ein Container ist optional aber man wird fast sicher eins einsetzen wollen...</p>
+      </section>
+
+      <section>
+        <h1>IoC: Anforderungen</h1>
+        Wir würden gerne mit Abstraktionen arbeiten
+        ein IoC Container enthält Registrierungen von
+        <ul>
+          <li>Abstraktionen...</li>
+          <li>...zu Implementierungen</li>
+        </ul>
+        <li>Ein Container liefert Implementierungen für angeforderte Abstraktionen</li>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h2>Was ist DI?</h2>
+            <ul>
+              <li>DI steht für [D]ependency [I]njection</li>
+              <li>Abhängigkeiten <i>mitgeben</i> statt <i>erstellen</i></li>
+              <li>Implementiert <em>IoC</em></li>
+            </ul>
+          </div>
+          <div>
+            <img src="assets/look_of_disapproval.jpg" class="fragment" data-fragment-index="1">
+            <p class="fragment" data-fragment-index="1">Genug Theorie!</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <hi>Bottom-up vs. Top-down</hi>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            // Bottom-up (callee makes decisions)
+            var pilot = new LukeSkywalker();
+            // weapon and helmet initialized in constructor
+
+            // Top-down (caller makes decisions)
+            var pilot = new LukeSkywalker(
+              new LaserBlaster(),
+              new BrainBucket()
+            );
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>IoC: Vorteile</h1>
+        <ul>
+          <li>Plattformspezifischen Implementationen für Testing ersetzen</li>
+          <li>Implementation basierend auf eine Bedingung selektieren
+            <ul>
+              <li>iOS vs. Android</li>
+              <li>Production vs. Testing</li>
+            </ul>
+          </li>
+          <li>"Constructor injection"
+            <ul>
+              <li>ist einfach zu verstehen</li>
+              <li>vereinfacht das identifizieren von Abhängigkeiten</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>IoC: Workflow</h1>
+        <ul>
+          <li>Schnittstellen/"Services" registrieren
+            <ul>
+              <li><code>Container.Register&lt;Interface, Implementation&gt;()</code></li>
+            </ul>
+          </li>
+          <li>IoC versiegeln (keine weitere Registrierungen erlaubt)</li>
+          <li>Schnittstellen/"Services" aus dem Container holen
+            <ul>
+              <li><code>Container.Resolve&lt;Interface&gt;()</code></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Warum versiegeln?</h1>
+        <ul>
+          <li>Ein container wird versiegelt sobald eine Instanz gefordert wird</li>
+          <li>Wie sonst könnte man ein Singleton garantieren?</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Singleton Verletzung</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            // Register
+            var container = CreateContainer()
+            .RegisterSingle&lt;IToy, StarWarsLegos&gt;();
+
+            // Seal
+            var services = container.GetServices();
+
+            // Request
+            var toy = services.GetInstance&lt;IToy&gt;();
+
+            // Error!
+            container.RegisterSingle&lt;IToy, BoardGame&gt;();
+        </code></pre>
+      </section>
+
+      <section>
+        <h1>Wann registrieren?</h1>
+        <ul>
+          <li>Für Schnittstellen <em>immer</em></li>
+          <li>Nicht registrierte Objekte sind immer <em>transient</em></li>
+          <li>Benutzt das Container, um Objekte leicht zu erstellen</li>
+          <li>Weicht eine Abhängigkeit auf Constructor-Parametern aus</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Beispiel Registrierung</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            class A { }
+            class B { B(A a) { } }
+            class C : A { }
+
+            var s1 = CreateContainer().GetServices();
+
+            var b = s1.GetInstance&lt;B&gt;(); // uses A
+
+            var s2 = CreateContainer()
+            .Register&lt;A, C&gt;()
+            .GetServices();
+
+            var b = s2.GetInstance&lt;B&gt;(); // uses C
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>Container übermässig einsetzen</h2>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            // Get all objects...
+            var toy = services.GetInstance&lt;IToy&gt;();
+            var player = services.GetInstance&lt;IPerson&gt;();
+            var game = services.GetInstance&lt;IGame&gt;();
+
+            // Use them
+            game.Start(player, toy);
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>Was könnte man sonst tun?</h2>
+        <p>Ein übergeordnetes Konzept einsetzen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            var services = CreateContainer()
+              .RegisterSingle&lt;IGame, Game&gt;()
+              .RegisterSingle&lt;IToy, StarWarsLegos&gt;()
+              .RegisterSingle&lt;IPerson, Child&gt;()
+              .GetServices();
+
+            class PlayDate
+            {
+              PlayDate(IGame game, IPerson person, IToy toy) { }
+            }
+
+            // Get new play date (transient)
+            services.GetInstance&lt;PlayDate&gt;().Start();
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>Transients und Singletons</h2>
+        <ul>
+          <li><b>Singleton</b>: eine Instanz instance pro Container</li>
+          <li><b>Transient</b>: neue Instanz pro Aufruf</li>
+          <li><em>"lifestyle mismatch"</em> =&gt; Transient injiziert zu einem Singleton</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Lifestyle mismatch</h2>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            class StarWarsLegos
+            {
+              StarWarsLegos(IPerson owner) { }
+            }
+
+            var services = CreateContainer()
+              .RegisterSingle&lt;IToy, StarWarsLegos&gt;()
+              .Register&lt;IPerson, Child&gt;()
+              .GetServices();
+
+            var toy = services.GetInstance&lt;IToy&gt;(); // CRASH
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>Anti-pattern: Container injizieren</h2>
+        <p>Abhängigkeiten werden vom Aufrufer verborgen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            bool CanFly(Container container)
+            {
+              var droid = container.GetInstance&lt;IDroid&gt;();
+              var pilot = container.GetInstance&lt;IPilot&gt;();
+
+              return droid.Online &amp;&amp; pilot.Awake;
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>Anti-pattern: Global Container benutzen</h2>
+        <p>Abhängigkeiten werden vom Aufrufer verborgen.</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            bool CanFly()
+            {
+              var droid = ServiceLocator.GetInstance&lt;IDroid&gt;();
+              var pilot = ServiceLocator.GetInstance&lt;IPilot&gt;();
+
+              return droid.Online &amp;&amp; pilot.Awake;
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>Code smell: <code>new</code></h2>
+        <ul>
+          <li>Nicht anpassbar</li>
+          <li>Kann nicht "gemockt" werden</li>
+          <li><em>Nie</em> <code>new</code> für ein Singleton einsetzen</li>
+          <li><em>Factories</em> sind flexibler</li>
+          <li><code>new</code> ist für kleine, "mutable" Objekte i.O.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>IoC in Xamarin</h1>
+        <img src="assets/Lesson03/IOCXamarin.jpg" class="full-width">
+      </section>
+
+      <section class="compact">
+        <h1>Ioc in Android</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            // Shared interface
+            public interface ISomeService {
+              void Foo();
+            }
+
+            // Android specific implementation. Registration via attribute.
+            using System;
+            using FormsTesting.Droid;
+            using Xamarin.Forms;
+
+            [assembly: Dependency(typeof(SomeService))]
+            namespace FormsTesting.Droid {
+              public class SomeService : ISomeService {
+                public void Foo() {
+                  throw new NotImplementedException();
+                }
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>IoC von Xamarin</h1>
+        <ul>
+          <li>Ist ein <strong>muss</strong> für "Custom Controls"</li>
+          <li>Ist wiederum ein ziemlich <em>einfaches</em> Container mit vielen Einschränkungen</li>
+          <li>Wir können es überall einsetzen <em>müssen das aber nicht</em></li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>IOC: Schnittstelle definieren</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public interface IDialogService {
+              Task Show(string title, string message);
+              Task&lt;bool&gt; Show(string title, string message, string positive, string negative);
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>IOC: Schnittstelle einsetzen</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            DeleteItemCommand = new Command(async () => {
+              var confirmed = await dialogService.Show("Confirm", "Are you sure you want to delete the item?", "Yes", "No");
+              if (confirmed)
+              {
+                Items.Remove(Items.First(x => x.IsSelected));
+              }
+            });
+          </code>
+        </pre>
+      </section>
+      <section>
+        <h1>IOC: <code>DialogService</code></h1>
+        <p>Implementation der Schnittstelle:</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class DialogService : IDialogService {
+              public DialogService(Page page) {
+                _page = page;
+              }
+
+              public async Task Show(string title, string message) {
+                await _page.DisplayAlert(title, message, "Cancel");
+              }
+
+              public async Task&lt;bool&gt; Show(string title, string message, string positive, string negative) {
+                return await _page.DisplayAlert(title, message, positive, negative);
+              }
+
+              private readonly Page _page;
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>IOC: <code>MockDialogService</code></h1>
+        <p>Implementation eines "Mocks":</p>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class MockDialogService : IDialogService {
+              public Task Show(string title, string message) {
+                return Task.CompletedTask;
+              }
+
+              public Task&lt;bool&gt; Show(string title, string message, string positive, string negative) {
+                return Task.FromResult(true);
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>IoC</h1>
+            <ul>
+              <li>Registrierung</li>
+              <li>Constructor definieren</li>
+              <li>Objekt durch IoC erstellen lassen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <p>IoC mit mindestens einen Dienst integrieren; Beispiele:</p>
+            <ul>
+              <li>On/Offline service</li>
+              <li>UI-spezifischer Dienst (z.B. DialogService)</li>
+              <li>Data-Provider (z.B. mit Verbindung über API oder DB; kann vorerst in Speicher implementiert werden)</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section data-background="assets/macro-focus-cogwheel-gear-159275-dimmed.jpg">
+        <h1><a href="https://docs.microsoft.com/en-us/dotnet/core/testing/">Testing</a></h1>
+      </section>
+
+      <section class="compact">
+        <h1><a href="https://docs.microsoft.com/en-us/dotnet/core/testing/">Testing</a></h1>
+        <p>Wir wollen möglichst viel Code mit Tests abdecken.</p>
+        <ul>
+          <li>Es gibt verschiedene Testing Frameworks:
+            <ul>
+              <li>NUnit</li>
+              <li>MSUnit</li>
+              <li>XUnit</li>
+            </ul>
+          </li>
+          <li>Wir bevorzugen "NUnit" weil das API besser und Test-Runner besser ist</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Testing Projekt erstellen</h1>
+        <ul>
+          <li>Ein "NUnit Test Project" im eigenen Solution erstellen</li>
+          <li>"Shared Code" Projekt vom Test-Projekt referenzieren</li>
+          <li>Ein Test-Klasse per "Service" erstellen</li>
+          <li>Basis-Klassen und Hilfsmethoden können nützlich sein, um dupliziertes Code zu vermeiden</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Testing: IoC aufsetzen</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            [TestFixture]
+            public class Tests {
+              [OneTimeSetUp]
+              public void Setup() {
+                // Potentially register different services to set up a "predictable" test environment.
+                App.Services.RegisterInstance(new NavigationPage().Navigation);
+                App.Services.Register&lt;IViewMapper, ViewMapper&gt;(Lifestyle.Singleton);
+                App.Services.Register&lt;ITodoViewModelFactory, TodoViewModelFactory&gt;(Lifestyle.Singleton);
+                App.Services.Register&lt;ITodoItemProvider, TodoItemProvider&gt;(Lifestyle.Singleton);
+                App.Services.Register&lt;MainViewModel&gt;(Lifestyle.Singleton);
+                App.Services.Register&lt;TodoListViewModel&gt;(Lifestyle.Singleton);
+                App.Services.Register&lt;TodoItemViewModel&gt;(Lifestyle.Transient);
+                App.Services.Register&lt;IDialogService, MockDialogService&gt;(Lifestyle.Singleton);
+              }
+           }
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Testing: Test schreiben</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            [TestFixture]
+            public class Tests {
+              // Setup excluded
+
+              [Test]
+              public void TestEmptyTodoCantBeSaved() {
+                var listViewModel = App.Services.GetInstance&lt;TodoListViewModel&gt;();
+                var todoItemViewModel = App.Services.GetInstance&lt;ITodoViewModelFactory&gt;()
+                  .Create(new TodoItem(), listViewModel);
+
+                Assert.That(todoItemViewModel.SaveCommand.CanExecute(null), Is.False);
+                todoItemViewModel.Title = "Title";
+                Assert.That(todoItemViewModel.SaveCommand.CanExecute(null));
+              }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Testing</h1>
+            <ul>
+              <li>Setup</li>
+              <li>Ausführen</li>
+              <li>Debuggen</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <p>Mindestens einen Test im eigenen Projekt erstellen und ausführen</p>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>

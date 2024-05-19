@@ -1,0 +1,359 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mobile App Entwicklung, Lektion 05: Hybrid-Apps</title>
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/white.css">
+  <link rel="stylesheet" href="slides.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/github.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="assets/MonteRosa.jpg" class="white-text">
+        <h1>Mobile App Entwicklung</h1>
+        <h2>Lektion 5</h2>
+        <p>
+          Hybrid-Apps
+        </p>
+      </section>
+
+      <section data-background="assets/looking-back-dimmed.jpg">
+        <h1>Rückblick</h1>
+        <ul>
+          <li>Einführung Android</li>
+          <li>Benachrichtigungen
+            <ul>
+              <li><a href="https://docs.microsoft.com/en-us/xamarin/android/app-fundamentals/notifications/local-notifications">Lokal</a></li>
+              <li><a href="https://docs.microsoft.com/en-us/xamarin/android/data-cloud/google-messaging/firebase-cloud-messaging">Push/Remote</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Übersicht Lektionen</h1>
+        <ol class="compact">
+          <li class="completed">Vorstellung, Einführung und Aufsetzen von Werkzeugen</li>
+          <li class="completed">MVVM, Bindings, Controls, Debugging</li>
+          <li class="completed">Dialogs, Styling, IOC, Testing</li>
+          <li class="completed">Benachrichtigungen (Lokal/Push/Remote)</li>
+          <li class="selected">Hybrid-Apps</li>
+          <li>Datenbanken (SQLite); HTTP Client</li>
+          <li>Sicherheit &amp; Biometrie</li>
+          <li><b>LK1</b>; Projektarbeit</li>
+          <li><b>MLZ Präsentationen</b>; Themen nach Wahl</li>
+        </ol>
+      </section>
+
+      <section>
+        <h1>Ablauf der Lektion</h1>
+        <ul>
+          <li>Übersicht: Hybrid Applikationen</li>
+          <li>Interoperabilität mit dem nativen Teil
+            <ul>
+              <li>Schnittstelle zwischen Web und nativem Code entwerfen</li>
+              <li>Kleines Beispiel implementieren</li>
+              <li>Ansatz präsentieren</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Vorteile</h1>
+        <ul>
+          <li>Hybrid-Ansatz ist etwa 50% des Markts (obwohl dies schwer zu beweisen ist)</li>
+          <li>Auch Mobile Web Browsers unterstützen die modernste HTML/CSS/JS APIs</li>
+          <li>Erlaubt Plattformunabhängiges Entwickeln für iOS, Android, und Desktop-Web gleichzeitig</li>
+          <li>Es ist leichter Web- als iOS/Android Entwickler zu finden</li>
+          <li>Aktualisieren der App kann ohne Store-Update statt finden</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Nachteile</h1>
+        <ul>
+          <li>Wirkt nicht immer so fliesend wie natives Code (obwohl das wird mit neueren Releases immer besser)</li>
+          <li>Man muss trotzdem beide API-Welten verstehen (Native &amp; Web)
+            <ul>
+              <li>Bei natives Code nicht so tiefgehend</li>
+              <li>Hingegen bei Web-Entwicklung schon</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Umsetzung</h1>
+        <ul>
+          <li>Natives Teil deklariert ein JavaScript-API</li>
+          <li>Web Browser kann den nativen Teil "antworten"</li>
+          <li>Web kann mit Nativen Komponenten kombiniert werden (z.B. für Sicherheitsrelevanten Eingaben wie PINs)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>WebView Komponenten</h1>
+        <ul>
+          <li><em>Xamarin</em> bietet ein eigenes WebView an. Siehe:
+            <ul>
+              <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/webview?tabs=windows">Xamarin.Forms WebView</a></li>
+              <li><a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/custom-renderer/hybridwebview">Customizing a WebView</a></li>
+            </ul>
+          </li>
+          <li>Auf natives <em>iOS</em>, <code><a href="https://developer.apple.com/documentation/webkit/wkwebview">WKWebView</a></code> einsetzen (<code>UIWebView</code> <em>nicht</em> einsetzen)</li>
+          <li>Auf natives <em>Android</em>, <code><a href="https://developer.android.com/reference/android/webkit/WebView">WebView</a></code> einsetzen (seit API19 wird diese Komponente unabhängig vom Betriebssystem aktualisiert)</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>WebView Details</h1>
+        <ul>
+          <li>Die Kontrolle ist ein Umhüllung um ein eigenes Prozess</li>
+          <li>Man kann auch mehrere WebViews einsetzen</li>
+          <li>HTML-Seiten können entweder aus App-Ressourcen oder von Remote-URLs geladen werden</li>
+          <li>CORS muss wie immer berücksichtigt werden</li>
+        </ul>
+      </section>
+
+      <section class="compact">
+        <h1>Hybrid Architecture</h1>
+        <img src="assets/Lesson05/Hybrid_Architecture.jpg" class="tall-screenshot">
+      </section>
+
+      <section class="compact">
+        <h1>Hybrid-Beispiel</h1>
+        <ul>
+          <li>Beispiel-Implementation in <code>APE2021_App</code></li>
+          <li>Branch: <code>feature/day5_hybrid_apps</code></li>
+          <li>Verzeichnis: <code>/Hybrid</code></li>
+          <li>Umsetzung: Xamarin mit nur Android</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>JS-Schnittstelle deklarieren</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            public class JavaScriptInject : Object {
+              /// <summary>
+              /// Annotate methods with the <see cref="JavascriptInterfaceAttribute"/> and   /// the <see cref="ExportAttribute"/> to call them from JS.
+              /// </summary>
+              [JavascriptInterface]
+              [Export("doSomething")]
+              public void FromJavaScript() { /* ... */ }
+
+              /// <summary>
+              /// Annotated methods can also accept parameters.
+              /// </summary>
+              [JavascriptInterface]
+              [Export("doSomething")]
+              public void FromJavaScript(string message) { /* ... */ }
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>JS-Schnittstelle registrieren</h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            // Set the content layout which contains a simple web view.
+            SetContentView(Resource.Layout.activity_main);
+
+            // Extract the web view from the layout.
+            var webView = (WebView)FindViewById(Resource.Id.webView);
+
+            // Configure WebView to allow JS and inject our custom interface.
+            webView.Settings.JavaScriptEnabled = true;
+            webView.AddJavascriptInterface(new JavaScriptInject(this), "Native");
+
+            // Load a local HTML file.
+            webView.LoadUrl("file:///android_asset/index.html");
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>WebView -> Native</h1>
+        <p>Mit <code>Native.doSomething()</code> ausführen</p>
+        <pre>
+          <code data-trim class="language-html hljs">
+            &lt;input type="button" onclick="Native.doSomething()" value="Invoke native" /&gt;
+          </code>
+        </pre>
+        <p>...oder mit Parametern ausführen</p>
+        <pre>
+          <code data-trim class="language-html hljs">
+            &lt;input type="button" onclick="Native.doSomething('Another message...')" value="Invoke native with param" /&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://docs.microsoft.com/en-gb/dotnet/api/android.webkit.webview.evaluatejavascript">Native -> WebView</a></h1>
+        <pre>
+          <code data-trim class="language-csharp hljs">
+            webView.EvaluateJavascript("do some JS magic...", null);
+
+            public class Callback : Java.Lang.Object, IValueCallback
+            {
+              public void OnReceiveValue(Object value)  {
+                // Do something with the value...
+              }
+            }
+
+            webView.EvaluateJavascript("do some JS magic...", new Callback());
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1><a href="https://www.xamarinhelp.com/xamarin-forms-debugging-webview/">Debugging the Webview</a></h1>
+        <ul>
+          <li><code>WebView.SetWebContentsDebuggingEnabled(true);</code> aufrufen</li>
+          <li>In Chrome, <code>chrome://inspect/#devices</code> in einem Tab öffnen</li>
+          <li>Gerät suchen und "inspect" klicken</li>
+          <li>Ein zweites Fenster mit dem Inspector vom Gerät wird geöffnet</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Hybrid-App</h1>
+            <ul class="compact">
+              <li>Native -> Web</li>
+              <li>Web -> Native</li>
+            </ul>
+          </div>
+          <img src="assets/demo.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>Generische Schnittstelle für die Kommunikation zwischen Native &lt;-&gt; Web entwerfen</li>
+              <li>In Gruppen oder individuell</li>
+              <li>Design präsentieren</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+      <section>
+        <h1>Eine Lösung: <a href="https://www.dofactory.com/net/mediator-design-pattern">Mediator</a></h1>
+        <ul>
+          <li>"Messages" senden und verteilen</li>
+          <li>Die Web-App "treibt" das Native Teil</li>
+          <li>Native wird als “API” benutzt</li>
+          <li>Pattern ist als “Messenger” in WPF bekannt</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Mediator Architektur</h1>
+        <img src="assets/Lesson05/MediatorArchitecture.jpg" class="tall-screenshot">
+      </section>
+
+      <section>
+        <h1>Mediator für Dialog</h1>
+        <img src="assets/Lesson05/MediatorExample.jpg" class="tall-screenshot">
+      </section>
+
+      <section class="compact">
+        <h1>Mediator: Web Code</h1>
+        <p>Das Absenden einer Nachricht ergibt ein Promise, welches ein Booleschen Wert zurückgibt.</p>
+        <pre>
+          <code data-trim class="language-javascript hljs">
+            return
+              this.messenger
+                .send(new SetBiometricValueMessage(entry, btoa(value)))
+                .then((response: OperationResponse) => response.success);
+          </code>
+        </pre>
+      </section>
+
+      <section class="compact">
+        <h1>Mediator: Java Code</h1>
+        <p>"Handlers" werden registriert, um bestimmten Typen von Nachrichten zu implementieren.</p>
+        <pre>
+          <code data-trim class="language-java hljs">
+            messageRegistrar.registerHandler(
+              SetBiometricValueMessage.TAG,
+              SetBiometricValueMessage.class,
+              new MessageHandler&lt;EmptyResponse, SetBiometricValueMessage&gt;() {
+                @Override
+                public MapPromise&lt;EmptyResponse&gt; invoke(SetBiometricValueMessage setBiometricValueMessage) {
+                  return biometricStorage.setValue(
+                    setBiometricValueMessage.key,
+                    encodingUtils.fromBase64(setBiometricValueMessage.value)
+                  );
+                }
+              }
+            );
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Fragen?</h1>
+        <div class="fifty-fifty-grid">
+          <img src="assets/okaaaay.jpg">
+        </div>
+      </section>
+
+      <section>
+        <div class="seventy-thirty-grid">
+          <div>
+            <h1>Übungen</h1>
+            <ul>
+              <li>Eigenes Projekt ausbauen</li>
+            </ul>
+          </div>
+          <img src="assets/cog-wheels.png">
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>
