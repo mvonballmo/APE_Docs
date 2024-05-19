@@ -1,14 +1,20 @@
-name: gh-pages publisher 🚀
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [ master ]
-
+permissions:
+  contents: write
 jobs:
-  publish-gh-pages:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: gh-pages -d . -r https://$GH_TOKEN@github.com/mvonballmo/APE_Docs.git
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: .
     env:
       GH_TOKEN: ${{secrets.SECRET_GITHUB_TOKEN}}
