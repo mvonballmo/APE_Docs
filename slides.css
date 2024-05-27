@@ -76,7 +76,16 @@
   opacity: 35%;
 }
 
-.reveal .schedule {
+.reveal .schedule div {
+  justify-self: center;
+
+  &:nth-child(2n + 12) {
+    color: crimson;
+  }
+
+  &:last-child {
+    color: black;
+  }
 }
 
 .reveal .fifty-fifty-grid {
